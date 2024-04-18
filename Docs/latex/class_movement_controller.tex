@@ -1,0 +1,139 @@
+\doxysection{Movement\+Controller Class Reference}
+\hypertarget{class_movement_controller}{}\label{class_movement_controller}\index{MovementController@{MovementController}}
+
+
+Komponen untuk mekanik movement. Karena ini hanya mekanik movement yang bisa dipakai Komponen lain, bisa dipakai oleh Player, Musuh, dan lainnya. Komponen ini memerlukan komponen lain\+:  
+
+
+Inheritance diagram for Movement\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_movement_controller}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_movement_controller_a6625f01290af846b3b61ea1e1432fb19}\label{class_movement_controller_a6625f01290af846b3b61ea1e1432fb19} 
+void {\bfseries Start} ()
+\item 
+\Hypertarget{class_movement_controller_a1aa2630f9919e2d7d73cf461635445e0}\label{class_movement_controller_a1aa2630f9919e2d7d73cf461635445e0} 
+void {\bfseries Fixed\+Update} ()
+\item 
+void \mbox{\hyperlink{class_movement_controller_ac5fd1519b6884dc51cef40d133646d52}{Do\+Walk}} (float walk\+\_\+dir\+\_\+x)
+\begin{DoxyCompactList}\small\item\em Fungsi untuk membuat bergerak secara horizontal Objek Game. \end{DoxyCompactList}\item 
+\Hypertarget{class_movement_controller_a84b7e947934d47cff6fec7af409b7dab}\label{class_movement_controller_a84b7e947934d47cff6fec7af409b7dab} 
+void {\bfseries Do\+Jump} ()
+\begin{DoxyCompactList}\small\item\em Fungsi untuk melakukan lompatan kepada Objek Game. Lompatan bisa berupa lompat saat diatas tanah, atau saat "{}\+Wall-\/\+Hugging"{} (Wall Jump). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_movement_controller_aa7107fec71bee186399b02d510f25ab8}{On\+Ground\+Check\+\_\+\+Enter}} (Collider2D collider)
+\begin{DoxyCompactList}\small\item\em Fungsi pengecekan ketika Player menyentuh sesuatu (dengan Collision "{}\+Ground\+Check"{}) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_movement_controller_a47118bf8235a917f152538e237d880b5}{On\+Ground\+Check\+\_\+\+Exit}} (Collider2D collider)
+\begin{DoxyCompactList}\small\item\em Fungsi pengecekan ketika Collider pada Collision "{}\+Ground\+Check"{} keluar. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_movement_controller_a2f010a28d66901d56b68a8f44f92253f}{On\+Hug\+Wall\+\_\+\+Left\+\_\+\+Enter}} (Collider2D collider)
+\begin{DoxyCompactList}\small\item\em Fungsi pengecekan ketika Player menyentuh sesuatu (dengan Collision "{}\+Wall\+Hug\+Left"{}) \end{DoxyCompactList}\item 
+\Hypertarget{class_movement_controller_a92e881ae7f1fe3cae6c299ce793f669d}\label{class_movement_controller_a92e881ae7f1fe3cae6c299ce793f669d} 
+void {\bfseries On\+Hug\+Wall\+\_\+\+Left\+\_\+\+Exit} (Collider2D collider)
+\begin{DoxyCompactList}\small\item\em Fungsi pengecekan ketika Collider pada Collision "{}\+Wall\+Hug\+Left"{} keluar. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_movement_controller_a783690f8b574c0c91e08c3529c8f88d5}{On\+Hug\+Wall\+\_\+\+Right\+\_\+\+Enter}} (Collider2D collider)
+\begin{DoxyCompactList}\small\item\em Fungsi pengecekan ketika Player menyentuh sesuatu (dengan Collision "{}\+Wall\+Hug\+Right"{}) \end{DoxyCompactList}\item 
+\Hypertarget{class_movement_controller_a995a19a74ade8f5c7c2c124662fa868c}\label{class_movement_controller_a995a19a74ade8f5c7c2c124662fa868c} 
+void {\bfseries On\+Hug\+Wall\+\_\+\+Right\+\_\+\+Exit} (Collider2D collider)
+\begin{DoxyCompactList}\small\item\em Fungsi pengecekan ketika Collider pada Collision "{}\+Wall\+Hug\+Right"{} keluar. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Komponen untuk mekanik movement. Karena ini hanya mekanik movement yang bisa dipakai Komponen lain, bisa dipakai oleh Player, Musuh, dan lainnya. Komponen ini memerlukan komponen lain\+: 
+
+
+\begin{DoxyItemize}
+\item Rigidbody2D
+\end{DoxyItemize}
+
+Komponen ini memerlukan Child Object sebagai berikut\+:
+\begin{DoxyItemize}
+\item \doxylink{class_rigidbody_message_relay}{Rigidbody\+Message\+Relay} (Ground\+Check)
+\item \doxylink{class_rigidbody_message_relay}{Rigidbody\+Message\+Relay} (Wall\+Hug\+Right)
+\item \doxylink{class_rigidbody_message_relay}{Rigidbody\+Message\+Relay} (Wall\+Hug\+Left) 
+\end{DoxyItemize}
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_movement_controller_ac5fd1519b6884dc51cef40d133646d52}\label{class_movement_controller_ac5fd1519b6884dc51cef40d133646d52} 
+\index{MovementController@{MovementController}!DoWalk@{DoWalk}}
+\index{DoWalk@{DoWalk}!MovementController@{MovementController}}
+\doxysubsubsection{\texorpdfstring{DoWalk()}{DoWalk()}}
+{\footnotesize\ttfamily void Movement\+Controller.\+Do\+Walk (\begin{DoxyParamCaption}\item[{float}]{walk\+\_\+dir\+\_\+x }\end{DoxyParamCaption})}
+
+
+
+Fungsi untuk membuat bergerak secara horizontal Objek Game. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em walk\+\_\+dir\+\_\+x} & Arah pergerakan dalam horizontal.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_movement_controller_aa7107fec71bee186399b02d510f25ab8}\label{class_movement_controller_aa7107fec71bee186399b02d510f25ab8} 
+\index{MovementController@{MovementController}!OnGroundCheck\_Enter@{OnGroundCheck\_Enter}}
+\index{OnGroundCheck\_Enter@{OnGroundCheck\_Enter}!MovementController@{MovementController}}
+\doxysubsubsection{\texorpdfstring{OnGroundCheck\_Enter()}{OnGroundCheck\_Enter()}}
+{\footnotesize\ttfamily void Movement\+Controller.\+On\+Ground\+Check\+\_\+\+Enter (\begin{DoxyParamCaption}\item[{Collider2D}]{collider }\end{DoxyParamCaption})}
+
+
+
+Fungsi pengecekan ketika Player menyentuh sesuatu (dengan Collision "{}\+Ground\+Check"{}) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em collider} & Object hasil Collision\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_movement_controller_a47118bf8235a917f152538e237d880b5}\label{class_movement_controller_a47118bf8235a917f152538e237d880b5} 
+\index{MovementController@{MovementController}!OnGroundCheck\_Exit@{OnGroundCheck\_Exit}}
+\index{OnGroundCheck\_Exit@{OnGroundCheck\_Exit}!MovementController@{MovementController}}
+\doxysubsubsection{\texorpdfstring{OnGroundCheck\_Exit()}{OnGroundCheck\_Exit()}}
+{\footnotesize\ttfamily void Movement\+Controller.\+On\+Ground\+Check\+\_\+\+Exit (\begin{DoxyParamCaption}\item[{Collider2D}]{collider }\end{DoxyParamCaption})}
+
+
+
+Fungsi pengecekan ketika Collider pada Collision "{}\+Ground\+Check"{} keluar. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em collider} & Object hasil Collisiondddd\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_movement_controller_a2f010a28d66901d56b68a8f44f92253f}\label{class_movement_controller_a2f010a28d66901d56b68a8f44f92253f} 
+\index{MovementController@{MovementController}!OnHugWall\_Left\_Enter@{OnHugWall\_Left\_Enter}}
+\index{OnHugWall\_Left\_Enter@{OnHugWall\_Left\_Enter}!MovementController@{MovementController}}
+\doxysubsubsection{\texorpdfstring{OnHugWall\_Left\_Enter()}{OnHugWall\_Left\_Enter()}}
+{\footnotesize\ttfamily void Movement\+Controller.\+On\+Hug\+Wall\+\_\+\+Left\+\_\+\+Enter (\begin{DoxyParamCaption}\item[{Collider2D}]{collider }\end{DoxyParamCaption})}
+
+
+
+Fungsi pengecekan ketika Player menyentuh sesuatu (dengan Collision "{}\+Wall\+Hug\+Left"{}) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em collider} & Object hasil Collision\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_movement_controller_a783690f8b574c0c91e08c3529c8f88d5}\label{class_movement_controller_a783690f8b574c0c91e08c3529c8f88d5} 
+\index{MovementController@{MovementController}!OnHugWall\_Right\_Enter@{OnHugWall\_Right\_Enter}}
+\index{OnHugWall\_Right\_Enter@{OnHugWall\_Right\_Enter}!MovementController@{MovementController}}
+\doxysubsubsection{\texorpdfstring{OnHugWall\_Right\_Enter()}{OnHugWall\_Right\_Enter()}}
+{\footnotesize\ttfamily void Movement\+Controller.\+On\+Hug\+Wall\+\_\+\+Right\+\_\+\+Enter (\begin{DoxyParamCaption}\item[{Collider2D}]{collider }\end{DoxyParamCaption})}
+
+
+
+Fungsi pengecekan ketika Player menyentuh sesuatu (dengan Collision "{}\+Wall\+Hug\+Right"{}) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em collider} & Object hasil Collision\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Assets/\+Source\+Code/Movement\+Controller.\+cs\end{DoxyCompactItemize}

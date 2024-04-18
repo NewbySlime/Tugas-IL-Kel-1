@@ -1,0 +1,69 @@
+\doxysection{Player\+Controller Class Reference}
+\hypertarget{class_player_controller}{}\label{class_player_controller}\index{PlayerController@{PlayerController}}
+
+
+Komponen untuk mengontrol Objek Game berdasarkan input dari Player. Komponen ini memerlukan komponen lain\+:  
+
+
+Inheritance diagram for Player\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_player_controller}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_player_controller_ae1117d9c4da3193181cddad2c814e467}\label{class_player_controller_ae1117d9c4da3193181cddad2c814e467} 
+void {\bfseries Start} ()
+\item 
+void \mbox{\hyperlink{class_player_controller_a28262cb1dd440c2844d2c841a033140b}{On\+Strafe}} (Input\+Value value)
+\begin{DoxyCompactList}\small\item\em Input Handling ketika Player memberikan input untuk bergerak secara horizontal. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_controller_a5a874d575d0d2115f1585c7c210a0674}{On\+Jump}} (Input\+Value value)
+\begin{DoxyCompactList}\small\item\em Input Handling ketika Player memberikan input untuk melompat. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Komponen untuk mengontrol Objek Game berdasarkan input dari Player. Komponen ini memerlukan komponen lain\+: 
+
+
+\begin{DoxyItemize}
+\item \doxylink{class_movement_controller}{Movement\+Controller} 
+\end{DoxyItemize}
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_player_controller_a5a874d575d0d2115f1585c7c210a0674}\label{class_player_controller_a5a874d575d0d2115f1585c7c210a0674} 
+\index{PlayerController@{PlayerController}!OnJump@{OnJump}}
+\index{OnJump@{OnJump}!PlayerController@{PlayerController}}
+\doxysubsubsection{\texorpdfstring{OnJump()}{OnJump()}}
+{\footnotesize\ttfamily void Player\+Controller.\+On\+Jump (\begin{DoxyParamCaption}\item[{Input\+Value}]{value }\end{DoxyParamCaption})}
+
+
+
+Input Handling ketika Player memberikan input untuk melompat. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Value yang diberikan Unity.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_controller_a28262cb1dd440c2844d2c841a033140b}\label{class_player_controller_a28262cb1dd440c2844d2c841a033140b} 
+\index{PlayerController@{PlayerController}!OnStrafe@{OnStrafe}}
+\index{OnStrafe@{OnStrafe}!PlayerController@{PlayerController}}
+\doxysubsubsection{\texorpdfstring{OnStrafe()}{OnStrafe()}}
+{\footnotesize\ttfamily void Player\+Controller.\+On\+Strafe (\begin{DoxyParamCaption}\item[{Input\+Value}]{value }\end{DoxyParamCaption})}
+
+
+
+Input Handling ketika Player memberikan input untuk bergerak secara horizontal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Value yang diberikan Unity.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Assets/\+Source\+Code/Player\+Controller.\+cs\end{DoxyCompactItemize}
