@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['dojump_0',['DoJump',['../class_movement_controller.html#a84b7e947934d47cff6fec7af409b7dab',1,'MovementController']]],
-  ['dowalk_1',['DoWalk',['../class_movement_controller.html#ac5fd1519b6884dc51cef40d133646d52',1,'MovementController']]]
+  ['adddata_3c_20t_20_3e_0',['AddData&lt; T &gt;',['../class_type_data_storage.html#a20fbd88f969ac45af8fca729afcb0e9e',1,'TypeDataStorage']]],
+  ['additem_1',['AddItem',['../class_inventory_data.html#a8361913e3957fd4b9546336c0624160a',1,'InventoryData.AddItem()'],['../class_item_container_controller.html#a2067fe4384718264be6b81131d43063e',1,'ItemContainerController.AddItem()']]],
+  ['autoloadhandler_2',['AutoloadHandler',['../class_autoload_handler.html',1,'']]]
 ];

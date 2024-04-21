@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['playercontroller_0',['PlayerController',['../class_player_controller.html',1,'']]]
+  ['consoleuicontroller_0',['ConsoleUIController',['../class_console_u_i_controller.html',1,'']]]
 ];

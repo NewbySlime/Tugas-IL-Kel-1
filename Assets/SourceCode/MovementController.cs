@@ -97,18 +97,18 @@ public class MovementController: MonoBehaviour{
   /// </summary>
   public void DoJump(){
     if(_is_touching_ground){
-      _is_touching_ground = false;
+      //_is_touching_ground = false;
       _object_rigidbody.AddForce(Vector3.up * jump_force);
     }
     else if(_is_wallhug_right){
-      _is_wallhug_right = false;
+      //_is_wallhug_right = false;
 
       Vector2 _inv_dir = new Vector2(-walljump_direction.x, walljump_direction.y);
       _object_rigidbody.velocity = Vector2.zero;
       _object_rigidbody.AddForce(_inv_dir.normalized * walljump_force);
     }
     else if(_is_wallhug_left){
-      _is_wallhug_left = false;
+      //_is_wallhug_left = false;
       
       _object_rigidbody.velocity = Vector2.zero;
       _object_rigidbody.AddForce(walljump_direction.normalized * walljump_force);
@@ -129,7 +129,7 @@ public class MovementController: MonoBehaviour{
   /// <summary>
   /// Fungsi pengecekan ketika Collider pada Collision "GroundCheck" keluar
   /// </summary>
-  /// <param name="collider">Object hasil Collisiondddd</param>
+  /// <param name="collider">Object hasil Collision</param>
   public void OnGroundCheck_Exit(Collider2D collider){
     if(_ground_collider_set.Contains(collider.attachedRigidbody))
       _ground_collider_set.Remove(collider.attachedRigidbody);
