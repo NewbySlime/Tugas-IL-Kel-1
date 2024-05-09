@@ -45,7 +45,7 @@ public class ItemDatabase: MonoBehaviour{
       GameObject _tmp_gameobj = Instantiate(_prefab_obj);
       ItemMetadata _metadata = _tmp_gameobj.GetComponent<ItemMetadata>();
       if(_metadata == null){
-        Debug.LogError(String.Format("GUID: \"{0}\" is not an Item.", _guid));
+        Debug.LogError(string.Format("GUID: \"{0}\" is not an Item.", _guid));
         continue;
       }
 

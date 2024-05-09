@@ -25,16 +25,21 @@ public class InventoryData: MonoBehaviour{
   public event OnItemRemoved OnItemRemovedEvent;
   public delegate void OnItemRemoved(string item_id);
 
-  private struct _item_data{
+  public struct ItemData{
     public string item_id;
     public uint item_count;
   }
 
 
-  private Dictionary<string, _item_data> _item_list = new Dictionary<string, _item_data>();
+  public class RuntimeData{
+    public List<ItemData> ListItem = new();
+  }
+
+
+  private Dictionary<string, ItemData> _item_list = new Dictionary<string, ItemData>();
   
   private ItemDatabase _item_database;
-
+  
 
   public void Start(){
     _item_database = FindObjectOfType<ItemDatabase>();
@@ -55,7 +60,8 @@ public class InventoryData: MonoBehaviour{
     }
 
     if(!_item_list.ContainsKey(item_id)){
-      _item_list[item_id] = new _item_data{
+      Debug.Log(string.Format("item added {0}", item_id));
+      _item_list[item_id] = new ItemData{
         item_id = item_id,
         item_count = count
       };
@@ -63,7 +69,8 @@ public class InventoryData: MonoBehaviour{
       OnItemAddedEvent?.Invoke(item_id, count);
     }
     else{
-      _item_data _item = _item_list[item_id];
+      Debug.Log(string.Format("item count changed {0}", item_id));
+      ItemData _item = _item_list[item_id];
       _item.item_count += count;
       _item_list[item_id] = _item;
 
@@ -81,7 +88,7 @@ public class InventoryData: MonoBehaviour{
     if(!_item_list.ContainsKey(item_id))
       return;
 
-    _item_data _item = _item_list[item_id];
+    ItemData _item = _item_list[item_id];
     if(_item.item_count > count){
       _item.item_count -= count;
       _item_list[item_id] = _item;
@@ -106,7 +113,7 @@ public class InventoryData: MonoBehaviour{
       if(!_item_list.ContainsKey(_item_id))
         return false;
 
-      _item_data _data = _item_list[_item_id];
+      ItemData _data = _item_list[_item_id];
       uint _item_occurence = 0;
       if(_list_map.ContainsKey(_item_id))
         _item_occurence = _list_map[_item_id];
@@ -124,6 +131,13 @@ public class InventoryData: MonoBehaviour{
     }
 
     return true;
+  }
+
+
+  public void RemoveAllItem(){
+    List<string> _list_remove = _item_list.Keys.ToList();
+    foreach(string key in _list_remove)
+      RemoveItem(key, uint.MaxValue);
   }
 
 
@@ -145,5 +159,31 @@ public class InventoryData: MonoBehaviour{
       return 0;
 
     return _item_list[item_id].item_count;
+  }
+
+
+
+  public RuntimeData AsRuntimeData(){
+    RuntimeData _res = new();
+    _res.ListItem = new List<ItemData>();
+    
+    foreach(ItemData _item in _item_list.Values){
+      Debug.Log(string.Format("runtime removing item {0}", _item.item_id));
+      _res.ListItem.Add(_item);
+    }
+
+    return _res;
+  }
+
+  public void FromRuntimeData(RuntimeData data){
+    if(data == null)
+      return;
+
+    Debug.Log("runtime from");
+    RemoveAllItem();
+    foreach(ItemData _item in data.ListItem){
+      Debug.Log(string.Format("runtime adding item {0}", _item.item_id));
+      AddItem(_item.item_id, _item.item_count);
+    }
   }
 }

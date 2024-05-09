@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['stdpipeemulator_0',['StdPipeEmulator',['../class_std_pipe_emulator.html',1,'']]]
+  ['healthcomponent_0',['HealthComponent',['../class_health_component.html',1,'']]],
+  ['healthcontext_1',['HealthContext',['../struct_health_component_1_1_health_context.html',1,'HealthComponent']]]
 ];

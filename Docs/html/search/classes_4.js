@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['playercontroller_0',['PlayerController',['../class_player_controller.html',1,'']]],
-  ['playerinventorycommand_1',['PlayerInventoryCommand',['../class_player_inventory_command.html',1,'']]]
+  ['fadeui_0',['FadeUI',['../class_fade_u_i.html',1,'']]],
+  ['flipinterface_1',['FlipInterface',['../class_flip_interface.html',1,'']]],
+  ['followercamera2d_2',['FollowerCamera2D',['../class_follower_camera2_d.html',1,'']]]
 ];

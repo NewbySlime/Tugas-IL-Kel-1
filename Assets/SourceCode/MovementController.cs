@@ -31,6 +31,9 @@ public class MovementController: MonoBehaviour{
   [SerializeField]
   private Vector2 walljump_direction = new Vector2(0.5f, 0.5f);
 
+  [SerializeField]
+  private Animator _TargetAnimatorMovement;
+
   private Rigidbody2D _object_rigidbody;
 
   private RigidbodyMessageRelay _ground_check_relay;
@@ -79,6 +82,19 @@ public class MovementController: MonoBehaviour{
       _result_vel.x += _walk_dir_x * Time.fixedDeltaTime * movement_speed_midair;
       if(MathF.Abs(_result_vel.x) <= movement_speed)
         _object_rigidbody.velocity = _result_vel;
+    }
+
+    if(_TargetAnimatorMovement != null){
+      float _val_velocity_x = _object_rigidbody.velocity.x/movement_speed;
+      _TargetAnimatorMovement.SetFloat("speed_horizontal", _val_velocity_x);
+      _TargetAnimatorMovement.SetFloat("speed_horizontal_abs", Mathf.Abs(_val_velocity_x));
+
+      if(Mathf.Abs(_val_velocity_x) > 0.1){
+        _TargetAnimatorMovement.SetBool("is_flipped", _val_velocity_x < 0);
+      }
+
+      float _val_velocity_y = _object_rigidbody.velocity.y/(jump_force*Time.fixedDeltaTime);
+      _TargetAnimatorMovement.SetFloat("speed_vertical", _val_velocity_y);
     }
   }
 
@@ -146,6 +162,10 @@ public class MovementController: MonoBehaviour{
   public void OnHugWall_Left_Enter(Collider2D collider){
     _wallhug_left_collider_set.Add(collider.attachedRigidbody);
     _is_wallhug_left = true;
+
+    if(_TargetAnimatorMovement != null){
+      _TargetAnimatorMovement.SetBool("is_wallhugging", true);
+    }
   }
 
   /// <summary>
@@ -155,8 +175,13 @@ public class MovementController: MonoBehaviour{
     if(_wallhug_left_collider_set.Contains(collider.attachedRigidbody))
       _wallhug_left_collider_set.Remove(collider.attachedRigidbody);
 
-    if(_wallhug_left_collider_set.Count <= 0)
+    if(_wallhug_left_collider_set.Count <= 0){
       _is_wallhug_left = false;
+      
+      if(_TargetAnimatorMovement != null){
+        _TargetAnimatorMovement.SetBool("is_wallhugging", false);
+      }
+    }
   }
 
 
@@ -167,6 +192,10 @@ public class MovementController: MonoBehaviour{
   public void OnHugWall_Right_Enter(Collider2D collider){
     _wallhug_right_collider_set.Add(collider.attachedRigidbody);
     _is_wallhug_right = true;
+
+    if(_TargetAnimatorMovement != null){
+      _TargetAnimatorMovement.SetBool("is_wallhugging", true);
+    }
   }
 
   /// <summary>
@@ -176,7 +205,12 @@ public class MovementController: MonoBehaviour{
     if(_wallhug_right_collider_set.Contains(collider.attachedRigidbody))
       _wallhug_right_collider_set.Remove(collider.attachedRigidbody);
 
-    if(_wallhug_right_collider_set.Count <= 0)
+    if(_wallhug_right_collider_set.Count <= 0){
       _is_wallhug_right = false;
+
+      if(_TargetAnimatorMovement != null){
+        _TargetAnimatorMovement.SetBool("is_wallhugging", false);
+      }
+    }
   }
 }

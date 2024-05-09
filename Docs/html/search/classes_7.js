@@ -1,4 +1,23 @@
 var searchData=
 [
-  ['typedatastorage_0',['TypeDataStorage',['../class_type_data_storage.html',1,'']]]
+  ['iareatriggerhandle_0',['IAreaTriggerHandle',['../interface_i_area_trigger_handle.html',1,'']]],
+  ['iloadingqueue_1',['ILoadingQueue',['../interface_i_loading_queue.html',1,'']]],
+  ['inputcontext_2',['InputContext',['../class_input_context.html',1,'']]],
+  ['interactableinterface_3',['InteractableInterface',['../class_interactable_interface.html',1,'']]],
+  ['interactionhandler_4',['InteractionHandler',['../class_interaction_handler.html',1,'']]],
+  ['interactionhint_5',['InteractionHint',['../class_interaction_hint.html',1,'']]],
+  ['inventorydata_6',['InventoryData',['../class_inventory_data.html',1,'']]],
+  ['ipersistance_7',['IPersistance',['../interface_persistance_context_1_1_i_persistance.html',1,'PersistanceContext']]],
+  ['iquestobserver_8',['IQuestObserver',['../interface_i_quest_observer.html',1,'']]],
+  ['isequenceasync_9',['ISequenceAsync',['../interface_i_sequence_async.html',1,'']]],
+  ['itembutton_10',['ItemButton',['../class_item_button.html',1,'']]],
+  ['itemcollectionsubquest_11',['ItemCollectionSubquest',['../class_item_collection_subquest.html',1,'']]],
+  ['itemcontainercontroller_12',['ItemContainerController',['../class_item_container_controller.html',1,'']]],
+  ['itemdata_13',['ItemData',['../struct_inventory_data_1_1_item_data.html',1,'InventoryData.ItemData'],['../struct_item_metadata_1_1_item_data.html',1,'ItemMetadata.ItemData'],['../class_item_recipe_data_1_1_item_data.html',1,'ItemRecipeData.ItemData'],['../class_item_texture_data_1_1_item_data.html',1,'ItemTextureData.ItemData'],['../struct_weapon_item_1_1_item_data.html',1,'WeaponItem.ItemData']]],
+  ['itemdatabase_14',['ItemDatabase',['../class_item_database.html',1,'']]],
+  ['itemdeplete_15',['ItemDeplete',['../struct_damager_component_1_1_damager_context_1_1_item_deplete.html',1,'DamagerComponent::DamagerContext']]],
+  ['itemmetadata_16',['ItemMetadata',['../class_item_metadata.html',1,'']]],
+  ['itemrecipedata_17',['ItemRecipeData',['../class_item_recipe_data.html',1,'']]],
+  ['itemrecipedatabase_18',['ItemRecipeDatabase',['../class_item_recipe_database.html',1,'']]],
+  ['itemtexturedata_19',['ItemTextureData',['../class_item_texture_data.html',1,'']]]
 ];

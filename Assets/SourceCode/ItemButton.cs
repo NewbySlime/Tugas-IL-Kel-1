@@ -41,10 +41,10 @@ public class ItemButton: MonoBehaviour, IPointerClickHandler{
     ItemTextureData.ItemData? _tex_data = _item_data.GetData<ItemTextureData.ItemData>();
     if(_tex_data == null){
       Debug.LogWarning(string.Format("Item (ID: {0}) doesn't have texture image.", item_id));
+      return;
     }
-    else{
-      _ItemSprite.sprite = _tex_data.SpriteTexture;
-    }
+
+    _ItemSprite.sprite = _tex_data.SpriteTexture;
   }
   #nullable disable
 

@@ -17,7 +17,7 @@ public class TypeDataStorage{
   /// <typeparam name="T">Tipe data yang mau dimasukkan</typeparam>
   /// <param name="data">Data yang mau dimasukkan</param>
   public void AddData<T>(T data){
-    _data.Add(typeof(T), data);
+    _data[typeof(T)] = data;
   }
 
   /// <summary>
@@ -28,16 +28,27 @@ public class TypeDataStorage{
     _data.Remove(typeof(T));
   }
 
-  #nullable enable
   /// <summary>
   /// Untuk mengambil data berdasarkan tipe "T".
   /// </summary>
-  /// <typeparam name="T">TIpe dat ayang mau diambil</typeparam>
+  /// <typeparam name="T">Tipe data yang mau diambil</typeparam>
   /// <returns>Data tertentu berdasarkan "T", namun akan mengeluarkan "default" atau null.</returns>
+  #nullable enable
   public T? GetData<T>(){
     if(_data.ContainsKey(typeof(T)))
       return (T)_data[typeof(T)];
     else
       return default;
   }
+  #nullable disable
+
+
+  #nullable enable
+  public object? GetData(Type type){
+    if(_data.ContainsKey(type))
+      return _data[type];
+    else
+      return null;
+  }
+  #nullable disable
 }

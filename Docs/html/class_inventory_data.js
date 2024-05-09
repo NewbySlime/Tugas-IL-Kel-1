@@ -1,5 +1,7 @@
 var class_inventory_data =
 [
+    [ "ItemData", "struct_inventory_data_1_1_item_data.html", null ],
+    [ "RuntimeData", "class_inventory_data_1_1_runtime_data.html", null ],
     [ "AddItem", "class_inventory_data.html#a8361913e3957fd4b9546336c0624160a", null ],
     [ "GetContainedItems", "class_inventory_data.html#a3b8334ccd419adbbff659f91699a2700", null ],
     [ "GetItemCount", "class_inventory_data.html#af5a56f5c48c1add4481980f34183f8e9", null ],

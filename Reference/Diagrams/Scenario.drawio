@@ -1,0 +1,25 @@
+<mxfile host="65bd71144e">
+    <diagram id="I5ELgDjuTqXJ-bgPtycQ" name="Page-1">
+        <mxGraphModel dx="1159" dy="747" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="&lt;h1&gt;ScenarioHandler&lt;/h1&gt;&lt;p&gt;Kelas ini bertujuan untuk menyimpan data scenario dan menghandle Subscenario (kumpulan Scenario dalam Scenario) agar menjadi urutan yang bisa dijadikan dalam bentuk cerita.&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="70" y="120" width="250" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="&lt;h1&gt;Urutan Subscenario Dalam Bentuk Cerita&lt;/h1&gt;&lt;p&gt;Setiap Subscenario mempunyai Goals atau Quest atau Objective yang harus dicapai untuk melanjutkan Subscenario selanjutnya. Selanjutnya, setiap Subscenario mempunyai trigger start dan finish, yang dimana akan di-trigger ketika mulai Subscenario atau sesudah Subscenario (atau saat objektif tercapai).&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="70" y="280" width="310" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="&lt;h1&gt;Bentar, Bagaimana Cara Mengubah Scenario?&lt;/h1&gt;&lt;p&gt;Setiap Scenario mempunyai trigger untuk mulai dan juga berakhirnya suatu Scenario. Dengan meggunakan trigger untuk finishing, dilakukannya Scenario switching dengan menggunakan trigger yang memanggil switching ke Scenario selanjutnya.&lt;/p&gt;&lt;p&gt;Alasan kenapa GameHandler tidak mengimplementasikan Scenario switching secara internal adalah, seperti contoh, andaikan ada side quest yang hanya trigger memberikan Item ke Player dan tidak ada Scenario side quest lainnya yang bisa dilanjutkan.&amp;nbsp;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="70" y="490" width="310" height="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="&lt;h1&gt;Scenario dan Efeknya ke Dunia Game&lt;/h1&gt;&lt;p&gt;ScenarioInterface membantu dalam hal ini, kelas ini akan mengecek Scenario yang sedang aktif dan melakukan pengaktifan child-nya sesuai dengan Scenario yang terkait. Sehingga hal ini memberikan suasana game yang dapat berubah seiring dengan Scenario nya.&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="70" y="840" width="310" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="&lt;h1&gt;Efek Samping Scenario&lt;/h1&gt;&lt;p&gt;Efek Samping atau hasil penyelesaian Scenario juga ada, setiap Scenario punya alternate Scenario &quot;finished&quot; yang dimana akan memunculkan suasana setelah Scenario itu terjadi.&lt;/p&gt;&lt;p&gt;Lebih optimal jika Scenario tersebut mempunyai alternate ketimbang state &quot;finshed&quot; sehingga jika alternate tersebut sudah tidak digunakan dapat diganti oleh Scenario lainnya.&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="70" y="1040" width="310" height="180" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

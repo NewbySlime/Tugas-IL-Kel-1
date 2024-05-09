@@ -43,6 +43,6 @@ public class InputContext: MonoBehaviour{
   /// <param name="obj">GameObject yang mau dites</param>
   /// <returns>Apakah Input bisa dipakai atau tidak</returns>
   public bool GetUIInputContext(GameObject obj){
-    return _ui_input_context_key_list.Count > 0;
+    return _ui_input_context_key_list.Contains(obj);
   }
 }
