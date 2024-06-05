@@ -59,74 +59,259 @@
     <UnityVersion>2022.3.20f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Users\ASUS\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.0.1\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Users\ASUS\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.0.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.20f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.20f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\SourceCode\ItemRecipeDatabase.cs" />
+    <Compile Include="Assets\SourceCode\QuestObserverComponent\ItemObserverQuest.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\UI\SetFadeUISequence.cs" />
+    <Compile Include="Assets\SourceCode\AnimationTriggerFlagComponent.cs" />
     <Compile Include="Assets\SourceCode\PersistanceContext.cs" />
-    <Compile Include="Assets\SourceCode\ItemTextureData.cs" />
-    <Compile Include="Assets\SourceCode\ILoadingQueue.cs" />
+    <Compile Include="Assets\SourceCode\VisualScript\SequenceHandlerVS.cs" />
+    <Compile Include="Assets\SourceCode\UI\ShrinkUI.cs" />
     <Compile Include="Assets\SourceCode\AutoloadHandler.cs" />
-    <Compile Include="Assets\SourceCode\LevelSequenceDatabase.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Debugging\LoggingSequence.cs" />
+    <Compile Include="Assets\SourceCode\VisualScript\QuestHandlerVS.cs" />
+    <Compile Include="Assets\SourceCode\Effects\Damager\DamagerAsCollectibleHelper.cs" />
     <Compile Include="Assets\SourceCode\FollowerCamera2D.cs" />
-    <Compile Include="Assets\SourceCode\RigidbodyMessageRelay.cs" />
     <Compile Include="Assets\SourceCode\InteractableInterface.cs" />
-    <Compile Include="Assets\SourceCode\QuestObserverComponent\QuestObserverInterface.cs" />
+    <Compile Include="Assets\SourceCode\VisualScript\ScenarioDiagramVS.cs" />
     <Compile Include="Assets\SourceCode\ItemDatabase.cs" />
-    <Compile Include="Assets\SourceCode\ScenarioHandler.cs" />
+    <Compile Include="Assets\SourceCode\NPCBehaviour.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_TextCore_Glyph.cs" />
     <Compile Include="Assets\SourceCode\ItemButton.cs" />
     <Compile Include="Assets\SourceCode\SequenceInterface.cs" />
-    <Compile Include="Assets\SourceCode\QuestObserverComponent\IQuestObserver.cs" />
-    <Compile Include="Assets\SourceCode\GameRuntimeData.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_TextCore_LowLevel_GlyphPairAdjustmentRecord.cs" />
+    <Compile Include="Assets\SourceCode\UI\BattleBarUI.cs" />
+    <Compile Include="Assets\SourceCode\LookAtToRotation.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Timing\TimerSequence.cs" />
+    <Compile Include="Assets\SourceCode\VisualScript\ScenarioHandlerVS.cs" />
+    <Compile Include="Assets\SourceCode\VisualScript\SequenceInitializing.cs" />
+    <Compile Include="Assets\SourceCode\EnemyBehaviour.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_Events_UnityEvent.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_Slider_SliderEvent.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_TMPro_TMP_InputField_SubmitEvent.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Input\RegisterInputFocusSequence.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Camera\RevertCameraDefaultSequence.cs" />
+    <Compile Include="Assets\SourceCode\CustomerAreaReceiver.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Camera\SetCameraSmoothSequence.cs" />
     <Compile Include="Assets\SourceCode\ObjectSpawner.cs" />
-    <Compile Include="Assets\SourceCode\UI\FadeUI.cs" />
+    <Compile Include="Assets\SourceCode\CharacterSpriteData.cs" />
+    <Compile Include="Assets\SourceCode\ItemPickerComponent.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_TextCore_Text_Character.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_InputSystem_PlayerInputManager_PlayerLeftEvent.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_TextCore_GlyphMetrics.cs" />
+    <Compile Include="Assets\SourceCode\Effects\BaseVisual\SpriteMaterialReference.cs" />
     <Compile Include="Assets\SourceCode\LevelTeleportHandler.cs" />
-    <Compile Include="Assets\SourceCode\SequenceHandler.cs" />
-    <Compile Include="Assets\SourceCode\IAreaTriggerHandle.cs" />
-    <Compile Include="Assets\SourceCode\QuestObserverComponent\GoCheckpointSubquest.cs" />
-    <Compile Include="Assets\SourceCode\Interactable\InteractionHint.cs" />
-    <Compile Include="Assets\SourceCode\WeaponHandler.cs" />
+    <Compile Include="Assets\SourceCode\Effects\Vital\RecoveryEffect.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_Unity_Mathematics_quaternion.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Persistance\TriggerSaveSequence.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_FontData.cs" />
     <Compile Include="Assets\SourceCode\InventoryData.cs" />
-    <Compile Include="Assets\SourceCode\SequenceHelper\SceneHandlingSequence.cs" />
-    <Compile Include="Assets\SourceCode\SequenceHelper\TimingSequence.cs" />
-    <Compile Include="Assets\SourceCode\GameHandler.cs" />
-    <Compile Include="Assets\SourceCode\CollectibleComponent.cs" />
-    <Compile Include="Assets\SourceCode\TimeControl.cs" />
-    <Compile Include="Assets\SourceCode\TypeDataStorage.cs" />
+    <Compile Include="Assets\SourceCode\IQuestHandler.cs" />
+    <Compile Include="Assets\SourceCode\UI\SetActiveUIOnTimeout.cs" />
+    <Compile Include="Assets\SourceCode\VisualScript\DialogueUI\DialogueCharacterUI\DataInterface.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_InputSystem_PlayerInput_DeviceRegainedEvent.cs" />
+    <Compile Include="Assets\SourceCode\VisualScript\DialogueInitializing.cs" />
+    <Compile Include="Assets\SourceCode\NPCHandler.cs" />
+    <Compile Include="Assets\SourceCode\PickableObject.cs" />
+    <Compile Include="Assets\SourceCode\InterfaceEnemyBehaviour.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_Dropdown_DropdownEvent.cs" />
+    <Compile Include="Assets\SourceCode\UI\BaseProgressUI.cs" />
     <Compile Include="Assets\SourceCode\DEBUG_SceneMetadata.cs" />
-    <Compile Include="Assets\SourceCode\DamagerComponent.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_TextCore_Text_FontWeightPair.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_TMPro_TMP_SpriteCharacter.cs" />
     <Compile Include="Assets\SourceCode\UI\RecipeCraftingUIController.cs" />
-    <Compile Include="Assets\SourceCode\AreaTriggerSequenceInterface.cs" />
-    <Compile Include="Assets\RichTextHelper\RichTextHelper.cs" />
-    <Compile Include="Assets\SourceCode\SequenceHelper\DebuggingSequence.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Game\EnemyFight\EnemyFightAddWatchObject.cs" />
+    <Compile Include="Assets\SourceCode\Effects\BaseVisual\IMaterialReference.cs" />
+    <Compile Include="Assets\SourceCode\UI\CustomerPatienceUI.cs" />
+    <Compile Include="Assets\SourceCode\RecipeDiscoveryComponent.cs" />
+    <Compile Include="Assets\SourceCode\UI\HealthBarUI.cs" />
+    <Compile Include="Assets\SourceCode\VisualScript\InputFocusContext.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_EventSystems_EventTrigger_TriggerEvent.cs" />
+    <Compile Include="Assets\SourceCode\MiniGameHandler.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_Toggle_ToggleEvent.cs" />
+    <Compile Include="Assets\SourceCode\Interactable\CookingInteraction.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Game\EnemyFight\EnemyFightAddWatchSpawner.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Game\TriggerMiniGameSequence.cs" />
     <Compile Include="Assets\SourceCode\UI\DialogueUI.cs" />
+    <Compile Include="Assets\SourceCode\UI\QuickTimeEventUI.cs" />
+    <Compile Include="Assets\SourceCode\ObjectReference.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_InputSystem_PlayerInputManager_PlayerJoinedEvent.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Scene\ChangeSceneSequence.cs" />
     <Compile Include="Assets\SourceCode\PlayerController.cs" />
-    <Compile Include="Assets\SourceCode\ItemRecipeData.cs" />
-    <Compile Include="Assets\SourceCode\WeaponItem.cs" />
-    <Compile Include="Assets\SourceCode\ISequenceAsync.cs" />
-    <Compile Include="Assets\SourceCode\ScenarioInterface.cs" />
-    <Compile Include="Assets\SourceCode\SequenceHelper\ScenarioHandlingSequence.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Dialogue\TriggerDialogue.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Camera\RemoveCameraFollowSequence.cs" />
+    <Compile Include="Assets\SourceCode\BossBehaviours\JarotBossBehaviour.cs" />
+    <Compile Include="Assets\SourceCode\TestObject.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_TMPro_TMP_Style.cs" />
+    <Compile Include="Assets\SourceCode\Patrolling\PatrolNodeBase.cs" />
+    <Compile Include="Assets\SourceCode\UI\ButtonBaseUI.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_InputSystem_InputAction.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_ParticleSystem_MinMaxGradient.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\ObjectHandling\SetObjectActiveSequence.cs" />
+    <Compile Include="Assets\SourceCode\UI\GameOverUI.cs" />
+    <Compile Include="Assets\SourceCode\UI\HurtUI.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_InputField_OnChangeEvent.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_InputSystem_InputActionProperty.cs" />
+    <Compile Include="Assets\SourceCode\ItemInstance.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_TMPro_HorizontalAlignmentOptions.cs" />
     <Compile Include="Assets\SourceCode\UI\ConsoleUIController.cs" />
-    <Compile Include="Assets\SourceCode\Interactable\DialogueInteraction.cs" />
+    <Compile Include="Assets\SourceCode\Effects\Vital\DamagedEffect.cs" />
+    <Compile Include="Assets\SourceCode\PickableObjectPickerHandler.cs" />
+    <Compile Include="Assets\SourceCode\Effects\Level\ParallaxEffect.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Character\RemoveCharacterSequence.cs" />
+    <Compile Include="Assets\SourceCode\TrapComponent.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_SpriteState.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_TMPro_TMP_InputField_OnChangeEvent.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_Navigation.cs" />
     <Compile Include="Assets\SourceCode\InteractionHandler.cs" />
-    <Compile Include="Assets\SourceCode\StdPipeEmulator.cs" />
-    <Compile Include="Assets\SourceCode\SequenceHelper\PlayerPositionSequence.cs" />
-    <Compile Include="Assets\SourceCode\LevelCheckpointDatabase.cs" />
-    <Compile Include="Assets\SourceCode\UI\ItemContainerController.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_TextCore_Text_SpriteGlyph.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\ObjectHandling\SetObjectPositionSequence.cs" />
+    <Compile Include="Assets\SourceCode\Interactable\SequenceInteraction.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Game\TriggerGameOverSequence.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_TMPro_TMP_Character.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_Dropdown_OptionDataList.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_TMPro_TextAlignmentOptions.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_TMPro_TMP_InputField_SelectionEvent.cs" />
+    <Compile Include="Assets\SourceCode\MiniGame\CookBattleMG.cs" />
     <Compile Include="Assets\SourceCode\CheckpointHandler.cs" />
-    <Compile Include="Assets\SourceCode\MouseFollower.cs" />
-    <Compile Include="Assets\SourceCode\QuestObserverComponent\ItemCollectionSubquest.cs" />
-    <Compile Include="Assets\SourceCode\QuestObserver.cs" />
+    <Compile Include="Assets\SourceCode\LookAtHandler.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Dialogue\GetDialogueInputFocus.cs" />
+    <Compile Include="Assets\SourceCode\VisualScript\DialogueUI\DialogueCharacterUI\AddTalkingCharacter.cs" />
+    <Compile Include="Assets\SourceCode\GameUIHandler.cs" />
     <Compile Include="Assets\SourceCode\HealthComponent.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_ColorBlock.cs" />
     <Compile Include="Assets\SourceCode\FlipInterface.cs" />
+    <Compile Include="Assets\SourceCode\ItemRecipeDiscoveryData.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Character\CreateCharacterSequence.cs" />
     <Compile Include="Assets\SourceCode\AreaTrigger.cs" />
-    <Compile Include="Assets\SourceCode\MovementController.cs" />
-    <Compile Include="Assets\SourceCode\InputContext.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_TMPro_TMP_Dropdown_DropdownEvent.cs" />
+    <Compile Include="Assets\SourceCode\ISequenceData.cs" />
+    <Compile Include="Assets\SourceCode\CanvasParallaxHandler.cs" />
     <Compile Include="Assets\SourceCode\ItemMetadata.cs" />
     <Compile Include="Assets\SourceCode\PlayerInventoryCommand.cs" />
-    <Compile Include="Assets\SourceCode\AlertComponent.cs" />
+    <Compile Include="Assets\SourceCode\TestThrower.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_AnimationTriggers.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\ObjectHandling\FlipObjectSequence.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_Scrollbar_ScrollEvent.cs" />
+    <Compile Include="Assets\SourceCode\UI\ChooseRecipeListUI.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_InputField_SubmitEvent.cs" />
+    <Compile Include="Assets\SourceCode\TestBreakableObject.cs" />
+    <Compile Include="Assets\SourceCode\ItemTextureData.cs" />
+    <Compile Include="Assets\SourceCode\Testing\ChangePosOnClick.cs" />
+    <Compile Include="Assets\SourceCode\ILoadingQueue.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_TMPro_TMP_InputField_TextSelectionEvent.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_Unity_Mathematics_bool2x2.cs" />
+    <Compile Include="Assets\SourceCode\UI\MultipleProgressBar.cs" />
+    <Compile Include="Assets\SourceCode\ObjectFriendlyHandler.cs" />
+    <Compile Include="Assets\SourceCode\VisualScript\DialogueUI\DialogueCharacterUI\RemoveTalkingCharacter.cs" />
+    <Compile Include="Assets\SourceCode\LevelSequenceDatabase.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\AI\MoveObjectToObjRefSequence.cs" />
+    <Compile Include="Assets\SourceCode\MiniGame\EnemyFightMG.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\UI\StartVideoUISequence.cs" />
+    <Compile Include="Assets\SourceCode\RigidbodyMessageRelay.cs" />
+    <Compile Include="Assets\SourceCode\UI\ProgressTexture.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\PlayerHandling\GetPlayerInputFocusSequence.cs" />
+    <Compile Include="Assets\SourceCode\Patrolling\GoToObject.cs" />
+    <Compile Include="Assets\SourceCode\UI\InventoryHUDUI.cs" />
+    <Compile Include="Assets\SourceCode\Patrolling\GoToPosition.cs" />
+    <Compile Include="Assets\SourceCode\PathFollower.cs" />
+    <Compile Include="Assets\SourceCode\UI\LoadingUI.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Input\RemoveInputFocusSequence.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Game\SetEnableTriggerSequence.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_InputSystem_InputActionMap.cs" />
+    <Compile Include="Assets\SourceCode\GameRuntimeData.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Timing\SetPeriodTimeSequence.cs" />
+    <Compile Include="Assets\SourceCode\CharacterMetadata.cs" />
+    <Compile Include="Assets\SourceCode\MathExtended.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\UI\SetPlayerUIMode.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Scene\SceneSequenceTrigger.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Camera\SetCameraFollowSequence.cs" />
+    <Compile Include="Assets\SourceCode\ParallaxComponent.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Scenario\StartScenarioSequence.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_Events_UnityEventBase.cs" />
+    <Compile Include="Assets\SourceCode\UI\FadeUI.cs" />
+    <Compile Include="Assets\SourceCode\QuestDatabase.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_InputSystem_PlayerInput_DeviceLostEvent.cs" />
+    <Compile Include="Assets\SourceCode\Interactable\InteractionHint.cs" />
+    <Compile Include="Assets\SourceCode\UI\BossHealthBarUI.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_TextCore_Text_TextStyle.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_ParticleSystem_MinMaxCurve.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_TMPro_TMP_InputField_TouchScreenKeyboardEvent.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_TextCore_Text_UnicodeLineBreakingRules.cs" />
+    <Compile Include="Assets\SourceCode\WeaponHandler.cs" />
+    <Compile Include="Assets\SourceCode\ActiveStateTriggerSequence.cs" />
+    <Compile Include="Assets\SourceCode\GameHandler.cs" />
+    <Compile Include="Assets\SourceCode\PatrolBehaviour.cs" />
+    <Compile Include="Assets\SourceCode\UI\CharacterFocusUI.cs" />
+    <Compile Include="Assets\SourceCode\CollectibleComponent.cs" />
+    <Compile Include="Assets\SourceCode\Patrolling\WaitForSeconds.cs" />
+    <Compile Include="Assets\SourceCode\GameTimeHandler.cs" />
+    <Compile Include="Assets\SourceCode\TypeDataStorage.cs" />
+    <Compile Include="Assets\SourceCode\Patrolling\LookAtDirection.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_TMPro_VerticalAlignmentOptions.cs" />
+    <Compile Include="Assets\SourceCode\CookerComponent.cs" />
+    <Compile Include="Assets\SourceCode\DamagerComponent.cs" />
+    <Compile Include="Assets\SourceCode\UI\IAlphaRendererReference.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_Button_ButtonClickedEvent.cs" />
+    <Compile Include="Assets\SourceCode\VisualScript\ScenarioInitializing.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_InputSystem_PlayerInput_ActionEvent.cs" />
+    <Compile Include="Assets\SourceCode\Effects\Damager\DamagerLayerExcludingHelper.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_TextCore_Text_SpriteCharacter.cs" />
+    <Compile Include="Assets\RichTextHelper\RichTextHelper.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_TMPro_TMP_GlyphPairAdjustmentRecord.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\PlayerHandling\GetPlayerObjectSequence.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_TMPro_TMP_FontWeightPair.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_TMPro_TMP_SpriteGlyph.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_MaskableGraphic_CullStateChangedEvent.cs" />
+    <Compile Include="Assets\SourceCode\UI\TimingBaseUI.cs" />
+    <Compile Include="Assets\SourceCode\SyncEnum.cs" />
+    <Compile Include="Assets\SourceCode\ItemRecipeData.cs" />
+    <Compile Include="Assets\SourceCode\WeaponItem.cs" />
+    <Compile Include="Assets\SourceCode\UI\CanvasAutoCameraSetter.cs" />
+    <Compile Include="Assets\SourceCode\SequenceDatabase.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Camera\ClearCameraFollowSequence.cs" />
+    <Compile Include="Assets\SourceCode\ConvertExtended.cs" />
+    <Compile Include="Assets\SourceCode\VisualScript\QuestInitializing.cs" />
+    <Compile Include="Assets\SourceCode\VisualScript\DialogueUI\HighlightTalker.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\AI\MoveObjectToSequence.cs" />
+    <Compile Include="Assets\SourceCode\Effects\BaseVisual\ImageUIMaterialReference.cs" />
+    <Compile Include="Assets\SourceCode\ISequenceAsync.cs" />
+    <Compile Include="Assets\SourceCode\ScenarioInterface.cs" />
+    <Compile Include="Assets\SourceCode\UIAlphaRendererReference.cs" />
+    <Compile Include="Assets\SourceCode\CharacterDatabase.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_TextCore_GlyphRect.cs" />
+    <Compile Include="Assets\SourceCode\Effects\Vital\VulnerableEffect.cs" />
+    <Compile Include="Assets\SourceCode\Interactable\DialogueInteraction.cs" />
+    <Compile Include="Assets\SourceCode\UI\DialogueCharacterUI.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_InputSystem_PlayerInput_ControlsChangedEvent.cs" />
+    <Compile Include="Assets\SourceCode\CharacterComponent.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Scenario\SetEnableScenarioSequence.cs" />
+    <Compile Include="Assets\SourceCode\StdPipeEmulator.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Camera\SetCameraPivotSequence.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\ObjectHandling\TranslateObjToReferenceSequence.cs" />
+    <Compile Include="Assets\SourceCode\AlertTrigger.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_TMPro_TMP_Dropdown_OptionDataList.cs" />
+    <Compile Include="Assets\SourceCode\LevelCheckpointDatabase.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_Unity_Mathematics_bool2.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_ScrollRect_ScrollRectEvent.cs" />
+    <Compile Include="Assets\SourceCode\UI\ItemContainerController.cs" />
+    <Compile Include="Assets\SourceCode\IQuestData.cs" />
+    <Compile Include="Assets\SourceCode\UI\PlayerHUDUI.cs" />
+    <Compile Include="Assets\SourceCode\MouseFollower.cs" />
+    <Compile Include="Assets\SourceCode\UI\TextButtonUI.cs" />
+    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_InputField_EndEditEvent.cs" />
+    <Compile Include="Assets\SourceCode\MovementController.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\UI\SetMainUIMode.cs" />
+    <Compile Include="Assets\SourceCode\FollowerBehaviour.cs" />
+    <Compile Include="Assets\SourceCode\ILookAtReceiver.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Timing\PauseGameSequence.cs" />
+    <Compile Include="Assets\SourceCode\SpriteAlphaRendererReference.cs" />
+    <Compile Include="Assets\SourceCode\UI\SlideUI.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\ObjectHandling\SetObjectPositionRefObjSequence.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -489,7 +674,11 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-      <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.4\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
+      <HintPath>Assets\AstarPathfindingProject\Plugins\DotNetZip\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
@@ -984,24 +1173,108 @@
       <HintPath>Library\ScriptAssemblies\Unity.2D.IK.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="PsdPlugin">
-      <HintPath>Library\ScriptAssemblies\PsdPlugin.dll</HintPath>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Burst.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Burst">
-      <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+    <Reference Include="Unity.2D.Common.Path.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Path.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.2D.PixelPerfect.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.PixelPerfect.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.2D.Aseprite.Common">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Aseprite.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Config.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Config.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Mathematics.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.2D.Tilemap.Extras.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections">
+      <HintPath>Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.2D.SpriteShape.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.SpriteShape.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.2D.PixelPerfect">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.PixelPerfect.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PPv2URPConverters">
+      <HintPath>Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.2D.Aseprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Aseprite.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VSCode.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PsdPlugin">
+      <HintPath>Library\ScriptAssemblies\PsdPlugin.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.2D.Common.Path.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Path.Editor.dll</HintPath>
+    <Reference Include="Unity.Burst">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
@@ -1010,6 +1283,10 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.Shared.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
@@ -1036,28 +1313,12 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.PixelPerfect.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.PixelPerfect.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.Aseprite.Common">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Aseprite.Common.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.InternalAPIEditorBridge.005">
       <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.005.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow.Editor">
@@ -1068,20 +1329,12 @@
       <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.001.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Mathematics.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.2D.Common.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.Tilemap.Extras.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
+    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Timeline">
@@ -1100,28 +1353,16 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Collections">
-      <HintPath>Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
+    <Reference Include="Unity.InternalAPIEditorBridge.001">
+      <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.001.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.2D.Psdimporter.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Psdimporter.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.InternalAPIEditorBridge.001">
-      <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.001.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.SpriteShape.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.SpriteShape.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.VisualScripting.State.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.PixelPerfect">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.PixelPerfect.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Mathematics">
@@ -1132,16 +1373,16 @@
       <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.2D.Aseprite.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Aseprite.Editor.dll</HintPath>
+    <Reference Include="Unity.Searcher.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
@@ -1166,6 +1407,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="PackageToolsEditor.csproj" />
+    <ProjectReference Include="AstarPathfindingProjectEditor.csproj" />
+    <ProjectReference Include="AstarPathfindingProject.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <ItemGroup>

@@ -1,0 +1,34 @@
+{
+    "name": "UIInput",
+    "maps": [
+        {
+            "name": "Keyboard",
+            "id": "b5f5ae14-9353-4c1b-a6cf-d5238a35062b",
+            "actions": [
+                {
+                    "name": "UIAccept",
+                    "type": "Button",
+                    "id": "53acadd5-1b92-4538-ba3c-5b6ccec4990b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0c286ae3-b1b3-405c-bf22-5cac5f4e275d",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UIAccept",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

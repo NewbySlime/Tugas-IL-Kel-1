@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 996494873}
   - component: {fileID: 996494872}
   - component: {fileID: 996494876}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TestTeleport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6160f46fef1774848a79114152754b16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _TriggerSequence: []
+  _SequenceHandler: {fileID: 0}
   _Rigidbody: {fileID: 996494872}
   TriggerOnEnter: 1
   _CheckpointID: test_teleport
@@ -341,6 +341,14 @@ PrefabInstance:
     - target: {fileID: 2987220203409192807, guid: f18f7544e29c9294bbae7c195bb4ef9a, type: 3}
       propertyPath: m_Name
       value: TEMPLATE_LevelNeeds
+      objectReference: {fileID: 0}
+    - target: {fileID: 5104418753096965481, guid: f18f7544e29c9294bbae7c195bb4ef9a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5104418753096965481, guid: f18f7544e29c9294bbae7c195bb4ef9a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6656412384073996161, guid: f18f7544e29c9294bbae7c195bb4ef9a, type: 3}
       propertyPath: m_LocalPosition.x

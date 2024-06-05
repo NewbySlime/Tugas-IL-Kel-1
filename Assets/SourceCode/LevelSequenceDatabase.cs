@@ -9,7 +9,7 @@ public class LevelSequenceDatabase: MonoBehaviour{
   [Serializable]
   private struct _SequenceMetadata{
     public string SequenceID;
-    public SequenceHandler Handler;
+    public SequenceHandlerVS Handler;
   }
 
   [SerializeField]

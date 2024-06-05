@@ -166,6 +166,10 @@ public class RecipeCraftingUIController: MonoBehaviour{
     _recipe_craft_res_controller.OnItemButtonPressedEvent += OnCraftResult_ItemButtonPressed;
 
     _item_inv_grouping = _ItemInventoryListContent.GetComponent<GridLayoutGroup>();
+
+
+    if(_game_handler.SceneInitialized)
+      _scene_changed_finished(_game_handler.GetCurrentSceneID(), _game_handler.GetCurrentSceneContext());
   }
 
   /// <summary>

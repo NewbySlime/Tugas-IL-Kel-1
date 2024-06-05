@@ -506,7 +506,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 754673854051070176}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Wrapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1939,7 +1939,8 @@ GameObject:
   - component: {fileID: 1170502361870028189}
   - component: {fileID: 4298595805473409653}
   - component: {fileID: 1077407300594894978}
-  m_Layer: 0
+  - component: {fileID: 2157350901218961864}
+  m_Layer: 5
   m_Name: RecipeCraftingUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1953,7 +1954,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4948101936221404111}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2013,6 +2014,18 @@ MonoBehaviour:
   _RecipeCraftResultContent: {fileID: 3182656695516870456}
   _WrapperContent: {fileID: 1645698078271430905}
   _ItemButtonPrefab: {fileID: 5989957559783791096, guid: ae6e9afa57dc7e6419318160e72cfe90, type: 3}
+--- !u!225 &2157350901218961864
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4948101936221404111}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5020492758716771831
 GameObject:
   m_ObjectHideFlags: 0
@@ -2651,7 +2664,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 203.97481, y: -342.91733}
+  m_AnchoredPosition: {x: 203.97478, y: -342.91797}
   m_SizeDelta: {x: 381.5064, y: 685.8342}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1522239094488332765
@@ -2911,7 +2924,7 @@ GameObject:
   - component: {fileID: 8681408533177661355}
   - component: {fileID: 5444257694339959944}
   - component: {fileID: 8669891133202123693}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: RecipeCraftList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3856,7 +3869,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 275056135096202834}
   m_HandleRect: {fileID: 6058910440291544188}
   m_Direction: 2
-  m_Value: 1.0000012
+  m_Value: 1.0000042
   m_Size: 0.69914854
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3873,7 +3886,7 @@ GameObject:
   - component: {fileID: 5269877473730518964}
   - component: {fileID: 7697599519712062896}
   - component: {fileID: 1743745305703717968}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

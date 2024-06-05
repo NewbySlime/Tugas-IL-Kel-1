@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2432357330282017089}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Wrapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 8170524841327439014}
   - component: {fileID: 255795111472073863}
   - component: {fileID: 2293959733582094841}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CommandText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,11 +224,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4996721749618087754}
+  - component: {fileID: 4855428086906039175}
   - component: {fileID: 177823873120459031}
   - component: {fileID: 3395582300357674162}
   - component: {fileID: 3015443663659451007}
   - component: {fileID: 147587307526055895}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ConsoleUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +243,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1513495286773958098}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1.0411974}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -255,6 +256,18 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000030518, y: 124.13}
   m_SizeDelta: {x: 1006.5, y: 248.25}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &4855428086906039175
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513495286773958098}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &177823873120459031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,7 +414,7 @@ GameObject:
   - component: {fileID: 5096801963383910352}
   - component: {fileID: 5781846349231696365}
   - component: {fileID: 7074358992942674943}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -477,7 +490,7 @@ GameObject:
   - component: {fileID: 6259672651424015422}
   - component: {fileID: 4020249561249678132}
   - component: {fileID: 6796892596008307949}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ConsoleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,63 +1,59 @@
+using System;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
-public class FadeUI: MonoBehaviour, ISequenceAsync{
+public class FadeUI: TimingBaseUI{
   [SerializeField]
-  private SpriteRenderer _SpriteRenderer;
-
-  [SerializeField]
-  private float _FadeTiming;
+  private GameObject _TargetAlphaReference;
 
   [SerializeField]
-  private bool _FadeActive;
+  private bool FadeStateOnStart = false;
 
+  private IAlphaRendererReference _alpha_reference;
 
   private float _target_fade_value = 0;
-  private float _from_fade_value = 0;
+  private bool _last_fade_to_cover;
 
-  private float _current_value = 0;
-  private float _current_fade_speed = 0;
+  [HideInInspector]
+  public bool FadeToCover = true;
+
+  protected override void _on_timer_started(){
+    _on_timer_start_call();
+
+    _target_fade_value = FadeToCover? 1: 0;
+  }
+
+  protected override void _on_timer_update(){
+    if(_last_fade_to_cover == FadeToCover)
+      return;
+
+    float _current_value = Mathf.SmoothStep(1, 0, __Progress);
+    _alpha_reference.SetAlpha(Math.Abs(_current_value - _target_fade_value));
+  }
+
+  protected override void _on_timer_finished(){
+    _last_fade_to_cover = FadeToCover;
+    _alpha_reference.SetAlpha(_target_fade_value);
+  }
 
 
   public void Start(){
-    if(_SpriteRenderer == null){
-      Debug.LogWarning("Sprite Renderer hasn't been assigned.");
-      return;
+    IAlphaRendererReference[] _list_references = _TargetAlphaReference.GetComponents<IAlphaRendererReference>();
+    if(_list_references.Length <= 0){
+      Debug.LogError("TargetAlphaReference does not have IAlphaRendererReference.");
+      throw new MissingReferenceException();
     }
-  }
+    else if(_list_references.Length > 1)
+      Debug.LogWarning("IAlphaRendererReference instance more than one is not supported.");
 
+    _alpha_reference = _list_references[0];
 
-  public void Update(){
-    float _next_value = _target_fade_value;
-    if(IsTriggering()){
-      Mathf.SmoothDamp(_current_value, _target_fade_value, ref _current_fade_speed, _FadeTiming);
-
-      _next_value = _current_value;
-    }
+    _last_fade_to_cover = !FadeStateOnStart;
+    FadeToCover = FadeStateOnStart;
     
-    Color _new_alpha = _SpriteRenderer.color;
-    _new_alpha.a = _next_value;
-
-    _SpriteRenderer.color = _new_alpha;
-  }
-
-
-  public void StartTriggerAsync(){
-    if(_FadeActive){
-      _target_fade_value = 1;
-      _from_fade_value = 0;
-    }
-    else{
-      _target_fade_value = 0;
-      _from_fade_value = 1;
-    }
-
-    _current_value = _from_fade_value;
-    _current_fade_speed = 0;
-  }
-
-  public bool IsTriggering(){
-    float _value = Mathf.Abs(_target_fade_value-_current_fade_speed);
-    return _value < 0.05;
+    StartTimerAsync(true);
   }
 }

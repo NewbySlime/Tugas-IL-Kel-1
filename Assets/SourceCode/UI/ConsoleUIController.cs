@@ -19,7 +19,7 @@ public class ConsoleUIController: MonoBehaviour, ISelectHandler, IDeselectHandle
   [SerializeField]
   private GameObject _WrapperContent;
 
-  private InputContext _input_context;
+  private InputFocusContext _input_context;
 
   private Selectable _selectable;
 
@@ -93,7 +93,7 @@ public class ConsoleUIController: MonoBehaviour, ISelectHandler, IDeselectHandle
 
 
   public void Start(){
-    _input_context = FindObjectOfType<InputContext>();
+    _input_context = FindObjectOfType<InputFocusContext>();
     _selectable = GetComponent<Selectable>();
 
     _console_toggled = true;
@@ -152,7 +152,7 @@ public class ConsoleUIController: MonoBehaviour, ISelectHandler, IDeselectHandle
   /// <param name="_event_data">Data event dari Unity</param>
   public void OnSelect(BaseEventData _event_data){
     _is_selected = true;
-    _input_context.BindUIInputContext(gameObject);
+    _input_context.RegisterInputObject(this, InputFocusContext.ContextEnum.UI);
   }
 
 
@@ -162,7 +162,7 @@ public class ConsoleUIController: MonoBehaviour, ISelectHandler, IDeselectHandle
   /// <param name="_event_data">Data event dari Unity</param>
   public void OnDeselect(BaseEventData _event_data){
     _is_selected = false;
-    _input_context.RemoveUIInputContext(gameObject);
+    _input_context.RemoveInputObject(this, InputFocusContext.ContextEnum.UI);
   }
 
 

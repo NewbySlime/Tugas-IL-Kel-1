@@ -6,45 +6,33 @@ using UnityEngine.Android;
 
 
 public class AreaTrigger: MonoBehaviour{
-  public struct TriggerContext{
-    public GameObject EnteredObject;
-  }
-
-
   [SerializeField]
-  private List<AreaTriggerSequenceInterface> _TriggerSequence;
+  private SequenceHandlerVS _SequenceHandler;
 
   [SerializeField]
   private RigidbodyMessageRelay _Rigidbody;
 
+  private GameHandler _game_handler;
+
   public bool TriggerOnEnter = true;
 
 
-  private IEnumerator _start_sequence(TriggerContext context){
-    foreach(AreaTriggerSequenceInterface _interface in _TriggerSequence){
-      _interface.SetContext(context);
-      _interface.StartTriggerAsync();
-
-      yield return new WaitUntil(() => !_interface.IsTriggering());
-      _interface.SetContext(null);
-    }
-  }
-
   protected virtual void _OnObjectEnter(Collider2D collider){
-    Debug.LogWarning("Area Entered");
-    if(!TriggerOnEnter)
+    if(!_game_handler.AreaTriggerEnable || !TriggerOnEnter || _SequenceHandler == null || _SequenceHandler.IsTriggering())
       return;
 
-    TriggerContext _context = new TriggerContext{
-      EnteredObject = collider.gameObject
-    };
-
-    StartCoroutine(_start_sequence(_context));
+    Debug.Log("done");
+    _SequenceHandler.StartTriggerAsync();
   }
 
 
   public void Start(){
-    Debug.Log("Area trigger starting.");
     _Rigidbody.OnTriggerEntered2DEvent += _OnObjectEnter;
+
+    _game_handler = FindAnyObjectByType<GameHandler>();
+    if(_game_handler == null){
+      Debug.LogError("Cannot find GameHandler.");
+      throw new MissingReferenceException();
+    }
   }
 }

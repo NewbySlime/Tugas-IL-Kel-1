@@ -15,12 +15,17 @@ public class LevelTeleportHandler: CheckpointHandler{
 
 
   private void _on_teleport_enter(Collider2D collider){
+    Debug.LogWarning("teleport triggered");
     PlayerController _player = collider.gameObject.GetComponent<PlayerController>();
-    if(_player == null)
+    if(_player == null || !_player.TriggerAvailable)
       return;
 
     if(_TriggerChangeSceneOnEnter)
       _GameHandler.ChangeScene(_ChangeSceneID);
+  }
+
+  private void _on_scene_removing(){
+    _GameHandler.SceneRemovingEvent -= _on_scene_removing;
   }
 
 
@@ -28,11 +33,11 @@ public class LevelTeleportHandler: CheckpointHandler{
     base._GameSceneChangedFinished(scene_id, context);
 
     _TriggerChangeSceneOnEnter = true;
+    _TriggerCheckpointOnEnter = true;
     _TriggerSaveOnEnter = false;
   }
 
   protected override void _OnObjectEnter(Collider2D collider){
-    Debug.LogWarning("teleport triggered");
     if(TriggerOnEnter)
       _on_teleport_enter(collider);
 
@@ -40,12 +45,20 @@ public class LevelTeleportHandler: CheckpointHandler{
   }
 
 
+  ~LevelTeleportHandler(){
+    _on_scene_removing();
+  }
+
+
   public new void Start(){
     base.Start();
 
+    _GameHandler.SceneRemovingEvent += _on_scene_removing;
+
     TriggerOnEnter = false;
     _TriggerChangeSceneOnEnter = false;
-    _TriggerSaveOnEnter = true;
+    _TriggerCheckpointOnEnter = true;
+    _TriggerSaveOnEnter = false;
 
     LevelCheckpointDatabase _database = FindAnyObjectByType<LevelCheckpointDatabase>();
     if(_database == null){

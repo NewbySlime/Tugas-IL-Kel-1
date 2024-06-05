@@ -16,6 +16,7 @@ public class ItemRecipeDatabase: MonoBehaviour{
   }
 
   private _recipe_node _start_recipe_tree = new _recipe_node();
+  private Dictionary<string, ItemRecipeData.ItemData> _item_recipe_map = new();
 
   private ItemDatabase _item_database;
 
@@ -40,6 +41,7 @@ public class ItemRecipeDatabase: MonoBehaviour{
         continue;
 
       Debug.Log(string.Format("recipe id: {0}", _item_id));
+      _item_recipe_map[_item_id] = _recipe_data;
 
       List<string> _sorted_item_list = _recipe_data.ItemList; _sorted_item_list.Sort();
       if(_sorted_item_list.Count() <= 0){
@@ -93,5 +95,18 @@ public class ItemRecipeDatabase: MonoBehaviour{
     }
 
     return _rnode.ResultItemID;
+  }
+
+
+  public List<string> GetItemNeeded(string item_id){
+    List<string> _result = new();
+    if(!_item_recipe_map.ContainsKey(item_id))
+      return _result;
+
+    ItemRecipeData.ItemData _recipe_data = _item_recipe_map[item_id];
+    foreach(string _id in _recipe_data.ItemList)
+      _result.Add(_id);
+
+    return _result;
   }
 }

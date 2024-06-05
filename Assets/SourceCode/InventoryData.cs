@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 
 
@@ -25,14 +27,45 @@ public class InventoryData: MonoBehaviour{
   public event OnItemRemoved OnItemRemovedEvent;
   public delegate void OnItemRemoved(string item_id);
 
-  public struct ItemData{
+
+  [Serializable]
+  public class ItemData{
     public string item_id;
     public uint item_count;
+
+
+    public string GetDataID(){
+      return "Inv.ItemData";
+    }
+
+    
+    public string GetData(){
+      return ConvertExt.ToBase64String(JsonUtility.ToJson(this));
+    }
+
+    public void SetData(string data){
+      JsonUtility.FromJsonOverwrite(ConvertExt.FromBase64String(data), this);
+    }
   }
 
 
-  public class RuntimeData{
-    public List<ItemData> ListItem = new();
+  [Serializable]
+  public class RuntimeData: PersistanceContext.IPersistance{
+    public ItemData[] ListItem = new ItemData[0];
+
+
+    public string GetDataID(){
+      return "Inv.RuntimeData";
+    }
+
+
+    public string GetData(){
+      return ConvertExt.ToBase64String(JsonUtility.ToJson(this));
+    }
+
+    public void SetData(string data){
+      JsonUtility.FromJsonOverwrite(ConvertExt.FromBase64String(data), this);
+    }
   }
 
 
@@ -165,11 +198,14 @@ public class InventoryData: MonoBehaviour{
 
   public RuntimeData AsRuntimeData(){
     RuntimeData _res = new();
-    _res.ListItem = new List<ItemData>();
+    _res.ListItem = new ItemData[_item_list.Count];
     
+    int idx = 0;
     foreach(ItemData _item in _item_list.Values){
       Debug.Log(string.Format("runtime removing item {0}", _item.item_id));
-      _res.ListItem.Add(_item);
+      _res.ListItem[idx] = _item;
+
+      idx++;
     }
 
     return _res;

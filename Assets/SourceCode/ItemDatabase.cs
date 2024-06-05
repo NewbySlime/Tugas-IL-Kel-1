@@ -9,12 +9,16 @@ using UnityEngine;
 /// Database pada game untuk menyimpan data-data semua Item.
 /// </summary>
 public class ItemDatabase: MonoBehaviour{
+  public delegate void OnInitializedCallback();
+  public event OnInitializedCallback OnInitializedEvent;
+  
   /// <summary>
   /// Folder-folder yang digunakan untuk menyimpan data item (Prefabs)
   /// </summary>
   static private string[] item_data_folder = {
     "Assets/Items/Makanan",
-    "Assets/Items/BahanBahan"
+    "Assets/Items/BahanBahan",
+    "Assets/Items/Senjata"
   };
 
   private struct _item_metadata{
@@ -31,9 +35,6 @@ public class ItemDatabase: MonoBehaviour{
 
   
   public bool IsInitialized{get; private set;} = false;
-  
-  public delegate void OnInitializedCallback();
-  public event OnInitializedCallback OnInitializedEvent;
   
 
   public void Start(){

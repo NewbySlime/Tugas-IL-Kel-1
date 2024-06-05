@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,7 +11,7 @@ public class InteractionHandler: MonoBehaviour{
   private RigidbodyMessageRelay _InteractionTrigger;
 
 
-  private HashSet<InteractableInterface> _interactable_list = new HashSet<InteractableInterface>();
+  private HashSet<InteractableInterface> _interactable_list = new();
 
 
   public void Start(){
@@ -41,10 +42,11 @@ public class InteractionHandler: MonoBehaviour{
     _interface.TriggerInteractionExit();
   }
 
+  public bool TriggerInteraction(){
+    if(_interactable_list.Count <= 0)
+      return false;
 
-  #nullable enable
-  public void OnInteract(InputValue value){
-    InteractableInterface? _nearest_obj = null;
+    InteractableInterface _nearest_obj = null;
     float _nearest_dist = float.PositiveInfinity;
     foreach(InteractableInterface _interface in _interactable_list){
       float _dist = (transform.position - _interface.transform.position).magnitude;
@@ -54,10 +56,9 @@ public class InteractionHandler: MonoBehaviour{
       }
     }
 
-    if(_nearest_obj == null)
-      return;
-
     _nearest_obj.TriggerInteract();
+    Debug.Log("interaction do");
+
+    return true;
   }
-  #nullable disable
 }

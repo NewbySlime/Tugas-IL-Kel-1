@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Linq;
+using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,6 +11,8 @@ public class ScenarioInterface: MonoBehaviour{
   private struct _ScenarioFilter{
     public string ScenarioID;
     public string SubScenarioID;
+
+    public bool IsScenarioFinished;
   }
 
 
@@ -20,31 +24,32 @@ public class ScenarioInterface: MonoBehaviour{
 
 
   private GameHandler _handler;
+  private ScenarioDiagramVS _scenario_diagram;
 
 
   #nullable enable
   private void _check_current_scenario(){
     bool _activate = !_ReverseFilter;
     while(true){
-      if(!_handler.GetEnableScenario(_Filter.ScenarioID)){
-        Debug.Log("Scenario not enabled");
+      if(!_scenario_diagram.GetEnableScenario(_Filter.ScenarioID)){
         _activate = _ReverseFilter;
         break;
       }
 
-      ScenarioHandler? _scenario = _handler.GetScenario(_Filter.ScenarioID);
+      ScenarioHandlerVS? _scenario = _scenario_diagram.GetScenario(_Filter.ScenarioID);
       if(_scenario == null){
-        Debug.Log("Scenario not found");
         _activate = _ReverseFilter;
         break;
       }
+
+      if(_Filter.IsScenarioFinished && _scenario.IsScenarioFinished())
+        break;
 
       if(_Filter.SubScenarioID.Length <= 0)
         break;
 
       string _subscenario = _scenario.GetCurrentSubScenario();
       if(_subscenario != _Filter.SubScenarioID){
-        Debug.Log("Subscenario false");
         _activate = _ReverseFilter;
         break;
       }
@@ -70,22 +75,49 @@ public class ScenarioInterface: MonoBehaviour{
     _check_current_scenario();
   }
 
+  private void _scenario_finished(string scenario){
+    Debug.Log("scenario interface finished");
 
-  private void _game_scene_changed(string scene_id, GameHandler.GameContext context){
-    Debug.Log("Game Handler scene changed");
-    _handler.ScenarioStateChangedEvent += _scenario_state_changed;
-    _handler.SubScenarioStateChangedEvent += _subscenario_state_changed;
+    if(_Filter.ScenarioID != scenario)
+      return;
 
     _check_current_scenario();
   }
 
-  private void _game_scene_removing(){
-    Debug.Log("Game Handler removing scene");
-    _handler.ScenarioStateChangedEvent -= _scenario_state_changed;
-    _handler.SubScenarioStateChangedEvent -= _subscenario_state_changed;
 
+  private void _game_scene_changed(string scene_id, GameHandler.GameContext context){
+    Debug.Log("Game Handler scene changed");
+    _check_current_scenario();
+    _scenario_diagram.ScenarioChangedStateEvent += _scenario_state_changed;
+
+    ScenarioHandlerVS _this_scenario = _scenario_diagram.GetScenario(_Filter.ScenarioID);
+    if(_this_scenario == null){
+      Debug.LogWarning(string.Format("Scenario not found {0}", _Filter.ScenarioID));
+      return;
+    }
+
+    _this_scenario.ScenarioSubscenarioChangedEvent += _subscenario_state_changed;
+    _this_scenario.ScenarioFinishedevent += _scenario_finished;
+  }
+
+  private void _game_scene_removed(){
     _handler.SceneChangedFinishedEvent -= _game_scene_changed;
-    _handler.SceneRemovingEvent -= _game_scene_removing;
+    _handler.SceneRemovingEvent -= _game_scene_removed;
+    _scenario_diagram.ScenarioChangedStateEvent -= _scenario_state_changed;
+
+    ScenarioHandlerVS _this_scenario = _scenario_diagram.GetScenario(_Filter.ScenarioID);
+    if(_this_scenario == null){
+      Debug.LogWarning(string.Format("Scenario not found {0}", _Filter.ScenarioID));
+      return;
+    }
+
+    _this_scenario.ScenarioSubscenarioChangedEvent -= _subscenario_state_changed;
+    _this_scenario.ScenarioFinishedevent -= _scenario_finished;
+  }
+
+
+  ~ScenarioInterface(){
+    _game_scene_removed();
   }
 
 
@@ -94,11 +126,20 @@ public class ScenarioInterface: MonoBehaviour{
     _handler = FindAnyObjectByType<GameHandler>();
     if(_handler == null){
       Debug.LogError("Cannot get GameHandler.");
-      throw new UnityEngine.MissingComponentException();
+      throw new MissingComponentException();
     }
 
     _handler.SceneChangedFinishedEvent += _game_scene_changed;
-    _handler.SceneRemovingEvent += _game_scene_removing;
+    _handler.SceneRemovingEvent += _game_scene_removed;
+
+    _scenario_diagram = FindAnyObjectByType<ScenarioDiagramVS>();
+    if(_scenario_diagram == null){
+      Debug.LogError("Cannot get Diagrams for Scenario.");
+      throw new MissingComponentException();
+    }
+
+    if(_handler.SceneInitialized)
+      _game_scene_changed(_handler.GetCurrentSceneID(), _handler.GetCurrentSceneContext());
   }
 
   public void SetInterfaceActive(bool active){

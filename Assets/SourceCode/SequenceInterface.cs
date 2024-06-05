@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
 public class SequenceInterface: MonoBehaviour{
   private HashSet<ISequenceAsync> _currently_played_sequence = new HashSet<ISequenceAsync>();
 
@@ -24,11 +25,20 @@ public class SequenceInterface: MonoBehaviour{
     if(IsTriggering())
       yield break;
 
-    ISequenceAsync[] sequences = GetComponents<ISequenceAsync>();
-    foreach(ISequenceAsync seq in sequences){
-      _currently_played_sequence.Add(seq);
+    {ISequenceAsync[] sequences = GetComponents<ISequenceAsync>();
+      foreach(ISequenceAsync seq in sequences){
+        _currently_played_sequence.Add(seq);
 
-      seq.StartTriggerAsync();
+        seq.StartTriggerAsync();
+      }
+    }
+
+    {ISequenceAsync[] sequences = transform.GetComponentsInChildren<ISequenceAsync>();
+      foreach(ISequenceAsync seq in sequences){
+        _currently_played_sequence.Add(seq);
+
+        seq.StartTriggerAsync();
+      }
     }
 
     yield return new WaitUntil(_check_sequences);

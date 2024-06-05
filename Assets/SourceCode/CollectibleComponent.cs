@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -9,7 +10,7 @@ public class CollectibleComponent: MonoBehaviour{
   private SpriteRenderer _ItemSpriteRenderer;
 
   [SerializeField]
-  private string _ItemID;
+  private string _ItemID = "";
 
   [SerializeField]
   private uint _ItemCount = 1;
@@ -20,18 +21,42 @@ public class CollectibleComponent: MonoBehaviour{
   private string _item_id;
   private uint _item_count = 1;
 
+  private bool _enable_collection = true;
 
-  private void _collider_entered(Collider2D collider){
-    Debug.Log(string.Format("collider name {0}", collider.gameObject.name));
-    InventoryData _inv = collider.gameObject.GetComponent<InventoryData>();
-    if(_inv == null)
+  private HashSet<GameObject> _list_entered_collider = new();
+
+
+  private void _check_collection(){
+    if(!_enable_collection)
       return;
 
-    _inv.AddItem(_item_id, _item_count);
-    Destroy(gameObject);
+    foreach(GameObject _object in _list_entered_collider){
+      InventoryData _inv = _object.GetComponent<InventoryData>();
+      if(_inv == null)
+        continue;
+      
+      _inv.AddItem(_item_id, _item_count);
+      Destroy(gameObject);
+
+      return;
+    }
   }
 
+  private void _collider_entered(Collider2D collider){
+    _list_entered_collider.Add(collider.gameObject);
+    _check_collection();
+  }
+
+  private void _collider_exited(Collider2D collider){
+    if(_list_entered_collider.Contains(collider.gameObject))
+      _list_entered_collider.Remove(collider.gameObject);
+  }
+
+
   private void _item_database_on_initialized(){
+    if(_ItemID.Length <= 0)
+      return;
+
     SetItemID(_ItemID);
     SetItemCount(_ItemCount);
   }
@@ -82,5 +107,16 @@ public class CollectibleComponent: MonoBehaviour{
     }
 
     _item_count = item_count;
+  }
+
+
+  public void SetEnableCollection(bool enable){
+    _enable_collection = enable;
+    if(_enable_collection)
+      _check_collection();
+  }
+
+  public bool GetEnableCollection(){
+    return _enable_collection;
   }
 }

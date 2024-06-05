@@ -1,12 +1,18 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 
 
 public class WeaponItem: MonoBehaviour{
   [Serializable]
   public struct ItemData{
-    public DamagerComponent.DamageData DamageData;
+    public DamagerComponent.DamagerData DamagerData;
     public DamagerComponent.DamagerContext DamagerContext;
+
+    public float WeaponFireDelay;
+
+    public GameObject ProjectilePrefab;
+    public Sprite ProjectileTexture;
   }
 
   [SerializeField]

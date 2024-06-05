@@ -10,7 +10,9 @@ public class FlipInterface: MonoBehaviour{
   private class _ObjectMetadataSerializeable{
     public GameObject Object;
 
-    public bool UseTransform; 
+    public bool UseTransform;
+
+    public bool UseRotation;
   }
 
   private class _ObjectMetadata{
@@ -73,7 +75,10 @@ public class FlipInterface: MonoBehaviour{
   public void Start(){
     _initialize_metadata(new _ObjectMetadataSerializeable{
       Object = gameObject,
-      UseTransform = false
+
+      UseTransform = false,
+
+      UseRotation = false
     });
 
     foreach(_ObjectMetadataSerializeable _metadata in _AddedFlipObjectList)
@@ -108,10 +113,21 @@ public class FlipInterface: MonoBehaviour{
       if(_metadata._metadata.UseTransform){
         GameObject _target_obj = _metadata._metadata.Object;
         Vector2 _loc_pos = _target_obj.transform.localPosition;
-        _loc_pos.x *= -1;
+        _loc_pos.x = Mathf.Abs(_loc_pos.x) * (flipped? -1: 1);
 
         _target_obj.transform.localPosition = _loc_pos;
       }
+
+      
+      Vector3 _current_angle = _metadata._metadata.Object.transform.eulerAngles;
+      Vector2 _direction = MathExt.AngleToDirection(_current_angle.z);
+      Debug.Log(string.Format("first angle {0}, direction {1}", _current_angle.z, _direction));
+      if(_metadata._metadata.UseRotation)
+        _direction.x = Mathf.Abs(_direction.x) * (flipped? -1: 1);
+
+      _current_angle.z = MathExt.DirectionToAngle(_direction);
+      Debug.Log(string.Format("angle {0}, direction {1}", _current_angle.z, _direction));
+      _metadata._metadata.Object.transform.eulerAngles = _current_angle;
     }
   }
 
@@ -131,10 +147,19 @@ public class FlipInterface: MonoBehaviour{
       if(_metadata._metadata.UseTransform){
         GameObject _target_obj = _metadata._metadata.Object;
         Vector2 _loc_pos = _target_obj.transform.localPosition;
-        _loc_pos.y *= -1;
+        _loc_pos.y = Mathf.Abs(_loc_pos.y) * (flipped? -1: 1);
 
         _target_obj.transform.localPosition = _loc_pos;
       }
+
+      Vector2 _direction = MathExt.AngleToDirection(_metadata._metadata.Object.transform);
+      if(_metadata._metadata.UseRotation)
+        _direction.y = Mathf.Abs(_direction.y) * (flipped? -1: 1);
+
+      Vector3 _current_angle = _metadata._metadata.Object.transform.eulerAngles;
+      _current_angle.z = MathExt.DirectionToAngle(_direction) * Mathf.Rad2Deg;
+
+      _metadata._metadata.Object.transform.eulerAngles = _current_angle;
     }
   }
   

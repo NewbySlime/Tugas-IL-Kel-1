@@ -1,7 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
+using Unity.Collections;
+using Unity.Jobs;
 using UnityEngine;
 
 
@@ -22,6 +26,7 @@ public class PersistanceContext: MonoBehaviour{
   }
 
 
+
   [Serializable]
   private struct _JSONData{
     public string data_type_id;
@@ -29,12 +34,14 @@ public class PersistanceContext: MonoBehaviour{
   }
 
   [Serializable]
-  private struct _JSONDataCollection{
-    public _JSONData[] data_list;
+  private class _JSONDataCollection{
+    public _JSONData[] data_list = new _JSONData[0];
   }
 
 
-  private Dictionary<string, _JSONData> _loaded_data;
+  private Dictionary<string, _JSONData> _loaded_data = new();
+
+  private string _save_folder_location;
 
 
   private bool _IsInitialized = false;
@@ -43,11 +50,13 @@ public class PersistanceContext: MonoBehaviour{
 
   public void Start(){
     _IsInitialized = true;
+
+    _save_folder_location = Application.persistentDataPath;
   }
 
 
   public void WriteSave(){
-    FileStream _save_file = File.Open(string.Format("{0}/{1}", Application.persistentDataPath, save_file_location), FileMode.Create);
+    FileStream _save_file = File.Open(string.Format("{0}/{1}", _save_folder_location, save_file_location), FileMode.Create);
 
     PersistanceSavingEvent?.Invoke(this);
 
@@ -64,17 +73,27 @@ public class PersistanceContext: MonoBehaviour{
 
 
     string _jsondata = JsonUtility.ToJson(_col);
-    byte[] _jsondata_raw = Encoding.UTF32.GetBytes(_jsondata);
-    string _filedata = Convert.ToBase64String(_jsondata_raw);
+    string _filedata = ConvertExt.ToBase64String(_jsondata);
     byte[] _filedata_raw = Encoding.UTF8.GetBytes(_filedata);
 
     _save_file.Write(_filedata_raw);
     _save_file.Close();
   }
 
+  public IEnumerator WriteSaveAsync(){
+    Delegate[] _list_delegate = PersistanceSavingEvent.GetInvocationList();
+    foreach(Delegate _del in _list_delegate){
+      yield return null;
+      _del.DynamicInvoke(this);
+    }
+  }
+
+
   public bool ReadSave(){
     try{
+      Debug.Log("save read test");
       FileStream _save_file = File.Open(string.Format("{0}/{1}", Application.persistentDataPath, save_file_location), FileMode.Open);
+      Debug.Log("save read test");
 
       byte[] _filedata_raw = new byte[_save_file.Length];
       int _left_bytes_iter = (int)_save_file.Length;
@@ -88,22 +107,28 @@ public class PersistanceContext: MonoBehaviour{
         _bytes_iter += _read_i;
       }
 
+      Debug.Log("save read test");
+      _save_file.Close();
+
       string _filedata = Encoding.UTF8.GetString(_filedata_raw);
-      byte[] _jsondata_raw = Convert.FromBase64String(_filedata);
-      string _jsondata = Encoding.UTF32.GetString(_jsondata_raw);
+      string _jsondata = ConvertExt.FromBase64String(_filedata);
 
+      Debug.Log("save read test");
       _JSONDataCollection _col = new _JSONDataCollection();
-      JsonUtility.FromJson<_JSONDataCollection>(_jsondata);
+      JsonUtility.FromJsonOverwrite(_jsondata, _col);
 
+      Debug.Log("save read test");
       _loaded_data.Clear();
       for(int i = 0; i < _col.data_list.Length; i++){
         _JSONData _data = _col.data_list[i];
         _loaded_data[_data.data_type_id] = _data;
       }
 
+      Debug.Log("save read test");
       PersistanceLoadingEvent?.Invoke(this);
     }
-    catch{
+    catch(Exception e){
+      Debug.LogError(e);
       return false;
     }
 
@@ -130,5 +155,10 @@ public class PersistanceContext: MonoBehaviour{
     data.SetData(_data.data);
 
     return true;
+  }
+
+
+  public void ClearData(){
+    _loaded_data.Clear();
   }
 }

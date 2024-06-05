@@ -18,6 +18,23 @@ public class ItemRecipeData: MonoBehaviour{
         return _ItemList;
       }
     }
+
+    public float FoodScore = 100f;
+
+    public bool AllowCustomRecipe = false;
+    public AddCustomRecipe CustomRecipe;
+  }
+
+  [Serializable]
+  public class AddCustomRecipe{
+    [Serializable]
+    public struct ItemScore{
+      public string ItemID;
+      public float ScoreAdd;
+    }
+
+    public float DefaultScoreAdd = 10;
+    public List<ItemScore> ItemScoreList;
   }
 
   
@@ -31,5 +48,5 @@ public class ItemRecipeData: MonoBehaviour{
   /// <param name="data">Penyimpanan data berdasarkan tipe yang diberikan dari ItemDatabase</param>
   public void ItemDatabase_LoadData(TypeDataStorage data){
     data.AddData(_item_recipe);
-  }
+  } 
 }

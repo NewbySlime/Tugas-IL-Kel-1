@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class MovementController: MonoBehaviour{
 
   [SerializeField]
   private float movement_speed = 100f;
+  public float MovementSpeed{get => movement_speed;}
 
   [SerializeField]
   private float movement_speed_midair = 10f;
@@ -32,9 +34,19 @@ public class MovementController: MonoBehaviour{
   private Vector2 walljump_direction = new Vector2(0.5f, 0.5f);
 
   [SerializeField]
+  private float forcejump_y_exaggeration = 1.5f;
+  
+  [SerializeField]
+  private float forcejump_startdelay = 0.5f;
+  public float ForceJumpStartDelay{get => forcejump_startdelay;}
+  [SerializeField]
+  private float forcejump_finishdelay = 1f;
+
+  [SerializeField]
   private Animator _TargetAnimatorMovement;
 
   private Rigidbody2D _object_rigidbody;
+  private Collider2D _object_collider;
 
   private RigidbodyMessageRelay _ground_check_relay;
 
@@ -51,12 +63,23 @@ public class MovementController: MonoBehaviour{
   private HashSet<Rigidbody2D> _wallhug_right_collider_set = new HashSet<Rigidbody2D>();
   private bool _is_wallhug_right;
 
+  private bool _forcejump_flag = false;
+
+  private bool _is_movement_enabled = true;
 
   private float _walk_dir_x = 0;
 
 
+  [HideInInspector]
+  public bool FixedLookAt = false;
+
+  [HideInInspector]
+  public bool GlideOnGround = false;
+
+
   public void Start(){
-    _object_rigidbody = gameObject.GetComponent<Rigidbody2D>();
+    _object_rigidbody = GetComponent<Rigidbody2D>();
+    _object_collider = GetComponent<Collider2D>();
     
     GameObject _ground_check = transform.Find("GroundCheck").gameObject;
     _ground_check_relay = _ground_check.GetComponent<RigidbodyMessageRelay>();
@@ -75,27 +98,41 @@ public class MovementController: MonoBehaviour{
   }
 
   public void FixedUpdate(){
-    if(_is_touching_ground)
-      _object_rigidbody.velocity = new Vector2(_walk_dir_x * movement_speed, _object_rigidbody.velocity.y);
-    else{
-      Vector2 _result_vel = _object_rigidbody.velocity;
-      _result_vel.x += _walk_dir_x * Time.fixedDeltaTime * movement_speed_midair;
-      if(MathF.Abs(_result_vel.x) <= movement_speed)
-        _object_rigidbody.velocity = _result_vel;
+    if(!_forcejump_flag && _is_movement_enabled){
+      if(_is_touching_ground && !GlideOnGround)
+        _object_rigidbody.velocity = new Vector2(_walk_dir_x * movement_speed, _object_rigidbody.velocity.y);
+      else{
+        Vector2 _result_vel = _object_rigidbody.velocity;
+        _result_vel.x += _walk_dir_x * Time.fixedDeltaTime * movement_speed_midair;
+        if(MathF.Abs(_result_vel.x) <= movement_speed)
+          _object_rigidbody.velocity = _result_vel;
+      }
     }
+
 
     if(_TargetAnimatorMovement != null){
       float _val_velocity_x = _object_rigidbody.velocity.x/movement_speed;
-      _TargetAnimatorMovement.SetFloat("speed_horizontal", _val_velocity_x);
+      if(!FixedLookAt)
+        _TargetAnimatorMovement.SetFloat("speed_horizontal", _val_velocity_x);
+
       _TargetAnimatorMovement.SetFloat("speed_horizontal_abs", Mathf.Abs(_val_velocity_x));
 
-      if(Mathf.Abs(_val_velocity_x) > 0.1){
-        _TargetAnimatorMovement.SetBool("is_flipped", _val_velocity_x < 0);
-      }
+      float _val_velocity_y = 0;
+      if(!_is_touching_ground)
+        _val_velocity_y = _object_rigidbody.velocity.y/(jump_force*Time.fixedDeltaTime);
 
-      float _val_velocity_y = _object_rigidbody.velocity.y/(jump_force*Time.fixedDeltaTime);
       _TargetAnimatorMovement.SetFloat("speed_vertical", _val_velocity_y);
+      _TargetAnimatorMovement.SetFloat("speed_vertical_abs", Mathf.Abs(_val_velocity_y));
     }
+  }
+
+
+  public void LookAt(Vector2 direction){
+    if(_TargetAnimatorMovement == null)
+      return;
+
+    if(Mathf.Abs(direction.x) > 0.1)
+      _TargetAnimatorMovement.SetFloat("speed_horizontal", direction.x < 0? -1: 1);
   }
 
 
@@ -112,6 +149,9 @@ public class MovementController: MonoBehaviour{
   /// Fungsi untuk melakukan lompatan kepada Objek Game. Lompatan bisa berupa lompat saat diatas tanah, atau saat "Wall-Hugging" (Wall Jump).
   /// </summary>
   public void DoJump(){
+    if(!_is_movement_enabled)
+      return;
+
     if(_is_touching_ground){
       //_is_touching_ground = false;
       _object_rigidbody.AddForce(Vector3.up * jump_force);
@@ -129,6 +169,65 @@ public class MovementController: MonoBehaviour{
       _object_rigidbody.velocity = Vector2.zero;
       _object_rigidbody.AddForce(walljump_direction.normalized * walljump_force);
     }
+  }
+
+
+  public void SetEnableMovement(bool enabled){
+    _is_movement_enabled = enabled;
+  }
+
+
+  public bool IsWallHuggingLeft(){
+    return _is_wallhug_left;
+  }
+
+  public bool IsWallHuggingRight(){
+    return _is_wallhug_right;
+  }
+
+  public Rigidbody2D GetRigidbody(){
+    return _object_rigidbody;
+  }
+
+
+  public IEnumerator ForceJump(Vector3 target_pos){
+    /* modified formulas from trajectory calculation:
+      t^2 = (dy*2)/g
+      t = ((dy*2)/g)^(1/2)
+
+      vy = g*t(up)
+      vx = x/t(total)
+
+      Terms:
+        bt: bottom to top
+        tb: top to bottom
+    */
+
+    float _y_total_exaggeration = Mathf.Max(target_pos.y, transform.position.y) + Mathf.Abs(forcejump_y_exaggeration);
+    float _y_bt = _y_total_exaggeration - transform.position.y;
+    float _y_tb = _y_total_exaggeration - target_pos.y;
+
+    float _g_acc = Mathf.Abs(_object_rigidbody.gravityScale * Physics2D.gravity.y);
+    float _t_bt = Mathf.Pow((_y_bt*2)/_g_acc, (float)1/2);
+    float _t_tb = Mathf.Pow((_y_tb*2)/_g_acc, (float)1/2);
+
+    float _vel_y = _g_acc*_t_bt;
+    float _vel_x = (target_pos.x-transform.position.x)/(_t_bt+_t_tb);
+
+    _forcejump_flag = true;
+    _object_rigidbody.velocity = Vector2.zero;
+    yield return new WaitForSeconds(forcejump_startdelay);
+    
+    _object_collider.enabled = false;
+    _object_rigidbody.velocity = new Vector2(_vel_x, _vel_y);
+    yield return new WaitForSeconds(_t_bt);
+
+    _object_collider.enabled = true;
+    yield return new WaitForSeconds(_t_tb);
+
+    yield return new WaitForSeconds(forcejump_finishdelay);
+
+    _forcejump_flag = false;
   }
 
 
