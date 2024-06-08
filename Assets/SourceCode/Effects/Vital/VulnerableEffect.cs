@@ -70,6 +70,7 @@ public class VulnerableEffect: MonoBehaviour{
   private void _trigger_viseffect_finished(){
     _TargetVisualEffect.material = _default_mat;
     _viseffect_coroutine = null;
+    _effect_timer = 0;
   }
 
 
@@ -80,7 +81,7 @@ public class VulnerableEffect: MonoBehaviour{
     });
     
     if(_TargetAnimator != null)
-      _TargetAnimator.SetBool("vulnerable_state", invincible);
+      _TargetAnimator.SetBool("is_vulnerable", !invincible);
   }
 
 

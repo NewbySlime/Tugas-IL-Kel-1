@@ -11,11 +11,17 @@ public class HealthComponent: MonoBehaviour{
   public delegate void OnDamaged(int points);
   public event OnDamaged OnDamagedEvent;
 
+  public delegate void OnHealed(int points);
+  public event OnHealed OnHealedEvent;
+
   public delegate void OnDamageCancelled();
   public event OnDamageCancelled OnDamageCancelledEvent;
 
   public delegate void OnDead();
   public event OnDead OnDeadEvent;
+
+  public delegate void OnRuntimeDataSet();
+  public event OnRuntimeDataSet OnRuntimeDataSetEvent;
 
   public struct HealthContext{
     public int HealthPoint;
@@ -24,7 +30,7 @@ public class HealthComponent: MonoBehaviour{
 
 
   [Serializable]
-  public class RuntimeData{
+  public struct RuntimeData{
     public int CurrentHealth;
   }
 
@@ -41,6 +47,9 @@ public class HealthComponent: MonoBehaviour{
 
   [SerializeField]
   private float _DestroyTimer;
+
+  [SerializeField]
+  private bool _IsInvincible = false;
 
   private int _current_health;
   private bool _invincible_flag;
@@ -82,10 +91,13 @@ public class HealthComponent: MonoBehaviour{
 
   private void _check_health(){
     Debug.Log("Check health");
+    OnHealthChangedEvent?.Invoke(_current_health);
+
+    if(_current_health > _MaxHealth)
+      _current_health = _MaxHealth;
+
     if(_current_health <= 0)
       _trigger_on_dead();
-    else
-      OnHealthChangedEvent?.Invoke(_current_health);
 
     if(_TargetAnimator != null && TriggerDeadAnimation)
       _TargetAnimator.SetBool("is_dead", _current_health <= 0);
@@ -93,7 +105,10 @@ public class HealthComponent: MonoBehaviour{
   
 
   public void Start(){
-    _current_health = MaxHealth;
+    SetHealth(new(){
+      HealthPoint = MaxHealth,
+      InvincibleFlag = _IsInvincible
+    });
   }
 
 
@@ -125,10 +140,17 @@ public class HealthComponent: MonoBehaviour{
     }
 
     SourceDamager = source;
+    
     _current_health -= (int)damage_data.damage_points;
-
-    Debug.Log(string.Format("health {0}", _current_health));
     OnDamagedEvent?.Invoke((int)damage_data.damage_points);
+
+    _check_health();
+  }
+
+  public void DoHeal(uint heal_points){
+    _current_health += (int)heal_points;
+    OnHealedEvent?.Invoke((int)heal_points);
+
     _check_health();
   }
 
@@ -141,12 +163,10 @@ public class HealthComponent: MonoBehaviour{
 
 
   public void FromRuntimeData(RuntimeData data){
-    Debug.Log(string.Format("runtime health is null? {0}", data == null));
-    if(data == null)
-      return;
-
     Debug.Log(string.Format("runtime health: {0}", data.CurrentHealth));
     _current_health = data.CurrentHealth;
     _check_health();
+
+    OnRuntimeDataSetEvent?.Invoke();
   }
 }

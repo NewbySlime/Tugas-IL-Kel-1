@@ -1,15 +1,20 @@
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using TMPro.EditorUtilities;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public static class ObjectReference{
-  public class ObjRefID{
+  public struct ObjRefID{
     public string ID;
 
     public override string ToString(){
       return ID;
+    }
+
+    public override int GetHashCode(){
+      return ID.GetHashCode();
     }
   }
 

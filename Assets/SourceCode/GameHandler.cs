@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
+[RequireComponent(typeof(PersistanceContext))]
 public class GameHandler: MonoBehaviour{
 
   public const string DefaultSceneID = "main_menu_scene";
@@ -105,6 +106,8 @@ public class GameHandler: MonoBehaviour{
     }
   }
 
+  
+
 
   [SerializeField]
   private GameObject _ScenarioObjectContainer;
@@ -121,7 +124,6 @@ public class GameHandler: MonoBehaviour{
   private bool DEBUG_ChangeSceneStartLoad = true;
 #endif
 
-  private PersistanceContext _persistance_context;
   private LevelCheckpointDatabase _checkpoint_database;
 
   private GameTimeHandler _time_handler;
@@ -135,6 +137,8 @@ public class GameHandler: MonoBehaviour{
 
   private GameUIHandler _ui_handler;
   private InputFocusContext _input_context;
+
+  private GameRuntimeData _runtime_data;
 
   private GameOverUI _game_over_ui;
   private FadeUI _game_over_fadeui;
@@ -157,6 +161,8 @@ public class GameHandler: MonoBehaviour{
   public bool Initialized{get => _obj_initialized;}
 
   public bool AreaTriggerEnable = true;
+  
+  public PersistanceContext PersistanceHandler{private set; get;}
 
 
   private void _check_loading_object(){
@@ -190,7 +196,7 @@ public class GameHandler: MonoBehaviour{
   }
 
 
-  private IEnumerator _change_scene(string scene_id, string teleport_to = "", bool do_save = true){
+  private IEnumerator _change_scene(string scene_id, string teleport_to = "", bool do_save = true, bool clear_runtime_data = false){
     if(!_scene_map.ContainsKey(scene_id)){
       Debug.LogWarning(string.Format("Cannot find Scene ID: '{0}'", scene_id));
       yield break;
@@ -206,6 +212,10 @@ public class GameHandler: MonoBehaviour{
     yield return TimingBaseUI.StartAllTimer(_level_loading_ui);
 
     SceneRemovingEvent?.Invoke();
+
+    Debug.Log("input cleared");
+    if(clear_runtime_data)
+      _runtime_data.ClearData();
 
     ObjectReference.ClearReference();
     _input_context.ClearRegisters();
@@ -277,16 +287,18 @@ public class GameHandler: MonoBehaviour{
 #endif
 
   private IEnumerator _load_game(bool change_scene = true){
+    _time_handler.ResumeTime();
+
     _fade_gu_ui.FadeToCover = true;
     yield return TimingBaseUI.StartAllTimer(_fade_gu_ui);
 
-    _persistance_context.ReadSave();
+    PersistanceHandler.ReadSave();
 
     GameLevelContext _game_context = new();
-    _persistance_context.OverwriteData(_game_context);
+    PersistanceHandler.OverwriteData(_game_context);
 
     SceneContextCollection _scene_contexts = new();
-    _persistance_context.OverwriteData(_scene_contexts);
+    PersistanceHandler.OverwriteData(_scene_contexts);
 
     _scene_context_map.Clear();
     foreach(SceneContext _context in _scene_contexts.SceneContexts){
@@ -295,7 +307,7 @@ public class GameHandler: MonoBehaviour{
     }
 
     ScenarioDiagramVS.PersistanceData _scenario_data = new();
-    _persistance_context.OverwriteData(_scenario_data);
+    PersistanceHandler.OverwriteData(_scenario_data);
     _scenario_diagram.SetPersistanceData(_scenario_data);
 
     // load scene
@@ -307,10 +319,10 @@ public class GameHandler: MonoBehaviour{
       }
 
       Debug.Log(string.Format("scene {0}, teleport {1}", _game_context.CurrentSceneID, _teleport_id));
-      yield return _change_scene(_game_context.CurrentSceneID, _teleport_id, false);
+      yield return _change_scene(_game_context.CurrentSceneID, _teleport_id, false, true);
     }
     
-    LoadDataFromPersistanceEvent?.Invoke(_persistance_context);
+    LoadDataFromPersistanceEvent?.Invoke(PersistanceHandler);
 
     _fade_gu_ui.FadeToCover = false;
     yield return TimingBaseUI.StartAllTimer(_fade_gu_ui);
@@ -330,8 +342,8 @@ public class GameHandler: MonoBehaviour{
     
     _ui_handler.SetUtilityHUDUIMode(GameUIHandler.UtilityHUDUIEnum.SaveHintUI, true);
     
-    yield return _persistance_context.WriteSaveAsync();
     yield return new WaitForSeconds(1);
+    PersistanceHandler.WriteSave();
 
     _ui_handler.SetUtilityHUDUIMode(GameUIHandler.UtilityHUDUIEnum.SaveHintUI, false);
   }
@@ -355,6 +367,28 @@ public class GameHandler: MonoBehaviour{
     context.ParseData(_game_context);
     context.ParseData(_scene_context_collection);
     context.ParseData(_scenario_diagram.GetPersistanceData());
+  }
+
+
+  private IEnumerator _trigger_recipe_added(string recipe_item_id){
+    RecipeBookUI _recipe_book_ui = _ui_handler.GetRecipeBookUI();
+    bool _current_trigger = _recipe_book_ui.IsEffectTriggering;
+
+    _recipe_book_ui.TriggerRecipeDiscoveryEffect(recipe_item_id);
+    if(!_current_trigger){
+      _input_context.RegisterInputObject(this, InputFocusContext.ContextEnum.Pause);
+
+      var _context_data = _ui_handler.GetMainUIContext();
+      _ui_handler.ResetMainUIMode();
+      _ui_handler.SetMainHUDUIMode(GameUIHandler.MainHUDUIEnum.RecipeBookUI, true);
+
+      yield return new WaitUntil(() => !_recipe_book_ui.IsEffectTriggering);
+
+      _time_handler.ResumeTime();
+      _ui_handler.SetMainUIContext(_context_data);
+
+      _input_context.RemoveInputObject(this, InputFocusContext.ContextEnum.Pause);
+    }
   }
 
 
@@ -384,14 +418,15 @@ public class GameHandler: MonoBehaviour{
       throw new MissingReferenceException();
     }
 
-
-    _persistance_context = FindAnyObjectByType<PersistanceContext>();
-    if(_persistance_context == null){
-      Debug.LogError("Cannot get Persistance Context Loader.");
-      throw new MissingComponentException();
+    _runtime_data = FindAnyObjectByType<GameRuntimeData>();
+    if(_runtime_data == null){
+      Debug.LogError("Cannot find GameRuntimeData.");
+      throw new MissingReferenceException();
     }
 
-    _persistance_context.PersistanceSavingEvent += _persistance_saving;
+
+    PersistanceHandler = GetComponent<PersistanceContext>();
+    PersistanceHandler.PersistanceSavingEvent += _persistance_saving;
 
     _scenario_diagram = FindAnyObjectByType<ScenarioDiagramVS>();
     if(_scenario_diagram == null){
@@ -438,11 +473,16 @@ public class GameHandler: MonoBehaviour{
       throw new MissingComponentException();
     }
 
-#if DEBUG
     // tunggu sampai start selanjutnya / menunggu semua objek inisialisasi
     yield return new WaitForNextFrameUnit();
     yield return new WaitForEndOfFrame();
 
+    yield return new WaitUntil(() => _scenario_diagram.IsInitialized);
+
+    yield return _scenario_diagram.StartScenario(DefaultScenarioID);
+    _time_handler.SetTimePeriod(GameTimeHandler.GameTimePeriod.Daytime);
+
+#if DEBUG
     if(DEBUG_LoadDataOnStart)
       StartCoroutine(_load_game_first_time());
 
@@ -460,7 +500,6 @@ public class GameHandler: MonoBehaviour{
     _current_scene = _metadata.SceneID;
 
     yield return _wait_scene_initialize(_metadata);
-    yield return _scenario_diagram.StartScenario(DefaultScenarioID);
 
 #else
     ChangeScene(DefaultSceneID);
@@ -473,6 +512,7 @@ public class GameHandler: MonoBehaviour{
   }
 
   public void Start(){
+    UnityEngine.Random.InitState((int)DateTime.Now.ToFileTimeUtc());
     StartCoroutine(_StartAsCoroutine());
   }
 
@@ -487,7 +527,7 @@ public class GameHandler: MonoBehaviour{
   }
 
   public void StartNewGame(){
-    _persistance_context.ClearData();
+    PersistanceHandler.ClearData();
 
     _scene_context_map.Clear();
     foreach(_SceneMetadata _metadata in _SceneMetadataList)
@@ -566,12 +606,9 @@ public class GameHandler: MonoBehaviour{
   }
 
 
+
   public void TriggerPlayerSpotted(){
     TriggerGameOver("Kamu Ketahuan!");
-  }
-
-  public void TriggerPlayerDied(){
-    TriggerGameOver("Yadi Pingsan!");
   }
 
   public void TriggerGameOver(string cause_text){
@@ -582,5 +619,12 @@ public class GameHandler: MonoBehaviour{
 
     _input_context.RegisterInputObject(_game_over_ui, InputFocusContext.ContextEnum.UI);
     _game_over_ui.SetCauseText(cause_text);
+  }
+
+
+  
+
+  public void TriggerRecipeAdded(string recipe_item_id){
+    StartCoroutine(_trigger_recipe_added(recipe_item_id));
   }
 }

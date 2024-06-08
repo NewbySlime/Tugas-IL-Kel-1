@@ -2,22 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// base class only serve as an interface for creating minigame
-// base class also handle what to do when losing or winning
-// inheriting class should handle the conditional win or lose case of the minigame
 
+// Komponen penting ketika akan melakukan "MiniGame" yang dimana pemakaiannya cukup luas. Seperti contoh, pada scene "base_level" ada dua "ekstensi" dari MiniGameHandler yang dipakai. Contohnya, Komponen EnemyFightMG dan BossFightMG.
+// Komponen ini juga memberikan fungsi yang bisa dipakai sebagai ekstensi dari objek ini, seperti contoh memberikan fungsi menjalankan Sequence ketika ResultCase tercapai.
 public class MiniGameHandler: MonoBehaviour{
   public enum ResultCase{
     Win,
     Lose
   }
-  
+
+  public struct ResultSequenceData{
+    public ResultCase Case;
+    public SequenceHandlerVS SequenceHandler;
+  }
+
   private SequenceDatabase _sequence_database;
 
   private Dictionary<ResultCase, SequenceHandlerVS> _result_sequence_map = new();
 
+  public bool IsMiniGameRunning{private set; get;} = false;
+
 
   private IEnumerator _set_result_case_sequence(ResultCase result, SequenceHandlerVS.SequenceInitializeData data){
+    yield return null;
+    yield return new WaitForEndOfFrame();
+
     if(_result_sequence_map.ContainsKey(result)){
       SequenceHandlerVS _handler = _result_sequence_map[result];
       Destroy(_handler.gameObject);
@@ -33,8 +42,18 @@ public class MiniGameHandler: MonoBehaviour{
     _result_sequence_map[result] = _sequence_handler;
   }
 
+  protected virtual void _OnGameFinished(ResultCase result){}
 
   protected void _GameFinished(ResultCase result){
+    Debug.Log("mini game finished");
+    if(!IsMiniGameRunning)
+      return;
+
+    Debug.Log("mini game finished done");
+    IsMiniGameRunning = false;
+
+    _OnGameFinished(result);
+    
     if(!_result_sequence_map.ContainsKey(result)){
       Debug.LogWarning(string.Format("No Sequence for ResultCase: {0}.", result));
       return;
@@ -59,6 +78,7 @@ public class MiniGameHandler: MonoBehaviour{
   }
 
   public virtual void TriggerGameStart(){
-    Debug.LogWarning("MiniGame Start is not yet implemented?");
+    Debug.Log("mini game started");
+    IsMiniGameRunning = true;
   }
 }

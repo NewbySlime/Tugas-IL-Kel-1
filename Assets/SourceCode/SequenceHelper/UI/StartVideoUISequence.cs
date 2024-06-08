@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.VisualScripting;
 using UnityEngine.Video;
+using System.Collections;
 
 
 
@@ -18,6 +19,20 @@ namespace SequenceHelper{
 
     private SequenceData _seq_data;
 
+    private bool _is_triggering = false;
+
+
+    private IEnumerator _start_trigger(){
+      _is_triggering = true;
+      _video_player.clip = _seq_data.Video;
+      _video_player.Play();
+
+      yield return new WaitUntil(() => _video_player.frame > 0);
+      yield return new WaitUntil(() => (ulong)_video_player.frame >= (_video_player.frameCount-1));
+
+      _is_triggering = false;
+    }
+
 
     public void Start(){
       _ui_handler = FindAnyObjectByType<GameUIHandler>();
@@ -34,12 +49,11 @@ namespace SequenceHelper{
       if(IsTriggering())
         return;
 
-      _video_player.clip = _seq_data.Video;
-      _video_player.Play();
+      StartCoroutine(_start_trigger());
     }
 
     public bool IsTriggering(){
-      return _video_player.isPlaying || _video_player.isPaused;
+      return _is_triggering;
     }
 
 

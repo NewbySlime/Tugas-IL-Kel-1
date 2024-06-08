@@ -5,6 +5,7 @@ using System.Reflection;
 using JetBrains.Annotations;
 using SequenceHelper;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -20,6 +21,7 @@ using UnityEngine.InputSystem.LowLevel;
 [RequireComponent(typeof(HealthComponent))]
 [RequireComponent(typeof(InventoryData))]
 [RequireComponent(typeof(RecipeDiscoveryComponent))]
+[RequireComponent(typeof(OnDeadGameOverTrigger))]
 public class PlayerController: MonoBehaviour{
   private const string _PlayerRuntimeDataID = "player_data";
 
@@ -70,14 +72,18 @@ public class PlayerController: MonoBehaviour{
 
   [SerializeField]
   private InteractionHandler _InteractionFront;
+
+  /*
   [SerializeField]
   private InteractionHandler _InteractionDirect;
+  */
 
   [SerializeField]
   private PickableObjectPickerHandler _PickerHandler;
 
   [SerializeField]
   private Animator _TargetAnimator;
+
 
   private AnimationTriggerFlagComponent _anim_trigger_flag;
 
@@ -95,6 +101,7 @@ public class PlayerController: MonoBehaviour{
   private RecipeDiscoveryComponent _recipe_discovery;
 
   private HealthComponent _health_component;
+  private OnDeadGameOverTrigger _dead_game_over_trigger;
 
   private MultipleProgressBar _weapon_counter_ui = null;
 
@@ -172,10 +179,11 @@ public class PlayerController: MonoBehaviour{
 
 
   private void _scene_changed(string scene_id, GameHandler.GameContext context){
+    Debug.Log("input added");
     ObjectReference.SetReferenceObject(PlayerDefaultRefID, gameObject);
+    _input_context.RegisterInputObject(this, InputFocusContext.ContextEnum.Player);
 
     _WeaponHandler.SetWeaponItem(_WeaponItemID);
-    _input_context.RegisterInputObject(this, InputFocusContext.ContextEnum.Player);
 
     PlayerHUDUI _player_ui = _ui_handler.GetPlayerHUDUI();
     HealthBarUI _health_bar_ui = _player_ui.GetHealthBar();
@@ -184,22 +192,34 @@ public class PlayerController: MonoBehaviour{
     _weapon_counter_ui = _player_ui.GetAmmoCounter();
     _weapon_counter_ui.SetProgressCount((int)_WeaponCount);
 
+    _ui_handler.GetRecipeBookUI().BindDiscoveryComponent(_recipe_discovery);
+
+    _game_handler.LoadDataFromPersistanceEvent += _persistance_loading;
+
+    _persistance_handler = _game_handler.PersistanceHandler;
+    _persistance_handler.PersistanceSavingEvent += _persistance_saving;
+
     GameRuntimeData _runtime_data = FindAnyObjectByType<GameRuntimeData>();
     if(_runtime_data == null){
       Debug.LogWarning("No Runtime data storage, Player cannot retain data from last scene.");
-      return;
     }
+    else{
+      // Inventory data
+      InventoryData.RuntimeData _inv_rdata = _runtime_data.GetData<InventoryData.RuntimeData>(_PlayerRuntimeDataID);
+      _inv_data.FromRuntimeData(_inv_rdata);
 
-    if(_inv_data != null){
-      InventoryData.RuntimeData _rdata = _runtime_data.GetData<InventoryData.RuntimeData>(_PlayerRuntimeDataID);
-      _inv_data.FromRuntimeData(_rdata);
+      // Recipe Discovery
+      RecipeDiscoveryComponent.RuntimeData _recipe_rdata = _runtime_data.GetData<RecipeDiscoveryComponent.RuntimeData>(_PlayerRuntimeDataID);
+      _recipe_discovery.FromRuntimeData(_recipe_rdata);
+
+      // Self data
+      RuntimeData _this_rdata = _runtime_data.GetData<RuntimeData>(_PlayerRuntimeDataID);
+      FromRuntimeData(_this_rdata);
     }
-
-    RuntimeData _this_rdata = _runtime_data.GetData<RuntimeData>(_PlayerRuntimeDataID);
-    FromRuntimeData(_this_rdata);
   }
 
   private void _scene_removing(){
+    Debug.Log("input removed");
     _input_context.RemoveInputObject(this, InputFocusContext.ContextEnum.Player);
 
     _game_handler.SceneChangedFinishedEvent -= _scene_changed;
@@ -209,60 +229,92 @@ public class PlayerController: MonoBehaviour{
 
     _persistance_handler.PersistanceSavingEvent -= _persistance_saving;
 
+    _input_context.FocusContextRegisteredEvent -= _another_focus_context_registered;
+
 
     GameRuntimeData _runtime_data = FindAnyObjectByType<GameRuntimeData>();
     if(_runtime_data == null){
       Debug.LogWarning("No Runtime Data Storage, Player data would not be transferred to next scene.");
       return;
     }
-
-    if(_inv_data != null){
+    else{
+      // Inventory data
       InventoryData.RuntimeData _rdata = _inv_data.AsRuntimeData();
       _runtime_data.SetData(_PlayerRuntimeDataID, _rdata);
-    }
 
-    _runtime_data.SetData(_PlayerRuntimeDataID, AsRuntimeData());
+      // Recipe Discovery data
+      RecipeDiscoveryComponent.RuntimeData _recipe_rdata = _recipe_discovery.AsRuntimeData();
+      _runtime_data.SetData(_PlayerRuntimeDataID, _recipe_rdata);
+
+      // Self data
+      _runtime_data.SetData(_PlayerRuntimeDataID, AsRuntimeData());
+    }
   }
 
 
   private void _persistance_saving(PersistanceContext context){
-    if(_inv_data != null){
-      InventoryData.RuntimeData _rdata = _inv_data.AsRuntimeData();
-      context.ParseData(_rdata);
-    }
+    // Inventory data
+    InventoryData.RuntimeData _rdata = _inv_data.AsRuntimeData();
+    context.ParseData(_rdata);
 
+    // Recipe Discovery data
+    RecipeDiscoveryComponent.RuntimeData _recipe_rdata = _recipe_discovery.AsRuntimeData();
+    context.ParseData(_recipe_rdata);
+
+    // Self data
     context.ParseData(AsRuntimeData());
   }
 
   private void _persistance_loading(PersistanceContext context){
-    if(_inv_data != null){
-      InventoryData.RuntimeData _rdata = new InventoryData.RuntimeData();
-      context.OverwriteData(_rdata);
+    // Inventory data
+    InventoryData.RuntimeData _rdata = new InventoryData.RuntimeData();
+    context.OverwriteData(_rdata);
 
-      _inv_data.FromRuntimeData(_rdata);
-    }
+    _inv_data.FromRuntimeData(_rdata);
 
+    // Recipe Discovery data
+    RecipeDiscoveryComponent.RuntimeData _recipe_rdata = new RecipeDiscoveryComponent.RuntimeData();
+    context.OverwriteData(_recipe_rdata);
+
+    _recipe_discovery.FromRuntimeData(_recipe_rdata);
+
+    // Self data
     RuntimeData _this_rdata = new();
     context.OverwriteData(_this_rdata);
     FromRuntimeData(_this_rdata);
   }
 
 
-  private IEnumerator _player_on_death_co_func(){
+  private void _player_on_death(){
+    TriggerAvailable = false;
+
     if(DisableMovementOnDead)
       _movement_controller.SetEnableMovement(false);
 
     if(TriggerGameOverOnDead){
       _ui_handler.ResetMainUIMode();
-
-      yield return new WaitUntil(_health_component.IsDeadEffectDone);
-      _game_handler.TriggerPlayerDied();
+      _input_context.RemoveInputObject(this, InputFocusContext.ContextEnum.Player);
+    }
+    else{
+      _dead_game_over_trigger.TriggerEnable = false;
+      _dead_game_over_trigger.CancelTrigger();
     }
   }
 
-  private void _player_on_death(){
-    TriggerAvailable = false;
-    StartCoroutine(_player_on_death_co_func());
+  private void _player_on_discovered_recipe(string recipe_item_id){
+    _game_handler.TriggerRecipeAdded(recipe_item_id);
+  }
+
+
+  private void _reset_input(){
+    _movement_controller.DoWalk(0);
+  }
+
+  private void _another_focus_context_registered(){
+    if(_input_context.InputAvailable(this))
+      return;
+
+    _reset_input();
   }
 
 
@@ -283,13 +335,6 @@ public class PlayerController: MonoBehaviour{
     _game_handler.SceneChangedFinishedEvent += _scene_changed;
     _game_handler.SceneRemovingEvent += _scene_removing;
 
-    _game_handler.LoadDataFromPersistanceEvent += _persistance_loading;
-
-    _persistance_handler = FindAnyObjectByType<PersistanceContext>();
-    if(_persistance_handler == null){
-      Debug.LogError("Cannot find PeristanceContext.");
-      throw new MissingReferenceException();
-    }
 
     if(_TargetAnimator != null){
       _anim_trigger_flag = GetComponent<AnimationTriggerFlagComponent>();
@@ -301,16 +346,25 @@ public class PlayerController: MonoBehaviour{
       _anim_trigger_flag.AnimationTriggerEvent += _on_anim_trigger;
     }
 
-    _persistance_handler.PersistanceSavingEvent += _persistance_saving;
 
     _health_component = GetComponent<HealthComponent>();
     _health_component.OnDeadEvent += _player_on_death;
 
+    _dead_game_over_trigger = GetComponent<OnDeadGameOverTrigger>();
+
     _movement_controller = GetComponent<MovementController>();
     _input_context = FindAnyObjectByType<InputFocusContext>();
+    if(_input_context == null){
+      Debug.LogError("Cannot find InputFocusContext.");
+      throw new MissingReferenceException();
+    }
+
+    _input_context.FocusContextRegisteredEvent += _another_focus_context_registered;
 
     _inv_data = GetComponent<InventoryData>();
     _recipe_discovery = GetComponent<RecipeDiscoveryComponent>();
+    _recipe_discovery.OnRecipeDiscoveredEvent += _player_on_discovered_recipe;
+
 
     _mouse_follower = FindAnyObjectByType<MouseFollower>();
     if(_mouse_follower == null){
@@ -324,7 +378,6 @@ public class PlayerController: MonoBehaviour{
       throw new MissingReferenceException();
     }
 
-
     if(_game_handler.SceneInitialized)
       _scene_changed(_game_handler.GetCurrentSceneID(), _game_handler.GetCurrentSceneContext());
   }
@@ -337,7 +390,6 @@ public class PlayerController: MonoBehaviour{
   public void FixedUpdate(){
     if(_mouse_follower != null){
       _WeaponHandler.LookAt(_mouse_follower.transform.position);
-
     }
 
     if(_current_weapon_count < _WeaponCount){
@@ -397,8 +449,10 @@ public class PlayerController: MonoBehaviour{
       return;
 
     if(value.isPressed){
+      /*
       if(_InteractionDirect.TriggerInteraction())
         return;
+      */
       
       if(_InteractionFront.TriggerInteraction())
         return;

@@ -6,7 +6,16 @@ using UnityEngine.InputSystem;
 
 
 
+// Ini adalah handler untuk interaksi antara player dan objek lainnya.
+// Cara kerjanya,
+//    Player mempunyai salah satu InteractionHandler yang akan dipakai ketika player memencet tombol "Interaksi" (tombol F contohnya).
+//    Untuk penerimanya ada InteractableInterface yang menerima arahan dari Handler ini yang dimana akan digunakan sebagai interaksi player.
+//    Secara teknis, ini bekerja dengan handler menggunakan Trigger dari komponen Collision. Setiap ada object yang masuk, Handler akan menyimpan objek yang datang sebagai objek yang akan diberikan arahan ketika player berinteraksi.
+//
+// Untuk developer, fokus kepada ketiga fungsi utama yang dipakai ketika ada interaksi antara player dan objek.
+// Yaitu: Interaction_OnEnter, Interaction_OnExit, TriggerInteraction   
 public class InteractionHandler: MonoBehaviour{
+  // Objek Relay yang dimana Handler ini akan menerima event\ "Collision" dari Rigidbody2D ataupun Collision2D
   [SerializeField]
   private RigidbodyMessageRelay _InteractionTrigger;
 
@@ -24,6 +33,8 @@ public class InteractionHandler: MonoBehaviour{
   }
 
 
+  // Fungsi ini dipakai untuk menyimpan objek yang diberikan saat Collider masuk ke Trigger Collider.
+  // Kemudian fungsi ini dilempar ke objek yang masuk dengan fungsi InteractableInterface.TriggerInteractionEnter() 
   public void Interaction_OnEnter(Collider2D collider){
     InteractableInterface _interface = collider.gameObject.GetComponent<InteractableInterface>();
     if(_interface == null)
@@ -33,6 +44,8 @@ public class InteractionHandler: MonoBehaviour{
     _interface.TriggerInteractionEnter();
   }
 
+  // Fungsi ini dipakai untuk melepas objek yang diberikan saat Collider masuk ke Trigger Collider.
+  // Kemudian fungsi ini dilempar ke objek yang masuk dengan fungsi InteractableInterface.TriggerInteractionExit() 
   public void Interaction_OnExit(Collider2D collider){
     InteractableInterface _interface = collider.gameObject.GetComponent<InteractableInterface>();
     if(_interface == null)
@@ -42,6 +55,8 @@ public class InteractionHandler: MonoBehaviour{
     _interface.TriggerInteractionExit();
   }
 
+  // Fungsi ini dipakai oleh Player untuk melakukan fungsi "Interaction" ke objek objek target player.
+  // Kemudian fungsi ini dilempar ke objek yang masuk dengan fungsi InteractableInterface.TriggerInteract()
   public bool TriggerInteraction(){
     if(_interactable_list.Count <= 0)
       return false;

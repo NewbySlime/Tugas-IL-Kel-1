@@ -8,7 +8,9 @@ using JetBrains.Annotations;
 public class TimingBaseUI: MonoBehaviour{
   [SerializeField]
   private float _Timing;
-  protected float __Timing{get => _Timing;}
+  
+  protected float __BaseTiming{get => _Timing;}
+  protected float __Timing;
 
   private float _Progress = 1f;
   // always between 0 - 1
@@ -18,11 +20,8 @@ public class TimingBaseUI: MonoBehaviour{
   private bool _timer_finished = true;
   private Coroutine _timer_coroutine = null;
 
-  private float _last_timer = 0;
+  public bool UseScaledTime = false;
 
-  protected bool _AllowSmoothCancelTiming = true;
-
-  protected virtual void _on_timer_start_call(){}
 
   protected virtual void _on_timer_started(){}
   protected virtual void _on_timer_update(){}
@@ -33,23 +32,16 @@ public class TimingBaseUI: MonoBehaviour{
       yield break;
 
     _timer_finished = false;
+    __Timing = _Timing;
     _on_timer_started();
 
     if(!skip_timing){
-      float _current_timer = _Timing;
-      Debug.Log(string.Format("current timing timer {0}", _current_timer));
-      if(_AllowSmoothCancelTiming && _current_timer > 0)
-        _current_timer = _Timing - _last_timer;
-
-      Debug.Log(string.Format("next current timing timer {0}", _current_timer));
+      float _current_timer = __Timing;
       while(_current_timer > 0){
         yield return new WaitForNextFrameUnit();
 
-        Debug.Log(string.Format("timer {0}", _current_timer));
-        _current_timer -= Time.unscaledDeltaTime;
-        _last_timer = _current_timer;
-
-        _Progress = Mathf.Abs(1 - (_current_timer/_Timing));
+        _current_timer -= UseScaledTime? Time.deltaTime: Time.unscaledDeltaTime;
+        _Progress = Mathf.Abs(1 - (_current_timer/__Timing));
 
         _on_timer_update();
       }
@@ -57,12 +49,12 @@ public class TimingBaseUI: MonoBehaviour{
 
     _timer_finished = true;
     _on_timer_finished();
+    _timer_coroutine = null;
   }
 
 
   public void StartTimerAsync(bool skip_timing = false){
-    _on_timer_start_call();
-    
+    SkipTimer();
     _timer_coroutine = StartCoroutine(_StartTimer(skip_timing));
   }
 
@@ -72,8 +64,9 @@ public class TimingBaseUI: MonoBehaviour{
 
     StopCoroutine(_timer_coroutine);
 
+    //_on_timer_finished();
     _timer_finished = true;
-    _on_timer_finished();
+    _timer_coroutine = null;
   }
 
   public bool TimerFinished(){

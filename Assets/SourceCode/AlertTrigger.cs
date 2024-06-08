@@ -88,14 +88,15 @@ public class AlertTrigger: MonoBehaviour{
       float _delta_angle = Math.Abs(_object_angle-_current_angle);
       //Debug.Log(string.Format("angle {0}, {1}", _object_angle, _current_angle));
       //Debug.Log(string.Format("delta angle {0}", _delta_angle));
-      if(_delta_angle <= (_ViewAngle/2) && _rayhit.collider == null){
-        if(!_inside_focus.Contains(_object)){
+      bool _is_in_focus = _delta_angle <= (_ViewAngle/2) && _rayhit.collider == null;
+      if(!_inside_focus.Contains(_object)){
+        if(_is_in_focus){
           _inside_focus.Add(_object);
           AlertObjectEnterEvent?.Invoke(_object);
         }
       }
       else{
-        if(_inside_focus.Contains(_object)){
+        if(!_is_in_focus){
           _inside_focus.Remove(_object);
           AlertObjectExitedEvent?.Invoke(_object);
         }

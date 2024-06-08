@@ -105,11 +105,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7653785592123475635}
-  - {fileID: 8960577367222905053}
   - {fileID: 8360156946226083029}
   - {fileID: 5420284239334682505}
   - {fileID: 9094983817567009904}
+  - {fileID: 7653785592123475635}
+  - {fileID: 8960577367222905053}
   m_Father: {fileID: 7397552965726708511}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -302,7 +302,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -40, y: -40}
+  m_SizeDelta: {x: -120, y: -40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8024027361625975304
 CanvasRenderer:
@@ -434,8 +434,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -350, y: -135}
-  m_SizeDelta: {x: 200, y: 74}
+  m_AnchoredPosition: {x: -375.00003, y: -135}
+  m_SizeDelta: {x: 150.00006, y: 74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4107786051409281919
 MonoBehaviour:
@@ -521,9 +521,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _TextContainer: {fileID: 3510912512250810040}
-  _DefaultPerCharacterDelay: 0.1
-  _CharacterDelayList: []
-  _UseScaledTiming: 0
+  _DefaultPerCharacterDelay: 0.05
+  _CharacterDelayList:
+  - Characters: '!.'
+    Delay: 0.5
+  - Characters: ' '
+    Delay: 0.08
+  - Characters: ','
+    Delay: 0.2
+  _UseScaledTiming: 1
   _SequenceHandlerPrefab: {fileID: 2051930571176680691, guid: a0abee26c7ddeb14db18cb947379e872, type: 3}
 --- !u!1 &8725719228722449303
 GameObject:
@@ -558,8 +564,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 350, y: -135}
-  m_SizeDelta: {x: 200, y: 74}
+  m_AnchoredPosition: {x: 374.99997, y: -135}
+  m_SizeDelta: {x: 149.99994, y: 74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &833070068301728389
 MonoBehaviour:

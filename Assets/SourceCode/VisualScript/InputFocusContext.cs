@@ -6,6 +6,9 @@ using UnityEngine;
 
 // use the same input focus, but layered
 public class InputFocusContext: MonoBehaviour{
+  public delegate void FocusContextRegistered();
+  public event FocusContextRegistered FocusContextRegisteredEvent;
+
   public enum ContextEnum{
     Player,
     UI,
@@ -31,6 +34,8 @@ public class InputFocusContext: MonoBehaviour{
       _stack.Remove(_obj_id);
     
     _stack.Add(_obj_id);
+
+    FocusContextRegisteredEvent?.Invoke();
   }
 
   public void RegisterInputObject(Component bind_obj, ContextEnum context){
@@ -54,9 +59,7 @@ public class InputFocusContext: MonoBehaviour{
 
   public bool InputAvailable(GameObject bind_obj){
     foreach(ContextEnum _context in _ContextOrder){
-      Debug.Log(string.Format("input context {0}", _context));
       List<int> _stack = _bound_stack[_context];
-      Debug.Log(string.Format("input count {0}", _stack.Count));
       if(_stack.Count <= 0)
         continue;
 

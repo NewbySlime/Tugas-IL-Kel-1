@@ -14,6 +14,8 @@ public class FollowerBehaviour: MonoBehaviour{
 
   private Coroutine _follow_coroutine = null;
 
+  public bool IsInitialized{private set; get;} = false;
+
   
   private IEnumerator _follow_function(){
     while(_TargetFollow != null){
@@ -32,6 +34,8 @@ public class FollowerBehaviour: MonoBehaviour{
     
     if(_TargetFollow != null)
       SetTargetFollow(_TargetFollow.gameObject);
+
+    IsInitialized = true;
   }
 
 
@@ -49,5 +53,13 @@ public class FollowerBehaviour: MonoBehaviour{
     _TargetFollow = obj == null? null: obj.transform;
 
     _follow_coroutine = StartCoroutine(_follow_function());
+  }
+
+
+  public void OnEnable(){
+    if(!IsInitialized)
+      return;
+
+    SetTargetFollow(_TargetFollow.gameObject);
   }
 }

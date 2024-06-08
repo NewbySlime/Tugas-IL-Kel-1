@@ -5,8 +5,11 @@ using System.Collections.Generic;
 using System;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.Sqlite;
+using UnityEditor.Playables;
 
 
+[RequireComponent(typeof(PathFollower))]
+[RequireComponent(typeof(MovementController))]
 public class PatrolBehaviour: MonoBehaviour{
   [SerializeField]
   private float _TemporaryStopDelay = 2f;
@@ -20,6 +23,12 @@ public class PatrolBehaviour: MonoBehaviour{
   [SerializeField]
   private float __PathUpdateInterval = 0.3f;
   internal float _PathUpdateInterval{get => __PathUpdateInterval;}
+
+  [SerializeField]
+  private BaseProgressUI _AlertProgress;
+
+  [SerializeField]
+  private SoundAlertReceiver _SoundReceiver = null;
 
 
   public class InitData{
@@ -59,6 +68,9 @@ public class PatrolBehaviour: MonoBehaviour{
       yield break;
     }
 
+    yield return null;
+    yield return new WaitForEndOfFrame();
+
     int i = 0;
     for(; i < _init_data.PatrolSet.Count; i++){
       if(_current_patrol_idx >= _init_data.PatrolSet.Count)
@@ -85,13 +97,12 @@ public class PatrolBehaviour: MonoBehaviour{
 
   // set _stop_delay first
   private IEnumerator _patrol_stopdelay(){
-    if(_patrol_forcestopper == null);
+    if(_patrol_forcestopper == null)
       _patrol_forcestopper = StartCoroutine(_patrol_stopforce());
 
     while(_stop_delay > 0){
       yield return new WaitForFixedUpdate();
       _stop_delay -= Time.fixedDeltaTime;
-      Debug.Log(string.Format("Stop delay {0}", _stop_delay));
     }
 
     if(_patrol_forcestopper != null)
@@ -104,6 +115,18 @@ public class PatrolBehaviour: MonoBehaviour{
 
   private IEnumerator _patrol_stopforce(){
     yield return new WaitUntil(StopPatrol);
+    _patrol_forcestopper = null;
+  }
+
+
+  private void _patrol_soundalerted(GameObject source){
+    _stop_delay = _TemporaryStopDelay;
+    if(_patrol_tmpstop == null)
+      StartCoroutine(_patrol_stopdelay());
+
+    _movement_controller.LookAt((source.transform.position - transform.position).normalized);
+
+    StartCoroutine(UIUtility.SetHideUI(_AlertingObject.gameObject, true, true));
   }
 
 
@@ -132,8 +155,13 @@ public class PatrolBehaviour: MonoBehaviour{
         Debug.Log("Player entered");
         if(_gameover_triggers.Count <= 0){
           Debug.Log("Player first entered");
-          _gameover_delay = _GameOverTimeout;
+          if(_gameover_delay < 0 || _gameover_delay > _GameOverTimeout)
+            _gameover_delay = _GameOverTimeout;
+
           _stop_delay = _TemporaryStopDelay;
+
+          Debug.Log("trigger alert show");
+          StartCoroutine(UIUtility.SetHideUI(_AlertProgress.gameObject, false));
 
           if(_patrol_tmpstop == null)
             _patrol_tmpstop = StartCoroutine(_patrol_stopdelay());
@@ -155,37 +183,51 @@ public class PatrolBehaviour: MonoBehaviour{
   }
 
 
+  private void _update_alert_bar(){
+    _AlertProgress.SetProgress(1-(_gameover_delay/_GameOverTimeout));
+  }
+
+
   ~PatrolBehaviour(){
     _on_scene_removing();
   }
 
 
+  private IEnumerator _start_co_func(){
+    yield return new WaitUntil(() => ObjectUtility.IsObjectInitialized(_AlertingObject));
+
+    StartCoroutine(UIUtility.SetHideUI(_AlertProgress.gameObject, true, true));
+  }
+
   public void Start(){
     _path_follower = GetComponent<PathFollower>();
-    if(_path_follower == null){
-      Debug.LogError("Cannot get PathFollower.");
-      throw new MissingComponentException();
-    }
-
     _movement_controller = GetComponent<MovementController>();
-    if(_movement_controller == null){
-      Debug.LogError("Cannot get MovementController.");
-      throw new MissingComponentException();
-    }
 
     _game_handler = FindAnyObjectByType<GameHandler>();
     if(_game_handler == null){
       Debug.LogError("Cannot find GameHandler");
+      throw new MissingReferenceException();
     }
 
     _game_handler.SceneChangedFinishedEvent += _on_scene_changed;
     _game_handler.SceneRemovingEvent += _on_scene_removing;
+
+
+    if(_SoundReceiver != null){
+      _SoundReceiver.SoundReceivedEvent += _patrol_soundalerted;
+    }
 
     _AlertingObject.AlertObjectEnterEvent += _on_alerted_enter;
     _AlertingObject.AlertObjectExitedEvent += _on_alerted_exit;
 
     if(_game_handler.SceneInitialized)
       _on_scene_changed(_game_handler.GetCurrentSceneID(), _game_handler.GetCurrentSceneContext());
+
+    StartCoroutine(_start_co_func());
+  }
+
+
+  public void Update(){
   }
 
   public void FixedUpdate(){
@@ -197,6 +239,19 @@ public class PatrolBehaviour: MonoBehaviour{
         _gameover_delay -= Time.fixedDeltaTime;
         if(_gameover_delay < 0)
           _game_handler.TriggerPlayerSpotted();
+      }
+
+      _update_alert_bar();
+    }
+    else{
+      if(_gameover_delay < _GameOverTimeout){
+        _stop_delay = _TemporaryStopDelay;
+        _gameover_delay += Time.fixedDeltaTime;
+        if(_gameover_delay >= _GameOverTimeout){
+          StartCoroutine(UIUtility.SetHideUI(_AlertProgress.gameObject, true));
+        }
+
+        _update_alert_bar();
       }
     }
   }

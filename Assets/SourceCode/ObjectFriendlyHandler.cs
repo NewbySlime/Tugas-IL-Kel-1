@@ -11,16 +11,10 @@ public class ObjectFriendlyHandler: MonoBehaviour{
     Enemy
   }
 
-  private static Dictionary<FriendlyType, LayerMask> _FriendlyContextLayerMaskMap = new Dictionary<FriendlyType, LayerMask>{
-    {FriendlyType.PlayerFriend, LayerMask.NameToLayer("Player")},
-    {FriendlyType.Neutral, LayerMask.NameToLayer("Default")},
-    {FriendlyType.Enemy, LayerMask.NameToLayer("Enemy")}
-  };
+  private static Dictionary<FriendlyType, LayerMask> _FriendlyContextLayerMaskMap;
 
 
-  [SerializeField]
-  private FriendlyType _FriendlyContext;
-  public FriendlyType FriendlyContext{get => _FriendlyContext;}
+  public FriendlyType FriendlyContext;
 
   [SerializeField]
   private List<GameObject> _ListAffectedObject;
@@ -28,18 +22,24 @@ public class ObjectFriendlyHandler: MonoBehaviour{
 
   private void _update_friendly_obj(GameObject obj, FriendlyType type){
     obj.layer = _FriendlyContextLayerMaskMap[type];
-    obj.SendMessage("ObjectFriendlyHandler_FriendlyTypeChanged", type);
+    obj.SendMessage("ObjectFriendlyHandler_FriendlyTypeChanged", type, SendMessageOptions.DontRequireReceiver);
   }
 
   private IEnumerator _start_co_func(){
     yield return null;
     yield return new WaitForEndOfFrame();
 
-    SetFriendlyType(_FriendlyContext);
+    SetFriendlyType(FriendlyContext);
   }
 
 
   public void Start(){
+    _FriendlyContextLayerMaskMap = new Dictionary<FriendlyType, LayerMask>{
+      {FriendlyType.PlayerFriend, LayerMask.NameToLayer("Player")},
+      {FriendlyType.Neutral, LayerMask.NameToLayer("Default")},
+      {FriendlyType.Enemy, LayerMask.NameToLayer("Enemy")}
+    };
+
     StartCoroutine(_start_co_func());
   }
 

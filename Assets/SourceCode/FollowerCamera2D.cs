@@ -137,6 +137,9 @@ public class FollowerCamera2D: MonoBehaviour{
 
   public void RevertDefaultPivot(){
     PlayerController _player = FindAnyObjectByType<PlayerController>();
+    if(_player == null)
+      return;
+
     MouseFollower _mouse_follower = FindAnyObjectByType<MouseFollower>();
 
     SetPivotObject(_player.gameObject);

@@ -10,22 +10,31 @@ using UnityEngine.TextCore.LowLevel;
 using UnityEngine.Video;
 
 
+// TODO add recipebookui
 public class GameUIHandler: MonoBehaviour{
   public enum PlayerUIMode{
     MainHUD,
     Pausing,
+    Setting,
     GameOver
   }
 
   public enum MainHUDUIEnum{
     PlayerHUD,
     DialogueUI,
+    BossHealthBarUI,
     QTEUI,
-    VideoUI
+    VideoUI,
+    CinematicBarUI,
+    RecipeBookUI
   }
 
   public enum UtilityHUDUIEnum{
     SaveHintUI
+  }
+
+  public class ModeContext<T>{
+    public Dictionary<T, bool> ContextShowList = new();
   }
 
 
@@ -34,9 +43,13 @@ public class GameUIHandler: MonoBehaviour{
   [SerializeField]
   private DialogueCharacterUI _DialogueHUD;
   [SerializeField]
+  private BossHealthBarUI _BossHealthBarUI;
+  [SerializeField]
   private VideoPlayer _VideoUI;
   [SerializeField]
   private QuickTimeEventUI _QTEUI;
+  [SerializeField]
+  private RecipeBookUI _RecipeBookUI;
 
   [SerializeField]
   private GameObject _SavingHintUI;
@@ -65,26 +78,7 @@ public class GameUIHandler: MonoBehaviour{
   private GameHandler _game_handler;
   private InputFocusContext _input_context;
 
-
-  private IEnumerator _set_hide_ui(GameObject ui_obj, bool ui_hide, bool skip_animation = false){
-    FadeUI _fadeui = ui_obj.GetComponent<FadeUI>();
-    if(_fadeui != null){
-      _fadeui.FadeToCover = !ui_hide;
-    }
-
-    SlideUI _slideui = ui_obj.GetComponent<SlideUI>();
-    if(_slideui != null){
-      _slideui.ShowAnimation = !ui_hide;
-    }
-
-    SetActiveUIOnTimeout _set_active_ui = ui_obj.GetComponent<SetActiveUIOnTimeout>();
-    if(_set_active_ui != null){
-      _set_active_ui.SetActiveTarget = !ui_hide;
-    }
-
-    TimingBaseUI.SkipAllTimer(ui_obj);
-    yield return TimingBaseUI.StartAllTimer(ui_obj, skip_animation);
-  }
+  private Dictionary<MainHUDUIEnum, bool> _main_ui_context = new();
 
 
   private void _game_handler_scene_changed(string scene_id, GameHandler.GameContext context){
@@ -123,6 +117,7 @@ public class GameUIHandler: MonoBehaviour{
     yield return new WaitForNextFrameUnit();
     yield return new WaitForEndOfFrame();
 
+    ResetMainUIMode(true);
     SetPlayerUIMode(PlayerUIMode.MainHUD);
 
     if(_game_handler.SceneInitialized)
@@ -155,6 +150,10 @@ public class GameUIHandler: MonoBehaviour{
     return _PlayerHUD;
   }
 
+  public BossHealthBarUI GetBossHealthBarUI(){
+    return _BossHealthBarUI;
+  }
+
   public VideoPlayer GetVideoPlayerUI(){
     return _VideoUI;
   }
@@ -163,19 +162,21 @@ public class GameUIHandler: MonoBehaviour{
     return _QTEUI;
   }
 
+  public RecipeBookUI GetRecipeBookUI(){
+    return _RecipeBookUI;
+  }
+
 
   public void HideAllUI(){
-    StartCoroutine(_set_hide_ui(_UIContainer, true));
+    StartCoroutine(UIUtility.SetHideUI(_UIContainer, true));
   }
 
   public void ShowAllUI(){
-    StartCoroutine(_set_hide_ui(_UIContainer, false));
+    StartCoroutine(UIUtility.SetHideUI(_UIContainer, false));
   }
 
 
   public void SetPlayerUIMode(PlayerUIMode mode, bool skip_animation = false){
-    ResetPlayerUIMode(false, new HashSet<PlayerUIMode>{mode});
-
     GameObject _ui_obj = null;
     switch(mode){
       case PlayerUIMode.MainHUD:{
@@ -191,7 +192,7 @@ public class GameUIHandler: MonoBehaviour{
       }break;
     }
 
-    StartCoroutine(_set_hide_ui(_ui_obj, false));
+    StartCoroutine(UIUtility.SetHideUI(_ui_obj, false));
   }
 
   public void ResetPlayerUIMode(bool skip_animation = false, HashSet<PlayerUIMode> filter = null){
@@ -207,12 +208,14 @@ public class GameUIHandler: MonoBehaviour{
       if(filter.Contains(_player_pair.Value))
         continue;
 
-      StartCoroutine(_set_hide_ui(_player_pair.Key, true, skip_animation));
+      StartCoroutine(UIUtility.SetHideUI(_player_pair.Key, true, skip_animation));
     }
   }
 
 
   public void SetMainHUDUIMode(MainHUDUIEnum mode, bool ui_show, bool skip_animation = false){
+    _main_ui_context[mode] = ui_show;
+
     GameObject _ui_obj = null;
     switch(mode){
       case MainHUDUIEnum.PlayerHUD:{
@@ -223,6 +226,10 @@ public class GameUIHandler: MonoBehaviour{
         _ui_obj = _DialogueHUD.gameObject;
       }break;
 
+      case MainHUDUIEnum.BossHealthBarUI:{
+        _ui_obj = _BossHealthBarUI.gameObject;
+      }break;
+
       case MainHUDUIEnum.QTEUI:{
         _ui_obj = _QTEUI.gameObject;
       }break;
@@ -230,9 +237,13 @@ public class GameUIHandler: MonoBehaviour{
       case MainHUDUIEnum.VideoUI:{
         _ui_obj = _VideoUI.gameObject;
       }break;
+
+      case MainHUDUIEnum.RecipeBookUI:{
+        _ui_obj = _RecipeBookUI.gameObject;
+      }break;
     }
 
-    StartCoroutine(_set_hide_ui(_ui_obj, !ui_show, skip_animation));
+    StartCoroutine(UIUtility.SetHideUI(_ui_obj, !ui_show, skip_animation));
   }
 
   public void ResetMainUIMode(bool skip_animation = false, HashSet<MainHUDUIEnum> filter = null){
@@ -241,8 +252,10 @@ public class GameUIHandler: MonoBehaviour{
     List<MainHUDUIEnum> _list_reset = new(){
       MainHUDUIEnum.PlayerHUD,
       MainHUDUIEnum.DialogueUI,
+      MainHUDUIEnum.BossHealthBarUI,
       MainHUDUIEnum.QTEUI,
-      MainHUDUIEnum.VideoUI
+      MainHUDUIEnum.VideoUI,
+      MainHUDUIEnum.RecipeBookUI
     };
 
     foreach(MainHUDUIEnum _reset in _list_reset){
@@ -254,6 +267,20 @@ public class GameUIHandler: MonoBehaviour{
   }
 
 
+  public ModeContext<MainHUDUIEnum> GetMainUIContext(){
+    ModeContext<MainHUDUIEnum> _result = new();
+    foreach(MainHUDUIEnum _enum in _main_ui_context.Keys)
+      _result.ContextShowList[_enum] = _main_ui_context[_enum];
+
+    return _result; 
+  }
+
+  public void SetMainUIContext(ModeContext<MainHUDUIEnum> context, bool skip_animation = false){
+    foreach(MainHUDUIEnum _enum in context.ContextShowList.Keys)
+      SetMainHUDUIMode(_enum, context.ContextShowList[_enum], skip_animation);
+  }
+
+
   public void SetUtilityHUDUIMode(UtilityHUDUIEnum mode, bool ui_show, bool skip_animation = false){
     GameObject _ui_obj = null;
     switch(mode){
@@ -262,7 +289,7 @@ public class GameUIHandler: MonoBehaviour{
       }break;
     }
 
-    StartCoroutine(_set_hide_ui(_ui_obj, !ui_show, skip_animation));
+    StartCoroutine(UIUtility.SetHideUI(_ui_obj, !ui_show, skip_animation));
   }
 
 

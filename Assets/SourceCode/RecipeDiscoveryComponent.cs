@@ -1,14 +1,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 
 [RequireComponent(typeof(InventoryData))]
 public class RecipeDiscoveryComponent: MonoBehaviour{
+  public delegate void OnRecipeDiscovered(string recipe_item_id);
+  public event OnRecipeDiscovered OnRecipeDiscoveredEvent;
+
   [Serializable]
-  public class RuntimeData{
+  public class RuntimeData: PersistanceContext.IPersistance{
     public string[] ListDiscoveredRecipe = new string[0];
+
+    public string GetDataID(){
+      return "RecipeDiscoveryComponent.Data";
+    }
+
+
+    public string GetData(){
+      return ConvertExt.ToBase64String(JsonUtility.ToJson(this));
+    }
+
+    public void SetData(string data){
+      JsonUtility.FromJsonOverwrite(ConvertExt.FromBase64String(data), this);
+    }
   }
 
   [SerializeField]
@@ -43,6 +60,8 @@ public class RecipeDiscoveryComponent: MonoBehaviour{
 
     if(_RemoveDiscoveryItemOnAdded)
       StartCoroutine(_remove_item_co_func(item_id));
+
+    OnRecipeDiscoveredEvent?.Invoke(item_id);
   }
 
 
@@ -54,6 +73,15 @@ public class RecipeDiscoveryComponent: MonoBehaviour{
     }
 
     _inventory = GetComponent<InventoryData>();
+    _inventory.OnItemAddedEvent += _on_item_added;
+  }
+
+  public List<string> GetListKnownRecipe(){
+    List<string> _result = new();
+    foreach(string _recipe_id in _list_known_recipe)
+      _result.Add(_recipe_id);
+
+    return _result;
   }
 
 
@@ -73,6 +101,9 @@ public class RecipeDiscoveryComponent: MonoBehaviour{
 
 
   public void FromRuntimeData(RuntimeData data){
+    if(data == null)
+      return;
+
     _list_known_recipe.Clear();
     foreach(string _id in data.ListDiscoveredRecipe)
       _list_known_recipe.Add(_id);

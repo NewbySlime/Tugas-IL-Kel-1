@@ -53,6 +53,9 @@ public class DamagerComponent: MonoBehaviour{
     public float SetExcludeLayerOnSpeedThreshold;
 
     public List<ItemDeplete> ListDepleteItem;
+
+    public bool SoundAlertOnCollision;
+    public SoundAlertTransceiver.AlertConfig SoundAlertConfig;
   }
 
   public struct DamagerTriggerData{
@@ -66,6 +69,9 @@ public class DamagerComponent: MonoBehaviour{
 
   [SerializeField]
   private SpriteRenderer _ProjectileSprite;
+
+  [SerializeField]
+  private SoundAlertTransceiver _SoundAlertTranceiver;
   
 
   private DamagerData _damager_data = new DamagerData{
@@ -106,6 +112,9 @@ public class DamagerComponent: MonoBehaviour{
       return;
 
     _check_object(target_object);
+    
+    if(_SoundAlertTranceiver != null && _damager_context.SoundAlertOnCollision)
+      _SoundAlertTranceiver.TriggerSound();
 
     switch(_damager_context.OnCollisionEffect){
       case DamagerContext.OnCollisionAction.EraseOnCollision:{
@@ -149,6 +158,11 @@ public class DamagerComponent: MonoBehaviour{
     
     if(_projectile_rigidbody != null){
       _projectile_rigidbody.sharedMaterial = _damager_context.ProjectileMaterial != null? _damager_context.ProjectileMaterial: new();
+    }
+
+    context.SoundAlertConfig.SoundRangeMax *= 1/context.ProjectileSize;
+    if(_SoundAlertTranceiver != null){
+      _SoundAlertTranceiver.SetAlertConfig(context.SoundAlertConfig);
     }
 
     gameObject.SendMessage("DamagerComponent_OnContextChanged", SendMessageOptions.DontRequireReceiver);

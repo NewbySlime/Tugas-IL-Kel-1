@@ -23,6 +23,22 @@ public class EnemyBehaviour: InterfaceEnemyBehaviour{
   private MovementController _movement;
   private PathFollower _path_follower;
 
+  private HealthComponent _health_component;
+
+  private HealthComponent _target_health;
+
+  private bool _do_enable_strike_damager = true;
+
+
+  private void _on_health_damaged(int points){
+    _do_enable_strike_damager = false;
+    _TargetStaticDamager.enabled = false;
+  }
+
+  private void _on_dead(){
+    SetEnemy(null);
+  }
+
 
   private void _on_alerted_enter(GameObject obj){
     SetEnemy(obj);
@@ -33,10 +49,12 @@ public class EnemyBehaviour: InterfaceEnemyBehaviour{
   }
 
   private IEnumerator _do_strike(){
+    _do_enable_strike_damager = true;
+
     _path_follower.ForceJump(_TargetEnemy.transform.position);
     yield return new WaitForSeconds(_movement.ForceJumpStartDelay);
 
-    _TargetStaticDamager.enabled = true;
+    _TargetStaticDamager.enabled = _do_enable_strike_damager;
     yield return new WaitUntil(() => !_path_follower.IsJumping());
     _TargetStaticDamager.enabled = false;
   }
@@ -44,20 +62,25 @@ public class EnemyBehaviour: InterfaceEnemyBehaviour{
 
   private IEnumerator _on_target_enemy_changed_co_func(){
     _npc_behaviour.enabled = _TargetEnemy == null;
-    if(_TargetEnemy == null)
-      yield break;
-
-    HealthComponent _target_health = _TargetEnemy.GetComponent<HealthComponent>();
-    if(_target_health == null)
-      Debug.LogWarning("TargetEnemy does not have HealthComponent.");
-    else{
-      _target_health.OnDeadEvent += _on_target_obj_dead;
-    }
 
     yield return null;
     yield return new WaitForEndOfFrame();
 
     _follower_behaviour.SetTargetFollow(_TargetEnemy);
+    if(_TargetEnemy == null){
+      if(_target_health != null)
+        _target_health.OnDeadEvent -= _on_target_obj_dead;
+
+      _target_health = null;
+      yield break;
+    }
+
+    _target_health = _TargetEnemy.GetComponent<HealthComponent>();
+    if(_target_health == null)
+      Debug.LogWarning("TargetEnemy does not have HealthComponent.");
+    else{
+      _target_health.OnDeadEvent += _on_target_obj_dead;
+    }
   }
 
   private IEnumerator _start_co_func(){
@@ -79,6 +102,12 @@ public class EnemyBehaviour: InterfaceEnemyBehaviour{
 
     _movement = GetComponent<MovementController>();
     _path_follower = GetComponent<PathFollower>();
+
+    _health_component = GetComponent<HealthComponent>();
+    if(_health_component != null){
+      _health_component.OnDamagedEvent += _on_health_damaged;
+      _health_component.OnDeadEvent += _on_dead;
+    }
 
     _AlertComponent.AlertObjectEnterEvent += _on_alerted_enter;
 

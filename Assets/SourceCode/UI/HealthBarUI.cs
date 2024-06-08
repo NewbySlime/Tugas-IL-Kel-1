@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -52,7 +53,7 @@ public class HealthBarUI: MonoBehaviour{
     int _max_health = _health_component.MaxHealth;
     Debug.Log(string.Format("health {0}", _current_health));
     
-    _target_fg_val = (float)_current_health/_max_health;
+    _target_fg_val = _current_health > 0? (float)_current_health/_max_health: 0;
     if(skip_animation){
       _fg_val = _target_fg_val;
       _bg_val = _target_fg_val;
@@ -63,8 +64,17 @@ public class HealthBarUI: MonoBehaviour{
     _bg_update_timer = _HealthBarDelayChange;
   }
 
+  private void _on_health_dead(){
+    _health_component.OnDeadEvent -= _on_health_dead;
+    _health_component.OnHealthChangedEvent -= _on_health_changed;
+  }
+
   private void _on_health_changed(int health){
     _update_bar();
+  }
+
+  private void _on_health_set_runtime_data(){
+    _update_bar(true);
   }
 
   private IEnumerator _start_co_func(){
@@ -95,11 +105,9 @@ public class HealthBarUI: MonoBehaviour{
   }
 
   public void Update(){
-    bool _update_bar = false;
-    Debug.Log(string.Format("health bar diff {0} - {1}", _target_fg_val, _fg_val)); 
+    bool _update_bar = false; 
     if(Mathf.Abs(_target_fg_val-_fg_val) > 0.01){
       _fg_val = Mathf.SmoothDamp(_fg_val, _target_fg_val, ref _fg_smooth_speed_ref, _HealthBarSmoothTime);
-      Debug.Log(string.Format("health bar {0}", _fg_val));
       
       if(_bg_val < _fg_val)
         _bg_val = _fg_val;
@@ -129,6 +137,7 @@ public class HealthBarUI: MonoBehaviour{
 
     _update_bar(true);
     _health_component.OnHealthChangedEvent += _on_health_changed;
+    _health_component.OnRuntimeDataSetEvent += _on_health_set_runtime_data;
   }
 
   public void UnbindHealthComponent(){
@@ -136,5 +145,6 @@ public class HealthBarUI: MonoBehaviour{
       return;
 
     _health_component.OnHealthChangedEvent -= _on_health_changed;
+    _health_component.OnRuntimeDataSetEvent -= _on_health_set_runtime_data;
   }
 }

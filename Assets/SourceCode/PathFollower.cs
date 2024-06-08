@@ -176,10 +176,14 @@ public class PathFollower: MonoBehaviour{
 
       // skip ke node selanjutnya
       Vector3 _previous_pos = transform.position;
+        _previous_pos.z = 0;
       float _total_distance = 0;
       for(; i < _current_path.path.Count; i++){
         GraphNode _graph_node = _current_path.path[i];
-        float _distance_to_next_path = ((Vector3)_graph_node.position-_previous_pos).magnitude;
+        Vector3 _next_pos = (Vector3)_graph_node.position;
+          _next_pos.z = 0;
+
+        float _distance_to_next_path = (_next_pos-_previous_pos).magnitude;
         _total_distance += _distance_to_next_path;
 
         _previous_pos = (Vector3)_graph_node.position;

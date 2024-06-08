@@ -59,7 +59,8 @@ namespace SequenceHelper{
   }
 
 
-  [UnitTitle("Sequence/Game/EnemyFight")]
+  [UnitTitle("Add Watch Object")]
+  [UnitCategory("Sequence/Game/EnemyFight")]
   public class EnemyFightAddWatchObjectVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _mini_game_input;

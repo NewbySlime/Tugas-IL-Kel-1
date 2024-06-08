@@ -25,4 +25,8 @@ public static class MathExt{
   public static float NormalizeAngle(float angle){
     return Mathf.Repeat(Mathf.Abs(angle), 360);
   }
+
+  public static float Range(float min, float max, float val){
+    return (max-min)*val+min;
+  }
 }

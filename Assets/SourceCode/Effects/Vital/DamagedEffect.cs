@@ -16,6 +16,10 @@ public class DamagedEffect: MonoBehaviour{
 
   private HealthComponent _health;
 
+  private VulnerableEffect _vulnerable_effect = null;
+
+  private Coroutine _effect_coroutine = null;
+
 
   public float DamagedEffectTime;
   public float ChangeColorInterval;
@@ -23,13 +27,16 @@ public class DamagedEffect: MonoBehaviour{
 
 
   private IEnumerator _on_damaged(){
+    if(_vulnerable_effect != null)
+      _vulnerable_effect.CancelEffect();
+
     // tunggu sampai FixedUpdate selanjutnya
     yield return null;
     yield return new WaitForEndOfFrame();
 
     if(_TargetExaggerationBody != null){
       Vector2 _hit_direction = (_health.SourceDamager.transform.position-transform.position).normalized;
-      _hit_direction = _hit_direction.x < 0? new Vector2(1, 1): new Vector2(-1, 1);
+      _hit_direction = _hit_direction.x < 0? new Vector2(1, 10): new Vector2(-1, 10);
 
       _TargetExaggerationBody.AddForce(_hit_direction.normalized * ExaggerationForce);
     }
@@ -78,26 +85,52 @@ public class DamagedEffect: MonoBehaviour{
       yield return null;
     }
 
+    _on_effect_finished();
+  }
+
+  private void _on_effect_finished(){
     _TargetSpriteManipulation.material.SetColor("_ColorMultiply", Color.white);
     _TargetSpriteManipulation.material.SetColor("_ColorAdditiveAfter", new Color(0,0,0,0));
 
     if(_TargetAnimator != null)
       _TargetAnimator.SetBool("is_damaged", false);
+
+    _effect_coroutine = null;
   }
 
+
   private void _on_damaged_async(int damage_points){
-    StartCoroutine(_on_damaged());
+    if(_effect_coroutine != null)
+      CancelEffect();
+
+    _effect_coroutine = StartCoroutine(_on_damaged());
+  }
+
+  private void _on_healed(int heal_points){
+    CancelEffect();
   }
 
 
   public void Start(){
     _health = GetComponent<HealthComponent>();
     _health.OnDamagedEvent += _on_damaged_async;
+    _health.OnHealedEvent += _on_healed;
 
     RigidbodyMessageRelay _rb_relay = _TargetExaggerationBody.gameObject.GetComponent<RigidbodyMessageRelay>();
     if(_rb_relay == null){
       Debug.LogWarning("Cannot get Relay in Target Rigidbody's GameObject.");
       return;
     }
+
+    _vulnerable_effect = GetComponent<VulnerableEffect>();
+  }
+
+
+  public void CancelEffect(){
+    if(_effect_coroutine == null)
+      return;
+
+    StopCoroutine(_effect_coroutine);
+    _on_effect_finished();
   }
 }

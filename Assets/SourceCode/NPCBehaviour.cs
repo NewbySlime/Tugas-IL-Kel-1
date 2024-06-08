@@ -44,8 +44,11 @@ public class NPCRandomBehaviour: MonoBehaviour{
 
 
   private IEnumerator _start_random_path(){
+    yield return null;
+    yield return new WaitForEndOfFrame();
+
     for(int i = 0; i < MaxRandomPositionIteration; i++){
-      Vector2 _random_new_pos = (Vector2)transform.position + new Vector2(Random.Range(_MinRandomPositionDistance, _MaxRandomPositionDistance), 0);
+      Vector2 _random_new_pos = (Vector2)transform.position + new Vector2(MathExt.Range(_MinRandomPositionDistance, _MaxRandomPositionDistance, Random.value), 0);
 
       _cannot_find_path = false;
       _is_path_searching = true;

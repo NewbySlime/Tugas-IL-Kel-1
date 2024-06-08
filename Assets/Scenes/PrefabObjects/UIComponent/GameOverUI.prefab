@@ -452,7 +452,7 @@ GameObject:
   - component: {fileID: 8838586772874593043}
   - component: {fileID: 3667372972179816285}
   - component: {fileID: 8383071448635133566}
-  - component: {fileID: 7534767843194575930}
+  - component: {fileID: 7709317534181852135}
   m_Layer: 5
   m_Name: GameOverUI
   m_TagString: Untagged
@@ -529,6 +529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Timing: 1
+  UseScaledTime: 0
   _TargetAlphaReference: {fileID: 3962095681153781333}
   FadeStateOnStart: 0
   FadeToCover: 1
@@ -545,11 +546,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Timing: 4
+  UseScaledTime: 0
   _SlideAnimationStartOffset: {x: 0, y: 30, z: 0}
   _TargetSlideAnimation: {fileID: 9178944200228490073}
   _ShowOnStart: 0
   ShowAnimation: 0
---- !u!114 &7534767843194575930
+--- !u!114 &7709317534181852135
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -562,8 +564,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Timing: 0
+  UseScaledTime: 0
   _TargetObject: {fileID: 3962095681153781333}
-  SetActiveTarget: 0
+  SetActiveTarget: 1
 --- !u!1 &2484457829753275355
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,10 +869,10 @@ RectTransform:
   - {fileID: 9178944200228490073}
   m_Father: {fileID: 1927606737669790880}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &6506417521082916580
 CanvasGroup:
@@ -1323,7 +1326,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 963.0615, y: 500}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5364119175733684132
 CanvasRenderer:
@@ -1552,7 +1555,7 @@ MonoBehaviour:
     m_Left: 0
     m_Right: 0
     m_Top: 0
-    m_Bottom: -258
+    m_Bottom: -215
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 1

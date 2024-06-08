@@ -13,8 +13,6 @@ public class ShrinkUI: TimingBaseUI{
   private float _target_value = 0;
   private float _start_value = 1;
 
-  private bool _last_shrink_state;
-
   private Vector2 _pivot_base_scale;
 
   [HideInInspector]
@@ -24,6 +22,18 @@ public class ShrinkUI: TimingBaseUI{
   protected override void _on_timer_started(){
     _start_value = DoShrink? 1: 0;
     _target_value = DoShrink? 0: 1;
+
+    float _max_dist = _pivot_base_scale.magnitude;
+    Vector3 _target_show_scale = DoShrink? Vector3.zero: _pivot_base_scale;
+
+    float _current_dist = (_target_show_scale-_DialoguePivot.transform.localScale).magnitude;
+
+    Debug.Log(string.Format("shrink {0} {1}", _current_dist, _DialoguePivot.transform.localScale));
+
+    float _val = _current_dist/_max_dist;
+    __Timing = _val*__BaseTiming;
+
+    _start_value += (1-_val) * (DoShrink? -1: 1);
   }
 
   protected override void _on_timer_update(){
@@ -39,7 +49,6 @@ public class ShrinkUI: TimingBaseUI{
   public void Start(){
     _pivot_base_scale = _DialoguePivot.transform.localScale;
 
-    _last_shrink_state = !_ShrinkOnStart;
     DoShrink = _ShrinkOnStart;
 
     StartTimerAsync(true);

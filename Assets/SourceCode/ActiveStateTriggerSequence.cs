@@ -12,9 +12,18 @@ public class ActiveStateTriggerSequence: SequenceHandlerVS{
   private bool _game_ready = false;
 
 
+  private void _trigger_sequence(){
+    if(!enabled || !_game_ready || (_TriggerOnlyOnce && _already_triggered))
+      return;
+
+    _already_triggered = true;
+    StartTriggerAsync();
+  }
+
+
   private void _game_handler_scene_changed(string scene_id, GameHandler.GameContext context){
     _game_ready = true;
-    OnEnabled();
+    _trigger_sequence();
   }
 
   private void _game_handler_scene_removed(){
@@ -45,10 +54,7 @@ public class ActiveStateTriggerSequence: SequenceHandlerVS{
   }
 
 
-  public void OnEnabled(){
-    if(!_game_ready || (_TriggerOnlyOnce && _already_triggered))
-      return;
-
-    StartTriggerAsync();
+  public void OnEnable(){
+    _trigger_sequence();
   }
 }

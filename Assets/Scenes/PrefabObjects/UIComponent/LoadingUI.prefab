@@ -94,7 +94,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &746182041056796638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Timing: 0.5
+  UseScaledTime: 0
   _TargetAlphaReference: {fileID: 7759505856782762602}
   FadeStateOnStart: 0
   FadeToCover: 1
@@ -126,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Timing: 0
+  UseScaledTime: 0
   _TargetObject: {fileID: 7759505856782762602}
   SetActiveTarget: 1
 --- !u!1 &3012304061177472164

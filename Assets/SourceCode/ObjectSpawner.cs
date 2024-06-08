@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,7 +40,9 @@ public class ObjectSpawner: MonoBehaviour{
 
   public bool TriggerByDistance = true;
   public bool TriggerByTimeout = true;
-  public bool DenySpawnWhenNotEmpty = true;
+  public bool TriggerWhenEmpty = true;
+
+  public bool IgnoreRandomSpawnCount = false;
 
 
   private void _spawn_object(GameObject target_copy){
@@ -55,21 +58,21 @@ public class ObjectSpawner: MonoBehaviour{
   private void _spawn_same_random_objects(int count){
     int _random_count = count;
     while(_random_count > 0){
-      int _choosen_idx = Random.Range(0, _CopyContainer.transform.childCount-1);
+      int _choosen_idx = (int)Mathf.Round(MathExt.Range(0, _CopyContainer.transform.childCount-1, Random.value));
       _spawn_object(_CopyContainer.transform.GetChild(_choosen_idx).gameObject);
 
       _random_count--;
     }
   }
 
-  private void _spawn_different_random_objects(int count){
+  private void _spawn_different_random_objects(int count = int.MaxValue){
     List<GameObject> _spawn_list = new();
     for(int i = 0; i < _CopyContainer.transform.childCount; i++)
       _spawn_list.Add(_CopyContainer.transform.GetChild(i).gameObject);
 
     int _random_count = count;
     while(_spawn_list.Count > 0 && _random_count > 0){
-      int _choosen_idx = Random.Range(0, _spawn_list.Count-1);
+      int _choosen_idx = (int)Mathf.Round(MathExt.Range(0, _spawn_list.Count-1, Random.value));;
       _spawn_object(_spawn_list[_choosen_idx]);
       
       _spawn_list.RemoveAt(_choosen_idx);
@@ -77,17 +80,24 @@ public class ObjectSpawner: MonoBehaviour{
     }
   }
 
+  private IEnumerator _start_co_func(){
+    yield return null;
+    yield return new WaitForEndOfFrame();
 
-  public void Start(){
     for(int i = 0; i < _CopyContainer.transform.childCount; i++)
       _CopyContainer.transform.GetChild(i).gameObject.SetActive(false);
+  }
+
+
+  public void Start(){
+    StartCoroutine(_start_co_func());
 
     foreach(GameObject _obj in _ListTriggerObjectByDistance)
       _trigger_obj_by_dist[_obj.GetInstanceID()] = _obj;
   }
 
   public void FixedUpdate(){
-    if(!TriggerByDistance && !TriggerByTimeout && !DenySpawnWhenNotEmpty)
+    if(!TriggerByDistance && !TriggerByTimeout && !TriggerWhenEmpty)
       return;
 
     bool _trigger_spawn_by_timeout = !TriggerByTimeout;
@@ -110,13 +120,11 @@ public class ObjectSpawner: MonoBehaviour{
       }
     }
 
-    bool _spawn_on_empty = DenySpawnWhenNotEmpty;
-    if(DenySpawnWhenNotEmpty){
-      //_spawn_on_empty = 
+    bool _trigger_spawn_on_empty = !TriggerWhenEmpty;
+    if(TriggerWhenEmpty)
+      _trigger_spawn_on_empty = _SpawnedContainer.transform.childCount <= 0;
 
-    }
-
-    if(_trigger_spawn_by_distance && _trigger_spawn_by_timeout)
+    if(_trigger_spawn_by_distance && _trigger_spawn_by_timeout && _trigger_spawn_on_empty)
       TriggerSpawn();
   }
 
@@ -125,14 +133,18 @@ public class ObjectSpawner: MonoBehaviour{
     if(_EnableContainer != null)
       _EnableContainer.SetActive(true);
 
-    int _random_spawn_count = Random.Range(_RandomObjectSpawnedMin, _RandomObjectSpawnedMin);
+    if(IgnoreRandomSpawnCount)
+      _spawn_different_random_objects();
+    else{
+      int _random_spawn_count = (int)Mathf.Round(MathExt.Range(_RandomObjectSpawnedMin, _RandomObjectSpawnedMax, Random.value));
 
-    if(_AllowSameObjectToSpawn)
-      _spawn_same_random_objects(_random_spawn_count);
-    else
-      _spawn_different_random_objects(_random_spawn_count);
+      if(_AllowSameObjectToSpawn)
+        _spawn_same_random_objects(_random_spawn_count);
+      else
+        _spawn_different_random_objects(_random_spawn_count);
+    }
 
-    _trigger_timer = Random.Range(_RandomTimerSpawnMin, _RandomTimerSpawnMax);
+    _trigger_timer = (int)Mathf.Round(MathExt.Range(_RandomTimerSpawnMin, _RandomTimerSpawnMax, Random.value));
   }
 
   public void DespawnAllSpawnedObjects(){
@@ -160,8 +172,8 @@ public class ObjectSpawner: MonoBehaviour{
 
   public List<GameObject> GetSpawnedObjectList(){
     List<GameObject> _result = new();
-    for(int i = 0; i < _CopyContainer.transform.childCount; i++)
-      _result.Add(_CopyContainer.transform.GetChild(i).gameObject);
+    for(int i = 0; i < _SpawnedContainer.transform.childCount; i++)
+      _result.Add(_SpawnedContainer.transform.GetChild(i).gameObject);
 
     return _result;
   }

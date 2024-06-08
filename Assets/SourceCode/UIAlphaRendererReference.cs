@@ -9,4 +9,8 @@ public class UIAlphaRendererReference: MonoBehaviour, IAlphaRendererReference{
   public void SetAlpha(float value){
     _TargetCanvas.alpha = value;
   }
+
+  public float GetAlpha(){
+    return _TargetCanvas.alpha;
+  }
 }

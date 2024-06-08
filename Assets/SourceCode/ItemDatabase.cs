@@ -16,8 +16,10 @@ public class ItemDatabase: MonoBehaviour{
   /// Folder-folder yang digunakan untuk menyimpan data item (Prefabs)
   /// </summary>
   static private string[] item_data_folder = {
-    "Assets/Items/Makanan",
     "Assets/Items/BahanBahan",
+    "Assets/Items/RecipeDiscovery",
+    "Assets/Items/HealingItems",
+    "Assets/Items/Makanan",
     "Assets/Items/Senjata"
   };
 

@@ -415,11 +415,12 @@ GameObject:
   - component: {fileID: 2253800376514387715}
   - component: {fileID: 8363690541560386513}
   - component: {fileID: -5716418768266409666}
-  - component: {fileID: -3649376251907840799}
   - component: {fileID: 3738024480171422869}
   - component: {fileID: 1181989439076558778}
   - component: {fileID: 2031371041772507960}
   - component: {fileID: 4333955126660195567}
+  - component: {fileID: 6769158397457197103}
+  - component: {fileID: 8050896666134178082}
   m_Layer: 0
   m_Name: BaseCharacterNPC
   m_TagString: Untagged
@@ -581,19 +582,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-3649376251907840799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8595777250861654223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad01426786dd78041b6944b31b4ecf1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _CharacterAnimator: {fileID: -5716418768266409666}
 --- !u!114 &3738024480171422869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,6 +603,8 @@ MonoBehaviour:
   forcejump_startdelay: 0.5
   forcejump_finishdelay: 1
   _TargetAnimatorMovement: {fileID: -5716418768266409666}
+  FixedLookAt: 0
+  GlideOnGround: 0
 --- !u!114 &1181989439076558778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -683,3 +673,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _AddedFlipObjectList: []
+--- !u!114 &6769158397457197103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595777250861654223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d306e6f119ea5408ccd78e595f02a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TargetAnimator: {fileID: -5716418768266409666}
+  CharacterID: 
+--- !u!114 &8050896666134178082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595777250861654223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ae15610221dc9458a7813751e7c05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FriendlyContext: 1
+  _ListAffectedObject: []

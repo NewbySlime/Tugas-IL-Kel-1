@@ -224,11 +224,16 @@ public class ScenarioHandlerVS: MonoBehaviour, ILoadingQueue{
       throw new MissingFieldException();
     }
 
+    Destroy(_seq_obj);
+
+
     GameObject _quest_obj = Instantiate(_QuestHandlerPrefab);
     if(_quest_obj.GetComponent<QuestHandlerVS>() == null){
       Debug.LogError("No Prefab for Quest Handler.");
       throw new MissingFieldException();
     }
+
+    Destroy(_quest_obj);
   }
 
 

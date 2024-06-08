@@ -21,7 +21,6 @@ public class AreaTrigger: MonoBehaviour{
     if(!_game_handler.AreaTriggerEnable || !TriggerOnEnter || _SequenceHandler == null || _SequenceHandler.IsTriggering())
       return;
 
-    Debug.Log("done");
     _SequenceHandler.StartTriggerAsync();
   }
 

@@ -63,7 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _WeaponData:
     DamagerData:
-      damage_points: 10
+      damage_points: 20
     DamagerContext:
       _ProjectileType: 1
       OnCollisionEffect: 0
@@ -71,7 +71,7 @@ MonoBehaviour:
       ProjectileGravityScale: 0.6
       ProjectileMaterial: {fileID: 6200000, guid: aa6ba4b143a1aef45af2161d103f8855, type: 2}
       ProjectileSize: 0.3
-      ProjectileSpeed: 5
+      ProjectileSpeed: 10
       DamagerLifetime: 10
       AsCollectible: 0
       AllowCollectibleOnSpeedThreshold: 0.3
@@ -80,6 +80,10 @@ MonoBehaviour:
         m_Bits: 130487
       SetExcludeLayerOnSpeedThreshold: 1
       ListDepleteItem: []
+      SoundAlertOnCollision: 1
+      SoundAlertConfig:
+        SoundRangeMax: 2.5
+        MaxCollisionSpeedReference: 7
     WeaponFireDelay: 2
     ProjectilePrefab: {fileID: 2360168195616954443, guid: eea5f609ce893924f840a49e8aeb25bd, type: 3}
     ProjectileTexture: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}

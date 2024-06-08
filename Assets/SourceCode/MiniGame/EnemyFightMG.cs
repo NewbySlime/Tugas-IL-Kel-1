@@ -58,6 +58,17 @@ public class EnemyFightMG: MiniGameHandler{
   }
 
 
+  protected override void _OnGameFinished(ResultCase result){
+    base._OnGameFinished(result);
+
+    switch(result){
+      case ResultCase.Win:{
+        // remove all enemy object
+      }break;
+    }
+  }
+
+
   protected virtual void _OnEnemyDied(GameObject obj){}
   protected virtual void _OnEnemyAddedToWatchList(GameObject obj){}
 
@@ -85,17 +96,17 @@ public class EnemyFightMG: MiniGameHandler{
 
     switch(_friendly_handler.FriendlyContext){
       case ObjectFriendlyHandler.FriendlyType.PlayerFriend:{
-        _health.OnDeadEvent += _on_enemy_died;
-        _list_watched_enemies[obj.GetInstanceID()] = _metadata;
-
-        _OnEnemyAddedToWatchList(obj);
-      }break;
-
-      case ObjectFriendlyHandler.FriendlyType.Enemy:{
         _health.OnDeadEvent += _on_ally_died;
         _list_watched_allies[obj.GetInstanceID()] = _metadata;
 
         _OnAllyAddedToWatchList(obj);
+      }break;
+
+      case ObjectFriendlyHandler.FriendlyType.Enemy:{
+        _health.OnDeadEvent += _on_enemy_died;
+        _list_watched_enemies[obj.GetInstanceID()] = _metadata;
+
+        _OnEnemyAddedToWatchList(obj);
       }break;
 
 
@@ -118,6 +129,8 @@ public class EnemyFightMG: MiniGameHandler{
 
 
   public override void TriggerGameStart(){
+    base.TriggerGameStart();
+
     foreach(ObjectSpawner _spawner in _ObjectSpawners){
       _spawner.TriggerSpawn();
 

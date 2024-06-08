@@ -125,7 +125,7 @@ MonoBehaviour:
     SetExcludeLayerOnSpeedThreshold: 0
     ListDepleteItem: []
   _DamagerData:
-    damage_points: 0
+    damage_points: 1000
 --- !u!1 &3411354215547480070
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,6 +147,9 @@ GameObject:
   - component: {fileID: 4101706522379409777}
   - component: {fileID: 7395575481843267332}
   - component: {fileID: 8785596804101399459}
+  - component: {fileID: -5998315093980143502}
+  - component: {fileID: -4369326297102418263}
+  - component: {fileID: 3131866070228681615}
   m_Layer: 10
   m_Name: JarotBoss
   m_TagString: Untagged
@@ -222,6 +225,8 @@ MonoBehaviour:
   forcejump_startdelay: 0.2
   forcejump_finishdelay: 0.5
   _TargetAnimatorMovement: {fileID: 4101706522379409777}
+  FixedLookAt: 0
+  GlideOnGround: 0
 --- !u!114 &8226381847377401319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,7 +242,7 @@ MonoBehaviour:
   _StuckTimeout: 1
   _StuckSpeedThreshold: 10
   _PathUpdateInterval: 0.3
-  _PathStopDistance: 0.1
+  _PathStopDistance: 0.5
   _PathSkipDistance: 1
   _TopJumpAngleThreshold: 40
   _BottomJumpAngleThreshold: 30
@@ -342,8 +347,8 @@ MonoBehaviour:
   _TargetAnimator: {fileID: 0}
   _DestroyTimer: 10
   TriggerDeadAnimation: 1
-  FallOffScreenOnDead: 1
-  DestroyOnDead: 1
+  FallOffScreenOnDead: 0
+  DestroyOnDead: 0
 --- !u!114 &3677078364744539891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,8 +426,7 @@ MonoBehaviour:
   _AddedFlipObjectList:
   - Object: {fileID: 2914385645859567024}
     UseTransform: 1
-    UseRotationX: 0
-    UseRotationY: 0
+    UseRotation: 0
 --- !u!212 &8785596804101399459
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -475,6 +479,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-5998315093980143502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3411354215547480070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b59fbfdac948e4fb5b6dc452d4ff89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TargetSpriteManipulation: {fileID: 8785596804101399459}
+  _TargetExaggerationBody: {fileID: 6594041006438689522}
+  _TargetAnimator: {fileID: 4101706522379409777}
+  DamagedEffectTime: 0.5
+  ChangeColorInterval: 0.2
+  ExaggerationForce: 200
+--- !u!114 &-4369326297102418263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3411354215547480070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d306e6f119ea5408ccd78e595f02a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TargetAnimator: {fileID: 4101706522379409777}
+  _CharacterID: jarot
+--- !u!114 &3131866070228681615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3411354215547480070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ae15610221dc9458a7813751e7c05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FriendlyContext: 2
+  _ListAffectedObject: []
 --- !u!1 &4392938146894752373
 GameObject:
   m_ObjectHideFlags: 0

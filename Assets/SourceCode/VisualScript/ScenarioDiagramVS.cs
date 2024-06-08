@@ -104,7 +104,7 @@ public class ScenarioDiagramVS: MonoBehaviour, ILoadingQueue{
         throw new MissingComponentException();
       }
 
-      _handler.transform.SetParent(transform);
+      _new_obj.transform.SetParent(transform);
 
       _scenario_map[_data.ScenarioID] = new _scenario_metadata{
         scenario_id = _data.ScenarioID,

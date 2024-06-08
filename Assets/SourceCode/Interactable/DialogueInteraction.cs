@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,6 +22,14 @@ public class DialogueInteraction: MonoBehaviour{
   [SerializeField]
   private float _DialogueHideTimeout = 5f;
 
+  [SerializeField]
+  private bool _LoopDialogue = false;
+
+  [SerializeField]
+  private bool _AutoResume = false;
+  [SerializeField]
+  private float _AutoResumeDelay = 3;
+
 
   private DialogueUI _dialogue_ui = null;
   private ShrinkUI _dialogue_shrinkui = null;
@@ -30,9 +39,10 @@ public class DialogueInteraction: MonoBehaviour{
   private GameHandler _game_handler;
 
   private int _dialogue_index = 0;
-
-
   private float _dialogue_timeout = 0;
+
+  private Coroutine _auto_resume_coroutine = null;
+  private float _auto_resume_timer;
 
 
   private void _popup_dialogue(DialogueUI.DialogueData data){
@@ -47,6 +57,11 @@ public class DialogueInteraction: MonoBehaviour{
   }
 
   private void _hide_dialogue(){
+    if(_auto_resume_coroutine != null){
+      StopCoroutine(_auto_resume_coroutine);
+      _auto_resume_coroutine = null;
+    }
+
     if(!_dialogue_shrinkui.DoShrink){
       TimingBaseUI.SkipAllTimer(_dialogue_shrinkui);
 
@@ -65,11 +80,17 @@ public class DialogueInteraction: MonoBehaviour{
       return;
     }
 
-    if(_dialogue_index >= _dialogue_sequence.Sequence.Count && !_RandomizeDialogue){
-      _hide_dialogue();
+    bool _do_dialogue = true;
+    if(_dialogue_index >= _dialogue_sequence.Sequence.Count){
       _dialogue_index = 0;
+      
+      if(!_LoopDialogue){
+        _hide_dialogue();
+        _do_dialogue = false;
+      }
     }
-    else{
+
+    if(_do_dialogue){
       _popup_dialogue(_dialogue_sequence.Sequence[_dialogue_index]);
       _dialogue_index++;
     }
@@ -90,6 +111,24 @@ public class DialogueInteraction: MonoBehaviour{
     }
     else
       _dialogue_ui.SkipDialogueAnimation();
+  }
+
+
+  private IEnumerator _auto_resume_co_func(){
+    while(true){
+      if(!_dialogue_ui.IsDialogueFinished()){
+        yield return null;
+        continue;
+      }
+
+      if(_auto_resume_timer < 0){
+        _auto_resume_timer = _AutoResumeDelay;
+        _next_dialogue();
+      }
+
+      yield return null;
+      _auto_resume_timer -= Time.deltaTime;
+    }
   }
 
 
@@ -121,8 +160,11 @@ public class DialogueInteraction: MonoBehaviour{
     }
   }
 
+  
+  public void TriggerDialogue(){
+    if(!gameObject.activeInHierarchy)
+      return;
 
-  public void InteractableInterface_Interact(){
     if(_dialogue_sequence.Sequence.Count <= 0){
       Debug.LogWarning("No Dialogue to show.");
       return;
@@ -132,6 +174,16 @@ public class DialogueInteraction: MonoBehaviour{
       _random_dialogue();
     else
       _next_dialogue();
+
+    if(_AutoResume && _auto_resume_coroutine == null){
+      _auto_resume_coroutine = StartCoroutine(_auto_resume_co_func());
+      _auto_resume_timer = _AutoResumeDelay;
+    }
+  }
+
+
+  public void InteractableInterface_Interact(){
+    TriggerDialogue();
   }
 
   public void InteractableInterface_InteractableExit(){

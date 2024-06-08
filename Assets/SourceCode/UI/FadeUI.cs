@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 
-public class FadeUI: TimingBaseUI{
+public class FadeUI: TimingBaseUI, IObjectInitialized{
   [SerializeField]
   private GameObject _TargetAlphaReference;
 
@@ -15,27 +15,23 @@ public class FadeUI: TimingBaseUI{
   private IAlphaRendererReference _alpha_reference;
 
   private float _target_fade_value = 0;
-  private bool _last_fade_to_cover;
 
   [HideInInspector]
   public bool FadeToCover = true;
 
-  protected override void _on_timer_started(){
-    _on_timer_start_call();
+  public bool IsInitialized{private set; get;} = false;
 
+  protected override void _on_timer_started(){
     _target_fade_value = FadeToCover? 1: 0;
+    __Timing = Mathf.Abs(_target_fade_value-_alpha_reference.GetAlpha()) * __BaseTiming;
   }
 
   protected override void _on_timer_update(){
-    if(_last_fade_to_cover == FadeToCover)
-      return;
-
     float _current_value = Mathf.SmoothStep(1, 0, __Progress);
     _alpha_reference.SetAlpha(Math.Abs(_current_value - _target_fade_value));
   }
 
   protected override void _on_timer_finished(){
-    _last_fade_to_cover = FadeToCover;
     _alpha_reference.SetAlpha(_target_fade_value);
   }
 
@@ -51,9 +47,12 @@ public class FadeUI: TimingBaseUI{
 
     _alpha_reference = _list_references[0];
 
-    _last_fade_to_cover = !FadeStateOnStart;
     FadeToCover = FadeStateOnStart;
     
     StartTimerAsync(true);
+  }
+
+  public bool GetIsInitialized(){
+    return IsInitialized;
   }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Specialized;
+using System.Data.Common;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,51 +12,33 @@ namespace SequenceHelper{
 
     public struct SequenceData{
       public string CharacterID;
+      public ObjectFriendlyHandler.FriendlyType FriendlyContext;
+
       public ObjectReference.ObjRefID RefID;
     }
 
 
-    [SerializeField]
-    private GameObject _CharacterPrefab;
-
-
     private SequenceData _seq_data;
 
-    private bool _seq_triggering = false;
-
-
-    private IEnumerator _start_trigger(){
-      _seq_triggering = true;
-      GameObject _inst_obj = Instantiate(_CharacterPrefab);
-      ObjectReference.SetReferenceObject(_seq_data.RefID, _inst_obj);
-
-      yield return new WaitForNextFrameUnit();
-
-      NPCHandler _handler = _inst_obj.GetComponent<NPCHandler>();
-      _handler.SetCharacter(_seq_data.CharacterID);
-
-      _seq_triggering = false;
-    }
+    private CharacterDatabase _character_database;
 
 
     public void Start(){
-      // test _CharacterPrefab
-      GameObject _test_obj = Instantiate(_CharacterPrefab);
-      if(_test_obj.GetComponent<NPCHandler>() == null){
-        Debug.LogError("CharacterPrefab does not have NPCHandler.");
-        throw new MissingComponentException();
+      _character_database = FindAnyObjectByType<CharacterDatabase>();
+      if(_character_database == null){
+        Debug.LogError("Cannot find database for Characters.");
+        return;
       }
-
-      Destroy(_test_obj);
     }
 
 
     public void StartTriggerAsync(){
-      StartCoroutine(_start_trigger());
+      GameObject _inst_obj = _character_database.CreateNewCharacter(_seq_data.CharacterID, _seq_data.FriendlyContext);
+      ObjectReference.SetReferenceObject(_seq_data.RefID, _inst_obj);
     }
 
     public bool IsTriggering(){
-      return _seq_triggering;
+      return false;
     }
 
 
@@ -79,6 +62,8 @@ namespace SequenceHelper{
   public class CreateCharacterSequenceVS: AddSubSequence{
     [DoNotNormalize]
     private ValueInput _character_id_input;
+    [DoNotSerialize]
+    private ValueInput _friendly_context_input;
 
     [DoNotSerialize]
     private ValueOutput _object_output;
@@ -90,6 +75,8 @@ namespace SequenceHelper{
       base.Definition();
 
       _character_id_input = ValueInput("CharacterID", "");
+      _friendly_context_input = ValueInput("FriendlyContext", ObjectFriendlyHandler.FriendlyType.Neutral);
+
       _object_output = ValueOutput("ObjectRef", (flow) => _ref_id);
     }
 
@@ -100,6 +87,8 @@ namespace SequenceHelper{
         SequenceID = CreateCharacterSequence.SequenceID,
         SequenceData = new CreateCharacterSequence.SequenceData{
           CharacterID = flow.GetValue<string>(_character_id_input),
+          FriendlyContext = flow.GetValue<ObjectFriendlyHandler.FriendlyType>(_friendly_context_input),
+
           RefID = _ref_id
         }
       };

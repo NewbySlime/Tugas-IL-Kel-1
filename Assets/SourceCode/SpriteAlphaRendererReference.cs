@@ -12,4 +12,8 @@ public class SpriteAlphaRendererReference: MonoBehaviour, IAlphaRendererReferenc
 
     _TargetSpriteRenderer.material.color = _current_col;
   }
+
+  public float GetAlpha(){
+    return _TargetSpriteRenderer.material.color.a;
+  }
 }

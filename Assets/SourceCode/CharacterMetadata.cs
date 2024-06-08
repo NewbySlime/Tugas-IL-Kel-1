@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterMetadata: MonoBehaviour{
   [Serializable]
-  public struct CharacterData{
+  public class CharacterData{
     public string CharacterID;
     public string CharacterName;
   }

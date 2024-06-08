@@ -10,8 +10,6 @@ using UnityEngine;
 
 
 public class PersistanceContext: MonoBehaviour{
-  private static string save_file_location = "save.dat";
-
   public delegate void PersistanceSaving(PersistanceContext context);
   public event PersistanceSaving PersistanceSavingEvent;
 
@@ -47,6 +45,8 @@ public class PersistanceContext: MonoBehaviour{
   private bool _IsInitialized = false;
   public bool IsInitialized{get => _IsInitialized;}
 
+  public string SaveFileLocation = "save.dat";
+
 
   public void Start(){
     _IsInitialized = true;
@@ -56,7 +56,7 @@ public class PersistanceContext: MonoBehaviour{
 
 
   public void WriteSave(){
-    FileStream _save_file = File.Open(string.Format("{0}/{1}", _save_folder_location, save_file_location), FileMode.Create);
+    FileStream _save_file = File.Open(string.Format("{0}/{1}", _save_folder_location, SaveFileLocation), FileMode.Create);
 
     PersistanceSavingEvent?.Invoke(this);
 
@@ -80,19 +80,11 @@ public class PersistanceContext: MonoBehaviour{
     _save_file.Close();
   }
 
-  public IEnumerator WriteSaveAsync(){
-    Delegate[] _list_delegate = PersistanceSavingEvent.GetInvocationList();
-    foreach(Delegate _del in _list_delegate){
-      yield return null;
-      _del.DynamicInvoke(this);
-    }
-  }
-
 
   public bool ReadSave(){
     try{
       Debug.Log("save read test");
-      FileStream _save_file = File.Open(string.Format("{0}/{1}", Application.persistentDataPath, save_file_location), FileMode.Open);
+      FileStream _save_file = File.Open(string.Format("{0}/{1}", Application.persistentDataPath, SaveFileLocation), FileMode.Open);
       Debug.Log("save read test");
 
       byte[] _filedata_raw = new byte[_save_file.Length];
