@@ -339,6 +339,7 @@
     <Compile Include="Assets\SourceCode\SequenceHelper\Timing\PauseGameSequence.cs" />
     <Compile Include="Assets\SourceCode\SpriteAlphaRendererReference.cs" />
     <Compile Include="Assets\SourceCode\UI\SlideUI.cs" />
+    <Compile Include="Assets\AudioManager.cs" />
     <Compile Include="Assets\SourceCode\SequenceHelper\ObjectHandling\SetObjectPositionRefObjSequence.cs" />
   </ItemGroup>
   <ItemGroup>

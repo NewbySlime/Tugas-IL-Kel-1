@@ -1,3 +1,11 @@
 .vscode
 Library
 Packages"Temp/" 
+.vscode/ 
+Library/ 
+Packages/ 
+Temp/ 
+.vs/ 
+Library/ 
+Package/ 
+Temp/
