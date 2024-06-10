@@ -1,10 +1,10 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CookerComponent : MonoBehaviour
 {
+    [System.Serializable]
     public class ItemCookResult
     {
         public float FoodScore;
@@ -14,7 +14,6 @@ public class CookerComponent : MonoBehaviour
             FoodScore = foodScore;
         }
     }
-
 
     [SerializeField] private BaseProgressUI _CookingProgressUI;
     [SerializeField] private float _CookTimePerItem = 4;
@@ -33,7 +32,7 @@ public class CookerComponent : MonoBehaviour
     private InputFocusContext _input_context;
     private bool _interacted_flag = false;
 
-    private IEnumerator _cook_new_item(string item_id, ItemRecipeData.ItemData recipe_data)
+    private IEnumerator CookNewItem(string item_id, ItemRecipeData.ItemData recipe_data)
     {
         QuickTimeEventUI _qte_ui = _ui_handler.GetQTEUI();
         _ui_handler.SetMainHUDUIMode(GameUIHandler.MainHUDUIEnum.QTEUI, true);
@@ -45,52 +44,44 @@ public class CookerComponent : MonoBehaviour
             TypeDataStorage _ingredient_data = _item_database.GetItemData(_ingredient_id);
             if (_ingredient_data == null)
             {
-                Debug.LogWarning(string.Format("Ingredient (ID: {0}) is not existed.", _ingredient_id));
-            }
-            else
-            {
-                ItemTextureData.ItemData _tex_data = _ingredient_data.GetData<ItemTextureData.ItemData>();
-                if (_tex_data == null)
-                {
-                    Debug.LogWarning(string.Format("Ingredient (ID: {0}) does not have Texture Data.", _ingredient_id));
-                }
-                else
-                {
-                    _qte_ui.SetEventSymbol(_tex_data.SpriteTexture);
-                }
+                Debug.LogWarning($"Ingredient (ID: {_ingredient_id}) is not existed.");
+                continue;
             }
 
-            float _accept_size = UnityEngine.Random.Range(_QTEAcceptBarSizeMin, _QTEAcceptBarSizeMax);
+            ItemTextureData.ItemData _tex_data = _ingredient_data.GetData<ItemTextureData.ItemData>();
+            if (_tex_data == null)
+            {
+                Debug.LogWarning($"Ingredient (ID: {_ingredient_id}) does not have Texture Data.");
+                continue;
+            }
+
+            _qte_ui.SetEventSymbol(_tex_data.SpriteTexture);
+
+            float _accept_size = Random.Range(_QTEAcceptBarSizeMin, _QTEAcceptBarSizeMax);
             float _accept_high = _accept_size / 2 + 0.5f;
             float _accept_low = _accept_size / 2 - 0.5f;
 
             _qte_ui.SetAcceptBarMaxSize(_accept_high);
             _qte_ui.SetAcceptBarMinSize(_accept_low);
 
-            float _base_qte_time = UnityEngine.Random.Range(_QTETimeMin, _QTETimeMax);
+            float _base_qte_time = Random.Range(_QTETimeMin, _QTETimeMax);
             float _qte_time = _base_qte_time;
 
             float _current_val = 1;
             _interacted_flag = false;
-            while (true)
+            while (_qte_time > 0)
             {
-                float __time_val = _qte_time / _base_qte_time;
-                _qte_ui.SetAcceptBarColorLerp(__time_val);
+                float _time_val = _qte_time / _base_qte_time;
+                _qte_ui.SetAcceptBarColorLerp(_time_val);
 
                 float _bar_val = Mathf.Abs(1 - Mathf.Repeat(_current_val, 2));
                 _qte_ui.SetQTETimingBar(_bar_val);
 
                 yield return null;
-                if (_qte_time > 0)
-                {
-                    _qte_time -= Time.deltaTime;
-                }
-                else
-                {
-                    _qte_time = 0;
-                }
 
-                float _current_speed = (_QTESpeedMax - _QTESpeedMin) * __time_val + _QTESpeedMin;
+                _qte_time -= Time.deltaTime;
+
+                float _current_speed = (_QTESpeedMax - _QTESpeedMin) * _time_val + _QTESpeedMin;
                 _current_val += _current_speed * Time.deltaTime;
 
                 if (_interacted_flag)
@@ -115,7 +106,13 @@ public class CookerComponent : MonoBehaviour
         Debug.Log($"Cooking finished with score: {cookResult.FoodScore}");
     }
 
-    public void Start()
+    private T FindAnyObjectByType<T>()
+    {
+        // Implementasi metode ini sesuai kebutuhanmu
+        return FindObjectOfType<T>();
+    }
+
+    private void Start()
     {
         _item_database = FindAnyObjectByType<ItemDatabase>();
         if (_item_database == null)
@@ -132,7 +129,8 @@ public class CookerComponent : MonoBehaviour
         }
 
         _ui_handler = FindAnyObjectByType<GameUIHandler>();
-        if (_ui_handler == null)
+        if (_ui_handler == null
+            )
         {
             Debug.LogError("Cannot get GameUIHandler.");
             throw new MissingReferenceException();
@@ -161,21 +159,28 @@ public class CookerComponent : MonoBehaviour
 
     public bool CookItem(string item_id)
     {
+        // Validasi input
+        if (string.IsNullOrEmpty(item_id))
+        {
+            Debug.LogWarning("Cooking cancelled, item ID is empty.");
+            return false;
+        }
+
         TypeDataStorage _item_data = _item_database.GetItemData(item_id);
         if (_item_data == null)
         {
-            Debug.LogWarning(string.Format("Cooking cancelled, item (ID: {0}) is not exist.", item_id));
+            Debug.LogWarning($"Cooking cancelled, item (ID: {item_id}) is not exist.");
             return false;
         }
 
         ItemRecipeData.ItemData _recipe_data = _item_data.GetData<ItemRecipeData.ItemData>();
         if (_recipe_data == null)
         {
-            Debug.LogWarning(string.Format("Cooking cancelled, item (ID: {0}) does not have ItemRecipeData.", item_id));
+            Debug.LogWarning($"Cooking cancelled, item (ID: {item_id}) does not have ItemRecipeData.");
             return false;
         }
 
-        StartCoroutine(_cook_new_item(item_id, _recipe_data));
+        StartCoroutine(CookNewItem(item_id, _recipe_data));
         return true;
     }
 
