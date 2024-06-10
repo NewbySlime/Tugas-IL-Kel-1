@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -14.8}
-  m_SizeDelta: {x: 1000, y: 524}
+  m_AnchoredPosition: {x: 100, y: -5}
+  m_SizeDelta: {x: 200, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3032871346265161767
 MonoBehaviour:
@@ -140,10 +140,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 901365814017370644}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.25}
-  m_AnchorMax: {x: 1, y: 0.75}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -840, y: -252}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9077480747341862309
 CanvasRenderer:
@@ -273,6 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Timing: 0.2
+  UseScaledTime: 1
   _TargetAlphaReference: {fileID: 5658458972040486017}
   FadeStateOnStart: 0
   FadeToCover: 1
@@ -289,6 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Timing: 0.5
+  UseScaledTime: 1
   _SlideAnimationStartOffset: {x: 0, y: 30, z: 0}
   _TargetSlideAnimation: {fileID: 3601568267242394556}
   _ShowOnStart: 0
@@ -379,11 +381,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 992801471759766587, guid: 67f3ce488b18b434e901908b9526621f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 75.6
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 992801471759766587, guid: 67f3ce488b18b434e901908b9526621f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -82.4
+      value: -64.3
       objectReference: {fileID: 0}
     - target: {fileID: 992801471759766587, guid: 67f3ce488b18b434e901908b9526621f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

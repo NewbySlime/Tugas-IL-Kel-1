@@ -90,6 +90,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 179366029160125121, guid: 0967a81db76839d42a9067c4edf39ed8, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 261559
+      objectReference: {fileID: 0}
     - target: {fileID: 457670904127942991, guid: 0967a81db76839d42a9067c4edf39ed8, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -108,7 +112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1822035598331978385, guid: 0967a81db76839d42a9067c4edf39ed8, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
-      value: 48438
+      value: 46390
       objectReference: {fileID: 0}
     - target: {fileID: 2331675649044279144, guid: 0967a81db76839d42a9067c4edf39ed8, type: 3}
       propertyPath: _DeadDelay
@@ -146,6 +150,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: -876546973899608171, guid: 2b0629808a4988e47bac04e54a2f9ac7, type: 3}
+    - target: {fileID: 4078364242703432760, guid: 0967a81db76839d42a9067c4edf39ed8, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 261559
+      objectReference: {fileID: 0}
+    - target: {fileID: 4267860880315283646, guid: 0967a81db76839d42a9067c4edf39ed8, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 261559
+      objectReference: {fileID: 0}
     - target: {fileID: 4620855569559039654, guid: 0967a81db76839d42a9067c4edf39ed8, type: 3}
       propertyPath: _Filter.ScenarioID
       value: nighttime_scenario
@@ -301,6 +313,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6514244372244188824, guid: 0967a81db76839d42a9067c4edf39ed8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1067424992246244036}
+    - targetCorrespondingSourceObject: {fileID: 6514244372244188824, guid: 0967a81db76839d42a9067c4edf39ed8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8101578515125144007}
+    - targetCorrespondingSourceObject: {fileID: 6514244372244188824, guid: 0967a81db76839d42a9067c4edf39ed8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8064664717573053182}
     - targetCorrespondingSourceObject: {fileID: 9008122451281835972, guid: 0967a81db76839d42a9067c4edf39ed8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2811197886258624654}
@@ -411,7 +429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ExcludedLayerRecovery:
     serializedVersion: 2
-    m_Bits: 113975
+    m_Bits: 111927
   _TargetRecoveryBody: {fileID: 4860422845764002075}
   _TargetSpriteManipulation: {fileID: 143766740149228769}
   RecoveryTime: 5
@@ -499,6 +517,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FriendlyContext: 0
   _ListAffectedObject: []
+--- !u!114 &8101578515125144007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7846986744859893878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 642c18e96833dc649a76c29a5bfc8c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _RemoveItemOnGet: 1
+--- !u!114 &8064664717573053182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7846986744859893878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d1c2951143d1e4fad806a53acd891b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TargetSpriteManipulation: {fileID: 143766740149228769}
+  _StartEffectColor: {r: 0, g: 0.509434, b: 0.13615343, a: 1}
+  TimeEffect: 2
 --- !u!1001 &4873582785750748836
 PrefabInstance:
   m_ObjectHideFlags: 0

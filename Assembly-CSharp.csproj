@@ -78,10 +78,12 @@
     <Compile Include="Assets\SourceCode\SequenceHelper\Debugging\LoggingSequence.cs" />
     <Compile Include="Assets\SourceCode\VisualScript\QuestHandlerVS.cs" />
     <Compile Include="Assets\SourceCode\Effects\Damager\DamagerAsCollectibleHelper.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Game\SetLastCheckpointSequence.cs" />
     <Compile Include="Assets\SourceCode\FollowerCamera2D.cs" />
     <Compile Include="Assets\SourceCode\InteractableInterface.cs" />
     <Compile Include="Assets\SourceCode\VisualScript\ScenarioDiagramVS.cs" />
     <Compile Include="Assets\SourceCode\ItemDatabase.cs" />
+    <Compile Include="Assets\SourceCode\Testing\CheckUIRaycastBlock.cs" />
     <Compile Include="Assets\SourceCode\NPCBehaviour.cs" />
     <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_TextCore_Glyph.cs" />
     <Compile Include="Assets\SourceCode\ItemButton.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="Assets\SourceCode\UI\GameSettingsHandlerUI.cs" />
     <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_FontData.cs" />
     <Compile Include="Assets\SourceCode\InventoryData.cs" />
+    <Compile Include="Assets\SourceCode\UI\PromptUI.cs" />
     <Compile Include="Assets\SourceCode\ItemHealData.cs" />
     <Compile Include="Assets\SourceCode\IQuestHandler.cs" />
     <Compile Include="Assets\SourceCode\UI\SetActiveUIOnTimeout.cs" />
@@ -128,6 +131,7 @@
     <Compile Include="Assets\SourceCode\VisualScript\DialogueInitializing.cs" />
     <Compile Include="Assets\SourceCode\PickableObject.cs" />
     <Compile Include="Assets\SourceCode\InterfaceEnemyBehaviour.cs" />
+    <Compile Include="Assets\SourceCode\Interactable\TeleportInteraction.cs" />
     <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_Dropdown_DropdownEvent.cs" />
     <Compile Include="Assets\SourceCode\UI\BaseProgressUI.cs" />
     <Compile Include="Assets\SourceCode\DEBUG_SceneMetadata.cs" />
@@ -143,6 +147,7 @@
     <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_EventSystems_EventTrigger_TriggerEvent.cs" />
     <Compile Include="Assets\SourceCode\MiniGameHandler.cs" />
     <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_Toggle_ToggleEvent.cs" />
+    <Compile Include="Assets\SourceCode\UI\MainMenuUI.cs" />
     <Compile Include="Assets\SourceCode\Interactable\CookingInteraction.cs" />
     <Compile Include="Assets\SourceCode\SequenceHelper\Game\EnemyFight\EnemyFightAddWatchSpawner.cs" />
     <Compile Include="Assets\SourceCode\UI\OrderDataUI.cs" />
@@ -189,6 +194,8 @@
     <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_UI_Dropdown_OptionDataList.cs" />
     <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_TMPro_TextAlignmentOptions.cs" />
     <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_TMPro_TMP_InputField_SelectionEvent.cs" />
+    <Compile Include="Assets\SourceCode\Interactable\SetActiveInteraction.cs" />
+    <Compile Include="Assets\SourceCode\OnEnabledRegisterInputFocus.cs" />
     <Compile Include="Assets\SourceCode\SequenceHelper\Enemy\SetEnemyTargetSequence.cs" />
     <Compile Include="Assets\SourceCode\MiniGame\CookBattleMG.cs" />
     <Compile Include="Assets\SourceCode\CheckpointHandler.cs" />
@@ -243,13 +250,13 @@
     <Compile Include="Assets\SourceCode\SequenceHelper\Timing\SetPeriodTimeSequence.cs" />
     <Compile Include="Assets\SourceCode\CharacterMetadata.cs" />
     <Compile Include="Assets\SourceCode\MathExtended.cs" />
-    <Compile Include="Assets\SourceCode\SequenceHelper\UI\SetPlayerUIMode.cs" />
     <Compile Include="Assets\SourceCode\SequenceHelper\Scene\SceneSequenceTrigger.cs" />
     <Compile Include="Assets\SourceCode\SequenceHelper\Camera\SetCameraFollowSequence.cs" />
     <Compile Include="Assets\SourceCode\ParallaxComponent.cs" />
     <Compile Include="Assets\SourceCode\MiniGame\BossFightMG.cs" />
     <Compile Include="Assets\SourceCode\SequenceHelper\Scenario\StartScenarioSequence.cs" />
     <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_Events_UnityEventBase.cs" />
+    <Compile Include="Assets\SourceCode\UI\SettingsUI.cs" />
     <Compile Include="Assets\SourceCode\UI\FadeUI.cs" />
     <Compile Include="Assets\SourceCode\QuestDatabase.cs" />
     <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_InputSystem_PlayerInput_DeviceLostEvent.cs" />
@@ -303,6 +310,7 @@
     <Compile Include="Assets\SourceCode\ISequenceAsync.cs" />
     <Compile Include="Assets\SourceCode\ScenarioInterface.cs" />
     <Compile Include="Assets\SourceCode\UIAlphaRendererReference.cs" />
+    <Compile Include="Assets\SourceCode\UI\CanvasRecursiveScaleCalibrator.cs" />
     <Compile Include="Assets\SourceCode\CharacterDatabase.cs" />
     <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\Property Providers\PropertyProvider_UnityEngine_TextCore_GlyphRect.cs" />
     <Compile Include="Assets\SourceCode\Effects\Vital\VulnerableEffect.cs" />

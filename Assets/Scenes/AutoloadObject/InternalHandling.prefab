@@ -35,51 +35,6 @@ Transform:
   - {fileID: 8257795658843598470}
   m_Father: {fileID: 4205417196774204584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1484009846477335915
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2049512121703553285}
-  - component: {fileID: 5797699272938320981}
-  m_Layer: 0
-  m_Name: PersistanceContext
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2049512121703553285
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1484009846477335915}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4205417196774204584}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5797699272938320981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1484009846477335915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d3aa98d2287e0a468ef5bc7caf47c6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SaveFileLocation: save.dat
 --- !u!1 &2668253186714453809
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,7 +166,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5853785348613298973}
-  - {fileID: 2049512121703553285}
   - {fileID: 7441629669322299947}
   - {fileID: 5221485531054309016}
   m_Father: {fileID: 0}
@@ -307,6 +261,7 @@ GameObject:
   - component: {fileID: 193816743365179125}
   - component: {fileID: 8467299025891989611}
   - component: {fileID: 4970358828955604391}
+  - component: {fileID: 4183203120337648411}
   m_Layer: 0
   m_Name: GameHandler
   m_TagString: Untagged
@@ -400,6 +355,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SaveFileLocation: save.dat
+--- !u!114 &4183203120337648411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5586516062806361623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 9692f149224d9a547b416eb05959c1e0, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: KeyboardAndMouse
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &5606847440627698119
 GameObject:
   m_ObjectHideFlags: 0

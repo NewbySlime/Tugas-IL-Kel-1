@@ -37,6 +37,7 @@ public class CharacterComponent: MonoBehaviour{
 
 
   public void SetCharacterID(string character_id){
+    _CharacterID = character_id;
     if(!IsInitialized)
       return;
 

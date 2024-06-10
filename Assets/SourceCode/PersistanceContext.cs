@@ -37,26 +37,24 @@ public class PersistanceContext: MonoBehaviour{
   }
 
 
-  private Dictionary<string, _JSONData> _loaded_data = new();
+  [SerializeField]
+  private string _SaveFileLocation = "save.dat";
 
-  private string _save_folder_location;
+
+  private Dictionary<string, _JSONData> _loaded_data = new();
 
 
   private bool _IsInitialized = false;
   public bool IsInitialized{get => _IsInitialized;}
 
-  public string SaveFileLocation = "save.dat";
-
 
   public void Start(){
     _IsInitialized = true;
-
-    _save_folder_location = Application.persistentDataPath;
   }
 
 
   public void WriteSave(){
-    FileStream _save_file = File.Open(string.Format("{0}/{1}", _save_folder_location, SaveFileLocation), FileMode.Create);
+    FileStream _save_file = File.Open(string.Format("{0}/{1}", Application.persistentDataPath, _SaveFileLocation), FileMode.Create);
 
     PersistanceSavingEvent?.Invoke(this);
 
@@ -84,7 +82,7 @@ public class PersistanceContext: MonoBehaviour{
   public bool ReadSave(){
     try{
       Debug.Log("save read test");
-      FileStream _save_file = File.Open(string.Format("{0}/{1}", Application.persistentDataPath, SaveFileLocation), FileMode.Open);
+      FileStream _save_file = File.Open(string.Format("{0}/{1}", Application.persistentDataPath, _SaveFileLocation), FileMode.Open);
       Debug.Log("save read test");
 
       byte[] _filedata_raw = new byte[_save_file.Length];
@@ -119,12 +117,39 @@ public class PersistanceContext: MonoBehaviour{
       Debug.Log("save read test");
       PersistanceLoadingEvent?.Invoke(this);
     }
+    catch(FileNotFoundException){
+      // pass when file not found
+      return false;
+    }
     catch(Exception e){
       Debug.LogError(e);
       return false;
     }
 
     return true;
+  }
+
+
+  public void SetSaveFileName(string file_name){
+    _SaveFileLocation = file_name;
+  }
+
+  public bool IsSaveValid(){
+    try{
+      FileStream _save_file = File.Open(string.Format("{0}/{1}", Application.persistentDataPath, _SaveFileLocation), FileMode.Open);
+      long _file_length = _save_file.Length; 
+
+      _save_file.Close();
+      return _file_length > 0;
+    }
+    catch(FileNotFoundException){
+      // pass when file not found;
+    }
+    catch(Exception e){
+      Debug.LogError(e);
+    }
+
+    return false;
   }
 
   

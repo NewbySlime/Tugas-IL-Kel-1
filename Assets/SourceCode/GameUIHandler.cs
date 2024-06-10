@@ -10,7 +10,6 @@ using UnityEngine.TextCore.LowLevel;
 using UnityEngine.Video;
 
 
-// TODO add recipebookui
 public class GameUIHandler: MonoBehaviour{
   public enum PlayerUIMode{
     MainHUD,
@@ -49,29 +48,32 @@ public class GameUIHandler: MonoBehaviour{
   [SerializeField]
   private QuickTimeEventUI _QTEUI;
   [SerializeField]
+  private GameObject _CinematicBarUI;
+  [SerializeField]
   private RecipeBookUI _RecipeBookUI;
 
   [SerializeField]
-  private GameObject _SavingHintUI;
+  private GameObject _UIContainer;
 
   [SerializeField]
   private GameObject _MainHUDParent;
   [SerializeField]
-  private GameObject _PausingHUDParent;
+  private PauseGameUI _PausingUI;
   [SerializeField]
-  private GameObject _GameOverHUDParent;
+  private SettingsUI _SettingsUI;
   [SerializeField]
-  private GameObject _UIContainer;
+  private GameOverUI _GameOverUI;
 
   [SerializeField]
   private LoadingUI _LevelLoadingUI;
 
   [SerializeField]
-  private GameOverUI _GameOverUI;
+  private FadeUI _GeneralUsageFadeUI;
+  [SerializeField]
+  private FadeUI _UnscaledFadeUI;
 
   [SerializeField]
-  private FadeUI _GeneralUsageFadeUI;
-
+  private GameObject _SavingHintUI;
 
   private PlayerUIMode _current_player_mode;
 
@@ -79,20 +81,29 @@ public class GameUIHandler: MonoBehaviour{
   private InputFocusContext _input_context;
 
   private Dictionary<MainHUDUIEnum, bool> _main_ui_context = new();
+  private Dictionary<PlayerUIMode, bool> _player_ui_context = new();
 
 
   private void _game_handler_scene_changed(string scene_id, GameHandler.GameContext context){
     switch(context){
       case GameHandler.GameContext.InGame:{
-        SetPlayerUIMode(PlayerUIMode.MainHUD);
+        ResetPlayerUIMode(true, new(){PlayerUIMode.MainHUD});
+        SetPlayerUIMode(PlayerUIMode.MainHUD, true);
+
+        ResetMainUIMode(true, new(){MainHUDUIEnum.PlayerHUD});
         SetMainHUDUIMode(MainHUDUIEnum.PlayerHUD, true);
+      }break;
+
+      case GameHandler.GameContext.MainMenu:{
+        ResetMainUIMode(true);
+        ResetPlayerUIMode(true);
       }break;
     }
   }
 
   private void _game_handler_scene_removed(){
-    ResetPlayerUIMode();
-    ResetMainUIMode();
+    // ResetPlayerUIMode();
+    // ResetMainUIMode();
   }
 
 
@@ -114,11 +125,16 @@ public class GameUIHandler: MonoBehaviour{
     }
 
 
-    yield return new WaitForNextFrameUnit();
+    yield return null;
     yield return new WaitForEndOfFrame();
 
+    yield return UIUtility.SetHideUI(_GeneralUsageFadeUI.gameObject, true, true);
+    // UnscaledFadeUI used by GameHandler
+    yield return UIUtility.SetHideUI(_LevelLoadingUI.gameObject, true, true);
+
     ResetMainUIMode(true);
-    SetPlayerUIMode(PlayerUIMode.MainHUD);
+    ResetPlayerUIMode(true);
+    SetPlayerUIMode(PlayerUIMode.MainHUD, true);
 
     if(_game_handler.SceneInitialized)
       _game_handler_scene_changed(_game_handler.GetCurrentSceneID(), _game_handler.GetCurrentSceneContext());
@@ -136,6 +152,10 @@ public class GameUIHandler: MonoBehaviour{
 
   public FadeUI GetGeneralFadeUI(){
     return _GeneralUsageFadeUI;
+  }
+
+  public FadeUI GetUnscaledFadeUI(){
+    return _UnscaledFadeUI;
   }
 
   public GameOverUI GetGameOverUI(){
@@ -176,7 +196,9 @@ public class GameUIHandler: MonoBehaviour{
   }
 
 
-  public void SetPlayerUIMode(PlayerUIMode mode, bool skip_animation = false){
+  public void SetPlayerUIMode(PlayerUIMode mode, bool ui_show, bool skip_animation = false){
+    _player_ui_context[mode] = ui_show;
+
     GameObject _ui_obj = null;
     switch(mode){
       case PlayerUIMode.MainHUD:{
@@ -184,15 +206,19 @@ public class GameUIHandler: MonoBehaviour{
       }break;
 
       case PlayerUIMode.Pausing:{
-        _ui_obj = _PausingHUDParent;
+        _ui_obj = _PausingUI.gameObject;
+      }break;
+
+      case PlayerUIMode.Setting:{
+        _ui_obj = _SettingsUI.gameObject;
       }break;
 
       case PlayerUIMode.GameOver:{
-        _ui_obj = _GameOverHUDParent;
+        _ui_obj = _GameOverUI.gameObject;
       }break;
     }
 
-    StartCoroutine(UIUtility.SetHideUI(_ui_obj, false));
+    StartCoroutine(UIUtility.SetHideUI(_ui_obj, !ui_show));
   }
 
   public void ResetPlayerUIMode(bool skip_animation = false, HashSet<PlayerUIMode> filter = null){
@@ -200,16 +226,31 @@ public class GameUIHandler: MonoBehaviour{
 
     var _player_ui_list = new List<KeyValuePair<GameObject, PlayerUIMode>>{
       new (_MainHUDParent, PlayerUIMode.MainHUD),
-      new (_PausingHUDParent, PlayerUIMode.Pausing),
-      new (_GameOverHUDParent, PlayerUIMode.GameOver)
+      new (_PausingUI.gameObject, PlayerUIMode.Pausing),
+      new (_SettingsUI.gameObject, PlayerUIMode.Setting),
+      new (_GameOverUI.gameObject, PlayerUIMode.GameOver)
     };
 
     foreach(var _player_pair in _player_ui_list){
       if(filter.Contains(_player_pair.Value))
         continue;
 
-      StartCoroutine(UIUtility.SetHideUI(_player_pair.Key, true, skip_animation));
+      SetPlayerUIMode(_player_pair.Value, false, skip_animation);
     }
+  }
+
+
+  public ModeContext<PlayerUIMode> GetPlayerModeContext(){
+    ModeContext<PlayerUIMode> _result = new();
+    foreach(PlayerUIMode mode in _player_ui_context.Keys)
+      _result.ContextShowList[mode] = _player_ui_context[mode];
+
+    return _result;
+  }
+
+  public void SetPlayerModeContext(ModeContext<PlayerUIMode> context, bool skip_animation = false){
+    foreach(var _context in context.ContextShowList)
+      SetPlayerUIMode(_context.Key, _context.Value, skip_animation);
   }
 
 
@@ -238,6 +279,10 @@ public class GameUIHandler: MonoBehaviour{
         _ui_obj = _VideoUI.gameObject;
       }break;
 
+      case MainHUDUIEnum.CinematicBarUI:{
+        _ui_obj = _CinematicBarUI;
+      }break;
+
       case MainHUDUIEnum.RecipeBookUI:{
         _ui_obj = _RecipeBookUI.gameObject;
       }break;
@@ -255,6 +300,7 @@ public class GameUIHandler: MonoBehaviour{
       MainHUDUIEnum.BossHealthBarUI,
       MainHUDUIEnum.QTEUI,
       MainHUDUIEnum.VideoUI,
+      MainHUDUIEnum.CinematicBarUI,
       MainHUDUIEnum.RecipeBookUI
     };
 

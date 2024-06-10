@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Android;
 
@@ -12,7 +13,8 @@ public class AreaTrigger: MonoBehaviour{
   [SerializeField]
   private RigidbodyMessageRelay _Rigidbody;
 
-  private GameHandler _game_handler;
+  [DoNotSerialize]
+  private GameHandler _game_handler = null;
 
   public bool TriggerOnEnter = true;
 
@@ -26,7 +28,9 @@ public class AreaTrigger: MonoBehaviour{
 
 
   public void Start(){
-    _Rigidbody.OnTriggerEntered2DEvent += _OnObjectEnter;
+    if(_Rigidbody != null){
+      _Rigidbody.OnTriggerEntered2DEvent += _OnObjectEnter;
+    }
 
     _game_handler = FindAnyObjectByType<GameHandler>();
     if(_game_handler == null){

@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Timing: 0.7
+  UseScaledTime: 1
   _SlideAnimationStartOffset: {x: 0, y: -30, z: 0}
   _TargetSlideAnimation: {fileID: 6004456053061752058}
   _ShowOnStart: 0
@@ -264,6 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Timing: 0.3
+  UseScaledTime: 1
   _TargetAlphaReference: {fileID: 2610716254556879940}
   FadeStateOnStart: 0
   FadeToCover: 1

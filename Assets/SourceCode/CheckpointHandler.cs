@@ -5,6 +5,7 @@ using UnityEngine;
 public class CheckpointHandler: AreaTrigger{
   [SerializeField]
   private string _CheckpointID;
+  public string CheckpointID{get => _CheckpointID;}
 
   private GameHandler _game_handler;
   protected GameHandler _GameHandler{

@@ -7,6 +7,7 @@ using System.Threading;
 using Unity.Jobs;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 
@@ -145,14 +146,22 @@ public class GameHandler: MonoBehaviour{
 
   private LoadingUI _level_loading_ui;
   
-  private FadeUI _fade_gu_ui;
+  private FadeUI _fade_ui;
 
 
   private Dictionary<string, SceneContext> _scene_context_map = new();
 
 
   private string _current_scene;
+  private GameContext _current_context;
+
   private string _last_scene;
+
+  private Coroutine _trigger_pause_coroutine = null;
+  private bool _trigger_pause_hide = false;
+
+  private Coroutine _trigger_settings_coroutine = null;
+  private bool _trigger_settings_hide = false;
 
   private bool _scene_initialized = false;
   public bool SceneInitialized{get => _scene_initialized;}
@@ -163,6 +172,34 @@ public class GameHandler: MonoBehaviour{
   public bool AreaTriggerEnable = true;
   
   public PersistanceContext PersistanceHandler{private set; get;}
+
+
+  private IEnumerator _pause_co_func(){
+    _trigger_pause_hide = false;
+
+    var _player_ui_context = _ui_handler.GetPlayerModeContext();
+    _ui_handler.SetPlayerUIMode(GameUIHandler.PlayerUIMode.Pausing, true);
+
+    _time_handler.StopTime();
+    yield return new WaitUntil(() => _trigger_pause_hide || !_scene_initialized);
+    _time_handler.ResumeTime();
+
+    _ui_handler.SetPlayerModeContext(_player_ui_context);
+    _trigger_pause_coroutine = null;
+  }
+
+
+  private IEnumerator _settings_co_func(){
+    _trigger_settings_hide = false;
+
+    var _player_ui_context = _ui_handler.GetPlayerModeContext();
+    _ui_handler.SetPlayerUIMode(GameUIHandler.PlayerUIMode.Setting, true);
+
+    yield return new WaitUntil(() => _trigger_settings_hide || !_scene_initialized);
+
+    _ui_handler.SetPlayerModeContext(_player_ui_context);
+    _trigger_settings_coroutine = null;
+  }
 
 
   private void _check_loading_object(){
@@ -181,7 +218,7 @@ public class GameHandler: MonoBehaviour{
 
     // tunggu sampai semua komponen sudah ter-inisialisasi
     yield return null;
-    while(_scene_loading_object_list.Count > 0){
+    while(_scene_loading_object_list.Count > 0 && false){
       yield return null;
       _check_loading_object();
     }
@@ -197,21 +234,23 @@ public class GameHandler: MonoBehaviour{
 
 
   private IEnumerator _change_scene(string scene_id, string teleport_to = "", bool do_save = true, bool clear_runtime_data = false){
+    if(!_scene_initialized)
+      yield break;
+
     if(!_scene_map.ContainsKey(scene_id)){
       Debug.LogWarning(string.Format("Cannot find Scene ID: '{0}'", scene_id));
       yield break;
     }
 
     _scene_initialized = false;
+    SceneRemovingEvent?.Invoke();
+
     _time_handler.StopTime();
 
     Debug.Log(string.Format("Chanding scene to: {0}", scene_id));
     _level_loading_ui.SetLoadingProgress(0);
 
-    _level_loading_ui.FadeToCover = true;
-    yield return TimingBaseUI.StartAllTimer(_level_loading_ui);
-
-    SceneRemovingEvent?.Invoke();
+    yield return UIUtility.SetHideUI(_level_loading_ui.gameObject, false);
 
     Debug.Log("input cleared");
     if(clear_runtime_data)
@@ -220,10 +259,12 @@ public class GameHandler: MonoBehaviour{
     ObjectReference.ClearReference();
     _input_context.ClearRegisters();
 
+    _SceneMetadata _metadata = _scene_map[scene_id];
+
     _last_scene = _current_scene;
     _current_scene = scene_id;
+    _current_context = _metadata.Metadata.SceneContext;
     
-    _SceneMetadata _metadata = _scene_map[scene_id];
     AsyncOperation _async_op = SceneManager.LoadSceneAsync(_metadata.SceneFile.name);
     _level_loading_ui.BindAsyncOperation(_async_op);
     yield return new WaitUntil(() => _async_op.isDone);
@@ -269,9 +310,7 @@ public class GameHandler: MonoBehaviour{
 
     yield return new WaitUntil(() => _level_loading_ui.UIAnimationFinished);
 
-    _level_loading_ui.FadeToCover = false;
-    yield return TimingBaseUI.StartAllTimer(_level_loading_ui);
-
+    yield return UIUtility.SetHideUI(_level_loading_ui.gameObject, true);
     _level_loading_ui.UnbindAsyncOperation();
 
     if(_metadata.Metadata.SceneContext == GameContext.InGame && do_save)
@@ -289,8 +328,7 @@ public class GameHandler: MonoBehaviour{
   private IEnumerator _load_game(bool change_scene = true){
     _time_handler.ResumeTime();
 
-    _fade_gu_ui.FadeToCover = true;
-    yield return TimingBaseUI.StartAllTimer(_fade_gu_ui);
+    yield return UIUtility.SetHideUI(_fade_ui.gameObject, false);
 
     PersistanceHandler.ReadSave();
 
@@ -324,14 +362,12 @@ public class GameHandler: MonoBehaviour{
     
     LoadDataFromPersistanceEvent?.Invoke(PersistanceHandler);
 
-    _fade_gu_ui.FadeToCover = false;
-    yield return TimingBaseUI.StartAllTimer(_fade_gu_ui);
+    yield return UIUtility.SetHideUI(_fade_ui.gameObject, true);
   }
 
 
   private IEnumerator _quit_game(){
-    _fade_gu_ui.FadeToCover = true;
-    yield return TimingBaseUI.StartAllTimer(_fade_gu_ui);
+    yield return UIUtility.SetHideUI(_fade_ui.gameObject, false);
 
     Application.Quit();
   }
@@ -447,8 +483,8 @@ public class GameHandler: MonoBehaviour{
       throw new MissingComponentException();
     }
 
-    _fade_gu_ui = _ui_handler.GetGeneralFadeUI();
-    if(_fade_gu_ui == null){
+    _fade_ui = _ui_handler.GetUnscaledFadeUI();
+    if(_fade_ui == null){
       Debug.LogError("FadeGU UI Object does not have FadeUI.");
       throw new MissingComponentException();
     }
@@ -458,8 +494,7 @@ public class GameHandler: MonoBehaviour{
     yield return new WaitForNextFrameUnit();
     yield return new WaitForEndOfFrame();
 
-    _fade_gu_ui.FadeToCover = true;
-    yield return TimingBaseUI.StartAllTimer(_fade_gu_ui, true);
+    yield return UIUtility.SetHideUI(_fade_ui.gameObject, false, true);
 
     _game_over_ui = _ui_handler.GetGameOverUI();
     if(_game_over_ui == null){
@@ -498,6 +533,7 @@ public class GameHandler: MonoBehaviour{
       Debug.LogWarning("DEBUGMODE: Cannot get Scene Metadata.");
 
     _current_scene = _metadata.SceneID;
+    _current_context = _metadata.SceneContext;
 
     yield return _wait_scene_initialize(_metadata);
 
@@ -505,8 +541,7 @@ public class GameHandler: MonoBehaviour{
     ChangeScene(DefaultSceneID);
 #endif
 
-    _fade_gu_ui.FadeToCover = false;
-    yield return TimingBaseUI.StartAllTimer(_fade_gu_ui);
+    yield return UIUtility.SetHideUI(_fade_ui.gameObject, true);
 
     _obj_initialized = true;
   }
@@ -565,7 +600,7 @@ public class GameHandler: MonoBehaviour{
   }
 
   public void ChangeSceneToMainMenu(){
-    Debug.LogWarning("Main menu is not implemented yet.");
+    ChangeScene(DefaultSceneID);
   }
 
   public string GetLastScene(){
@@ -579,12 +614,28 @@ public class GameHandler: MonoBehaviour{
 
 
   public void PauseGame(){
-    _time_handler.StopTime();
+    if(_trigger_pause_coroutine != null || !_scene_initialized || _current_context != GameContext.InGame)
+      return;
+    
+    _trigger_pause_coroutine = StartCoroutine(_pause_co_func());
   }
 
   public void ResumeGame(){
-    _time_handler.ResumeTime();
+    _trigger_pause_hide = true;
   }
+
+
+  public void OpenSettingsUI(){
+    if(_trigger_settings_coroutine != null)
+      return;
+
+    _trigger_settings_coroutine = StartCoroutine(_settings_co_func());
+  }
+
+  public void CloseSettingsUI(){
+    _trigger_settings_hide = true;
+  }
+
 
 
   public void AddLoadingQueue(ILoadingQueue queue){
@@ -607,13 +658,16 @@ public class GameHandler: MonoBehaviour{
 
 
 
+  // MARK: Game Triggers
   public void TriggerPlayerSpotted(){
     TriggerGameOver("Kamu Ketahuan!");
   }
 
   public void TriggerGameOver(string cause_text){
     _ui_handler.ResetMainUIMode();
-    _ui_handler.SetPlayerUIMode(GameUIHandler.PlayerUIMode.GameOver);
+
+    _ui_handler.ResetPlayerUIMode(true, new(){GameUIHandler.PlayerUIMode.GameOver});
+    _ui_handler.SetPlayerUIMode(GameUIHandler.PlayerUIMode.GameOver, true);
 
     _time_handler.StopTime();
 
@@ -622,9 +676,16 @@ public class GameHandler: MonoBehaviour{
   }
 
 
-  
-
   public void TriggerRecipeAdded(string recipe_item_id){
     StartCoroutine(_trigger_recipe_added(recipe_item_id));
+  }
+
+
+  // MARK: Input Handlings
+  public void OnPauseGame(InputValue value){
+    if(value.isPressed){
+      // Unpause will be handled by PauseGameUI
+      PauseGame();
+    }
   }
 }

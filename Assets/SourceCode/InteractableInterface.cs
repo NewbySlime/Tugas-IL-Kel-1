@@ -27,8 +27,15 @@ public class InteractableInterface: MonoBehaviour{
     if(!gameObject.activeInHierarchy)
       return;
       
-    foreach(GameObject _listener in _IncludedListenerObject)
+    foreach(GameObject _listener in _IncludedListenerObject){
+      InteractableInterface _interface = _listener.GetComponent<InteractableInterface>();
+      if(_interface != null){
+        _interface.TriggerInteractionEnter();
+        continue;
+      }
+
       _listener.SendMessage("InteractableInterface_InteractableEnter", SendMessageOptions.DontRequireReceiver);
+    }
   } 
 
   public void TriggerInteractionEnter(){
@@ -48,8 +55,15 @@ public class InteractableInterface: MonoBehaviour{
     if(!gameObject.activeInHierarchy)
       return;
       
-    foreach(GameObject _listener in _IncludedListenerObject)
+    foreach(GameObject _listener in _IncludedListenerObject){
+      InteractableInterface _interface = _listener.GetComponent<InteractableInterface>();
+      if(_interface != null){
+        _interface.TriggerInteractionExit();
+        continue;
+      }
+
       _listener.SendMessage("InteractableInterface_InteractableExit", SendMessageOptions.DontRequireReceiver);
+    }
   }
 
   public void TriggerInteractionExit(){
@@ -66,8 +80,15 @@ public class InteractableInterface: MonoBehaviour{
     if(!gameObject.activeInHierarchy)
       return;
       
-    foreach(GameObject _listener in _IncludedListenerObject)
+    foreach(GameObject _listener in _IncludedListenerObject){
+      InteractableInterface _interface = _listener.GetComponent<InteractableInterface>();
+      if(_interface != null){
+        _interface.TriggerInteract();
+        continue;
+      }
+
       _listener.SendMessage("InteractableInterface_Interact", SendMessageOptions.DontRequireReceiver);
+    }
   }
 
   public void TriggerInteract(){

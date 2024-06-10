@@ -21,7 +21,7 @@ public class LevelTeleportHandler: CheckpointHandler{
       return;
 
     if(_TriggerChangeSceneOnEnter)
-      _GameHandler.ChangeScene(_ChangeSceneID);
+      TriggerTeleport();
   }
 
   private void _on_scene_removing(){
@@ -85,5 +85,10 @@ public class LevelTeleportHandler: CheckpointHandler{
 
   public string GetArriveSceneID(){
     return _ArriveSceneID;
+  }
+
+
+  public void TriggerTeleport(){
+    _GameHandler.ChangeScene(_ChangeSceneID);
   }
 }

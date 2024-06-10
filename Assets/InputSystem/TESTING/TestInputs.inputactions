@@ -28,6 +28,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UITesting",
+            "id": "1ed5f184-3a67-4e32-bdd5-ad9bde744fa2",
+            "actions": [
+                {
+                    "name": "CheckTrigger",
+                    "type": "Button",
+                    "id": "07937ce6-45af-4577-9741-e986070d3f6f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2e6e5125-e949-4179-b1be-09d5b65b5d17",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CheckTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

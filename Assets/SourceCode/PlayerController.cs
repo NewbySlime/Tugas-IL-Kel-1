@@ -377,9 +377,6 @@ public class PlayerController: MonoBehaviour{
       Debug.LogError("Cannot find GameUIHandler.");
       throw new MissingReferenceException();
     }
-
-    if(_game_handler.SceneInitialized)
-      _scene_changed(_game_handler.GetCurrentSceneID(), _game_handler.GetCurrentSceneContext());
   }
 
 
