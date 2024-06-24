@@ -11,7 +11,7 @@ namespace SequenceHelper{
     private ValueOutput _player_obj_output;
 
     protected override void Definition(){
-      _player_obj_output = ValueOutput("ObjectRef", (flow) => PlayerController.PlayerDefaultRefID);
+      _player_obj_output = ValueOutput("ObjectRef", (flow) => PlayerController.DefaultRefID);
     }
   }
 }

@@ -13,9 +13,15 @@ public class TrapComponent: MonoBehaviour{
 
   private GameHandler _game_handler;
 
+  public bool IsInitialized{private set; get;} = false;
+
 
   private void _game_scene_changed(string scene_id, GameHandler.GameContext context){
-    _Damager.SetDamagerContext(_DamagerContext);
+    if(!gameObject.activeInHierarchy)
+      return;
+      
+    // it destroys tilemap renderer???
+    //_Damager.SetDamagerContext(_DamagerContext);
     _Damager.SetDamagerData(_DamagerData);
   }
 
@@ -25,11 +31,16 @@ public class TrapComponent: MonoBehaviour{
   }
 
 
-  ~TrapComponent(){
+  public void OnDestroy(){
+    if(!IsInitialized)
+      return;
+
     _game_scene_removed();
   }
 
   public void Start(){
+    _Damager.AllowMultipleHitsSameObject = true;
+
     _game_handler = FindAnyObjectByType<GameHandler>();
     if(_game_handler == null){
       Debug.LogError("Cannot find GameHandler.");
@@ -39,6 +50,7 @@ public class TrapComponent: MonoBehaviour{
     _game_handler.SceneChangedFinishedEvent += _game_scene_changed;
     _game_handler.SceneRemovingEvent += _game_scene_removed;
 
+    IsInitialized = true;
     if(_game_handler.SceneInitialized)
       _game_scene_changed(_game_handler.GetCurrentSceneID(), _game_handler.GetCurrentSceneContext());
   }

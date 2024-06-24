@@ -26,7 +26,7 @@ namespace SequenceHelper{
 
 
     public void StartTriggerAsync(){
-      _camera._SmoothTime = _seq_data.SmoothTime;
+      _camera.SetSmoothTime(_seq_data.SmoothTime);
     }
 
     public bool IsTriggering(){

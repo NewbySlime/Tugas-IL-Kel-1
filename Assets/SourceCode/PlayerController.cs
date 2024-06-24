@@ -25,12 +25,12 @@ using UnityEngine.InputSystem.LowLevel;
 public class PlayerController: MonoBehaviour{
   private const string _PlayerRuntimeDataID = "player_data";
 
-  public static ObjectReference.ObjRefID PlayerDefaultRefID = new(){
+  public static ObjectReference.ObjRefID DefaultRefID = new(){
     ID = "player_object"
   };
 
   public static RegisterInputFocusSequence.InputFocusData PlayerInputContext = new(){
-    RefID = PlayerDefaultRefID,
+    RefID = DefaultRefID,
     InputContext = InputFocusContext.ContextEnum.Player
   };
 
@@ -92,6 +92,8 @@ public class PlayerController: MonoBehaviour{
 
   private GameUIHandler _ui_handler;
 
+  private ItemDatabase _item_database;
+
   private MovementController _movement_controller;
   private InputFocusContext _input_context;
 
@@ -112,11 +114,22 @@ public class PlayerController: MonoBehaviour{
   private bool _weapon_fire_trigger_flag = false;
   private bool _weapon_fire_finished_flag = false;
 
+  private bool _is_ducking_pressed = false;
+  private bool _is_jumping_pressed = false;
+
+
+  public bool AllowUseWeapon = true;
+  public bool AllowJump = true;
 
   public bool TriggerGameOverOnDead = true;
   public bool DisableMovementOnDead = true;
 
   public bool TriggerAvailable{private set; get;} = true;
+
+
+  private void _check_ignore_one_way(){
+    _movement_controller.SetIgnoreOneWayCollision(_is_ducking_pressed && _is_jumping_pressed);
+  }
 
 
   private void _update_ammo_counter_ui(){
@@ -131,7 +144,7 @@ public class PlayerController: MonoBehaviour{
   }
 
   private void _on_anim_trigger(string trigger_name){
-    Debug.Log(string.Format("weapon trigger anim trigger {0}", trigger_name));
+    DEBUGModeUtils.Log(string.Format("weapon trigger anim trigger {0}", trigger_name));
     switch(trigger_name){
       case "weapon_trigger":{
         _weapon_fire_trigger_flag = true;
@@ -179,8 +192,8 @@ public class PlayerController: MonoBehaviour{
 
 
   private void _scene_changed(string scene_id, GameHandler.GameContext context){
-    Debug.Log("input added");
-    ObjectReference.SetReferenceObject(PlayerDefaultRefID, gameObject);
+    DEBUGModeUtils.Log("input added");
+    ObjectReference.SetReferenceObject(DefaultRefID, gameObject);
     _input_context.RegisterInputObject(this, InputFocusContext.ContextEnum.Player);
 
     _WeaponHandler.SetWeaponItem(_WeaponItemID);
@@ -191,6 +204,20 @@ public class PlayerController: MonoBehaviour{
 
     _weapon_counter_ui = _player_ui.GetAmmoCounter();
     _weapon_counter_ui.SetProgressCount((int)_WeaponCount);
+
+    TypeDataStorage _projectile_data = _item_database.GetItemData(_WeaponItemID);
+    if(_projectile_data == null){
+      Debug.LogError(string.Format("Cannot get projectile data. (ID: {0})", _WeaponItemID));
+      throw new MissingReferenceException();
+    }
+
+    ItemTextureData.ItemData _texture_data = _projectile_data.GetData<ItemTextureData.ItemData>();
+    if(_texture_data == null){
+      Debug.LogError(string.Format("Cannot get projectile texture data. (ID: {0})", _WeaponItemID));
+      throw new MissingReferenceException();
+    }
+
+    _weapon_counter_ui.SetProgressSprite(_texture_data.SpriteTexture.texture);
 
     _ui_handler.GetRecipeBookUI().BindDiscoveryComponent(_recipe_discovery);
 
@@ -219,7 +246,7 @@ public class PlayerController: MonoBehaviour{
   }
 
   private void _scene_removing(){
-    Debug.Log("input removed");
+    DEBUGModeUtils.Log("input removed");
     _input_context.RemoveInputObject(this, InputFocusContext.ContextEnum.Player);
 
     _game_handler.SceneChangedFinishedEvent -= _scene_changed;
@@ -308,6 +335,10 @@ public class PlayerController: MonoBehaviour{
 
   private void _reset_input(){
     _movement_controller.DoWalk(0);
+
+    _is_ducking_pressed = false;
+    _is_jumping_pressed = false;
+    _check_ignore_one_way();
   }
 
   private void _another_focus_context_registered(){
@@ -334,6 +365,13 @@ public class PlayerController: MonoBehaviour{
 
     _game_handler.SceneChangedFinishedEvent += _scene_changed;
     _game_handler.SceneRemovingEvent += _scene_removing;
+
+
+    _item_database = FindAnyObjectByType<ItemDatabase>();
+    if(_item_database == null){
+      Debug.LogError("Cannot find database for Items.");
+      throw new MissingReferenceException();
+    }
 
 
     if(_TargetAnimator != null){
@@ -405,6 +443,7 @@ public class PlayerController: MonoBehaviour{
   /// </summary>
   /// <param name="value">Value yang diberikan Unity.</param>
   public void OnStrafe(InputValue value){
+    DEBUGModeUtils.Log("strafe input");
     if(!_input_context.InputAvailable(this))
       return;
 
@@ -419,23 +458,40 @@ public class PlayerController: MonoBehaviour{
   public void OnJump(InputValue value){
     if(!_input_context.InputAvailable(this))
       return;
+
+    _is_jumping_pressed = value.isPressed;
+    _check_ignore_one_way();
+
+    if(!AllowJump || _is_ducking_pressed)
+      return;
       
     if(value.isPressed)
       _movement_controller.DoJump();
   }
 
-  public void OnFire(InputValue value){
+  public void OnDuck(InputValue value){
     if(!_input_context.InputAvailable(this))
       return;
 
+    _is_ducking_pressed = value.isPressed;
+    _check_ignore_one_way();
+  }
+
+  public void OnFire(InputValue value){
+    DEBUGModeUtils.Log(string.Format("fire input {0} {1}", !AllowUseWeapon, !_input_context.InputAvailable(this)));
+    if(!AllowUseWeapon || !_input_context.InputAvailable(this))
+      return;
+
     if(value.isPressed){
+      // not implemented yet
       if(false && _PickerHandler.GetHasObject()){
         _PickerHandler.ThrowObject((_mouse_follower.transform.position-transform.position).normalized);
         return;
       }
 
+      DEBUGModeUtils.Log(string.Format("weapon fire {0} {1} {2}", _weapon_fire_coroutine == null, _current_weapon_count > 0, _WeaponHandler.CanShoot()));
       if(_weapon_fire_coroutine == null && _current_weapon_count > 0 && _WeaponHandler.CanShoot()){
-        StartCoroutine(_trigger_weapon_fire());
+        _weapon_fire_coroutine = StartCoroutine(_trigger_weapon_fire());
         return;
       }
     }
@@ -454,6 +510,11 @@ public class PlayerController: MonoBehaviour{
       if(_InteractionFront.TriggerInteraction())
         return;
     }
+  }
+
+
+  public void SetEnableInteraction(bool flag){
+    _InteractionFront.gameObject.SetActive(flag);
   }
 
 

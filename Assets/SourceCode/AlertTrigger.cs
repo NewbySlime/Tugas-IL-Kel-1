@@ -86,8 +86,8 @@ public class AlertTrigger: MonoBehaviour{
       RaycastHit2D _rayhit = Physics2D.Raycast(transform.position, _object_dir, _object_dist, _ObstructionLayer);
 
       float _delta_angle = Math.Abs(_object_angle-_current_angle);
-      //Debug.Log(string.Format("angle {0}, {1}", _object_angle, _current_angle));
-      //Debug.Log(string.Format("delta angle {0}", _delta_angle));
+      //DEBUGModeUtils.Log(string.Format("angle {0}, {1}", _object_angle, _current_angle));
+      //DEBUGModeUtils.Log(string.Format("delta angle {0}", _delta_angle));
       bool _is_in_focus = _delta_angle <= (_ViewAngle/2) && _rayhit.collider == null;
       if(!_inside_focus.Contains(_object)){
         if(_is_in_focus){

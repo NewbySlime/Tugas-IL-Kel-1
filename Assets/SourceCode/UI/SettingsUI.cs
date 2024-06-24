@@ -60,12 +60,13 @@ public class SettingsUI: MonoBehaviour{
 
   private IEnumerator _auto_save_co_func(){
     while(_auto_save_timer > 0){
-      yield return new WaitForFixedUpdate();
-
-      _auto_save_timer -= Time.fixedDeltaTime;
+      yield return null;
+      _auto_save_timer -= Time.unscaledDeltaTime;
+      DEBUGModeUtils.Log(string.Format("timer {0}", _auto_save_timer));
     }
 
     _persistance_context.WriteSave();
+    _auto_save_coroutine = null;
   }
 
   private void _trigger_auto_save(){
@@ -90,7 +91,7 @@ public class SettingsUI: MonoBehaviour{
 
 
   private void _on_back_button(){
-    Debug.Log("back button pressed.");
+    DEBUGModeUtils.Log("back button pressed.");
     _game_handler.CloseSettingsUI();
   }
 

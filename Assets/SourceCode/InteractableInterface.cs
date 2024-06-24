@@ -21,6 +21,11 @@ public class InteractableInterface: MonoBehaviour{
   // Ini adalah flag ketika suatu objek disarankan untuk langsung "trigger" saat memasuki Area "Interactable".
   [SerializeField]
   private bool _InteractOnAvailable = false;
+  public bool InteractOnAvailable{get => _InteractOnAvailable;}
+
+  [SerializeField]
+  private bool _PassThrough = false;
+  public bool PassThrough{get => _PassThrough;}
 
 
   public void InteractableInterface_InteractableEnter(){

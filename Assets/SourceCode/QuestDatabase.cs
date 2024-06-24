@@ -1,19 +1,15 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 
 public class QuestDatabase: MonoBehaviour{
-  private static string[] quest_data_folder = {
-    "Assets/Scenes/PrefabObjects/Quests"
-  };
+  private static string quest_data_folder = "Scenes/PrefabObjects/Quests";
 
 
   private struct _quest_metadata{
     public string quest_id;
 
     public GameObject quest_prefab;
-    public string guid;
   }
 
 
@@ -24,27 +20,23 @@ public class QuestDatabase: MonoBehaviour{
 
 
   public void Start(){
-    Debug.Log("Quest Database start");
-    string[] _prefab_guid_list = AssetDatabase.FindAssets("t:prefab", quest_data_folder);
-    foreach(string _guid in _prefab_guid_list){
-      string _path = AssetDatabase.GUIDToAssetPath(_guid);
-      GameObject _prefab_obj = AssetDatabase.LoadAssetAtPath<GameObject>(_path);
-
+    Debug.Log("QuestDatabase Starting...");
+    GameObject[] _prefab_list = Resources.LoadAll<GameObject>(quest_data_folder);
+    foreach(GameObject _prefab_obj in _prefab_list){
       GameObject _tmp_instantiate = Instantiate(_prefab_obj);
       while(true){
         IQuestData[] _quest_data = _tmp_instantiate.GetComponents<IQuestData>();
         if(_quest_data.Length > 1)
-          Debug.LogWarning(string.Format("Quest Object (GUID: {0}) has multiple Quest Data interface.", _guid));
+          Debug.LogWarning(string.Format("Quest Object ({0}) has multiple Quest Data interface.", _prefab_obj.name));
         else if(_quest_data.Length <= 0){
-          Debug.LogError(string.Format("Quest Object (GUID: {0}) does not have Quest Data interface.", _guid));
+          Debug.LogError(string.Format("Quest Object ({0}) does not have Quest Data interface.", _prefab_obj.name));
           break;
         }
 
         IQuestData _quest = _quest_data[0];
         _quest_map[_quest.GetQuestID()] = new _quest_metadata{
           quest_id = _quest.GetQuestID(),
-          quest_prefab = _prefab_obj,
-          guid = _guid
+          quest_prefab = _prefab_obj
         };
 
         break;

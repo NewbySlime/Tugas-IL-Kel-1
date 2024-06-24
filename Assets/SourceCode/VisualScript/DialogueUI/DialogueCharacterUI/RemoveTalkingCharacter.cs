@@ -1,6 +1,5 @@
 using UnityEngine;
 using Unity.VisualScripting;
-using Unity.VisualScripting.Generated.PropertyProviders;
 
 
 [UnitTitle("Remove Character")]

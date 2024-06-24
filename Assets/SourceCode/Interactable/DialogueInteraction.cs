@@ -44,6 +44,8 @@ public class DialogueInteraction: MonoBehaviour{
   private Coroutine _auto_resume_coroutine = null;
   private float _auto_resume_timer;
 
+  private bool _is_interact_enter = false;
+
 
   private void _popup_dialogue(DialogueUI.DialogueData data){
     _dialogue_timeout = _DialogueHideTimeout;
@@ -57,6 +59,9 @@ public class DialogueInteraction: MonoBehaviour{
   }
 
   private void _hide_dialogue(){
+    if(_game_handler == null || !_game_handler.SceneInitialized)
+      return;
+
     if(_auto_resume_coroutine != null){
       StopCoroutine(_auto_resume_coroutine);
       _auto_resume_coroutine = null;
@@ -132,12 +137,25 @@ public class DialogueInteraction: MonoBehaviour{
   }
 
 
+  private void _on_scene_initialized(string scene_id, GameHandler.GameContext context){
+    TriggerDialogue();
+  }
+
+  private void _on_scene_removed(){
+    _game_handler.SceneChangedFinishedEvent -= _on_scene_initialized;
+    _game_handler.SceneRemovingEvent -= _on_scene_removed;
+  }
+
+
 
   public void Start(){
     _game_handler = FindAnyObjectByType<GameHandler>();
     if(_game_handler == null){
       Debug.LogError("Cannot get Game Handler.");
     }
+
+    _game_handler.SceneChangedFinishedEvent += _on_scene_initialized;
+    _game_handler.SceneRemovingEvent += _on_scene_removed;
 
     GameObject _dialogue_bubble = Instantiate(_DialogueBubblePrefab);
     _dialogue_bubble.transform.SetParent(_DialogueBubbleContainer.transform);
@@ -162,7 +180,7 @@ public class DialogueInteraction: MonoBehaviour{
 
   
   public void TriggerDialogue(){
-    if(!gameObject.activeInHierarchy)
+    if(!gameObject.activeInHierarchy || _game_handler == null || !_game_handler.SceneInitialized || !_is_interact_enter)
       return;
 
     if(_dialogue_sequence.Sequence.Count <= 0){
@@ -183,10 +201,12 @@ public class DialogueInteraction: MonoBehaviour{
 
 
   public void InteractableInterface_Interact(){
+    _is_interact_enter = true;
     TriggerDialogue();
   }
 
   public void InteractableInterface_InteractableExit(){
+    _is_interact_enter = false;
     _hide_dialogue();
   }
 

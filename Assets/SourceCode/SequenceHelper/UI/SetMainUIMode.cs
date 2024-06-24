@@ -9,6 +9,8 @@ namespace SequenceHelper{
     public struct SequenceData{
       public GameUIHandler.MainHUDUIEnum UIMode;
       public bool ShowFlag;
+
+      public bool SkipAnimation;
     }
 
 
@@ -27,7 +29,7 @@ namespace SequenceHelper{
 
 
     public void StartTriggerAsync(){
-      _game_ui_handler.SetMainHUDUIMode(_seq_data.UIMode, _seq_data.ShowFlag);
+      _game_ui_handler.SetMainHUDUIMode(_seq_data.UIMode, _seq_data.ShowFlag, _seq_data.SkipAnimation);
     }
 
     public bool IsTriggering(){
@@ -57,6 +59,8 @@ namespace SequenceHelper{
     private ValueInput _mode_input;
     [DoNotSerialize]
     private ValueInput _show_input;
+    [DoNotSerialize]
+    private ValueInput _skip_animation_input;
 
 
     protected override void AddData(Flow flow, out SequenceHandlerVS.SequenceInitializeData.DataPart init_data){
@@ -64,7 +68,8 @@ namespace SequenceHelper{
         SequenceID = SetMainUIMode.SequenceID,
         SequenceData = new SetMainUIMode.SequenceData{
           UIMode = flow.GetValue<GameUIHandler.MainHUDUIEnum>(_mode_input),
-          ShowFlag = flow.GetValue<bool>(_show_input)
+          ShowFlag = flow.GetValue<bool>(_show_input),
+          SkipAnimation = flow.GetValue<bool>(_skip_animation_input)
         }
       };
     }
@@ -74,6 +79,7 @@ namespace SequenceHelper{
 
       _mode_input = ValueInput("Mode", GameUIHandler.MainHUDUIEnum.PlayerHUD);
       _show_input = ValueInput("Show", true);
+      _skip_animation_input = ValueInput("SkipAnimation", false);
     }
   }
 }

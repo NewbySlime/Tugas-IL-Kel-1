@@ -71,8 +71,8 @@ public class CookerComponent : MonoBehaviour
             _interacted_flag = false;
             while (_qte_time > 0)
             {
-                float _time_val = _qte_time / _base_qte_time;
-                _qte_ui.SetAcceptBarColorLerp(_time_val);
+                float __time_val = _qte_time / _base_qte_time;
+                _qte_ui.SetAcceptBarColorLerp(__time_val);
 
                 float _bar_val = Mathf.Abs(1 - Mathf.Repeat(_current_val, 2));
                 _qte_ui.SetQTETimingBar(_bar_val);
@@ -81,7 +81,7 @@ public class CookerComponent : MonoBehaviour
 
                 _qte_time -= Time.deltaTime;
 
-                float _current_speed = (_QTESpeedMax - _QTESpeedMin) * _time_val + _QTESpeedMin;
+                float _current_speed = (_QTESpeedMax - _QTESpeedMin) * __time_val + _QTESpeedMin;
                 _current_val += _current_speed * Time.deltaTime;
 
                 if (_interacted_flag)
@@ -103,13 +103,7 @@ public class CookerComponent : MonoBehaviour
         yield return new WaitForSeconds(_cooking_timer);
 
         ItemCookResult cookResult = new ItemCookResult(_total_score);
-        Debug.Log($"Cooking finished with score: {cookResult.FoodScore}");
-    }
-
-    private T FindAnyObjectByType<T>()
-    {
-        // Implementasi metode ini sesuai kebutuhanmu
-        return FindObjectOfType<T>();
+        DEBUGModeUtils.Log($"Cooking finished with score: {cookResult.FoodScore}");
     }
 
     private void Start()

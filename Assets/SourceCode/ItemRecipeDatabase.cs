@@ -26,21 +26,21 @@ public class ItemRecipeDatabase: MonoBehaviour{
   /// Fungsi untuk menerima "message" dari ItemDatabase sesudah inisialisasi.
   /// </summary>
   private void ItemDatabase_Initialized(){
-    Debug.Log("test start");
+    DEBUGModeUtils.Log("test start");
     List<string> _item_list = _item_database.GetItemList();
-    Debug.Log(_item_list.Count);
+    DEBUGModeUtils.Log(_item_list.Count);
     foreach(string _item_id in _item_list){
-      Debug.Log("test");
+      DEBUGModeUtils.Log("test");
       TypeDataStorage? _item_data = _item_database.GetItemData(_item_id);
       if(_item_data == null)
         continue;
         
-      Debug.Log("test1");
+      DEBUGModeUtils.Log("test1");
       ItemRecipeData.ItemData? _recipe_data = _item_data.GetData<ItemRecipeData.ItemData>();
       if(_recipe_data == null)  
         continue;
 
-      Debug.Log(string.Format("recipe id: {0}", _item_id));
+      DEBUGModeUtils.Log(string.Format("recipe id: {0}", _item_id));
       _item_recipe_map[_item_id] = _recipe_data;
 
       List<string> _sorted_item_list = _recipe_data.ItemList; _sorted_item_list.Sort();
@@ -84,9 +84,9 @@ public class ItemRecipeDatabase: MonoBehaviour{
 
     _recipe_node _rnode = _start_recipe_tree;
     foreach(string _item_id in item_list){
-      Debug.Log(string.Format("next item id: {0}", _item_id));
+      DEBUGModeUtils.Log(string.Format("next item id: {0}", _item_id));
       foreach(string _key_item in _rnode.NextNodes.Keys)
-        Debug.Log(string.Format("list in _rnode: {0}", _key_item));
+        DEBUGModeUtils.Log(string.Format("list in _rnode: {0}", _key_item));
 
       if(!_rnode.NextNodes.ContainsKey(_item_id))
         return "";

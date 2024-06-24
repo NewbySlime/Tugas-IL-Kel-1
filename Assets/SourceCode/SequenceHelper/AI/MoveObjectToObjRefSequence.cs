@@ -10,13 +10,9 @@ namespace SequenceHelper{
     public struct SequenceData{
       public ObjectReference.ObjRefID TargetRefID;
       public ObjectReference.ObjRefID PositionRefID;
+
+      public bool WaitUntilOnPosition;
     }
-
-
-    [SerializeField]
-    private float _StuckRecheckDelay = 0.3f;
-    [SerializeField]
-    private int _PathSeekMaxIter = 10;
 
     
     private SequenceData _seq_data;
@@ -42,16 +38,12 @@ namespace SequenceHelper{
         yield break;
       }
 
-      _sequence_triggering = true;
+      _sequence_triggering = _seq_data.WaitUntilOnPosition;
 
-      for(int i = 0; i < _PathSeekMaxIter; i++){
-        _path_follower.FollowPathAsync(_position_obj.transform.position);
+      _path_follower.FollowPathAsync(_position_obj.transform.position);
+      
+      if(_seq_data.WaitUntilOnPosition)
         yield return new WaitUntil(() => !_path_follower.IsMoving());
-        if(!_path_follower.IsStuck())
-          break;
-
-        yield return new WaitForSeconds(_PathSeekMaxIter);
-      }
 
       _sequence_triggering = false;
     }
@@ -89,12 +81,16 @@ namespace SequenceHelper{
     [DoNotSerialize]
     private ValueInput _target_obj_input;
 
+    [DoNotSerialize]
+    private ValueInput _wait_until_input;
+
 
     protected override void Definition(){
       base.Definition();
       
       _pos_obj_input = ValueInput<ObjectReference.ObjRefID>("PositionObj");
       _target_obj_input = ValueInput<ObjectReference.ObjRefID>("TargetObj");
+      _wait_until_input = ValueInput("WaitUntilPosition", true);
     }
 
 
@@ -103,7 +99,8 @@ namespace SequenceHelper{
         SequenceID = MoveObjectToObjRefSequence.SequenceID,
         SequenceData = new MoveObjectToObjRefSequence.SequenceData{
           PositionRefID = flow.GetValue<ObjectReference.ObjRefID>(_pos_obj_input),
-          TargetRefID = flow.GetValue<ObjectReference.ObjRefID>(_target_obj_input)
+          TargetRefID = flow.GetValue<ObjectReference.ObjRefID>(_target_obj_input),
+          WaitUntilOnPosition = flow.GetValue<bool>(_wait_until_input)
         }
       };
     }

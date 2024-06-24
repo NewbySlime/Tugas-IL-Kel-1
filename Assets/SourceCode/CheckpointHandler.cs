@@ -55,7 +55,7 @@ public class CheckpointHandler: AreaTrigger{
 
 
   public new void Start(){
-    Debug.Log("Checkpoint starting");
+    DEBUGModeUtils.Log("Checkpoint starting");
     base.Start();
 
     TriggerOnEnter = false;

@@ -15,4 +15,12 @@ public static class ObjectUtility{
   public static bool IsObjectInitialized(Component comp){
     return IsObjectInitialized(comp.gameObject);
   }
+
+
+  public static string GetObjHierarchyPath(Transform obj){
+    if(obj == null)
+      return "";
+      
+    return GetObjHierarchyPath(obj.parent) + " > " + obj.name;
+  }
 }

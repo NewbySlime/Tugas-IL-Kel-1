@@ -32,6 +32,9 @@ public class NPCRandomBehaviour: MonoBehaviour{
   private bool _is_path_searching = false; 
 
 
+  public bool IsInitialized{private set; get;} = false;
+
+
   private void _on_path_error(){
     _cannot_find_path = true;
     _is_path_searching = false;
@@ -92,6 +95,14 @@ public class NPCRandomBehaviour: MonoBehaviour{
   }
 
 
+  public void OnDestroy(){
+    if(!IsInitialized)
+      return;
+
+    _on_scene_removed();
+  }
+
+
   public void Start(){
     _path_follower = GetComponent<PathFollower>();
     if(_path_follower == null){
@@ -110,6 +121,8 @@ public class NPCRandomBehaviour: MonoBehaviour{
 
     _game_handler.SceneChangedFinishedEvent += _on_scene_changed;
     _game_handler.SceneRemovingEvent += _on_scene_removed;
+
+    IsInitialized = true;
     if(_game_handler.SceneInitialized)
       _on_scene_changed(_game_handler.GetCurrentSceneID(), _game_handler.GetCurrentSceneContext());
   }

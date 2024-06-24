@@ -3,10 +3,6 @@ using UnityEngine;
 using Unity.VisualScripting;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Linq;
-using TMPro.EditorUtilities;
-using Unity.Jobs;
 
 
 
@@ -115,7 +111,7 @@ public class ScenarioDiagramVS: MonoBehaviour, ILoadingQueue{
     }
 
     // tunggu sampai Start() selanjutnya
-    yield return new WaitForNextFrameUnit();
+    yield return null;
     yield return new WaitForEndOfFrame();
 
     // Set data
@@ -125,15 +121,33 @@ public class ScenarioDiagramVS: MonoBehaviour, ILoadingQueue{
       _init_queue_list.Add(_metadata._handler);
     }
 
-    Debug.Log("scenario check queue");
+    DEBUGModeUtils.Log("scenario check queue");
     yield return new WaitUntil(_check_queue_list);
     
-    Debug.Log("scenario disable");
+    DEBUGModeUtils.Log("scenario disable");
     // disable
     foreach(_scenario_metadata _metadata in _scenario_map.Values)
       SetEnableScenario(_metadata.scenario_id, false);
 
     IsInitialized = true;
+  }
+  
+
+  private IEnumerator _set_persistance_data(PersistanceData data){
+    yield return ResetAllScenario();
+
+    foreach(ScenarioHandlerVS.PersistanceData _scenario_data in data.ScenarioDataCollections){
+      ScenarioHandlerVS _handler = GetScenario(_scenario_data.ScenarioID);
+      if(_handler == null){
+        Debug.LogWarning(string.Format("LOAD: Cannot get handler for Scenario ID: '{0}'.", _scenario_data.ScenarioID));
+        continue;
+      }
+
+      yield return _handler.SetPersistanceData(_scenario_data);
+    }
+
+    foreach(string _active_scenario in data.ListActivePersistance)
+      SetEnableScenario(_active_scenario, true);
   }
 
 
@@ -156,7 +170,7 @@ public class ScenarioDiagramVS: MonoBehaviour, ILoadingQueue{
 
     _scenario_metadata _metadata = _scenario_map[scenario_id];
     if(_metadata._handler.gameObject.activeInHierarchy)
-      Debug.LogWarning(string.Format("Scenario (ID: '{0}') already active."));
+      Debug.LogWarning(string.Format("Scenario (ID: '{0}') already active.", _metadata.scenario_id));
 
     _metadata._handler.gameObject.SetActive(true);
 
@@ -166,7 +180,7 @@ public class ScenarioDiagramVS: MonoBehaviour, ILoadingQueue{
 
 
   public void SetEnableScenario(string scenario_id, bool enabled){
-    Debug.Log(string.Format("Scenario {0} {1}", scenario_id, enabled));
+    DEBUGModeUtils.Log(string.Format("Scenario {0} {1}", scenario_id, enabled));
     if(!_scenario_map.ContainsKey(scenario_id))
       return;
 
@@ -182,6 +196,27 @@ public class ScenarioDiagramVS: MonoBehaviour, ILoadingQueue{
 
     _scenario_metadata _metadata = _scenario_map[scenario_id];
     return _metadata._handler.gameObject.activeInHierarchy;
+  }
+
+
+  public IEnumerator ResetAllScenario(){
+    foreach(string _scenario_id in _scenario_map.Keys){
+      _scenario_metadata _metadata = _scenario_map[_scenario_id];
+      yield return _metadata._handler.SwitchSubScenario(0, false, false);
+
+      SetEnableScenario(_scenario_id, false);
+    }
+  }
+
+
+  public void SkipToNextSubScenario(string scenario_id){
+    if(!_scenario_map.ContainsKey(scenario_id)){
+      Debug.LogWarning(string.Format("Cannot find Scenario. (ID: {0})", scenario_id));
+      return;
+    }
+
+    _scenario_metadata _metadata = _scenario_map[scenario_id];
+    _metadata._handler.SkipToNextSubScenario();
   }
 
 
@@ -208,6 +243,7 @@ public class ScenarioDiagramVS: MonoBehaviour, ILoadingQueue{
   public PersistanceData GetPersistanceData(){
     PersistanceData _result = new();
     foreach(_scenario_metadata _metadata in _scenario_map.Values){
+      DEBUGModeUtils.Log(string.Format("scenario id {0} {1}", _metadata.scenario_id, GetEnableScenario(_metadata.scenario_id)));
       if(GetEnableScenario(_metadata.scenario_id)){
         Array.Resize(ref _result.ListActivePersistance, _result.ListActivePersistance.Length+1);
         _result.ListActivePersistance[_result.ListActivePersistance.Length-1] = _metadata.scenario_id;
@@ -228,17 +264,6 @@ public class ScenarioDiagramVS: MonoBehaviour, ILoadingQueue{
   }
 
   public void SetPersistanceData(PersistanceData data){
-    foreach(ScenarioHandlerVS.PersistanceData _scenario_data in data.ScenarioDataCollections){
-      ScenarioHandlerVS _handler = GetScenario(_scenario_data.ScenarioID);
-      if(_handler == null){
-        Debug.LogWarning(string.Format("LOAD: Cannot get handler for Scenario ID: '{0}'.", _scenario_data.ScenarioID));
-        continue;
-      }
-
-      _handler.SetPersistanceData(_scenario_data);
-    }
-
-    foreach(string _active_scenario in data.ListActivePersistance)
-      SetEnableScenario(_active_scenario, true);
+    StartCoroutine(_set_persistance_data(data));
   }
 }

@@ -50,11 +50,11 @@ public class DamagerLayerExcludingHelper: MonoBehaviour{
 
 
   public void DamagerComponent_OnContextChanged(){
-    Debug.Log("damager set context");
+    DEBUGModeUtils.Log("damager set context");
     DamagerComponent.DamagerContext _context = _damager.GetDamagerContext();
     _speed_threshold = _context.SetExcludeLayerOnSpeedThreshold;
     _excluding_layer = _context.ExcludeLayerHide;
 
-    Debug.Log(string.Format("damager speed threshold {0}", _speed_threshold));
+    DEBUGModeUtils.Log(string.Format("damager speed threshold {0}", _speed_threshold));
   }
 }

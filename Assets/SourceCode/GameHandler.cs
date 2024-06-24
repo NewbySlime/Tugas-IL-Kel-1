@@ -1,22 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 using Unity.Jobs;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 
 [RequireComponent(typeof(PersistanceContext))]
 public class GameHandler: MonoBehaviour{
+  public const string RuntimeSceneDataFile = "GameConfigs/RuntimeSceneData";
 
   public const string DefaultSceneID = "main_menu_scene";
-  public const string DefaultGameSceneID = "main_game_scene"; 
-  public const string DefaultScenarioID = "default_scenario";
+  public const string DefaultGameSceneID = "intro_game_scene"; 
+  public const string DefaultScenarioID = "intro_scenario";
 
   public delegate void SceneChangedInitializing(string scene_id, GameContext context);
   public event SceneChangedInitializing SceneChangedInitializingEvent;
@@ -44,11 +48,25 @@ public class GameHandler: MonoBehaviour{
   }
 
   [Serializable]
-  private class _SceneMetadata{
+  public class SceneData{
     public SceneMetadata Metadata;
 
     public UnityEngine.Object SceneFile;
   }
+
+
+  [Serializable]
+  public class RuntimeSceneData{
+    public SceneMetadata Metadata;
+
+    public string SceneName;
+  }
+
+  [Serializable]
+  public class RuntimeSceneDataWrapper{
+    public RuntimeSceneData[] SceneDataList = new RuntimeSceneData[0];
+  }
+
 
   [Serializable]
   private class SceneContext: PersistanceContext.IPersistance{
@@ -107,6 +125,17 @@ public class GameHandler: MonoBehaviour{
     }
   }
 
+
+#if DEBUG
+  [Serializable]
+  private struct SetScenarioData{
+    public string ScenarioID;
+    public int SubScenarioIdx;
+
+    public bool TriggerEntrySequence;
+  }
+#endif
+
   
 
 
@@ -114,7 +143,7 @@ public class GameHandler: MonoBehaviour{
   private GameObject _ScenarioObjectContainer;
 
   [SerializeField]
-  private List<_SceneMetadata> _SceneMetadataList;
+  private List<SceneData> _SceneMetadataList;
 
 
 #if DEBUG
@@ -123,13 +152,22 @@ public class GameHandler: MonoBehaviour{
 
   [SerializeField]
   private bool DEBUG_ChangeSceneStartLoad = true;
+
+  [SerializeField]
+  private bool DEBUG_UseCustomInitScenarios = false;
+
+  [SerializeField]
+  private List<SetScenarioData> DEBUG_ListInitializeScenario;
+
+  [SerializeField]
+  private GameTimeHandler.GameTimePeriod DEBUG_InitTimePeriod = GameTimeHandler.GameTimePeriod.Daytime;
 #endif
 
   private LevelCheckpointDatabase _checkpoint_database;
 
   private GameTimeHandler _time_handler;
 
-  private Dictionary<string, _SceneMetadata> _scene_map = new Dictionary<string, _SceneMetadata>();
+  private Dictionary<string, RuntimeSceneData> _scene_map = new();
 
   private HashSet<ILoadingQueue> _scene_loading_object_list = new HashSet<ILoadingQueue>();
 
@@ -166,12 +204,60 @@ public class GameHandler: MonoBehaviour{
   private bool _scene_initialized = false;
   public bool SceneInitialized{get => _scene_initialized;}
 
+  private bool _scene_initializing = false;
+  public bool SceneInitializing{get => _scene_initializing;}
+
   private bool _obj_initialized = false;
   public bool Initialized{get => _obj_initialized;}
-
-  public bool AreaTriggerEnable = true;
   
   public PersistanceContext PersistanceHandler{private set; get;}
+
+
+#if DEBUG
+  private IEnumerator _set_custom_scenario(){
+    yield return _scenario_diagram.ResetAllScenario();
+
+    foreach(SetScenarioData _data in DEBUG_ListInitializeScenario){
+      ScenarioHandlerVS _handler = _scenario_diagram.GetScenario(_data.ScenarioID);
+      if(_handler == null){
+        Debug.LogWarning(string.Format("DEBUG: Cannot get Scenario. (ID: {0})", _data.ScenarioID));
+        continue;
+      }
+
+      _scenario_diagram.SetEnableScenario(_data.ScenarioID, true);
+
+      StartCoroutine(_handler.SwitchSubScenario(_data.SubScenarioIdx, _data.TriggerEntrySequence));
+    }
+  }
+
+
+  private IEnumerator _use_custom_scenario(){
+    BaseLoadingQueue _load_queue = new(){
+      LoadFlag = false
+    };
+
+    AddLoadingQueue(_load_queue);
+
+    yield return new WaitUntil(() => _scene_initializing);
+
+    if(DEBUG_UseCustomInitScenarios)
+      yield return _set_custom_scenario();
+    else
+      yield return _reset_game_scenario();
+
+    _time_handler.SetTimePeriod(DEBUG_InitTimePeriod);
+
+    _load_queue.LoadFlag = true;
+  }
+#endif
+
+
+  private IEnumerator _reset_game_scenario(){
+    yield return _scenario_diagram.ResetAllScenario();
+
+    yield return _scenario_diagram.StartScenario(DefaultScenarioID);
+    _time_handler.SetTimePeriod(GameTimeHandler.GameTimePeriod.Daytime);
+  }
 
 
   private IEnumerator _pause_co_func(){
@@ -215,21 +301,33 @@ public class GameHandler: MonoBehaviour{
 
   private IEnumerator _wait_scene_initialize(SceneMetadata _current_metadata){
     SceneChangedInitializingEvent?.Invoke(_current_metadata.SceneID, _current_metadata.SceneContext);
+    _scene_initializing = true;
+
+    Debug.Log("[GameHandler] waiting for loading queue...");
 
     // tunggu sampai semua komponen sudah ter-inisialisasi
     yield return null;
-    while(_scene_loading_object_list.Count > 0 && false){
+    while(_scene_loading_object_list.Count > 0){
       yield return null;
       _check_loading_object();
     }
 
+    Debug.Log("[GameHandler] loading queue empty.");
+    
     // agar tidak banyak bug, biarkan physics untuk diproses sebelum even finish
     yield return null;
     yield return new WaitForEndOfFrame();
 
-    Debug.Log("Game handler scene change finishing.");
-    SceneChangedFinishedEvent?.Invoke(_current_metadata.SceneID, _current_metadata.SceneContext);
+    if(!SplashScreen.isFinished){
+      Debug.Log("Waiting for splashcreen");
+      yield return new WaitUntil(() => SplashScreen.isFinished);
+      Debug.Log("Waiting for splashscreen done.");
+    }
+
+    Debug.Log("[GameHandler] scene change finished.");
     _scene_initialized = true;
+
+    SceneChangedFinishedEvent?.Invoke(_current_metadata.SceneID, _current_metadata.SceneContext);
   }
 
 
@@ -242,40 +340,41 @@ public class GameHandler: MonoBehaviour{
       yield break;
     }
 
+    _scene_initializing = false;
     _scene_initialized = false;
     SceneRemovingEvent?.Invoke();
 
     _time_handler.StopTime();
 
-    Debug.Log(string.Format("Chanding scene to: {0}", scene_id));
+    Debug.Log(string.Format("[GameHandler] changing scene to: {0}", scene_id));
     _level_loading_ui.SetLoadingProgress(0);
 
-    yield return UIUtility.SetHideUI(_level_loading_ui.gameObject, false);
+    yield return UIUtility.SetHideUI(_level_loading_ui.gameObject, false, true);
 
-    Debug.Log("input cleared");
+    Debug.Log("[GameHandler] Input cleared");
     if(clear_runtime_data)
       _runtime_data.ClearData();
 
     ObjectReference.ClearReference();
     _input_context.ClearRegisters();
 
-    _SceneMetadata _metadata = _scene_map[scene_id];
+    RuntimeSceneData _metadata = _scene_map[scene_id];
 
     _last_scene = _current_scene;
     _current_scene = scene_id;
     _current_context = _metadata.Metadata.SceneContext;
     
-    AsyncOperation _async_op = SceneManager.LoadSceneAsync(_metadata.SceneFile.name);
+    AsyncOperation _async_op = SceneManager.LoadSceneAsync(_metadata.SceneName);
     _level_loading_ui.BindAsyncOperation(_async_op);
     yield return new WaitUntil(() => _async_op.isDone);
 
     _checkpoint_database.UpdateDatabase();
 
     _time_handler.ResumeTime();
-    
-    Debug.Log(string.Format("teleport to {0}", teleport_to));
+
+    Debug.Log(string.Format("[GameHandler] Teleporting to {0}", teleport_to));
     if(_metadata.Metadata.SceneContext == GameContext.InGame && teleport_to.Length > 0){
-      Debug.Log("check teleporting");
+      DEBUGModeUtils.Log("check teleporting");
       bool _do_teleport = true;
 
       CheckpointHandler _handler = null;
@@ -297,7 +396,7 @@ public class GameHandler: MonoBehaviour{
         _do_teleport = false;
       }
 
-      Debug.Log(string.Format("do teleport {0}", _do_teleport));
+      Debug.Log(string.Format("[GameHandler] do teleport {0}", _do_teleport));
       if(_do_teleport){
         _handler.TeleportObject(_player.gameObject);
 
@@ -340,7 +439,7 @@ public class GameHandler: MonoBehaviour{
 
     _scene_context_map.Clear();
     foreach(SceneContext _context in _scene_contexts.SceneContexts){
-      Debug.Log(string.Format("scene context {0}", _context.SceneID));
+      DEBUGModeUtils.Log(string.Format("scene context {0}", _context.SceneID));
       _scene_context_map[_context.SceneID] = _context;
     }
 
@@ -356,7 +455,7 @@ public class GameHandler: MonoBehaviour{
         _teleport_id = _scene_context.LastCheckpointID;
       }
 
-      Debug.Log(string.Format("scene {0}, teleport {1}", _game_context.CurrentSceneID, _teleport_id));
+      Debug.Log(string.Format("[GameHandler] SceneID: {0}, TeleportID: {1}", _game_context.CurrentSceneID, _teleport_id));
       yield return _change_scene(_game_context.CurrentSceneID, _teleport_id, false, true);
     }
     
@@ -378,8 +477,8 @@ public class GameHandler: MonoBehaviour{
     
     _ui_handler.SetUtilityHUDUIMode(GameUIHandler.UtilityHUDUIEnum.SaveHintUI, true);
     
-    yield return new WaitForSeconds(1);
     PersistanceHandler.WriteSave();
+    yield return new WaitForSeconds(1);
 
     _ui_handler.SetUtilityHUDUIMode(GameUIHandler.UtilityHUDUIEnum.SaveHintUI, false);
   }
@@ -428,13 +527,48 @@ public class GameHandler: MonoBehaviour{
   }
 
 
+  private void _create_runtime_scene_data(){
+    string _path = "Assets/Resources/" + RuntimeSceneDataFile + ".json";
+    FileStream _writer = File.Open(_path, FileMode.Create);
+
+    RuntimeSceneDataWrapper _wrapper = new(){
+      SceneDataList = _scene_map.Values.ToArray()
+    };
+
+    _writer.Write(Encoding.UTF8.GetBytes(JsonUtility.ToJson(_wrapper)));
+    _writer.Close();
+  }
+
+  private void _load_runtime_scene_data(){
+    TextAsset _runtime_scene = Resources.Load<TextAsset>(RuntimeSceneDataFile);
+
+    RuntimeSceneDataWrapper _wrapper = new();
+    JsonUtility.FromJsonOverwrite(_runtime_scene.text, _wrapper);
+
+    _scene_map.Clear();
+    foreach(RuntimeSceneData _scene_data in _wrapper.SceneDataList)
+      _scene_map[_scene_data.Metadata.SceneID] = _scene_data;
+  }
+
+
   public void Awake(){
-    foreach(var _metadata in _SceneMetadataList)
-      _scene_map[_metadata.Metadata.SceneID] = _metadata;
+#if UNITY_EDITOR
+    foreach(var _metadata in _SceneMetadataList){
+      _scene_map[_metadata.Metadata.SceneID] = new(){
+        Metadata = _metadata.Metadata,
+        SceneName = _metadata.SceneFile.name
+      };
+    }
+
+    _create_runtime_scene_data();
+#else
+
+    _load_runtime_scene_data();
+#endif
   }
 
   private IEnumerator _StartAsCoroutine(){
-    Debug.Log("Game Handler init");
+    Debug.Log("GameHandler init");
 
     _time_handler = FindAnyObjectByType<GameTimeHandler>();
     if(_time_handler == null){
@@ -453,6 +587,9 @@ public class GameHandler: MonoBehaviour{
       Debug.LogError("Cannot find InputFocusContext.");
       throw new MissingReferenceException();
     }
+
+    // block any input while GameHandler initiating
+    _input_context.RegisterInputObject(this, InputFocusContext.ContextEnum.Pause);
 
     _runtime_data = FindAnyObjectByType<GameRuntimeData>();
     if(_runtime_data == null){
@@ -514,12 +651,6 @@ public class GameHandler: MonoBehaviour{
 
     yield return new WaitUntil(() => _scenario_diagram.IsInitialized);
 
-    yield return _scenario_diagram.StartScenario(DefaultScenarioID);
-    _time_handler.SetTimePeriod(GameTimeHandler.GameTimePeriod.Daytime);
-
-#if DEBUG
-    if(DEBUG_LoadDataOnStart)
-      StartCoroutine(_load_game_first_time());
 
     SceneMetadata _metadata = new SceneMetadata{
       SceneID = "",
@@ -535,15 +666,22 @@ public class GameHandler: MonoBehaviour{
     _current_scene = _metadata.SceneID;
     _current_context = _metadata.SceneContext;
 
-    yield return _wait_scene_initialize(_metadata);
-
+#if DEBUG
+    if(DEBUG_LoadDataOnStart)
+      StartCoroutine(_load_game_first_time());
+    else
+      StartCoroutine(_use_custom_scenario());
 #else
-    ChangeScene(DefaultSceneID);
+    yield return _reset_game_scenario();
 #endif
 
+    yield return _wait_scene_initialize(_metadata);
     yield return UIUtility.SetHideUI(_fade_ui.gameObject, true);
 
     _obj_initialized = true;
+
+    // unblock input
+    _input_context.RemoveInputObject(this, InputFocusContext.ContextEnum.Pause);
   }
 
   public void Start(){
@@ -563,9 +701,11 @@ public class GameHandler: MonoBehaviour{
 
   public void StartNewGame(){
     PersistanceHandler.ClearData();
+    _runtime_data.ClearData();
+    ResetGameScenario();
 
     _scene_context_map.Clear();
-    foreach(_SceneMetadata _metadata in _SceneMetadataList)
+    foreach(SceneData _metadata in _SceneMetadataList)
       _scene_context_map[_metadata.Metadata.SceneID] = new SceneContext{
         SceneID = _metadata.Metadata.SceneID,
         LastCheckpointID = ""
@@ -595,8 +735,8 @@ public class GameHandler: MonoBehaviour{
   }
 
 
-  public void ChangeScene(string scene_id, string teleport_to = ""){
-    StartCoroutine(_change_scene(scene_id, teleport_to));
+  public void ChangeScene(string scene_id, string teleport_to = "", bool do_save = true){
+    StartCoroutine(_change_scene(scene_id, teleport_to, do_save));
   }
 
   public void ChangeSceneToMainMenu(){
@@ -687,5 +827,10 @@ public class GameHandler: MonoBehaviour{
       // Unpause will be handled by PauseGameUI
       PauseGame();
     }
+  }
+
+
+  public void ResetGameScenario(){
+    StartCoroutine(_reset_game_scenario());
   }
 }

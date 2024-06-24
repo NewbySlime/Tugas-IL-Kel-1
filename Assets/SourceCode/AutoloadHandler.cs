@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 
@@ -14,9 +13,7 @@ public class AutoloadHandler : MonoBehaviour{
   /// <summary>
   /// List folder teregister untuk autoload
   /// </summary>
-  static private string[] autoload_prefab_list = {
-    "Assets/Scenes/AutoloadObject"
-  };
+  static private string autoload_prefab_folder = "Scenes/AutoloadObject";
 
   
   public void Awake(){
@@ -25,11 +22,9 @@ public class AutoloadHandler : MonoBehaviour{
       return;
     }
 
-    string[] _prefab_guid_list = AssetDatabase.FindAssets("t:prefab", autoload_prefab_list);
-    foreach(string _guid in _prefab_guid_list){
-      string _object_path = AssetDatabase.GUIDToAssetPath(_guid);
-      GameObject _prefab_obj = AssetDatabase.LoadAssetAtPath<GameObject>(_object_path);
-
+    GameObject[] _prefab_list = Resources.LoadAll<GameObject>(autoload_prefab_folder);
+    DEBUGModeUtils.Log(string.Format("autoload handler count prefab {0}", _prefab_list.Length));
+    foreach(GameObject _prefab_obj in _prefab_list){
       GameObject _prefab_game_obj = Instantiate(_prefab_obj);
       DontDestroyOnLoad(_prefab_game_obj);
     }

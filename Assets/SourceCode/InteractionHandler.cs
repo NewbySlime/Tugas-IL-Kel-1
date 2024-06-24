@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor;
+using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.InputSystem;
+using UnityEngine.Jobs;
 
 
 
@@ -21,6 +24,59 @@ public class InteractionHandler: MonoBehaviour{
 
 
   private HashSet<InteractableInterface> _interactable_list = new();
+
+  private InteractableInterface _current_interactable = null;
+
+
+  private List<InteractableInterface> _get_nearest_objects(){
+    List<InteractableInterface> _interface_list = _interactable_list.ToList();
+    _interface_list.Sort((InteractableInterface var1, InteractableInterface var2) => {
+      float _dist_from1 = (transform.position - var1.transform.position).magnitude;
+      float _dist_from2 = (transform.position - var2.transform.position).magnitude;
+
+      return _dist_from1 > _dist_from2? 1: -1;
+    });
+
+    List<InteractableInterface> _result = new();
+    foreach(InteractableInterface _interface in _interface_list){
+      _result.Add(_interface);
+
+      if(!_interface.PassThrough)
+        break;
+    }
+
+    return _result;
+  }
+
+  private void _trigger_enter_objects(List<InteractableInterface> list_interface){
+    HashSet<InteractableInterface> _exit_set = new(_interactable_list);
+    foreach(InteractableInterface _interface_obj in list_interface){
+      _exit_set.Remove(_interface_obj);
+      if(_interface_obj.InteractOnAvailable)
+        continue;
+
+      _interface_obj.TriggerInteractionEnter();
+    }
+
+    // trigger exit to not accounted objs
+    foreach(InteractableInterface _interface_obj in _exit_set)
+      _interface_obj.TriggerInteractionExit();
+  }
+
+
+  private void _change_current(InteractableInterface interactable){
+    if(interactable == _current_interactable)
+      return;
+
+    if(_current_interactable != null){
+      _current_interactable.TriggerInteractionExit();
+    }
+
+    _current_interactable = interactable;
+    if(interactable != null){
+      interactable.TriggerInteractionEnter();
+    }
+  }
 
 
   public void Start(){
@@ -41,7 +97,11 @@ public class InteractionHandler: MonoBehaviour{
       return;
 
     _interactable_list.Add(_interface);
-    _interface.TriggerInteractionEnter();
+
+    List<InteractableInterface> _nearest_objs = _get_nearest_objects();
+    _trigger_enter_objects(_nearest_objs);
+
+    _change_current(_nearest_objs.Count > 0? _nearest_objs[_nearest_objs.Count-1]: null);
   }
 
   // Fungsi ini dipakai untuk melepas objek yang diberikan saat Collider masuk ke Trigger Collider.
@@ -53,27 +113,20 @@ public class InteractionHandler: MonoBehaviour{
 
     _interactable_list.Remove(_interface);
     _interface.TriggerInteractionExit();
+
+    List<InteractableInterface> _nearest_objs = _get_nearest_objects();
+    _trigger_enter_objects(_nearest_objs);
+
+    _change_current(_nearest_objs.Count > 0? _nearest_objs[_nearest_objs.Count-1]: null);
   }
 
   // Fungsi ini dipakai oleh Player untuk melakukan fungsi "Interaction" ke objek objek target player.
   // Kemudian fungsi ini dilempar ke objek yang masuk dengan fungsi InteractableInterface.TriggerInteract()
   public bool TriggerInteraction(){
-    if(_interactable_list.Count <= 0)
+    if(_current_interactable == null)
       return false;
 
-    InteractableInterface _nearest_obj = null;
-    float _nearest_dist = float.PositiveInfinity;
-    foreach(InteractableInterface _interface in _interactable_list){
-      float _dist = (transform.position - _interface.transform.position).magnitude;
-      if(_dist < _nearest_dist){
-        _nearest_obj = _interface;
-        _nearest_dist = _dist;
-      }
-    }
-
-    _nearest_obj.TriggerInteract();
-    Debug.Log("interaction do");
-
+    _current_interactable.TriggerInteract();
     return true;
   }
 }

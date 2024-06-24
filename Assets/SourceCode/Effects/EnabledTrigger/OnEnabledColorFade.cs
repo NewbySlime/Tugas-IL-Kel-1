@@ -27,9 +27,9 @@ public class OnEnabledColorFade: MonoBehaviour, IEnableTrigger, IObjectInitializ
 
 
   private void _trigger_effect(){
-    Debug.Log(string.Format("trigger effect {0}", !EnableTrigger));
-    Debug.Log(string.Format("trigger effect {0}", _effect_coroutine != null));
-    Debug.Log(string.Format("trigger effect {0}", !IsInitialized));
+    DEBUGModeUtils.Log(string.Format("trigger effect {0}", !EnableTrigger));
+    DEBUGModeUtils.Log(string.Format("trigger effect {0}", _effect_coroutine != null));
+    DEBUGModeUtils.Log(string.Format("trigger effect {0}", !IsInitialized));
     if(!EnableTrigger || _effect_coroutine != null || !IsInitialized)
       return;
 
@@ -109,7 +109,7 @@ public class OnEnabledColorFade: MonoBehaviour, IEnableTrigger, IObjectInitializ
 
 
   public void TriggerSetOnEnable(bool flag){
-    Debug.Log(string.Format("trigger set {0}", flag));
+    DEBUGModeUtils.Log(string.Format("trigger set {0}", flag));
     EnableTrigger = flag;
   }
 

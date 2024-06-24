@@ -101,7 +101,7 @@ public class RecipeCraftingUIController: MonoBehaviour{
 
     List<string> _item_list = _recipe_craft_list_controller.GetListItem();
     string _result_id = _item_recipe_database.RecipeParse(_item_list);
-    Debug.Log(string.Format("hasil masakan: {0}", _result_id));
+    DEBUGModeUtils.Log(string.Format("hasil masakan: {0}", _result_id));
 
     if(_result_id.Length > 0)
       _recipe_craft_res_controller.AddItem(_result_id, 1);

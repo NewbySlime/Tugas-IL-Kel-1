@@ -23,8 +23,8 @@ TagManager:
   - NPC
   - Trap
   - SoundAlert
-  - 
-  - 
+  - LevelObstacleNonInteract
+  - LevelObstacleOneWay
   - 
   - 
   - 

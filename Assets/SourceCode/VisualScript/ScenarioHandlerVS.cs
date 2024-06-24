@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Unity.VisualScripting;
-using UnityEditorInternal;
 using UnityEngine;
 
 
@@ -57,8 +55,17 @@ public class ScenarioHandlerVS: MonoBehaviour, ILoadingQueue{
     public SequenceHandlerVS _finish_sequence;
   }
 
+  [SerializeField]
+  private string DEBUG_ScenarioID;
 
-  private string _scenario_id;
+  private string __scenario_id;
+
+  private string _scenario_id{
+    get{return __scenario_id;}
+    set{__scenario_id = value; DEBUG_ScenarioID = value;}
+  }
+
+
   private List<_subscenario_data> _subscenario_list = new();
   private Dictionary<string, int> _scenario_data_ref_idx = new();
 
@@ -76,12 +83,14 @@ public class ScenarioHandlerVS: MonoBehaviour, ILoadingQueue{
 
 
   private IEnumerator __quest_finished(string subscenario){
-    Debug.Log("Quest finished");
+    DEBUGModeUtils.Log("Quest finished");
     string _last_subid = "";
     string _next_subid = "";
-    Debug.Log(string.Format("current scenario {0}", _scenario_idx));
+    DEBUGModeUtils.Log(string.Format("current scenario {0}", _scenario_idx));
 
     int _last_scenario_idx = _scenario_idx;
+    _scenario_idx++;
+    
     if(_last_scenario_idx >= 0 && _last_scenario_idx < _subscenario_list.Count){
       _subscenario_data _data = _subscenario_list[_last_scenario_idx];
       _last_subid = _data._subscenario_id;
@@ -91,7 +100,7 @@ public class ScenarioHandlerVS: MonoBehaviour, ILoadingQueue{
       yield return StartTriggerEnd(_data._subscenario_id);
     }
     
-    int _next_scenario_idx = _scenario_idx+1;
+    int _next_scenario_idx = _scenario_idx;
     if(_next_scenario_idx >= 0 && _next_scenario_idx < _subscenario_list.Count){
       _subscenario_data _data = _subscenario_list[_next_scenario_idx];
       _next_subid = _data._subscenario_id;
@@ -101,13 +110,12 @@ public class ScenarioHandlerVS: MonoBehaviour, ILoadingQueue{
       yield return StartTriggerStart(_data._subscenario_id);
     }
 
-    _scenario_idx = _next_scenario_idx;
     ScenarioSubscenarioChangedEvent?.Invoke(_scenario_id, _last_subid, _next_subid);
     ScenarioSubscenarioFinishedEvent?.Invoke(_scenario_id, subscenario);
 
-    Debug.Log(string.Format("scenario idx {0}/{1}", _next_scenario_idx, _subscenario_list.Count));
+    DEBUGModeUtils.Log(string.Format("scenario idx {0}/{1}", _next_scenario_idx, _subscenario_list.Count));
     if(_next_scenario_idx >= _subscenario_list.Count){
-      Debug.Log("scenario finished");
+      DEBUGModeUtils.Log("scenario finished");
       ScenarioFinishedevent?.Invoke(_scenario_id);
     }
   }
@@ -204,9 +212,9 @@ public class ScenarioHandlerVS: MonoBehaviour, ILoadingQueue{
       }
     }
 
-    Debug.Log("scenario handler check queue");
+    DEBUGModeUtils.Log("scenario handler check queue");
     yield return new WaitUntil(_check_queue_list);
-    Debug.Log("scenario handler disable");
+    DEBUGModeUtils.Log("scenario handler disable");
 
     // disable
     for(int i = 0; i < _subscenario_list.Count; i++)
@@ -238,6 +246,7 @@ public class ScenarioHandlerVS: MonoBehaviour, ILoadingQueue{
 
 
   public IEnumerator SwitchSubScenario(int idx, bool new_use_trigger = true, bool last_use_trigger = false){
+    DEBUGModeUtils.Log(string.Format("set scenario {0} idx {1}", _scenario_id, idx));
     if(idx < 0 || idx >= _subscenario_list.Count())
       yield break;
 
@@ -259,6 +268,7 @@ public class ScenarioHandlerVS: MonoBehaviour, ILoadingQueue{
     ScenarioSubscenarioChangedEvent?.Invoke(_scenario_id, _last_subid, _data._subscenario_id);
 
     _set_enable_subscenario(idx, true);
+    DEBUGModeUtils.Log(string.Format("setted scenario {0} idx {1}", _scenario_id, GetCurrentSubScenario()));
   }
 
 
@@ -269,6 +279,7 @@ public class ScenarioHandlerVS: MonoBehaviour, ILoadingQueue{
     }
 
     _subscenario_data _data = _subscenario_list[idx];
+    DEBUGModeUtils.Log(string.Format("start sequence exist {0}", _data._start_sequence == null));
     if(_data._start_sequence == null)
       yield break;
 
@@ -276,6 +287,7 @@ public class ScenarioHandlerVS: MonoBehaviour, ILoadingQueue{
   }
 
   public IEnumerator StartTriggerStart(string SubScenario){
+    DEBUGModeUtils.Log(string.Format("Starting trigger ID:{0}", SubScenario));
     if(!_scenario_data_ref_idx.ContainsKey(SubScenario)){
       Debug.LogError(string.Format("SubScenario ID: '{0}' cannot be found.", SubScenario));
       yield break;
@@ -348,6 +360,15 @@ public class ScenarioHandlerVS: MonoBehaviour, ILoadingQueue{
   }
 
 
+  public void SkipToNextSubScenario(){
+    if(_scenario_idx >= _subscenario_list.Count)
+      return;
+
+    string _current_subscenario_id = _subscenario_list[_scenario_idx]._subscenario_id;
+    StartCoroutine(__quest_finished(_current_subscenario_id));
+  }
+
+
   public void SetInitData(ScenarioDiagramVS.ScenarioData init_data){
     StartCoroutine(_set_init_data(init_data));
   }
@@ -365,7 +386,7 @@ public class ScenarioHandlerVS: MonoBehaviour, ILoadingQueue{
     };
   }
 
-  public void SetPersistanceData(PersistanceData data){
-    _scenario_idx = data.SubscenarioIdx;
+  public IEnumerator SetPersistanceData(PersistanceData data){
+    yield return SwitchSubScenario(data.SubscenarioIdx, false, false);
   }
 }

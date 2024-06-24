@@ -1,13 +1,19 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+using System.Linq;
 
 
 public class GameTimeHandler: MonoBehaviour{
+  public delegate void OnTimePeriodChanged();
+  public event OnTimePeriodChanged OnTimePeriodChangedEvent;
+
   public enum GameTimePeriod{
     Daytime,
     Nighttime
   }
+
 
   private static Dictionary<GameTimePeriod, string> _GameTimePeriod_ScenarioName = new(){
     {GameTimePeriod.Daytime, "daytime_scenario"},
@@ -19,6 +25,20 @@ public class GameTimeHandler: MonoBehaviour{
   private GameHandler _game_handler;
 
 
+  private void _on_scene_initializing(string scene_id, GameHandler.GameContext context){
+    GameTimePeriod _time_period = _current_time_period;
+    foreach(GameTimePeriod time in _GameTimePeriod_ScenarioName.Keys){
+      string scenario_id = _GameTimePeriod_ScenarioName[time];
+      if(_game_handler._ScenarioDiagram.GetEnableScenario(scenario_id)){
+        _time_period = time;
+        break;
+      }
+    }
+
+    SetTimePeriod(_time_period);
+  }
+
+
   public void Start(){
     Time.timeScale = 1;
 
@@ -27,6 +47,8 @@ public class GameTimeHandler: MonoBehaviour{
       Debug.LogError("Cannot find GameHandler.");
       throw new MissingReferenceException();
     }
+
+    _game_handler.SceneChangedInitializingEvent += _on_scene_initializing;
   }
 
 
@@ -59,8 +81,9 @@ public class GameTimeHandler: MonoBehaviour{
       string _scenario_name = _GameTimePeriod_ScenarioName[_period];
 
       _game_handler._ScenarioDiagram.SetEnableScenario(_scenario_name, _period == time);
-      Debug.Log(string.Format("setting time scenario {0}, {1}", _scenario_name, time == _period));
     }
+
+    OnTimePeriodChangedEvent?.Invoke();
   }
 
   public GameTimePeriod GetTimePeriod(){

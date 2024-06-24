@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 /// <summary>
@@ -16,6 +17,14 @@ using UnityEngine;
 ///   - RigidbodyMessageRelay (WallHugLeft)
 /// </summary>
 public class MovementController: MonoBehaviour{
+  public const string AudioID_Jump = "jump";
+
+
+  [SerializeField]
+  private float WalkNormalizeClamp = 0.4f;
+
+  [SerializeField]
+  private bool ClampWalkDir = true;
 
   [SerializeField]
   private float movement_speed = 100f;
@@ -45,6 +54,9 @@ public class MovementController: MonoBehaviour{
   [SerializeField]
   private Animator _TargetAnimatorMovement;
 
+  [SerializeField]
+  private AudioCollectionHandler _TargetAudioHandler;
+
   private Rigidbody2D _object_rigidbody;
   private Collider2D _object_collider;
 
@@ -53,14 +65,20 @@ public class MovementController: MonoBehaviour{
   private RigidbodyMessageRelay _wh_right_check_relay;
   private RigidbodyMessageRelay _wh_left_check_relay;
 
+  private HashSet<int> _one_way_ground_collider_set = new();
+  private HashSet<int> _one_way_collider_set = new();
+  private LayerMask _OneWayColliderMask;
 
-  private HashSet<Rigidbody2D> _ground_collider_set = new HashSet<Rigidbody2D>();
+  private HashSet<int> _ground_collider_set = new();
   private bool _is_touching_ground;
 
-  private HashSet<Rigidbody2D> _wallhug_left_collider_set = new HashSet<Rigidbody2D>();
+  private Vector3 _last_position;
+
+
+  private HashSet<int> _wallhug_left_collider_set = new();
   private bool _is_wallhug_left;
   
-  private HashSet<Rigidbody2D> _wallhug_right_collider_set = new HashSet<Rigidbody2D>();
+  private HashSet<int> _wallhug_right_collider_set = new();
   private bool _is_wallhug_right;
 
   private bool _forcejump_flag = false;
@@ -68,6 +86,11 @@ public class MovementController: MonoBehaviour{
   private bool _is_movement_enabled = true;
 
   private float _walk_dir_x = 0;
+
+  private bool _set_ignore_one_way_flag = false;
+
+
+  public bool ToggleWalk = false;
 
 
   [HideInInspector]
@@ -78,6 +101,8 @@ public class MovementController: MonoBehaviour{
 
 
   public void Start(){
+    _OneWayColliderMask = LayerMask.NameToLayer("LevelObstacleOneWay");
+
     _object_rigidbody = GetComponent<Rigidbody2D>();
     _object_collider = GetComponent<Collider2D>();
     
@@ -86,24 +111,41 @@ public class MovementController: MonoBehaviour{
     _ground_check_relay.OnTriggerEntered2DEvent += OnGroundCheck_Enter;
     _ground_check_relay.OnTriggerExited2DEvent += OnGroundCheck_Exit;
 
-    GameObject _wallhug_right_check = transform.Find("WallHugRight").gameObject;
-    _wh_right_check_relay = _wallhug_right_check.GetComponent<RigidbodyMessageRelay>();
-    _wh_right_check_relay.OnTriggerEntered2DEvent += OnHugWall_Right_Enter;
-    _wh_right_check_relay.OnTriggerExited2DEvent += OnHugWall_Right_Exit;
+    Transform _wallhug_right_check_tr = transform.Find("WallHugRight");
+    if(_wallhug_right_check_tr != null){
+      GameObject _wallhug_right_check = _wallhug_right_check_tr.gameObject;
+      _wh_right_check_relay = _wallhug_right_check.GetComponent<RigidbodyMessageRelay>();
+      _wh_right_check_relay.OnTriggerEntered2DEvent += OnHugWall_Right_Enter;
+      _wh_right_check_relay.OnTriggerExited2DEvent += OnHugWall_Right_Exit;
+    }
 
-    GameObject _wallhug_left_check = transform.Find("WallHugLeft").gameObject;
-    _wh_left_check_relay = _wallhug_left_check.GetComponent<RigidbodyMessageRelay>();
-    _wh_left_check_relay.OnTriggerEntered2DEvent += OnHugWall_Left_Enter;
-    _wh_left_check_relay.OnTriggerExited2DEvent += OnHugWall_Left_Exit;
+    Transform _wallhug_left_check_tr = transform.Find("WallHugLeft");
+    if(_wallhug_left_check_tr != null){
+      GameObject _wallhug_left_check = _wallhug_left_check_tr.gameObject;
+      _wh_left_check_relay = _wallhug_left_check.GetComponent<RigidbodyMessageRelay>();
+      _wh_left_check_relay.OnTriggerEntered2DEvent += OnHugWall_Left_Enter;
+      _wh_left_check_relay.OnTriggerExited2DEvent += OnHugWall_Left_Exit;
+    }
   }
 
   public void FixedUpdate(){
+    Vector3 _speed = (transform.position - _last_position) / Time.fixedDeltaTime;
+    _last_position = transform.position;
+
     if(!_forcejump_flag && _is_movement_enabled){
-      if(_is_touching_ground && !GlideOnGround)
-        _object_rigidbody.velocity = new Vector2(_walk_dir_x * movement_speed, _object_rigidbody.velocity.y);
+      float _clamped_walk_dir_x = ClampWalkDir? Mathf.Clamp(_walk_dir_x, -1, 1): _walk_dir_x;
+      if(ToggleWalk)
+        _clamped_walk_dir_x = Mathf.Clamp(_walk_dir_x, -WalkNormalizeClamp, WalkNormalizeClamp);
+
+      if(_is_touching_ground && !GlideOnGround){
+        _object_rigidbody.velocity = new Vector2(
+          _clamped_walk_dir_x * movement_speed,
+          _object_rigidbody.velocity.y
+        );
+      }
       else{
         Vector2 _result_vel = _object_rigidbody.velocity;
-        _result_vel.x += _walk_dir_x * Time.fixedDeltaTime * movement_speed_midair;
+        _result_vel.x += _clamped_walk_dir_x * Time.fixedDeltaTime * movement_speed_midair;
         if(MathF.Abs(_result_vel.x) <= movement_speed)
           _object_rigidbody.velocity = _result_vel;
       }
@@ -152,9 +194,12 @@ public class MovementController: MonoBehaviour{
     if(!_is_movement_enabled)
       return;
 
+    bool _is_trigger_jumping = false;
     if(_is_touching_ground){
       //_is_touching_ground = false;
       _object_rigidbody.AddForce(Vector3.up * jump_force);
+
+      _is_trigger_jumping = true;
     }
     else if(_is_wallhug_right){
       //_is_wallhug_right = false;
@@ -162,12 +207,21 @@ public class MovementController: MonoBehaviour{
       Vector2 _inv_dir = new Vector2(-walljump_direction.x, walljump_direction.y);
       _object_rigidbody.velocity = Vector2.zero;
       _object_rigidbody.AddForce(_inv_dir.normalized * walljump_force);
+
+      _is_trigger_jumping = true;
     }
     else if(_is_wallhug_left){
       //_is_wallhug_left = false;
       
       _object_rigidbody.velocity = Vector2.zero;
       _object_rigidbody.AddForce(walljump_direction.normalized * walljump_force);
+      
+      _is_trigger_jumping = true;
+    }
+
+    if(_is_trigger_jumping){
+      if(_TargetAudioHandler != null)
+        _TargetAudioHandler.TriggerSound(AudioID_Jump);
     }
   }
 
@@ -187,6 +241,14 @@ public class MovementController: MonoBehaviour{
 
   public Rigidbody2D GetRigidbody(){
     return _object_rigidbody;
+  }
+
+
+  public void SetIgnoreOneWayCollision(bool flag){
+    _set_ignore_one_way_flag = flag;
+
+    if(flag)
+      _object_rigidbody.excludeLayers |= 1 << _OneWayColliderMask;
   }
 
 
@@ -236,9 +298,21 @@ public class MovementController: MonoBehaviour{
   /// </summary>
   /// <param name="collider">Object hasil Collision</param>
   public void OnGroundCheck_Enter(Collider2D collider){
-    Debug.Log("ground check enter");
-    _ground_collider_set.Add(collider.attachedRigidbody);
+    DEBUGModeUtils.Log(string.Format("ground check enter {0} {1} id {2} count {3}", collider.gameObject.layer, (int)_OneWayColliderMask, collider.gameObject.GetInstanceID(), _ground_collider_set.Count));
+    if(collider.gameObject.layer == _OneWayColliderMask)
+      _one_way_ground_collider_set.Add(collider.gameObject.GetInstanceID());
+
+    _ground_collider_set.Add(collider.gameObject.GetInstanceID());
+    DEBUGModeUtils.Log(string.Format("ground check enter count {0}", _ground_collider_set.Count));
+    
     _is_touching_ground = true;
+    
+    if(!_set_ignore_one_way_flag)
+      _object_rigidbody.excludeLayers &= ~(1 << _OneWayColliderMask);
+
+    if(_TargetAnimatorMovement != null){
+      _TargetAnimatorMovement.SetBool("is_on_ground", true);
+    }
   }
 
   /// <summary>
@@ -246,11 +320,20 @@ public class MovementController: MonoBehaviour{
   /// </summary>
   /// <param name="collider">Object hasil Collision</param>
   public void OnGroundCheck_Exit(Collider2D collider){
-    if(_ground_collider_set.Contains(collider.attachedRigidbody))
-      _ground_collider_set.Remove(collider.attachedRigidbody);
+    DEBUGModeUtils.Log(string.Format("ground check exit id {0}", collider.gameObject.GetInstanceID()));
+    if(_ground_collider_set.Contains(collider.gameObject.GetInstanceID()))
+      _ground_collider_set.Remove(collider.gameObject.GetInstanceID());
 
-    if(_ground_collider_set.Count <= 0)
+    if(_one_way_ground_collider_set.Contains(collider.gameObject.GetInstanceID()))
+      _one_way_ground_collider_set.Remove(collider.gameObject.GetInstanceID());
+
+    if(_ground_collider_set.Count <= 0){
       _is_touching_ground = false;
+
+      if(_TargetAnimatorMovement != null){
+        _TargetAnimatorMovement.SetBool("is_on_ground", false);
+      }
+    }
   }
 
   
@@ -259,7 +342,7 @@ public class MovementController: MonoBehaviour{
   /// </summary>
   /// <param name="collider">Object hasil Collision</param>
   public void OnHugWall_Left_Enter(Collider2D collider){
-    _wallhug_left_collider_set.Add(collider.attachedRigidbody);
+    _wallhug_left_collider_set.Add(collider.gameObject.GetInstanceID());
     _is_wallhug_left = true;
 
     if(_TargetAnimatorMovement != null){
@@ -271,8 +354,8 @@ public class MovementController: MonoBehaviour{
   /// Fungsi pengecekan ketika Collider pada Collision "WallHugLeft" keluar
   /// </summary>
   public void OnHugWall_Left_Exit(Collider2D collider){
-    if(_wallhug_left_collider_set.Contains(collider.attachedRigidbody))
-      _wallhug_left_collider_set.Remove(collider.attachedRigidbody);
+    if(_wallhug_left_collider_set.Contains(collider.gameObject.GetInstanceID()))
+      _wallhug_left_collider_set.Remove(collider.gameObject.GetInstanceID());
 
     if(_wallhug_left_collider_set.Count <= 0){
       _is_wallhug_left = false;
@@ -289,7 +372,7 @@ public class MovementController: MonoBehaviour{
   /// </summary>
   /// <param name="collider">Object hasil Collision</param>
   public void OnHugWall_Right_Enter(Collider2D collider){
-    _wallhug_right_collider_set.Add(collider.attachedRigidbody);
+    _wallhug_right_collider_set.Add(collider.gameObject.GetInstanceID());
     _is_wallhug_right = true;
 
     if(_TargetAnimatorMovement != null){
@@ -301,8 +384,8 @@ public class MovementController: MonoBehaviour{
   /// Fungsi pengecekan ketika Collider pada Collision "WallHugRight" keluar
   /// </summary>
   public void OnHugWall_Right_Exit(Collider2D collider){
-    if(_wallhug_right_collider_set.Contains(collider.attachedRigidbody))
-      _wallhug_right_collider_set.Remove(collider.attachedRigidbody);
+    if(_wallhug_right_collider_set.Contains(collider.gameObject.GetInstanceID()))
+      _wallhug_right_collider_set.Remove(collider.gameObject.GetInstanceID());
 
     if(_wallhug_right_collider_set.Count <= 0){
       _is_wallhug_right = false;
@@ -310,6 +393,20 @@ public class MovementController: MonoBehaviour{
       if(_TargetAnimatorMovement != null){
         _TargetAnimatorMovement.SetBool("is_wallhugging", false);
       }
+    }
+  }
+
+
+  public void OnCollisionEnter2D(Collision2D collision){
+    DEBUGModeUtils.Log(string.Format("enter collider {0}", collision.gameObject.layer));
+    if(collision.gameObject.layer == _OneWayColliderMask)
+      _one_way_collider_set.Add(collision.gameObject.GetInstanceID());
+  }
+
+  public void OnCollisionExit2D(Collision2D collision){
+    DEBUGModeUtils.Log(string.Format("exit collider {0}", collision.gameObject.layer));
+    if(_one_way_collider_set.Contains(collision.gameObject.GetInstanceID())){
+      _one_way_collider_set.Remove(collision.gameObject.GetInstanceID());
     }
   }
 }

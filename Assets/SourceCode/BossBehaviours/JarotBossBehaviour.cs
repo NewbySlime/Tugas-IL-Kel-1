@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 
 [RequireComponent(typeof(MovementController))]
+[RequireComponent(typeof(HealthComponent))]
 [RequireComponent(typeof(FollowerBehaviour))]
 [RequireComponent(typeof(VulnerableEffect))]
 public class JarotBossBehaviour: InterfaceEnemyBehaviour{
@@ -31,13 +32,16 @@ public class JarotBossBehaviour: InterfaceEnemyBehaviour{
   [SerializeField]
   private DamagerComponent _StrikeDamager;
 
+  [SerializeField]
+  private Animator _TargetAnimator;
+
 #if DEBUG
   [SerializeField]
   private GameObject DEBUG_TargetObject;
 #endif 
 
-  
   private MovementController _movement;
+  private HealthComponent _health_component;
   private FollowerBehaviour _follower_behaviour;
   private VulnerableEffect _vulnerable_effect;
 
@@ -50,29 +54,43 @@ public class JarotBossBehaviour: InterfaceEnemyBehaviour{
     _is_striking = true;
     _follower_behaviour.SetTargetFollow(null);
 
-    yield return new WaitForSeconds(_DelayStriking);
-
-    float _walk_val = _StrikingSpeed/_movement.MovementSpeed;
+    yield return null;
+    yield return new WaitForEndOfFrame();
 
     Vector2 _delta_target = _TargetEnemy.transform.position-transform.position;
     Vector2 _strike_direction = _delta_target.normalized;
+
+    _movement.LookAt(_strike_direction);
+
+    if(_TargetAnimator != null)
+      _TargetAnimator.SetInteger("striking_idx", 1);
+
+    yield return new WaitForSeconds(_DelayStriking);
+
+    if(_TargetAnimator != null)
+      _TargetAnimator.SetInteger("striking_idx", 2);
+
+    float _walk_val = _StrikingSpeed/_movement.MovementSpeed;
     Func<bool> _wallhug_check = _strike_direction.x > 0 ? _movement.IsWallHuggingRight: _movement.IsWallHuggingLeft;
-    Debug.Log("boss start striking"); 
+    DEBUGModeUtils.Log("boss start striking"); 
     _StrikeDamager.enabled = true;
     while(!_wallhug_check()){
       _movement.DoWalk(_walk_val * (_strike_direction.x > 0? 1: -1));;
       yield return new WaitForFixedUpdate();
     }
 
+    if(_TargetAnimator != null)
+      _TargetAnimator.SetInteger("striking_idx", 0);
+
     _StrikeDamager.enabled = false;
-    Debug.Log("boss stopped striking striking");
+    DEBUGModeUtils.Log("boss stopped striking striking");
     _movement.DoWalk(0);
 
     yield return new WaitForFixedUpdate();
     _movement.enabled = false;
 
     Vector2 _exaggeration_direction = new Vector2(_strike_direction.x > 0? -1: 1, 3).normalized;
-    Debug.Log(string.Format("exaggeration dir {0}", _exaggeration_direction));
+    DEBUGModeUtils.Log(string.Format("exaggeration dir {0}", _exaggeration_direction));
     _movement.GetRigidbody().AddForce(_exaggeration_direction * _BumpExaggerationForce);
 
     _vulnerable_effect.StartEffect();
@@ -84,6 +102,11 @@ public class JarotBossBehaviour: InterfaceEnemyBehaviour{
 
     _cooldown_strike = _StrikingCooldownDelay;
   }
+
+  private void _on_dead(){
+    SetEnemy(null);
+  }
+
 
 #if DEBUG
   private IEnumerator _debug_start(){
@@ -101,6 +124,9 @@ public class JarotBossBehaviour: InterfaceEnemyBehaviour{
 
 
   public void Start(){
+    _health_component = GetComponent<HealthComponent>();
+    _health_component.OnDeadEvent += _on_dead;
+
     _movement = GetComponent<MovementController>();
     _follower_behaviour = GetComponent<FollowerBehaviour>();
     _vulnerable_effect = GetComponent<VulnerableEffect>();
@@ -136,7 +162,7 @@ public class JarotBossBehaviour: InterfaceEnemyBehaviour{
     if(_distance_to_target > _MinStrikeRange)
       return;
 
-    Debug.Log("striking.");
+    DEBUGModeUtils.Log("striking.");
     StartCoroutine(_start_strike());
   }
 }

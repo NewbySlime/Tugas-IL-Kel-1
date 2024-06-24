@@ -11,6 +11,8 @@ public class BaseProgressUI: MonoBehaviour{
 
   private IMaterialReference _mat_reference;
 
+  private float _current_progress = 0;
+
 
   private IEnumerator _start_co_func(){
     yield return null;
@@ -34,7 +36,13 @@ public class BaseProgressUI: MonoBehaviour{
     StartCoroutine(_start_co_func());
   }
 
+
   public void SetProgress(float val){
+    _current_progress = val;
     _mat_reference.GetMaterial().SetFloat("_Progression", val);
+  }
+
+  public float GetProgress(){
+    return _current_progress;
   }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 
@@ -15,13 +14,7 @@ public class ItemDatabase: MonoBehaviour{
   /// <summary>
   /// Folder-folder yang digunakan untuk menyimpan data item (Prefabs)
   /// </summary>
-  static private string[] item_data_folder = {
-    "Assets/Items/BahanBahan",
-    "Assets/Items/RecipeDiscovery",
-    "Assets/Items/HealingItems",
-    "Assets/Items/Makanan",
-    "Assets/Items/Senjata"
-  };
+  static private string item_data_folder = "Items";
 
   private struct _item_metadata{
     public string item_id;
@@ -29,7 +22,6 @@ public class ItemDatabase: MonoBehaviour{
     public TypeDataStorage _data_storage;
 
     public GameObject _this;
-    public string guid;
   }
 
 
@@ -40,15 +32,12 @@ public class ItemDatabase: MonoBehaviour{
   
 
   public void Start(){
-    string[] _prefab_guid_list = AssetDatabase.FindAssets("t:prefab", item_data_folder);
-    foreach(string _guid in _prefab_guid_list){
-      string _object_path = AssetDatabase.GUIDToAssetPath(_guid);
-      GameObject _prefab_obj = AssetDatabase.LoadAssetAtPath<GameObject>(_object_path);
-
+    GameObject[] _prefab_list = Resources.LoadAll<GameObject>(item_data_folder);
+    foreach(GameObject _prefab_obj in _prefab_list){
       GameObject _tmp_gameobj = Instantiate(_prefab_obj);
       ItemMetadata _metadata = _tmp_gameobj.GetComponent<ItemMetadata>();
       if(_metadata == null){
-        Debug.LogError(string.Format("GUID: \"{0}\" is not an Item.", _guid));
+        Debug.LogError(string.Format("Prefab ({0}) is not an Item.", _prefab_obj.name));
         continue;
       }
 
@@ -57,12 +46,11 @@ public class ItemDatabase: MonoBehaviour{
 
       Destroy(_tmp_gameobj);
 
-      Debug.Log(string.Format("id: {0}", _metadata.GetItemID()));
+      DEBUGModeUtils.Log(string.Format("id: {0}", _metadata.GetItemID()));
       _item_map.Add(_metadata.GetItemID(), new _item_metadata{
         _this = _prefab_obj,
         _data_storage = _new_item_data,
-        item_id = _metadata.GetItemID(),
-        guid = _guid
+        item_id = _metadata.GetItemID()
       });
     }
 

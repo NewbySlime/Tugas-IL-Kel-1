@@ -19,7 +19,7 @@ namespace SequenceHelper{
 
 
     public void StartTriggerAsync(){
-      Debug.LogWarning(string.Format("reference id ({0})", _seq_data.NewRefID));
+      DEBUGModeUtils.LogWarning(string.Format("reference id ({0})", _seq_data.NewRefID));
       GameObject _game_object = ObjectReference.GetReferenceObject(_seq_data.RefID);
       if(_game_object == null)
         Debug.LogWarning(string.Format("Referenced Object is null, is this intentional? (NewRefID: {0}) (RefID: {1})", _seq_data.NewRefID, _seq_data.RefID));

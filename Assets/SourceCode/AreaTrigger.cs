@@ -20,9 +20,11 @@ public class AreaTrigger: MonoBehaviour{
 
 
   protected virtual void _OnObjectEnter(Collider2D collider){
-    if(!_game_handler.AreaTriggerEnable || !TriggerOnEnter || _SequenceHandler == null || _SequenceHandler.IsTriggering())
+    AreaTriggerActuator _trigger_actuator = collider.gameObject.GetComponent<AreaTriggerActuator>();
+    if(_trigger_actuator == null || !_trigger_actuator.TriggerOnEnter || !TriggerOnEnter || _SequenceHandler == null || _SequenceHandler.IsTriggering())
       return;
 
+    DEBUGModeUtils.Log(string.Format("Object entered {0}", collider.gameObject.name));
     _SequenceHandler.StartTriggerAsync();
   }
 

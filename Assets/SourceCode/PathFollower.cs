@@ -80,9 +80,9 @@ public class PathFollower: MonoBehaviour{
   private bool _path_found = false;
   private bool _path_calculating = false;
   private void _on_path_found(Path _new_path){
-    Debug.Log("Path found");
+    DEBUGModeUtils.Log("Path found");
     if(!_new_path.error && _new_path.path.Count >= 1){
-      Debug.Log("Calculating path...");
+      DEBUGModeUtils.Log("Calculating path...");
       bool _success = true;
 
       float _total_distance = 0;
@@ -98,7 +98,7 @@ public class PathFollower: MonoBehaviour{
         }
       }
 
-      Debug.Log("Path checked");
+      DEBUGModeUtils.Log("Path checked");
       _current_path = _new_path;
       _path_found = _success;
     }
@@ -140,7 +140,7 @@ public class PathFollower: MonoBehaviour{
   
   private IEnumerator _follow_path(Vector3 target_pos){
     _target_position = target_pos;
-    Debug.Log("finding new path...");
+    DEBUGModeUtils.Log("finding new path...");
     yield return _find_new_path(transform.position, (Vector2)target_pos);
 
     if(!_path_found){
@@ -152,7 +152,7 @@ public class PathFollower: MonoBehaviour{
       yield break;
     }
 
-    Debug.Log("Path found!");
+    DEBUGModeUtils.Log("Path found!");
     PathFoundEvent?.Invoke();
     if(_update_coroutine == null)
       _update_coroutine = StartCoroutine(_update_path());
@@ -170,7 +170,7 @@ public class PathFollower: MonoBehaviour{
         _current_path_idx = 0;
       }
 
-      Debug.Log("Check if stop...");
+      DEBUGModeUtils.Log("Check if stop...");
       GraphNode _current_node = null;
       int i = Mathf.Clamp(_current_path_idx, 0, _current_path.path.Count-1);
 
@@ -189,7 +189,7 @@ public class PathFollower: MonoBehaviour{
         _previous_pos = (Vector3)_graph_node.position;
         
 
-        Debug.Log(string.Format("Distance {2} {0}/{1}", _total_distance, _PathStopDistance, i));
+        DEBUGModeUtils.Log(string.Format("Distance {2} {0}/{1}", _total_distance, _PathStopDistance, i));
 
         if(i >= (_current_path.path.Count-1)){
           if(_total_distance < _PathStopDistance)
@@ -206,7 +206,7 @@ public class PathFollower: MonoBehaviour{
       if(_current_node == null)
         break;
 
-      Debug.Log("Still not stopping.");
+      DEBUGModeUtils.Log("Still not stopping.");
       _current_path_idx = i;
 
       Vector2 _general_direction = ((Vector3)_current_node.position-transform.position).normalized;
@@ -214,7 +214,7 @@ public class PathFollower: MonoBehaviour{
       bool _move_horizontally = true;
       RaycastHit2D _ray_hit = Physics2D.Raycast((Vector3)_current_node.position, Vector2.down, _CheckDistanceFromGround, _JumpCheckLayerMask);
       if(_ray_hit.collider == null || _ray_hit.collider.gameObject == gameObject){
-        Debug.Log("Check to jump...");
+        DEBUGModeUtils.Log("Check to jump...");
         bool _jumping_stuck = false;
         bool _skip_jump = false;
         GraphNode _ground_node = null;
@@ -246,7 +246,7 @@ public class PathFollower: MonoBehaviour{
           }
 
           _sum_direction += (Vector3)_next_node.position-_previous_pos;
-          Debug.Log(string.Format("sum direction {0}", _sum_direction));
+          DEBUGModeUtils.Log(string.Format("sum direction {0}", _sum_direction));
           _previous_pos = (Vector3)_next_node.position;
 
           if(_ray_hit.collider == null || _ray_hit.collider.gameObject == gameObject)
@@ -262,7 +262,7 @@ public class PathFollower: MonoBehaviour{
         }
 
         _general_direction = _sum_direction.normalized;
-        Debug.Log(string.Format("new general dir {0}", _general_direction));
+        DEBUGModeUtils.Log(string.Format("new general dir {0}", _general_direction));
 
         if(_CanJump && (!_skip_jump || _general_direction.y <= 0)){
           if(_ground_node == null){
@@ -271,7 +271,7 @@ public class PathFollower: MonoBehaviour{
           }
 
           float _y_angle = Mathf.Rad2Deg * Mathf.Asin(_general_direction.y);
-          Debug.Log(string.Format("check angle {0}", _y_angle));
+          DEBUGModeUtils.Log(string.Format("check angle {0}", _y_angle));
 
           if(_y_angle >= _TopJumpAngleThreshold || _y_angle <= _BottomJumpAngleThreshold){
             yield return _trigger_jump((Vector3)_ground_node.position);
@@ -285,10 +285,10 @@ public class PathFollower: MonoBehaviour{
       }
       
       if(_move_horizontally){
-        Debug.Log("Not jumping, going to move horizontally...");
+        DEBUGModeUtils.Log("Not jumping, going to move horizontally...");
         float _speed = _movement.MovementSpeed;
         float _supposed_speed = _total_distance/Time.fixedDeltaTime;
-        Debug.Log(string.Format("speed {0}/{1}", _speed, _supposed_speed));
+        DEBUGModeUtils.Log(string.Format("speed {0}/{1}", _speed, _supposed_speed));
 
         float _val = 1;
         if(_speed > _supposed_speed)
@@ -330,7 +330,7 @@ public class PathFollower: MonoBehaviour{
 
 
   public void FollowPathAsync(Vector3 target_pos){
-    Debug.Log(string.Format("is moving {0}", IsMoving()));
+    DEBUGModeUtils.Log(string.Format("is moving {0}", IsMoving()));
     if(IsMoving())
       return;
 

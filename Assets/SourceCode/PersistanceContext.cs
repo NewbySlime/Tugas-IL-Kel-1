@@ -81,9 +81,9 @@ public class PersistanceContext: MonoBehaviour{
 
   public bool ReadSave(){
     try{
-      Debug.Log("save read test");
+      DEBUGModeUtils.Log("save read test");
       FileStream _save_file = File.Open(string.Format("{0}/{1}", Application.persistentDataPath, _SaveFileLocation), FileMode.Open);
-      Debug.Log("save read test");
+      DEBUGModeUtils.Log("save read test");
 
       byte[] _filedata_raw = new byte[_save_file.Length];
       int _left_bytes_iter = (int)_save_file.Length;
@@ -97,24 +97,24 @@ public class PersistanceContext: MonoBehaviour{
         _bytes_iter += _read_i;
       }
 
-      Debug.Log("save read test");
+      DEBUGModeUtils.Log("save read test");
       _save_file.Close();
 
       string _filedata = Encoding.UTF8.GetString(_filedata_raw);
       string _jsondata = ConvertExt.FromBase64String(_filedata);
 
-      Debug.Log("save read test");
+      DEBUGModeUtils.Log("save read test");
       _JSONDataCollection _col = new _JSONDataCollection();
       JsonUtility.FromJsonOverwrite(_jsondata, _col);
 
-      Debug.Log("save read test");
+      DEBUGModeUtils.Log("save read test");
       _loaded_data.Clear();
       for(int i = 0; i < _col.data_list.Length; i++){
         _JSONData _data = _col.data_list[i];
         _loaded_data[_data.data_type_id] = _data;
       }
 
-      Debug.Log("save read test");
+      DEBUGModeUtils.Log("save read test");
       PersistanceLoadingEvent?.Invoke(this);
     }
     catch(FileNotFoundException){

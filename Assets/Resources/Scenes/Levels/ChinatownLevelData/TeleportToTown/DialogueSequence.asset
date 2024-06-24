@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e66c6366d904e98bc83428217d4fd7, type: 3}
+  m_Name: DialogueSequence
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"graph":{"variables":{"Kind":"Flow","collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[],"controlOutputDefinitions":[],"valueInputDefinitions":[],"valueOutputDefinitions":[],"title":null,"summary":null,"pan":{"x":128.8,"y":28.79996},"zoom":1.0,"elements":[{"coroutine":false,"defaultValues":{},"position":{"x":-202.0,"y":-140.0},"guid":"2594fbb1-4092-411c-a80b-bc385cae8877","$version":"A","$type":"Unity.VisualScripting.Start","$id":"9"},{"defaultValues":{},"position":{"x":573.0,"y":-141.0},"guid":"539df358-37cf-4574-bd7d-78dd0adeb946","$version":"A","$type":"SetDialogueToGameObject","$id":"11"},{"defaultValues":{"Dialogue":{"$content":"","$type":"System.String"}},"position":{"x":43.0,"y":-139.0},"guid":"681e0d53-312d-4d1c-8bc0-427a178b9367","$version":"A","$type":"AddDialogue","$id":"13"},{"type":"System.String","value":{"$content":"Apakah
+      ingin ke Tengah Kota?","$type":"System.String"},"defaultValues":{},"position":{"x":-239.0,"y":-24.0},"guid":"e21ff92b-28ee-4798-9148-3e69f05ad6f3","$version":"A","$type":"Unity.VisualScripting.Literal","$id":"15"},{"defaultValues":{},"position":{"x":375.0,"y":12.0},"guid":"438c1d4f-4c10-4da7-ac97-6eee9b8490b6","$version":"A","$type":"Unity.VisualScripting.This","$id":"17"},{"sourceUnit":{"$ref":"9"},"sourceKey":"trigger","destinationUnit":{"$ref":"13"},"destinationKey":"Input
+      Flow","guid":"2a3e4b7f-abec-408c-88b0-294f7b24eda0","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"13"},"sourceKey":"Output
+      Flow","destinationUnit":{"$ref":"11"},"destinationKey":"Input Flow","guid":"a30426f9-3ce3-45c9-bab4-a2ef53b2faa6","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"13"},"sourceKey":"DialogueData","destinationUnit":{"$ref":"11"},"destinationKey":"DialogueData","guid":"49de35f2-435f-43a8-b8bb-2804b64945f0","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"17"},"sourceKey":"self","destinationUnit":{"$ref":"11"},"destinationKey":"GameObject","guid":"d6c33de2-4a9b-4e1d-9f72-4b1ada94fcbd","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"15"},"sourceKey":"output","destinationUnit":{"$ref":"13"},"destinationKey":"Dialogue","guid":"eea707d3-a76a-4bc4-bcbe-5cf6e7d4d4ef","$type":"Unity.VisualScripting.ValueConnection"}],"$version":"A"}}'
+    _objectReferences: []

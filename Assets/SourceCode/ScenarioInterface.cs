@@ -26,9 +26,14 @@ public class ScenarioInterface: MonoBehaviour{
   private GameHandler _handler;
   private ScenarioDiagramVS _scenario_diagram;
 
+  public bool IsInitialized{private set; get;} = false;
+
 
   #nullable enable
   private void _check_current_scenario(){
+    if(!gameObject.activeInHierarchy)
+      return;
+
     bool _activate = !_ReverseFilter;
     while(true){
       if(!_scenario_diagram.GetEnableScenario(_Filter.ScenarioID)){
@@ -49,6 +54,7 @@ public class ScenarioInterface: MonoBehaviour{
         break;
 
       string _subscenario = _scenario.GetCurrentSubScenario();
+      DEBUGModeUtils.Log(string.Format("subscenario check {0}/{1}", _subscenario, _Filter.SubScenarioID));
       if(_subscenario != _Filter.SubScenarioID){
         _activate = _ReverseFilter;
         break;
@@ -60,6 +66,14 @@ public class ScenarioInterface: MonoBehaviour{
     SetInterfaceActive(_activate);
   }
   #nullable disable
+
+  private IEnumerator _set_interface_active(bool flag){
+    yield return null;
+    yield return new WaitForEndOfFrame();
+
+    for(int i = 0; i < transform.childCount; i++)
+      transform.GetChild(i).gameObject.SetActive(flag);
+  }
 
   private void _scenario_state_changed(string scenario){
     if(_Filter.ScenarioID != scenario)
@@ -76,7 +90,7 @@ public class ScenarioInterface: MonoBehaviour{
   }
 
   private void _scenario_finished(string scenario){
-    Debug.Log("scenario interface finished");
+    DEBUGModeUtils.Log("scenario interface finished");
 
     if(_Filter.ScenarioID != scenario)
       return;
@@ -85,8 +99,8 @@ public class ScenarioInterface: MonoBehaviour{
   }
 
 
-  private void _game_scene_changed(string scene_id, GameHandler.GameContext context){
-    Debug.Log("Game Handler scene changed");
+  private void _game_scene_initializing(string scene_id, GameHandler.GameContext context){
+    DEBUGModeUtils.Log("Game Handler scene changed");
     _check_current_scenario();
     _scenario_diagram.ScenarioChangedStateEvent += _scenario_state_changed;
 
@@ -96,18 +110,19 @@ public class ScenarioInterface: MonoBehaviour{
       return;
     }
 
+    DEBUGModeUtils.Log(string.Format("scenario {0} idx {1}", _Filter.ScenarioID, _this_scenario.GetCurrentSubScenario()));
     _this_scenario.ScenarioSubscenarioChangedEvent += _subscenario_state_changed;
     _this_scenario.ScenarioFinishedevent += _scenario_finished;
   }
 
   private void _game_scene_removed(){
-    _handler.SceneChangedFinishedEvent -= _game_scene_changed;
+    _handler.SceneChangedInitializingEvent -= _game_scene_initializing;
     _handler.SceneRemovingEvent -= _game_scene_removed;
     _scenario_diagram.ScenarioChangedStateEvent -= _scenario_state_changed;
 
     ScenarioHandlerVS _this_scenario = _scenario_diagram.GetScenario(_Filter.ScenarioID);
     if(_this_scenario == null){
-      Debug.LogWarning(string.Format("Scenario not found {0}", _Filter.ScenarioID));
+      DEBUGModeUtils.LogWarning(string.Format("Scenario not found {0}", _Filter.ScenarioID));
       return;
     }
 
@@ -116,20 +131,22 @@ public class ScenarioInterface: MonoBehaviour{
   }
 
 
-  ~ScenarioInterface(){
-    _game_scene_removed();
+  public void OnDestroy(){
+    DEBUGModeUtils.Log("scenario interface destroy");
+    if(IsInitialized)
+      _game_scene_removed();
   }
 
 
   public void Start(){
-    Debug.Log("ScenarioInterface Changed.");
+    DEBUGModeUtils.Log("ScenarioInterface Changed.");
     _handler = FindAnyObjectByType<GameHandler>();
     if(_handler == null){
       Debug.LogError("Cannot get GameHandler.");
       throw new MissingComponentException();
     }
 
-    _handler.SceneChangedFinishedEvent += _game_scene_changed;
+    _handler.SceneChangedInitializingEvent += _game_scene_initializing;
     _handler.SceneRemovingEvent += _game_scene_removed;
 
     _scenario_diagram = FindAnyObjectByType<ScenarioDiagramVS>();
@@ -138,12 +155,23 @@ public class ScenarioInterface: MonoBehaviour{
       throw new MissingComponentException();
     }
 
-    if(_handler.SceneInitialized)
-      _game_scene_changed(_handler.GetCurrentSceneID(), _handler.GetCurrentSceneContext());
+    if(_handler.SceneInitializing)
+      _game_scene_initializing(_handler.GetCurrentSceneID(), _handler.GetCurrentSceneContext());
+
+    IsInitialized = true;
   }
 
   public void SetInterfaceActive(bool active){
-    for(int i = 0; i < transform.childCount; i++)
-      transform.GetChild(i).gameObject.SetActive(active);
+    if(!gameObject.activeInHierarchy)
+      return;
+
+    StartCoroutine(_set_interface_active(active));
+  }
+
+  public void OnEnable(){
+    if(!IsInitialized)
+      return;
+      
+    _check_current_scenario();
   }
 }

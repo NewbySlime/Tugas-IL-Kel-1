@@ -1,0 +1,76 @@
+{
+    "name": "AnyKeyInput",
+    "maps": [
+        {
+            "name": "KeyboardAndMouse",
+            "id": "e5b3f099-2f1f-446b-8c0b-d5e6d8b7cf88",
+            "actions": [
+                {
+                    "name": "AnyKeyPressed",
+                    "type": "Button",
+                    "id": "8e2c23cf-c854-472e-bab9-4c575b3ff8af",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SkipKeyPressed",
+                    "type": "Button",
+                    "id": "c284ddea-b8df-4d42-b324-feee90f97c6a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "dde24eb8-7208-4750-8c4a-295dcd616acd",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AnyKeyPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5e28837e-d6fe-4479-8eeb-31102b97dd4f",
+                    "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AnyKeyPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ca4b895e-b943-46aa-b7ec-fe1eb61780d1",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkipKeyPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4e661219-ebcc-408e-8b94-8914532a57d5",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkipKeyPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

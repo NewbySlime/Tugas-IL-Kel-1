@@ -1,21 +1,17 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 
 
 public class SequenceDatabase: MonoBehaviour{
-  private static string[] sequence_data_folder = {
-    "Assets/Scenes/PrefabObjects/Sequences"
-  };
+  private static string sequence_data_folder = "Scenes/PrefabObjects/Sequences";
 
 
   private struct _sequence_metadata{
     public string sequence_id;
 
     public GameObject sequence_prefab;
-    public string guid;
   }
 
   [SerializeField]
@@ -32,28 +28,24 @@ public class SequenceDatabase: MonoBehaviour{
 
 
   public void Start(){
-    Debug.Log("Sequence Database start");
-    string[] _prefab_guid_list = AssetDatabase.FindAssets("t:prefab", sequence_data_folder);
-    foreach(string _guid in _prefab_guid_list){
-      string _path = AssetDatabase.GUIDToAssetPath(_guid);
-      GameObject _prefab_obj = AssetDatabase.LoadAssetAtPath<GameObject>(_path);
-
+    Debug.Log("SequenceDatabase Starting...");
+    GameObject[] _prefab_list = Resources.LoadAll<GameObject>(sequence_data_folder);
+    foreach(GameObject _prefab_obj in _prefab_list){
       GameObject _tmp_instantiate = Instantiate(_prefab_obj);
       while(true){
         ISequenceData[] _seq_data = _tmp_instantiate.GetComponents<ISequenceData>();
         if(_seq_data.Length <= 0){
-          Debug.LogError(string.Format("Cannot find ISequenceData for GUID ({0})", _guid));
+          Debug.LogError(string.Format("Cannot find ISequenceData in Prefab ({0})", _prefab_obj.name));
           break;
         }
         else if(_seq_data.Length > 1){
-          Debug.LogWarning(string.Format("Object has more than 1 ISequenceData in GUID ({0})", _guid));
+          Debug.LogWarning(string.Format("Object has more than 1 ISequenceData in Prefab ({0})", _prefab_obj.name));
         }
 
         ISequenceData _data = _seq_data[0];
         _sequence_map[_data.GetSequenceID()] = new _sequence_metadata{
           sequence_id = _data.GetSequenceID(),
-          sequence_prefab = _prefab_obj,
-          guid = _guid
+          sequence_prefab = _prefab_obj
         };
 
         break;

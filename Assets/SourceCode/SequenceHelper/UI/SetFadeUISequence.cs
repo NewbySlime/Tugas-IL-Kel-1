@@ -10,6 +10,8 @@ namespace SequenceHelper{
 
     public struct SequenceData{
       public bool FadeToShow;
+      public bool SkipAnimation;
+      public bool WaitUntilFinish;
     }
 
 
@@ -30,13 +32,11 @@ namespace SequenceHelper{
 
 
     public void StartTriggerAsync(){
-      _fade_ui.FadeToCover = _seq_data.FadeToShow;
-
-      _fade_ui.StartTimerAsync();
+      StartCoroutine(UIUtility.SetHideUI(_fade_ui.gameObject, !_seq_data.FadeToShow, _seq_data.SkipAnimation));
     }
 
     public bool IsTriggering(){
-      return !_fade_ui.TimerFinished();
+      return _seq_data.WaitUntilFinish && !TimingBaseUI.AllTimerFinished(_fade_ui);
     }
 
 
@@ -60,12 +60,18 @@ namespace SequenceHelper{
   public class SetFadeUISequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _fade_cover_input;
+    [DoNotSerialize]
+    private ValueInput _skip_animation_input;
+    [DoNotSerialize]
+    private ValueInput _wait_until_finished_input;
 
 
     protected override void Definition(){
       base.Definition();
 
       _fade_cover_input = ValueInput("FadeCover", true);
+      _skip_animation_input = ValueInput("SkipAnimation", false);
+      _wait_until_finished_input = ValueInput("WaitUntilFinished", true);
     }
 
 
@@ -73,7 +79,9 @@ namespace SequenceHelper{
       init_data = new(){
         SequenceID = SetFadeUISequence.SequenceID,
         SequenceData = new SetFadeUISequence.SequenceData{
-          FadeToShow = flow.GetValue<bool>(_fade_cover_input)
+          FadeToShow = flow.GetValue<bool>(_fade_cover_input),
+          SkipAnimation = flow.GetValue<bool>(_skip_animation_input),
+          WaitUntilFinish = flow.GetValue<bool>(_wait_until_finished_input)
         }
       };
     }

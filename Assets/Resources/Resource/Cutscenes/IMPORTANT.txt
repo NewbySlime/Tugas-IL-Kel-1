@@ -1,0 +1,6 @@
+NOTE WHEN CLONING THIS REPO
+
+It's important to fill in the missing Cutscene files before entering Unity's editor. As ignoring it will make the Editor acknowledge it as "Missing Video" and fixing it could take time as it is used across multiple Level Sequences.
+
+Why the Cutscene Videos are missing from the Repo?
+Cutscenes used in the project takes a lot of storage space. So to not trigger Github's Storage Error, the videos are removed from the repo.

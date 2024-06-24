@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEditor;
 using UnityEngine;
 
 
@@ -8,9 +6,7 @@ public class CharacterDatabase: MonoBehaviour{
   public delegate void OnInitialized();
   public event OnInitialized OnInitializedEvent;
 
-  private static string[] character_data_folder = {
-    "Assets/Characters"
-  };
+  private static string character_data_folder = "Characters";
 
 
   private struct _character_metadata{
@@ -20,7 +16,6 @@ public class CharacterDatabase: MonoBehaviour{
     public TypeDataStorage data_storage;
 
     public GameObject _this;
-    public string guid;
   }
 
 
@@ -34,15 +29,12 @@ public class CharacterDatabase: MonoBehaviour{
 
 
   public void Start(){
-    string[] _prefab_guid_list = AssetDatabase.FindAssets("t:prefab", character_data_folder);
-    foreach(string _guid in _prefab_guid_list){
-      string _object_path = AssetDatabase.GUIDToAssetPath(_guid);
-      GameObject _prefab_obj = AssetDatabase.LoadAssetAtPath<GameObject>(_object_path);
-
+    GameObject[] _prefab_list = Resources.LoadAll<GameObject>(character_data_folder);
+    foreach(GameObject _prefab_obj in _prefab_list){
       GameObject _tmp_gameobj = Instantiate(_prefab_obj);
       CharacterMetadata _metadata = _tmp_gameobj.GetComponent<CharacterMetadata>();
       if(_metadata == null){
-        Debug.LogError(string.Format("GUID: '{0}' is not an Character.", _guid));
+        Debug.LogError(string.Format("Prefab ({0}) is not an Character.", _prefab_obj.name));
         continue;
       }
 
@@ -58,7 +50,6 @@ public class CharacterDatabase: MonoBehaviour{
         data_storage = _character_data,
 
         _this = _prefab_obj,
-        guid = _guid
       });
     }
 

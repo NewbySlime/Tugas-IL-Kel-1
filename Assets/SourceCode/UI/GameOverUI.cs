@@ -23,7 +23,7 @@ public class GameOverUI: MonoBehaviour{
 
 
   private void _on_restart_button(){
-    Debug.Log("restart game");
+    DEBUGModeUtils.Log("restart game");
     _game_handler.RestartFromLastCheckpoint();
   }
 

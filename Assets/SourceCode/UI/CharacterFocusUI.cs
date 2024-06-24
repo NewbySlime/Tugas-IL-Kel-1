@@ -26,7 +26,7 @@ public class CharacterFocusUI: MonoBehaviour{
 
 
   public void Start(){
-    Debug.Log("starting");
+    DEBUGModeUtils.Log("starting");
     _character_database = FindAnyObjectByType<CharacterDatabase>();
     if(_character_database == null){
       Debug.LogError("Cannot find database for Characters.");
@@ -39,21 +39,26 @@ public class CharacterFocusUI: MonoBehaviour{
   }
 
 
-  public void SetCharacter(string character_id){
+  public bool SetCharacter(string character_id){
     TypeDataStorage _data = _character_database.GetDataStorage(character_id);
     if(_data == null){
       Debug.LogWarning(string.Format("Cannot get Character with ID: '{0}'.", character_id));
-      return;
+      return false;
     }
 
     CharacterSpriteData.CharacterData _sprite_data = _data.GetData<CharacterSpriteData.CharacterData>();
     if(_sprite_data == null){
       Debug.LogWarning(string.Format("Character (ID: '{0}') does not have CharacterSpriteData.", character_id));
-      return;
+      return false;
     }
+
+    // skip if no FullBody sprite
+    if(_sprite_data.FullBody == null)
+      return false;
 
     _TextureUI.sprite = _sprite_data.FullBody;
     //_TextureUI.material.SetTexture("_MainTex", _sprite_data.FullBody);
+    return true;
   }
 
   public IEnumerator UnfocusCharacter(){

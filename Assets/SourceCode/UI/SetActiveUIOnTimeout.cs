@@ -11,10 +11,10 @@ public class SetActiveUIOnTimeout: TimingBaseUI{
   public bool SetActiveTarget = true;
 
   private IEnumerator _start_timer(){
-    Debug.Log("starting timer");
+    DEBUGModeUtils.Log("starting timer");
     yield return new WaitUntil(() => AllTimerFinished(this));
 
-    Debug.Log(string.Format("timer finished, {0}", SetActiveTarget));
+    DEBUGModeUtils.Log(string.Format("timer finished, {0}", SetActiveTarget));
     _TargetObject.SetActive(SetActiveTarget);
   }
 

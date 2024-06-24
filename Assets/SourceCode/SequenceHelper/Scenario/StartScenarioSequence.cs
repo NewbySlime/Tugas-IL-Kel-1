@@ -47,8 +47,8 @@ namespace SequenceHelper{
   }
 
 
-[UnitTitle("Start Scenario")]
-  [UnitCategory("Sequence")]
+  [UnitTitle("Start Scenario")]
+  [UnitCategory("Sequence/Scenario")]
   public class StartScenarioSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _scenario_id_input;

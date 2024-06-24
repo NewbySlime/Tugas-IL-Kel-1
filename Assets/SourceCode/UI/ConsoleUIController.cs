@@ -41,11 +41,11 @@ public class ConsoleUIController: MonoBehaviour, ISelectHandler, IDeselectHandle
 
     string _combined_str = "";
     for(int i = 0; i < _splits.Length; i++){
-      Debug.Log("getting split");
-      Debug.Log(i);
+      DEBUGModeUtils.Log("getting split");
+      DEBUGModeUtils.Log(i);
       string str = _splits[i];
 
-      Debug.Log(string.Format("split str: {0}", str));
+      DEBUGModeUtils.Log(string.Format("split str: {0}", str));
       if(str.Length <= 0)
         continue;
 
@@ -66,7 +66,7 @@ public class ConsoleUIController: MonoBehaviour, ISelectHandler, IDeselectHandle
         Array.Resize(ref _results, _results.Length+1);
         _results[_results.Length-1] = str;
 
-        Debug.Log(string.Format("result size {0}", _results.Length));
+        DEBUGModeUtils.Log(string.Format("result size {0}", _results.Length));
       }
     }
 
@@ -139,9 +139,9 @@ public class ConsoleUIController: MonoBehaviour, ISelectHandler, IDeselectHandle
   /// </summary>
   /// <param name="command">Command yang mau dijalankan kepada Game</param>
   public void SendCommand(string command){
-    Debug.Log(string.Format("command: {0}", command));
+    DEBUGModeUtils.Log(string.Format("command: {0}", command));
     string[] _command_split = _SplitCommandString(command);
-    Debug.Log(_command_split.Length);
+    DEBUGModeUtils.Log(_command_split.Length);
     gameObject.SendMessage("ConsoleHandler_CommandAccept", _command_split,  SendMessageOptions.DontRequireReceiver);
   }
 

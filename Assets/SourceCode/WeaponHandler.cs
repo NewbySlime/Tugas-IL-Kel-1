@@ -19,7 +19,7 @@ public class WeaponHandler: MonoBehaviour{
 
 
   private IEnumerator _trigger_weapon(){
-    Debug.Log(string.Format("firing has value {0}", _weapon_item.HasValue));
+    DEBUGModeUtils.Log(string.Format("firing has value {0}", _weapon_item.HasValue));
     if(!_weapon_item.HasValue)
       yield break;
 
@@ -30,7 +30,7 @@ public class WeaponHandler: MonoBehaviour{
     yield return new WaitForEndOfFrame();
 
     try{
-      Debug.Log("firing damager instantiated");
+      DEBUGModeUtils.Log("firing damager instantiated");
       DamagerComponent _damager = _projectile.GetComponent<DamagerComponent>();
       if(_damager == null)
         throw new Exception(string.Format("Projectile doesn't have DamagerComponent. (Item ID: '{0}')", _weapon_id));
@@ -40,14 +40,14 @@ public class WeaponHandler: MonoBehaviour{
       _damager.SetDamagerSprite(_weapon_data.ProjectileTexture);
       _damager.SetDamagerExcludeLayer(1 << gameObject.layer);
 
-      Debug.Log(string.Format("exclude layer: {0}", gameObject.layer));
+      DEBUGModeUtils.Log(string.Format("exclude layer: {0}", gameObject.layer));
 
       _damager.TriggerDamager(new DamagerComponent.DamagerTriggerData{
         StartPosition = transform.position,
         Direction = _weapon_direction
       });
 
-      Debug.Log("firing damager triggered");
+      DEBUGModeUtils.Log("firing damager triggered");
     }
     catch(Exception e){
       Debug.LogError(string.Format("Something went wrong when firing weapon. (ID: {0})", _weapon_id));
@@ -110,6 +110,10 @@ public class WeaponHandler: MonoBehaviour{
     _weapon_id = item_id;
     _weapon_item = _weapon_data;
     return true;
+  }
+
+  public string GetWeaponItem(){
+    return _weapon_id;
   }
 
 

@@ -67,7 +67,7 @@ public class QuestHandlerVS: MonoBehaviour, IQuestHandler, ILoadingQueue{
   }
 
   private void _quest_finished(IQuestHandler quest){
-    Debug.Log("another quest finished.");
+    DEBUGModeUtils.Log("another quest finished.");
     if(_unfinished_quest.Contains(quest))
       _unfinished_quest.Remove(quest);
 
@@ -102,7 +102,7 @@ public class QuestHandlerVS: MonoBehaviour, IQuestHandler, ILoadingQueue{
 
 
   private IEnumerator _update_quest(){
-    Debug.Log(string.Format("scenario update quest {0} {1}", _quest_database == null, _init_data == null));
+    DEBUGModeUtils.Log(string.Format("scenario update quest {0} {1}", _quest_database == null, _init_data == null));
     if(_quest_database == null || _init_data == null)
       yield break;
 
@@ -146,7 +146,7 @@ public class QuestHandlerVS: MonoBehaviour, IQuestHandler, ILoadingQueue{
       _metadata._data.SetQuestData(_metadata._init_data.QuestData);
 
     yield return new WaitUntil(_check_loading_list);
-    Debug.Log("scenario quest initialized");
+    DEBUGModeUtils.Log("scenario quest initialized");
     IsInitialized = true;
   }
 
@@ -209,8 +209,8 @@ public class QuestHandlerVS: MonoBehaviour, IQuestHandler, ILoadingQueue{
 
 
   public void SetInitData(InitQuestInfo init_data){
-    Debug.Log("scenario set quest init data");
-    Debug.Log(string.Format("scenario quest data {0}", init_data == null));
+    DEBUGModeUtils.Log("scenario set quest init data");
+    DEBUGModeUtils.Log(string.Format("scenario quest data {0}", init_data == null));
 
     _init_data = init_data;
     StartCoroutine(_update_quest());

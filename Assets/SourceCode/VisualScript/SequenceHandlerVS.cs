@@ -24,6 +24,8 @@ public class SequenceHandlerVS: MonoBehaviour, ISequenceAsync{
 
   private bool _sequence_triggering = false;
 
+  public bool SequenceInitializeDataSet{get => _init_data != null;}
+
 
   private IEnumerator _update_sequence(){
     if(_init_data == null || _seq_database == null)
@@ -53,6 +55,7 @@ public class SequenceHandlerVS: MonoBehaviour, ISequenceAsync{
       }
 
       _interface.transform.SetParent(transform);
+      _interface.name = "SequenceInterface" + _sequences_list.Count.ToString();
 
       foreach(SequenceInitializeData.DataPart _data in _list){
         GameObject _prefab = _seq_database.GetSequencePrefab(_data.SequenceID);
@@ -72,22 +75,22 @@ public class SequenceHandlerVS: MonoBehaviour, ISequenceAsync{
         _seq_data.SetSequenceData(_data.SequenceData);
       }
 
-      Debug.Log("Sequence add");
+      DEBUGModeUtils.Log("Sequence add");
       _sequences_list.Add(_interface);
     }
   }
 
 
   private IEnumerator _sequence_start(){
-    Debug.Log("Sequence trigger start");
+    DEBUGModeUtils.Log("Sequence trigger start");
     _sequence_triggering = true;
     foreach(SequenceInterface _seq_interface in _sequences_list){
-      Debug.Log("Sequence interface trigger.");
+      DEBUGModeUtils.Log("Sequence interface trigger.");
       yield return _seq_interface.StartTrigger();
     }
 
     _sequence_triggering = false;
-    Debug.Log("Sequence trigger finished");
+    DEBUGModeUtils.Log("Sequence trigger finished");
   }
 
 

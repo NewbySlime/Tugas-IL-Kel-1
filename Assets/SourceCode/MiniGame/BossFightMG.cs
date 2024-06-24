@@ -59,7 +59,7 @@ public class BossFightMG: EnemyFightMG{
   protected override void _OnGameFinished(ResultCase result){
     base._OnGameFinished(result);
 
-    Debug.Log("mini game hide");
+    DEBUGModeUtils.Log("mini game hide");
     _ui_handler.SetMainHUDUIMode(GameUIHandler.MainHUDUIEnum.BossHealthBarUI, false);
   }
 

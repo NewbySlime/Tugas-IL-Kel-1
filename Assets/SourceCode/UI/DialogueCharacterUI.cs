@@ -39,7 +39,7 @@ public class DialogueCharacterUI: MonoBehaviour{
   public static InputFocusContext.ContextEnum InputContext = InputFocusContext.ContextEnum.UI;
 
 
-  private struct _show_character_data{
+  private class _show_character_data{
     public CharacterFocusUI character_ui;
     public ShowLayoutPosition position;
   }
@@ -126,6 +126,8 @@ public class DialogueCharacterUI: MonoBehaviour{
 
     _show_character_data _data = _character_ui_instance_list[character_id];
     _character_ui_instance_list.Remove(character_id);
+    if(_data.character_ui == null)
+      yield break;
 
     FadeUI _fadeui = _data.character_ui.GetComponent<FadeUI>();
     if(!skip_animation && _fadeui != null){
@@ -138,8 +140,12 @@ public class DialogueCharacterUI: MonoBehaviour{
   }
 
   private void _character_unfocus_all(){
-    foreach(_show_character_data _data in _character_ui_instance_list.Values)
+    foreach(_show_character_data _data in _character_ui_instance_list.Values){
+      if(_data.character_ui == null)
+        continue;
+
       StartCoroutine(_data.character_ui.UnfocusCharacter());
+    }
   }
 
 
@@ -159,8 +165,8 @@ public class DialogueCharacterUI: MonoBehaviour{
     }
 
     _new_ui.transform.SetAsLastSibling();
-
     CharacterFocusUI _character_ui = _new_ui.GetComponent<CharacterFocusUI>();
+
     _show_character_data _new_data = new _show_character_data{
       character_ui = _character_ui,
       position = position
@@ -171,29 +177,40 @@ public class DialogueCharacterUI: MonoBehaviour{
     yield return new WaitForNextFrameUnit();
     yield return new WaitForEndOfFrame();
 
-    _character_ui.SetCharacter(character_id);
-    yield return _character_ui.UnfocusCharacter();
+    if(_character_ui.SetCharacter(character_id)){
+      yield return _character_ui.UnfocusCharacter();
 
-    _check_max_character_show();
-    
-    RectTransform _rt_transform = _character_ui.GetComponent<RectTransform>();
-    _rt_transform.localScale = Vector3.one;
+      _check_max_character_show();
+      
+      RectTransform _rt_transform = _character_ui.GetComponent<RectTransform>();
+      _rt_transform.localScale = Vector3.one;
 
-    if(force_focus)
-      yield return _character_ui.FocusCharacter();
+      if(force_focus)
+        yield return _character_ui.FocusCharacter();
+    }
+    else{
+      Destroy(_new_ui);
+      _new_data.character_ui = null;
+    }
   }
 
 
-  private IEnumerator _character_show(string character_id){
+  private IEnumerator _character_show(string character_id, bool reorder = true){
     if(!_character_ui_instance_list.ContainsKey(character_id)){
       Debug.LogWarning(string.Format("Character is not yet instantiated in UI. (Character ID: '{0}')", character_id));
       yield break;
     }
 
     _show_character_data _data = _character_ui_instance_list[character_id];
+    if(_data.character_ui == null)
+      yield break;
 
-    _data.character_ui.transform.SetAsLastSibling();
+    if(reorder)
+      _data.character_ui.transform.SetAsLastSibling();
+
     _check_max_character_show();
+
+    UIUtility.RefreshLayoutGroupsImmediateAndRecursive(gameObject);
 
     yield return _data.character_ui.FocusCharacter();
   }
@@ -207,21 +224,21 @@ public class DialogueCharacterUI: MonoBehaviour{
   }
 
   private IEnumerator _dialogue_start(DialogueUI.DialogueSequence dialogue){
-    Debug.Log("dialogue start"); 
+    DEBUGModeUtils.Log("dialogue start"); 
     
     _dialogue_finished = false;
     _input_context.RegisterInputObject(this, InputFocusContext.ContextEnum.UI);
 
-    Debug.Log("dialogue reset highlight character"); 
+    DEBUGModeUtils.Log("dialogue reset highlight character"); 
     ClearCharacterUIFrom(ShowLayoutPosition.Main, true);
     ClearCharacterUIFrom(ShowLayoutPosition.Secondary, true);
     
-    Debug.Log("dialogue start looping");
-    Debug.Log(string.Format("Dialogue Count {0}", dialogue.Sequence.Count));
+    DEBUGModeUtils.Log("dialogue start looping");
+    DEBUGModeUtils.Log(string.Format("Dialogue Count {0}", dialogue.Sequence.Count));
     for(int i = 0; i < dialogue.Sequence.Count; i++){
       DialogueUI.DialogueData _current_data = dialogue.Sequence[i];
 
-      Debug.Log("dialogue unfocus all");
+      DEBUGModeUtils.Log("dialogue unfocus all");
       // set focus and unfocus on certain character ui
       _character_unfocus_all();
       if(_current_data.DialogueCharacterUIData != null){
@@ -236,17 +253,34 @@ public class DialogueCharacterUI: MonoBehaviour{
       yield return new WaitForNextFrameUnit();
       yield return new WaitForEndOfFrame();
 
-      Debug.Log("dialogue highlight characters");
+      DEBUGModeUtils.Log("dialogue highlight characters");
       string _main_name = "";
       string _secondary_name = "";
-      foreach(string _talk_id in _current_data.CharactersTalking){
-        StartCoroutine(_character_show(_talk_id));
 
+      bool _main_reorder = true;
+      bool _secondary_reorder = true;
+      foreach(string _talk_id in _current_data.CharactersTalking){
         if(!_character_ui_instance_list.ContainsKey(_talk_id))
           continue;
 
-        Debug.Log("dialogue highlight another character");
+        DEBUGModeUtils.Log("dialogue highlight another character");
+        
         _show_character_data _data = _character_ui_instance_list[_talk_id];
+        bool _trigger_reorder = true;
+        switch(_data.position){
+          case ShowLayoutPosition.Main:{
+            _trigger_reorder = _main_reorder;
+            _main_reorder = false;
+          }break;
+
+          case ShowLayoutPosition.Secondary:{
+            _trigger_reorder = _secondary_reorder;
+            _secondary_reorder = false;
+          }break;
+        }
+
+        StartCoroutine(_character_show(_talk_id, _trigger_reorder));
+
         TypeDataStorage _character_data = _character_database.GetDataStorage(_talk_id);
         if(_character_data == null){
           Debug.LogWarning(string.Format("Cannot get Character (ID: '{0}') data", _talk_id));
@@ -265,7 +299,7 @@ public class DialogueCharacterUI: MonoBehaviour{
         }
       }
 
-      Debug.Log("dialogue setting names");
+      DEBUGModeUtils.Log("dialogue setting names");
       // set names
       _CharacterMainNameContainer.SetActive(_main_name.Length > 0);
       _CharacterMainNameText.text = _main_name;
@@ -273,7 +307,7 @@ public class DialogueCharacterUI: MonoBehaviour{
       _CharacterSecondaryNameContainer.SetActive(_secondary_name.Length > 0);
       _CharacterSecondaryNameText.text = _secondary_name;
 
-      Debug.Log("dialogue start dialogue");
+      DEBUGModeUtils.Log("dialogue start dialogue");
       // start dialogue
       _DialogueBase.ChangeDialogue(_current_data);
       yield return _DialogueBase.IsDialogueFinished();
@@ -283,7 +317,7 @@ public class DialogueCharacterUI: MonoBehaviour{
       yield return new WaitUntil(() => !_DialogueBase.IsSequenceTriggering());
       _next_dialogue_flag = false;
 
-      Debug.Log("dialogue sequence finished");
+      DEBUGModeUtils.Log("dialogue sequence finished");
     }
 
     _dialogue_finished_function();
@@ -299,22 +333,6 @@ public class DialogueCharacterUI: MonoBehaviour{
     ObjectReference.SetReferenceObject(ObjectRef, gameObject);
   }
 
-
-  public IEnumerator _test_start(){
-    yield return new WaitForNextFrameUnit();
-    yield return new WaitForEndOfFrame();
-
-    StartCoroutine(_character_create(ShowLayoutPosition.Main, "yadi"));
-
-    StartCoroutine(_character_create(ShowLayoutPosition.Secondary, "erik"));
-    StartCoroutine(_character_create(ShowLayoutPosition.Secondary, "mirna"));
-
-    yield return new WaitForNextFrameUnit();
-    yield return new WaitForEndOfFrame();
-
-    StartCoroutine(_character_show("yadi"));
-    StartCoroutine(_character_show("mirna"));
-  }
 
   public void Start(){
     GameObject _test_obj = Instantiate(_CharacterShowPrefabTemplate);
@@ -368,7 +386,7 @@ public class DialogueCharacterUI: MonoBehaviour{
     if(!IsDialogueFinished())
       CancelDialogue();
 
-    Debug.Log("triggering dialogue async");
+    DEBUGModeUtils.Log("triggering dialogue async");
     _dialogue_coroutine = StartCoroutine(_dialogue_start(dialogue));
   }
 

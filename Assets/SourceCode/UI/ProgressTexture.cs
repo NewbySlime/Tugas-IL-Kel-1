@@ -18,7 +18,7 @@ public class ProgressTexture: MonoBehaviour{
 
 
   public void Start(){
-    Debug.Log("progress starting.");
+    DEBUGModeUtils.Log("progress starting.");
     _target_meterial = new Material(_SpriteMaterial);
     _TargetSpriteManipulation.material = _target_meterial;
 

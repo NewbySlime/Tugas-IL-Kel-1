@@ -15,7 +15,7 @@ public class LevelTeleportHandler: CheckpointHandler{
 
 
   private void _on_teleport_enter(Collider2D collider){
-    Debug.LogWarning("teleport triggered");
+    DEBUGModeUtils.LogWarning("teleport triggered");
     PlayerController _player = collider.gameObject.GetComponent<PlayerController>();
     if(_player == null || !_player.TriggerAvailable)
       return;

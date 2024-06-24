@@ -10,6 +10,8 @@ namespace SequenceHelper{
     public struct SequenceData{
       public Vector3 Position;
       public ObjectReference.ObjRefID RefID;
+
+      public bool WaitUntilOnPosition;
     }
 
     private SequenceData _seq_data;

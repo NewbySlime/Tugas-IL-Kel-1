@@ -5,6 +5,11 @@ using UnityEngine;
 
 
 public class FollowerCamera2D: MonoBehaviour{
+  public static ObjectReference.ObjRefID DefaultRefID = new(){
+    ID = "scene_camera_obj"
+  };
+
+
   private struct _follower_data{
     public GameObject _target;
     
@@ -27,16 +32,36 @@ public class FollowerCamera2D: MonoBehaviour{
 
   private Vector3 _last_position;
 
+  private GameHandler _game_handler;
   private GameTimeHandler _time_handler;
 
   private float _z_position = 0;
 
   private float _current_vel = 0;
 
-  public float _SmoothTime;
+  private float _smooth_time;
+
+
+  private void _on_scene_changed(string scnee_id, GameHandler.GameContext context){
+    ObjectReference.SetReferenceObject(DefaultRefID, gameObject);
+  }
+
+  private void _on_scene_removed(){
+    _game_handler.SceneChangedFinishedEvent -= _on_scene_changed;
+    _game_handler.SceneRemovingEvent -= _on_scene_removed;
+  }
 
 
   public void Start(){
+    _game_handler = FindAnyObjectByType<GameHandler>();
+    if(_game_handler == null){
+      Debug.LogError("Cannot find GameHandler.");
+      throw new MissingReferenceException();
+    }
+
+    _game_handler.SceneChangedFinishedEvent += _on_scene_changed;
+    _game_handler.SceneRemovingEvent += _on_scene_removed;
+
     _time_handler = FindAnyObjectByType<GameTimeHandler>();
     if(_time_handler == null)
       Debug.LogWarning("Cannot find GameHandler.");
@@ -44,13 +69,14 @@ public class FollowerCamera2D: MonoBehaviour{
     _z_position = transform.position.z;
     _last_position = transform.position;
 
-    _SmoothTime = DefaultSmoothTime;
+    _smooth_time = DefaultSmoothTime;
 
     if(_BindToPlayerOnStart)
       RevertDefaultPivot();
   } 
 
   public void Update(){
+    DEBUGModeUtils.Log(string.Format("follower camera pos {0}", transform.position));
     if(_time_handler != null && _time_handler.IsPausing())
       return;
 
@@ -89,11 +115,13 @@ public class FollowerCamera2D: MonoBehaviour{
       _distance_last = _delta_from_last.magnitude;
     }
 
-    float _next_value = Mathf.SmoothDamp(_distance_last, _distance_next, ref _current_vel, _SmoothTime);
+    float _next_value = Mathf.SmoothDamp(_distance_last, _distance_next, ref _current_vel, _smooth_time);
     float _next_value_clamp = Mathf.Clamp(_next_value-_distance_last, 0, _distance_next);
 
-    transform.position += _dir_to_next * _next_value_clamp;
+    Vector3 _new_pos = transform.position + _dir_to_next * _next_value_clamp;
+    _new_pos.z = _z_position;
 
+    transform.position = _new_pos;
     _last_position = transform.position;
   }
 
@@ -130,6 +158,12 @@ public class FollowerCamera2D: MonoBehaviour{
   #nullable disable
 
 
+  public void SetSmoothTime(float time){
+    _smooth_time = time;
+    _current_vel = 0;
+  }
+
+
   public bool IsFollowingObject(GameObject target){
     return _list_followed.ContainsKey(target);
   }
@@ -147,6 +181,6 @@ public class FollowerCamera2D: MonoBehaviour{
     SetFollowObject(_player.gameObject, 1/_PlayerToMouseCameraRatio);
     SetFollowObject(_mouse_follower.gameObject, 1/(1-_PlayerToMouseCameraRatio));
 
-    _SmoothTime = DefaultSmoothTime;
+    _smooth_time = DefaultSmoothTime;
   }
 }

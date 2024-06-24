@@ -6,6 +6,9 @@ using UnityEngine;
 
 [RequireComponent(typeof(HealthComponent))]
 public class DamagedEffect: MonoBehaviour{
+  public const string AudioID_Hurt = "hurt";
+
+
   [SerializeField]
   private SpriteRenderer _TargetSpriteManipulation;
   [SerializeField]
@@ -13,6 +16,9 @@ public class DamagedEffect: MonoBehaviour{
 
   [SerializeField]
   private Animator _TargetAnimator;
+
+  [SerializeField]
+  private AudioCollectionHandler _TargetAudioHandler;
 
   private HealthComponent _health;
 
@@ -43,6 +49,9 @@ public class DamagedEffect: MonoBehaviour{
 
     if(_TargetAnimator != null)
       _TargetAnimator.SetBool("is_damaged", true);
+
+    if(_TargetAudioHandler != null)
+      _TargetAudioHandler.TriggerSound(AudioID_Hurt);
 
     int i = 0;
 

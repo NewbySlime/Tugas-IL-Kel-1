@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
-using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.TextCore.Text;
 
 
@@ -56,6 +56,8 @@ public class DamagerComponent: MonoBehaviour{
 
     public bool SoundAlertOnCollision;
     public SoundAlertTransceiver.AlertConfig SoundAlertConfig;
+
+    public AudioClip OnCollisionSound;
   }
 
   public struct DamagerTriggerData{
@@ -72,6 +74,9 @@ public class DamagerComponent: MonoBehaviour{
 
   [SerializeField]
   private SoundAlertTransceiver _SoundAlertTranceiver;
+
+  [SerializeField]
+  private AudioSource _TargetAudioSource;
   
 
   private DamagerData _damager_data = new DamagerData{
@@ -90,13 +95,20 @@ public class DamagerComponent: MonoBehaviour{
   private Rigidbody2D _projectile_rigidbody = null;
 
   private List<Collider2D> _collision_lists = new();
+  private HashSet<int> _list_collided = new();
+
+  private LayerMask _current_exclude;
 
 
   private Vector3 _direction;
+  private Vector3 _last_pos;
 
   private float _object_lifetime = -1;
 
   private bool _is_triggered = false;
+
+  public bool AllowMultipleHitsSameObject = false;
+
 
 
   private void _check_object(GameObject target_object){
@@ -104,7 +116,11 @@ public class DamagerComponent: MonoBehaviour{
     if(_health == null)
       return;
 
+    if(!AllowMultipleHitsSameObject && _list_collided.Contains(target_object.GetInstanceID()))
+      return;
+
     _health.DoDamage(_damager_data, this);
+    _list_collided.Add(target_object.GetInstanceID());
   }
 
   private void _object_collided(GameObject target_object){
@@ -115,6 +131,9 @@ public class DamagerComponent: MonoBehaviour{
     
     if(_SoundAlertTranceiver != null && _damager_context.SoundAlertOnCollision)
       _SoundAlertTranceiver.TriggerSound();
+
+    if(_TargetAudioSource != null && _damager_context.OnCollisionSound != null)
+      _TargetAudioSource.PlayOneShot(_damager_context.OnCollisionSound);
 
     switch(_damager_context.OnCollisionEffect){
       case DamagerContext.OnCollisionAction.EraseOnCollision:{
@@ -131,11 +150,23 @@ public class DamagerComponent: MonoBehaviour{
     _collision_lists = collisions.ToList();
 
     SetDamagerExcludeLayer(new LayerMask());
+    _last_pos = transform.position;
   }
 
   public void FixedUpdate(){
     if(!_is_triggered)
       return;
+
+    float _speed = (transform.position-_last_pos).magnitude/Time.fixedDeltaTime;
+    if(_projectile_rigidbody != null){
+      _projectile_rigidbody.excludeLayers =
+        (_speed < _damager_context.SetExcludeLayerOnSpeedThreshold)?
+        _damager_context.ExcludeLayerHide:
+        _current_exclude
+      ;
+    }
+
+    _last_pos = transform.position;
 
     if(float.IsFinite(_object_lifetime) && _object_lifetime > 0){
       _object_lifetime -= Time.fixedDeltaTime;
@@ -180,16 +211,21 @@ public class DamagerComponent: MonoBehaviour{
 
   public void SetDamagerExcludeLayer(LayerMask excluded_layer){
     LayerMask _result_layer = excluded_layer | _DamagerExcludeLayer;
-    Debug.Log(string.Format("result exclude layer {0}", _result_layer));
+    DEBUGModeUtils.Log(string.Format("result exclude layer {0}", _result_layer));
 
     if(_projectile_rigidbody != null)
       _projectile_rigidbody.excludeLayers = _result_layer;
 
     foreach(Collider2D _col in _collision_lists)
       _col.excludeLayers = _result_layer;
+
+    _current_exclude = _result_layer;
   }
 
   public void SetDamagerSprite(Sprite texture){
+    if(_ProjectileSprite == null)
+      return;
+      
     _ProjectileSprite.sprite = texture;
     _ProjectileSprite.size = Vector2.one;
   }

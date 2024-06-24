@@ -14,8 +14,12 @@ public class SequenceInterface: MonoBehaviour{
         _done_seq_list.Add(seq);
     }
 
-    foreach(ISequenceAsync seq in _done_seq_list)
+    foreach(ISequenceAsync seq in _done_seq_list){
+      Component _comp_obj = (Component)seq;
+      DEBUGModeUtils.Log(string.Format("Sequence Finished {0}", _comp_obj.transform));
+
       _currently_played_sequence.Remove(seq);
+    }
     
     return _currently_played_sequence.Count <= 0;
   }
@@ -25,6 +29,7 @@ public class SequenceInterface: MonoBehaviour{
     if(IsTriggering())
       yield break;
 
+    DEBUGModeUtils.Log(string.Format("SequenceInterface start trigger {0}", ObjectUtility.GetObjHierarchyPath(transform)));
     {ISequenceAsync[] sequences = GetComponents<ISequenceAsync>();
       foreach(ISequenceAsync seq in sequences){
         _currently_played_sequence.Add(seq);
@@ -35,6 +40,9 @@ public class SequenceInterface: MonoBehaviour{
 
     {ISequenceAsync[] sequences = transform.GetComponentsInChildren<ISequenceAsync>();
       foreach(ISequenceAsync seq in sequences){
+        Component _comp_obj = (Component)seq;
+        DEBUGModeUtils.Log(string.Format("Starting Sequence {0}", _comp_obj.transform));
+
         _currently_played_sequence.Add(seq);
 
         seq.StartTriggerAsync();
@@ -42,6 +50,7 @@ public class SequenceInterface: MonoBehaviour{
     }
 
     yield return new WaitUntil(_check_sequences);
+    DEBUGModeUtils.Log(string.Format("SequenceInterface finish trigger {0}", ObjectUtility.GetObjHierarchyPath(transform)));
   }
 
   public bool IsTriggering(){

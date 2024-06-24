@@ -87,7 +87,7 @@ public class FlipInterface: MonoBehaviour{
 
 
   public void SetFlippedX(string val){
-    Debug.Log(string.Format("flipped {0}", val));
+    DEBUGModeUtils.Log(string.Format("flipped {0}", val));
     SetFlippedX(val == "true");
   }
 
@@ -98,7 +98,7 @@ public class FlipInterface: MonoBehaviour{
 
   public void SetFlippedX(bool flipped){
     _flipped_x = flipped;
-    Debug.Log("flipped");
+    DEBUGModeUtils.Log("flipped");
 
     foreach(_ObjectMetadata _metadata in _initialized_metadata_map.Values){
       if(_metadata._metadata.Object == null)
@@ -121,12 +121,12 @@ public class FlipInterface: MonoBehaviour{
       
       Vector3 _current_angle = _metadata._metadata.Object.transform.eulerAngles;
       Vector2 _direction = MathExt.AngleToDirection(_current_angle.z);
-      Debug.Log(string.Format("first angle {0}, direction {1}", _current_angle.z, _direction));
+      DEBUGModeUtils.Log(string.Format("first angle {0}, direction {1}", _current_angle.z, _direction));
       if(_metadata._metadata.UseRotation)
         _direction.x = Mathf.Abs(_direction.x) * (flipped? -1: 1);
 
       _current_angle.z = MathExt.DirectionToAngle(_direction);
-      Debug.Log(string.Format("angle {0}, direction {1}", _current_angle.z, _direction));
+      DEBUGModeUtils.Log(string.Format("angle {0}, direction {1}", _current_angle.z, _direction));
       _metadata._metadata.Object.transform.eulerAngles = _current_angle;
     }
   }

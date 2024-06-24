@@ -50,11 +50,11 @@ public class MiniGameHandler: MonoBehaviour{
 
   // PENTING: ini fungsi yang dipakai ketika komponen ekstensi memberi tahu bahwa "Game ini sudah selesai, dan hasilnya: X".
   protected void _GameFinished(ResultCase result){
-    Debug.Log("mini game finished");
+    DEBUGModeUtils.Log("mini game finished");
     if(!IsMiniGameRunning)
       return;
 
-    Debug.Log("mini game finished done");
+    DEBUGModeUtils.Log("mini game finished done");
     IsMiniGameRunning = false;
 
     _OnGameFinished(result);
@@ -86,7 +86,7 @@ public class MiniGameHandler: MonoBehaviour{
   
   // PENTING: Funsgi yang dipakai oleh MiniGame ataupun komponen ekstensi ketika ada objek atau actor yang menjalankan/mentrigger MiniGame ini.
   public virtual void TriggerGameStart(){
-    Debug.Log("mini game started");
+    DEBUGModeUtils.Log("mini game started");
     IsMiniGameRunning = true;
   }
 }

@@ -9,7 +9,7 @@ public class LevelCheckpointDatabase: MonoBehaviour{
 
 
   public void UpdateDatabase(){
-    Debug.Log("refresh database");
+    Debug.Log("[LevelCheckpointDatabase] Refreshing database...");
     _checkpoint_map.Clear();
 
     CheckpointHandler[] _checkpoint_list = FindObjectsOfType<CheckpointHandler>();

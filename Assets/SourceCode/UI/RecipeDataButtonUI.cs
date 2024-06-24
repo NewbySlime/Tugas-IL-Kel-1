@@ -33,7 +33,7 @@ public class RecipeDataButtonUI: ButtonBaseUI, IObjectInitialized{
     _ItemDescription.text = "";
     _RecipeDescription.text = "???";
 
-    Debug.Log(string.Format("set item {0} {1}", IsInitialized, _current_item_id));
+    DEBUGModeUtils.Log(string.Format("set item {0} {1}", IsInitialized, _current_item_id));
 
     if(!IsInitialized || _current_item_id.Length <= 0)
       return;

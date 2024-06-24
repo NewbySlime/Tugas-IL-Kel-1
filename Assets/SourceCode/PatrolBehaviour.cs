@@ -3,9 +3,6 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Dependencies.Sqlite;
-using UnityEditor.Playables;
 
 
 [RequireComponent(typeof(PathFollower))]
@@ -24,9 +21,11 @@ public class PatrolBehaviour: MonoBehaviour{
   private float __PathUpdateInterval = 0.3f;
   internal float _PathUpdateInterval{get => __PathUpdateInterval;}
 
+  // NOTE: nullable
   [SerializeField]
   private BaseProgressUI _AlertProgress;
 
+  // NOTE: nullable
   [SerializeField]
   private SoundAlertReceiver _SoundReceiver = null;
 
@@ -152,22 +151,23 @@ public class PatrolBehaviour: MonoBehaviour{
     // cek kalau yang masuk player
     {PlayerController _player = _object.GetComponent<PlayerController>();
       if(_player != null){
-        Debug.Log("Player entered");
+        DEBUGModeUtils.Log("Player entered");
         if(_gameover_triggers.Count <= 0){
-          Debug.Log("Player first entered");
+          DEBUGModeUtils.Log("Player first entered");
           if(_gameover_delay < 0 || _gameover_delay > _GameOverTimeout)
             _gameover_delay = _GameOverTimeout;
 
           _stop_delay = _TemporaryStopDelay;
 
-          Debug.Log("trigger alert show");
-          StartCoroutine(UIUtility.SetHideUI(_AlertProgress.gameObject, false));
+          DEBUGModeUtils.Log("trigger alert show");
+          if(_AlertProgress != null)
+            StartCoroutine(UIUtility.SetHideUI(_AlertProgress.gameObject, false));
 
           if(_patrol_tmpstop == null)
             _patrol_tmpstop = StartCoroutine(_patrol_stopdelay());
         }
 
-        Debug.Log("gameover add");
+        DEBUGModeUtils.Log("gameover add");
         _gameover_triggers.Add(_object);
       }
     }
@@ -184,6 +184,9 @@ public class PatrolBehaviour: MonoBehaviour{
 
 
   private void _update_alert_bar(){
+    if(_AlertProgress == null)
+      return;
+
     _AlertProgress.SetProgress(1-(_gameover_delay/_GameOverTimeout));
   }
 
@@ -195,6 +198,9 @@ public class PatrolBehaviour: MonoBehaviour{
 
   private IEnumerator _start_co_func(){
     yield return new WaitUntil(() => ObjectUtility.IsObjectInitialized(_AlertingObject));
+
+    if(_AlertProgress == null)
+      yield break;
 
     StartCoroutine(UIUtility.SetHideUI(_AlertProgress.gameObject, true, true));
   }
@@ -213,9 +219,8 @@ public class PatrolBehaviour: MonoBehaviour{
     _game_handler.SceneRemovingEvent += _on_scene_removing;
 
 
-    if(_SoundReceiver != null){
+    if(_SoundReceiver != null)
       _SoundReceiver.SoundReceivedEvent += _patrol_soundalerted;
-    }
 
     _AlertingObject.AlertObjectEnterEvent += _on_alerted_enter;
     _AlertingObject.AlertObjectExitedEvent += _on_alerted_exit;
@@ -232,7 +237,7 @@ public class PatrolBehaviour: MonoBehaviour{
 
   public void FixedUpdate(){
     if(_gameover_triggers.Count > 0){
-      Debug.Log("Stop delay refreshed");
+      DEBUGModeUtils.Log("Stop delay refreshed");
       _stop_delay = _TemporaryStopDelay;
 
       if(_gameover_delay > 0){
@@ -247,7 +252,7 @@ public class PatrolBehaviour: MonoBehaviour{
       if(_gameover_delay < _GameOverTimeout){
         _stop_delay = _TemporaryStopDelay;
         _gameover_delay += Time.fixedDeltaTime;
-        if(_gameover_delay >= _GameOverTimeout){
+        if(_gameover_delay >= _GameOverTimeout && _AlertProgress != null){
           StartCoroutine(UIUtility.SetHideUI(_AlertProgress.gameObject, true));
         }
 

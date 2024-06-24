@@ -36,7 +36,7 @@ public class SoundAlertTransceiver: MonoBehaviour{
     foreach(SoundAlertReceiver _receiver in _alert_receiver_list)
       _receiver.TriggerHear(gameObject);
 
-    Debug.Log("receiver triggered");
+    DEBUGModeUtils.Log("receiver triggered");
 
     // test
     yield return new WaitForSeconds(1);
@@ -66,12 +66,12 @@ public class SoundAlertTransceiver: MonoBehaviour{
 
 
   public void OnTriggerEnter2D(Collider2D collider){
-    Debug.Log(string.Format("receiver added {0}", collider.gameObject.name));
+    DEBUGModeUtils.Log(string.Format("receiver added {0}", collider.gameObject.name));
     SoundAlertReceiver _receiver = collider.gameObject.GetComponent<SoundAlertReceiver>();
     if(_receiver == null)
       return;
 
-    Debug.Log("receiver actually added");
+    DEBUGModeUtils.Log("receiver actually added");
     _alert_receiver_list.Add(_receiver);
   }
 

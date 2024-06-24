@@ -93,7 +93,7 @@ public class InventoryData: MonoBehaviour{
     }
 
     if(!_item_list.ContainsKey(item_id)){
-      Debug.Log(string.Format("item added {0}", item_id));
+      DEBUGModeUtils.Log(string.Format("item added {0}", item_id));
       _item_list[item_id] = new ItemData{
         item_id = item_id,
         item_count = count
@@ -102,7 +102,7 @@ public class InventoryData: MonoBehaviour{
       OnItemAddedEvent?.Invoke(item_id, count);
     }
     else{
-      Debug.Log(string.Format("item count changed {0}", item_id));
+      DEBUGModeUtils.Log(string.Format("item count changed {0}", item_id));
       ItemData _item = _item_list[item_id];
       _item.item_count += count;
       _item_list[item_id] = _item;
@@ -202,7 +202,7 @@ public class InventoryData: MonoBehaviour{
     
     int idx = 0;
     foreach(ItemData _item in _item_list.Values){
-      Debug.Log(string.Format("runtime removing item {0}", _item.item_id));
+      DEBUGModeUtils.Log(string.Format("runtime removing item {0}", _item.item_id));
       _res.ListItem[idx] = _item;
 
       idx++;
@@ -215,10 +215,10 @@ public class InventoryData: MonoBehaviour{
     if(data == null)
       return;
 
-    Debug.Log("runtime from");
+    DEBUGModeUtils.Log("runtime from");
     RemoveAllItem();
     foreach(ItemData _item in data.ListItem){
-      Debug.Log(string.Format("runtime adding item {0}", _item.item_id));
+      DEBUGModeUtils.Log(string.Format("runtime adding item {0}", _item.item_id));
       AddItem(_item.item_id, _item.item_count);
     }
   }

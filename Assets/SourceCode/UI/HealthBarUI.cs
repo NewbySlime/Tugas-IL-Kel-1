@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 public class HealthBarUI: MonoBehaviour{
@@ -51,7 +48,7 @@ public class HealthBarUI: MonoBehaviour{
   private void _update_bar(bool skip_animation = false){
     int _current_health = _health_component.GetHealth();
     int _max_health = _health_component.MaxHealth;
-    Debug.Log(string.Format("health {0}", _current_health));
+    DEBUGModeUtils.Log(string.Format("health {0}", _current_health));
     
     _target_fg_val = _current_health > 0? (float)_current_health/_max_health: 0;
     if(skip_animation){
@@ -90,7 +87,7 @@ public class HealthBarUI: MonoBehaviour{
 
 
   public void Start(){
-    Debug.Log("health bar started");
+    DEBUGModeUtils.Log("health bar started");
     IMaterialReference[] _list_material_ref = _HealthBarMaterialReference.GetComponents<IMaterialReference>();
     if(_list_material_ref.Length <= 0){
       Debug.LogError("HealthBar material reference does not have IMaterialReference.");

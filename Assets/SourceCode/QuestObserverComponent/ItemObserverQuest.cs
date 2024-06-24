@@ -9,7 +9,7 @@ public class ItemObserverQuest: MonoBehaviour, IQuestData, IQuestHandler{
   public event IQuestHandler.QuestUpdated QuestUpdatedEvent;
   public event IQuestHandler.QuestFinished QuestFinishedEvent;
 
-  public struct QuestData{
+  public class QuestData{
     public string ItemID;
     public uint ItemCount;
 
@@ -26,6 +26,9 @@ public class ItemObserverQuest: MonoBehaviour, IQuestData, IQuestHandler{
   private ItemDatabase _item_database;
   private InventoryData _inv_data = null;
 
+  private GameHandler _game_handler = null;
+  private QuestData _quest_data = null;
+
 
   private void _check_inventory(){
     if(_inv_data == null || _item_id.Length <= 0)
@@ -36,7 +39,7 @@ public class ItemObserverQuest: MonoBehaviour, IQuestData, IQuestHandler{
     bool _is_finished = _current_count < _item_count && _new_count >= _item_count;
     _current_count = _new_count;
 
-    Debug.Log(string.Format("item observer get item {0}/{1}", _new_count, _item_count));
+    DEBUGModeUtils.Log(string.Format("item observer get item {0}/{1}", _new_count, _item_count));
 
     QuestUpdatedEvent?.Invoke(this);
 
@@ -72,19 +75,17 @@ public class ItemObserverQuest: MonoBehaviour, IQuestData, IQuestHandler{
     if(_player == null)
       return;
 
-    _inv_data = FindAnyObjectByType<InventoryData>();
-    if(_inv_data != null){
-      _inv_data.OnItemAddedEvent += _item_added_event;
-      _inv_data.OnItemCountChangedEvent += _item_count_changed_event;
-      _inv_data.OnItemRemovedEvent += _item_removed_event;
-    }
+    _inv_data = _player.GetComponent<InventoryData>();
+    _inv_data.OnItemAddedEvent += _item_added_event;
+    _inv_data.OnItemCountChangedEvent += _item_count_changed_event;
+    _inv_data.OnItemRemovedEvent += _item_removed_event;
 
-    _check_inventory();
+    SetQuestData(_quest_data);
   }
 
 
   public void Start(){
-    GameHandler _game_handler = FindAnyObjectByType<GameHandler>();
+    _game_handler = FindAnyObjectByType<GameHandler>();
     if(_game_handler == null){
       Debug.LogError("Cannot get Game Handler.");
       throw new MissingComponentException();
@@ -127,13 +128,16 @@ public class ItemObserverQuest: MonoBehaviour, IQuestData, IQuestHandler{
   }
 
   public void SetQuestData(object data){
-    Debug.Log(string.Format("item database is null {0}", _item_database == null));
-    if(data is not QuestData){
+    _quest_data = (QuestData)data;
+    if(_game_handler == null || !_game_handler.SceneInitialized || _inv_data == null)
+      return;
+
+    DEBUGModeUtils.Log(string.Format("item database is null {0}", _item_database == null));
+    if(_quest_data is not QuestData){
       Debug.LogError(string.Format("Data is not '{0}'", typeof(QuestData).Name));
       return;
     }
-
-    QuestData _quest_data = (QuestData)data;
+    
     _item_id = _quest_data.ItemID;
     _item_count = _quest_data.ItemCount;
     _quest_message = _quest_data.GoalMessage;

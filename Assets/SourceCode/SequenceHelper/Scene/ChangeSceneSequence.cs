@@ -10,6 +10,8 @@ namespace SequenceHelper{
     public struct SequenceData{
       public string SceneID;
       public bool WaitUntilSceneChanged;
+
+      public bool AutoSave; 
     }
 
 
@@ -43,7 +45,7 @@ namespace SequenceHelper{
 
     public void StartTriggerAsync(){
       _scene_changed = false;
-      _game_handler.ChangeScene(_seq_data.SceneID);
+      _game_handler.ChangeScene(_seq_data.SceneID, "", _seq_data.AutoSave);
 
       if(!_seq_data.WaitUntilSceneChanged)
         _scene_changed = true;
@@ -78,12 +80,16 @@ namespace SequenceHelper{
     [DoNotSerialize]
     private ValueInput _wait_until_input;
 
+    [DoNotSerialize]
+    private ValueInput _auto_save_input;
+
 
     protected override void Definition(){
       base.Definition();
 
       _scene_id_input = ValueInput("SceneID", "");
       _wait_until_input = ValueInput("WaitUntilChanged", true);
+      _auto_save_input = ValueInput("AutoSave", true);
     }
 
     protected override void AddData(Flow flow, out SequenceHandlerVS.SequenceInitializeData.DataPart init_data){
@@ -91,7 +97,8 @@ namespace SequenceHelper{
         SequenceID = ChangeSceneSequence.SequenceID,
         SequenceData = new ChangeSceneSequence.SequenceData{
           SceneID = flow.GetValue<string>(_scene_id_input),
-          WaitUntilSceneChanged = flow.GetValue<bool>(_wait_until_input)
+          WaitUntilSceneChanged = flow.GetValue<bool>(_wait_until_input),
+          AutoSave = flow.GetValue<bool>(_auto_save_input)
         }
       };
     }

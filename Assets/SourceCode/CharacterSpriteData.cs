@@ -1,5 +1,4 @@
 using System;
-using UnityEditor.Animations;
 using UnityEngine;
 
 
@@ -8,7 +7,7 @@ public class CharacterSpriteData: MonoBehaviour{
   public class CharacterData{
     public Sprite FullBody;
 
-    public AnimatorController CharacterMovementAnimation;
+    public RuntimeAnimatorController CharacterMovementAnimation;
   }
 
   [SerializeField]

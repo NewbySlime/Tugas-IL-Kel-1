@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e66c6366d904e98bc83428217d4fd7, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"graph":{"variables":{"Kind":"Flow","collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[],"controlOutputDefinitions":[],"valueInputDefinitions":[],"valueOutputDefinitions":[],"title":null,"summary":null,"pan":{"x":307.2885,"y":59.14764},"zoom":1.0,"elements":[{"coroutine":false,"defaultValues":{},"position":{"x":-169.0,"y":3.0},"guid":"b5b824e5-6928-4190-8613-b53c4e9bf52d","$version":"A","$type":"Unity.VisualScripting.Start","$id":"9"},{"defaultValues":{"Dialogue":{"$content":"Pakai
+      tombol <b>WASD</b> untuk bergerak","$type":"System.String"}},"position":{"x":15.0,"y":2.0},"guid":"1d04a48b-3544-437d-8613-57812228e7f4","$version":"A","$type":"AddDialogue","$id":"11"},{"defaultValues":{},"position":{"x":643.0,"y":2.0},"guid":"84ae1dc1-b303-49a4-80c1-32fdc6dce5ec","$version":"A","$type":"SetDialogueToGameObject","$id":"13"},{"defaultValues":{},"position":{"x":505.0,"y":166.0},"guid":"19248557-ea95-4bba-a8fb-fff2992ff40b","$version":"A","$type":"Unity.VisualScripting.This","$id":"15"},{"sourceUnit":{"$ref":"9"},"sourceKey":"trigger","destinationUnit":{"$ref":"11"},"destinationKey":"Input
+      Flow","guid":"ee44f7fe-269a-46e7-8b62-1ca8a67052d6","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"11"},"sourceKey":"Output
+      Flow","destinationUnit":{"$ref":"13"},"destinationKey":"Input Flow","guid":"a31ff1ad-bfe8-46f5-ba59-77f8caae3953","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"11"},"sourceKey":"DialogueData","destinationUnit":{"$ref":"13"},"destinationKey":"DialogueData","guid":"019a4a7a-747d-46a2-b11d-dc81bacc19e4","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"15"},"sourceKey":"self","destinationUnit":{"$ref":"13"},"destinationKey":"GameObject","guid":"167563e5-7597-4479-a0df-6ae58535723a","$type":"Unity.VisualScripting.ValueConnection"}],"$version":"A"}}'
+    _objectReferences: []

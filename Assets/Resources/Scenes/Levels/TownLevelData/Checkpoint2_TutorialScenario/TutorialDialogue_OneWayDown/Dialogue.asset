@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e66c6366d904e98bc83428217d4fd7, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"graph":{"variables":{"Kind":"Flow","collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[],"controlOutputDefinitions":[],"valueInputDefinitions":[],"valueOutputDefinitions":[],"title":null,"summary":null,"pan":{"x":-74.40018,"y":19.99998},"zoom":1.0,"elements":[{"coroutine":false,"defaultValues":{},"position":{"x":-568.0,"y":-97.0},"guid":"626ede6f-caf1-43e9-8f50-a5b982645252","$version":"A","$type":"Unity.VisualScripting.Start","$id":"9"},{"defaultValues":{"Dialogue":{"$content":"","$type":"System.String"}},"position":{"x":-362.0,"y":-98.0},"guid":"d26ff43b-aea7-4f28-b4c0-197ce27e1f5a","$version":"A","$type":"AddDialogue","$id":"11"},{"defaultValues":{},"position":{"x":447.0,"y":-105.0},"guid":"f72c2ec8-3b7a-40ae-953a-b9a51fad5cfb","$version":"A","$type":"SetDialogueToGameObject","$id":"13"},{"type":"System.String","value":{"$content":"Dengan
+      tombol <b>S</b> dan <b>Lompat</b> ditekan secara bersamaan","$type":"System.String"},"defaultValues":{},"position":{"x":-226.0,"y":88.0},"guid":"e8b95311-3e9f-44e8-8bfc-b84c7f2648d8","$version":"A","$type":"Unity.VisualScripting.Literal","$id":"15"},{"defaultValues":{},"position":{"x":330.0,"y":124.0},"guid":"66a31cc7-cdef-46a0-a371-08d4c9bfcd1c","$version":"A","$type":"Unity.VisualScripting.This","$id":"17"},{"type":"System.String","value":{"$content":"Platform
+      ini juga bisa dilewati dari atas","$type":"System.String"},"defaultValues":{},"position":{"x":-611.0,"y":81.0},"guid":"fe0b0fac-8f3a-442b-b84e-e11d4c58ee33","$version":"A","$type":"Unity.VisualScripting.Literal","$id":"19"},{"defaultValues":{"Dialogue":{"$content":"","$type":"System.String"}},"position":{"x":46.0,"y":-100.0},"guid":"c0fc2ddc-2d6e-4423-b2e4-b7ca0161541b","$version":"A","$type":"AddDialogue","$id":"21"},{"sourceUnit":{"$ref":"9"},"sourceKey":"trigger","destinationUnit":{"$ref":"11"},"destinationKey":"Input
+      Flow","guid":"8a764d7b-ecd4-46df-95b4-dac54703ec8f","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"11"},"sourceKey":"Output
+      Flow","destinationUnit":{"$ref":"21"},"destinationKey":"Input Flow","guid":"6ee9e1d6-c231-41da-acc7-7211de0480b3","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"21"},"sourceKey":"Output
+      Flow","destinationUnit":{"$ref":"13"},"destinationKey":"Input Flow","guid":"ec6bc9d9-74fd-42b0-88ff-71fa41db2d97","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"17"},"sourceKey":"self","destinationUnit":{"$ref":"13"},"destinationKey":"GameObject","guid":"47c13be3-5ea6-4f78-aad1-3c3d1e1b1994","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"19"},"sourceKey":"output","destinationUnit":{"$ref":"11"},"destinationKey":"Dialogue","guid":"658e333f-4af4-4c92-8cb4-40011b860434","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"15"},"sourceKey":"output","destinationUnit":{"$ref":"21"},"destinationKey":"Dialogue","guid":"3cfc6758-594c-4933-982d-7680fb6fff22","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"11"},"sourceKey":"DialogueData","destinationUnit":{"$ref":"21"},"destinationKey":"DialogueData","guid":"82988e80-8a28-440f-8bf9-35d62b3779cf","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"21"},"sourceKey":"DialogueData","destinationUnit":{"$ref":"13"},"destinationKey":"DialogueData","guid":"25e0213b-f2dd-411a-ba7a-fc3b5d737bab","$type":"Unity.VisualScripting.ValueConnection"}],"$version":"A"}}'
+    _objectReferences: []

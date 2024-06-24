@@ -64,7 +64,7 @@ public class RecoveryEffect: MonoBehaviour{
           _blink_iter++;
         }
 
-        Debug.Log(string.Format("blink timer {0}", _blink_timer));
+        DEBUGModeUtils.Log(string.Format("blink timer {0}", _blink_timer));
       }
 
       _recovery_timer -= Time.deltaTime;

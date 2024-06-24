@@ -1,10 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Generated.PropertyProviders;
 using UnityEngine;
 using UnityEngine.TextCore.LowLevel;
 using UnityEngine.Video;
@@ -20,6 +16,7 @@ public class GameUIHandler: MonoBehaviour{
 
   public enum MainHUDUIEnum{
     PlayerHUD,
+    FadeOutUI,
     DialogueUI,
     BossHealthBarUI,
     QTEUI,
@@ -39,6 +36,8 @@ public class GameUIHandler: MonoBehaviour{
 
   [SerializeField]
   private PlayerHUDUI _PlayerHUD;
+  [SerializeField]
+  private FadeUI _FadeOutPlayerHUDUI;
   [SerializeField]
   private DialogueCharacterUI _DialogueHUD;
   [SerializeField]
@@ -102,6 +101,7 @@ public class GameUIHandler: MonoBehaviour{
   }
 
   private void _game_handler_scene_removed(){
+    _VideoUI.Stop();
     // ResetPlayerUIMode();
     // ResetMainUIMode();
   }
@@ -263,6 +263,10 @@ public class GameUIHandler: MonoBehaviour{
         _ui_obj = _PlayerHUD.GetVisualContainer();
       }break;
 
+      case MainHUDUIEnum.FadeOutUI:{
+        _ui_obj = _FadeOutPlayerHUDUI.gameObject;
+      }break;
+
       case MainHUDUIEnum.DialogueUI:{
         _ui_obj = _DialogueHUD.gameObject;
       }break;
@@ -296,6 +300,7 @@ public class GameUIHandler: MonoBehaviour{
 
     List<MainHUDUIEnum> _list_reset = new(){
       MainHUDUIEnum.PlayerHUD,
+      MainHUDUIEnum.FadeOutUI,
       MainHUDUIEnum.DialogueUI,
       MainHUDUIEnum.BossHealthBarUI,
       MainHUDUIEnum.QTEUI,

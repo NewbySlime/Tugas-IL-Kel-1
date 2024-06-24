@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e66c6366d904e98bc83428217d4fd7, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"graph":{"variables":{"Kind":"Flow","collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[],"controlOutputDefinitions":[],"valueInputDefinitions":[],"valueOutputDefinitions":[],"title":null,"summary":null,"pan":{"x":0.0,"y":0.0},"zoom":1.0,"elements":[{"defaultValues":{"Dialogue":{"$content":"","$type":"System.String"}},"position":{"x":-231.0,"y":-185.0},"guid":"859e3485-7a1c-401b-a2a4-bbd6085d4043","$version":"A","$type":"AddDialogue","$id":"9"},{"coroutine":false,"defaultValues":{},"position":{"x":-459.0,"y":-191.0},"guid":"5212bc14-2927-458d-a5ab-3d004ed99939","$version":"A","$type":"Unity.VisualScripting.Start","$id":"11"},{"type":"System.String","value":{"$content":"Apakah
+      mau ke Restoran?","$type":"System.String"},"defaultValues":{},"position":{"x":-506.0,"y":-82.0},"guid":"6499a65c-8504-4eda-87f5-2312176f62de","$version":"A","$type":"Unity.VisualScripting.Literal","$id":"13"},{"defaultValues":{},"position":{"x":209.0,"y":-190.0},"guid":"1eaef635-248a-47d5-b27b-0df6475d04b9","$version":"A","$type":"SetDialogueToGameObject","$id":"15"},{"defaultValues":{},"position":{"x":95.0,"y":-29.0},"guid":"429c04b3-3f32-4218-8866-a8e8ede1eb4b","$version":"A","$type":"Unity.VisualScripting.This","$id":"17"},{"sourceUnit":{"$ref":"11"},"sourceKey":"trigger","destinationUnit":{"$ref":"9"},"destinationKey":"Input
+      Flow","guid":"6e9b2553-462a-41e1-81b0-d583d3a4b43e","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"9"},"sourceKey":"Output
+      Flow","destinationUnit":{"$ref":"15"},"destinationKey":"Input Flow","guid":"fb4a3301-81a4-4a1e-b820-b1a1674ab252","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"13"},"sourceKey":"output","destinationUnit":{"$ref":"9"},"destinationKey":"Dialogue","guid":"25a447b9-05ff-49bc-b166-9191eebfa0e1","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"9"},"sourceKey":"DialogueData","destinationUnit":{"$ref":"15"},"destinationKey":"DialogueData","guid":"368d61d7-5d4c-4e79-b5a0-e1edc1165445","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"17"},"sourceKey":"self","destinationUnit":{"$ref":"15"},"destinationKey":"GameObject","guid":"07085c7e-b2a4-4544-ba8c-d6ea6a705df1","$type":"Unity.VisualScripting.ValueConnection"}],"$version":"A"}}'
+    _objectReferences: []

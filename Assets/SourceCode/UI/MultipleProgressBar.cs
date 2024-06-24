@@ -23,10 +23,14 @@ public class MultipleProgressBar: MonoBehaviour{
 
   private float _progress_value;
 
+  private bool _progress_bar_initialized = false;
+
 
   private IEnumerator _set_progress_count(int count){
     if(_ProgressBarPrefab == null || count == _progress_list.Count)
       yield break;
+
+    _progress_bar_initialized = false;
 
     if(count > _progress_list.Count){
       int _start_idx = _progress_list.Count;
@@ -55,7 +59,16 @@ public class MultipleProgressBar: MonoBehaviour{
       _progress_list.RemoveRange(count, _progress_list.Count-count);
     }
     
+    _progress_bar_initialized = true;
     SetProgress(_progress_value);
+  }
+
+  private IEnumerator _set_progress_texture(Texture texture){
+    _progress_texture = texture;
+    
+    yield return new WaitUntil(() => _progress_bar_initialized);
+    foreach(ProgressTexture _progress in _progress_list)
+      _progress.SetTexture(texture);
   }
 
 
@@ -96,9 +109,7 @@ public class MultipleProgressBar: MonoBehaviour{
   }
 
   public void SetProgressSprite(Texture texture){
-    _progress_texture = texture;
-    foreach(ProgressTexture _progress in _progress_list)
-      _progress.SetTexture(texture);
+    StartCoroutine(_set_progress_texture(texture));
   }
 
   public void SetSpriteSize(Vector2 size){

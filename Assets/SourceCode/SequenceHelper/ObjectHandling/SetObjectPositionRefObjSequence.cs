@@ -10,6 +10,8 @@ namespace SequenceHelper{
     public struct SequenceData{
       public ObjectReference.ObjRefID TargetRefID;
       public ObjectReference.ObjRefID PositionRefID;
+
+      public Vector3 OffsetPos;
     }
 
 
@@ -29,7 +31,7 @@ namespace SequenceHelper{
         return;
       }
       
-      _target_obj.transform.position = _position_obj.transform.position;
+      _target_obj.transform.position = _position_obj.transform.position + _seq_data.OffsetPos;
     }
 
     public bool IsTriggering(){
@@ -60,12 +62,17 @@ namespace SequenceHelper{
     [DoNotSerialize]
     private ValueInput _position_ref_obj_input;
 
+    [DoNotSerialize]
+    private ValueInput _offset_pos_input;
+
 
     protected override void Definition(){
       base.Definition();
 
       _target_ref_obj_input = ValueInput<ObjectReference.ObjRefID>("Target ObjectRef");
       _position_ref_obj_input = ValueInput<ObjectReference.ObjRefID>("PositionRef");
+      
+      _offset_pos_input = ValueInput("OffsetPos", Vector3.zero);
     }
 
 
@@ -74,7 +81,9 @@ namespace SequenceHelper{
         SequenceID = SetObjectPositionRefObjSequence.SequenceID,
         SequenceData = new SetObjectPositionRefObjSequence.SequenceData{
           TargetRefID = flow.GetValue<ObjectReference.ObjRefID>(_target_ref_obj_input),
-          PositionRefID = flow.GetValue<ObjectReference.ObjRefID>(_position_ref_obj_input)
+          PositionRefID = flow.GetValue<ObjectReference.ObjRefID>(_position_ref_obj_input),
+
+          OffsetPos = flow.GetValue<Vector3>(_offset_pos_input)
         }
       };
     }

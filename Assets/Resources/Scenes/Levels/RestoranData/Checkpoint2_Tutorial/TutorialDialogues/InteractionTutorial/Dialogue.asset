@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e66c6366d904e98bc83428217d4fd7, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"graph":{"variables":{"Kind":"Flow","collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[],"controlOutputDefinitions":[],"valueInputDefinitions":[],"valueOutputDefinitions":[],"title":null,"summary":null,"pan":{"x":345.1502,"y":14.16788},"zoom":0.8,"elements":[{"coroutine":false,"defaultValues":{},"position":{"x":-444.0,"y":-8.0},"guid":"b5b824e5-6928-4190-8613-b53c4e9bf52d","$version":"A","$type":"Unity.VisualScripting.Start","$id":"9"},{"defaultValues":{"Dialogue":{"$content":"Pakai
+      tombol <b>F</b> untuk berinteraksi","$type":"System.String"}},"position":{"x":-259.0,"y":-2.0},"guid":"1d04a48b-3544-437d-8613-57812228e7f4","$version":"A","$type":"AddDialogue","$id":"11"},{"defaultValues":{},"position":{"x":892.0,"y":0.0},"guid":"84ae1dc1-b303-49a4-80c1-32fdc6dce5ec","$version":"A","$type":"SetDialogueToGameObject","$id":"13"},{"defaultValues":{},"position":{"x":754.0,"y":164.0},"guid":"19248557-ea95-4bba-a8fb-fff2992ff40b","$version":"A","$type":"Unity.VisualScripting.This","$id":"15"},{"defaultValues":{"Dialogue":{"$content":"Lanjut
+      ke <b>kanan</b> untuk keluar","$type":"System.String"}},"position":{"x":231.0,"y":2.0},"guid":"61ac51c2-7c43-402f-97b7-f933865ffc39","$version":"A","$type":"AddDialogue","$id":"17"},{"sourceUnit":{"$ref":"9"},"sourceKey":"trigger","destinationUnit":{"$ref":"11"},"destinationKey":"Input
+      Flow","guid":"ee44f7fe-269a-46e7-8b62-1ca8a67052d6","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"11"},"sourceKey":"Output
+      Flow","destinationUnit":{"$ref":"17"},"destinationKey":"Input Flow","guid":"d394c4e0-0528-4d2c-bc6a-4e303e3ee0e2","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"17"},"sourceKey":"Output
+      Flow","destinationUnit":{"$ref":"13"},"destinationKey":"Input Flow","guid":"5dda1ab7-a00e-4def-b6fa-c46b4cfacae5","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"15"},"sourceKey":"self","destinationUnit":{"$ref":"13"},"destinationKey":"GameObject","guid":"167563e5-7597-4479-a0df-6ae58535723a","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"11"},"sourceKey":"DialogueData","destinationUnit":{"$ref":"17"},"destinationKey":"DialogueData","guid":"012e0b21-0a04-4c30-b0f0-6599beff16e0","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"17"},"sourceKey":"DialogueData","destinationUnit":{"$ref":"13"},"destinationKey":"DialogueData","guid":"064a673e-72be-4c7b-aadc-e0d5d2c209b9","$type":"Unity.VisualScripting.ValueConnection"}],"$version":"A"}}'
+    _objectReferences: []

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 
@@ -9,20 +10,37 @@ public class ActiveStateTriggerSequence: SequenceHandlerVS{
   private GameHandler _game_handler;
 
   private bool _already_triggered = false;
-  private bool _game_ready = false;
 
+
+  private IEnumerator _trigger_sequence_co_func(){
+    yield return new WaitUntil(() => SequenceInitializeDataSet);
+    DEBUGModeUtils.Log("triggering sequence");
+
+    if(IsTriggering())
+      yield break;
+
+    StartTriggerAsync();
+  }
 
   private void _trigger_sequence(){
-    if(!enabled || !_game_ready || (_TriggerOnlyOnce && _already_triggered))
+    if(!gameObject.activeInHierarchy || _game_handler == null || !_game_handler.SceneInitialized || (_TriggerOnlyOnce && _already_triggered))
       return;
 
+    DEBUGModeUtils.Log(string.Format("triggering bool {0} {1} {2} {3}", !gameObject.activeInHierarchy, _game_handler == null, !_game_handler.SceneInitialized,(_TriggerOnlyOnce && _already_triggered)));
     _already_triggered = true;
-    StartTriggerAsync();
+    StartCoroutine(_trigger_sequence_co_func());
+  }
+
+
+  private IEnumerator _on_enable(){
+    yield return null;
+    yield return new WaitForEndOfFrame(); 
+
+    _trigger_sequence();
   }
 
 
   private void _game_handler_scene_changed(string scene_id, GameHandler.GameContext context){
-    _game_ready = true;
     _trigger_sequence();
   }
 
@@ -55,6 +73,6 @@ public class ActiveStateTriggerSequence: SequenceHandlerVS{
 
 
   public void OnEnable(){
-    _trigger_sequence();
+    StartCoroutine(_on_enable());
   }
 }

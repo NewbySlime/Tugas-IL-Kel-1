@@ -28,7 +28,7 @@ public class ShrinkUI: TimingBaseUI{
 
     float _current_dist = (_target_show_scale-_DialoguePivot.transform.localScale).magnitude;
 
-    Debug.Log(string.Format("shrink {0} {1}", _current_dist, _DialoguePivot.transform.localScale));
+    DEBUGModeUtils.Log(string.Format("shrink {0} {1}", _current_dist, _DialoguePivot.transform.localScale));
 
     float _val = _current_dist/_max_dist;
     __Timing = _val*__BaseTiming;

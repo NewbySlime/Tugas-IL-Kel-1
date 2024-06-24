@@ -37,7 +37,7 @@ namespace SequenceHelper{
         return;
       }
 
-      Debug.Log(string.Format("registering input {0}", _ref_obj.name));
+      DEBUGModeUtils.Log(string.Format("registering input {0}", _ref_obj.name));
 
       _input_handler.RegisterInputObject(_ref_obj, _seq_data.FocusData.InputContext);
     }

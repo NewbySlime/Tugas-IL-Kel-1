@@ -5,6 +5,9 @@ using UnityEngine;
 
 
 public class HealthComponent: MonoBehaviour{
+  public const string AudioID_Dead = "dead";
+
+
   public delegate void OnHealthChanged(int new_health);
   public event OnHealthChanged OnHealthChangedEvent;
 
@@ -46,6 +49,9 @@ public class HealthComponent: MonoBehaviour{
   private Animator _TargetAnimator;
 
   [SerializeField]
+  private AudioCollectionHandler _TargetAudioHandler;
+
+  [SerializeField]
   private float _DestroyTimer;
 
   [SerializeField]
@@ -64,7 +70,7 @@ public class HealthComponent: MonoBehaviour{
 
 
   private IEnumerator _trigger_dead_effect(){
-    Debug.Log("triggering dead anim");
+    DEBUGModeUtils.Log("triggering dead anim");
     _death_effect_triggering = true;
     if(_TargetRigidbody != null && FallOffScreenOnDead)
       _TargetRigidbody.excludeLayers = LayerMask.NameToLayer("Everything");
@@ -90,7 +96,7 @@ public class HealthComponent: MonoBehaviour{
 
 
   private void _check_health(){
-    Debug.Log("Check health");
+    DEBUGModeUtils.Log("Check health");
     OnHealthChangedEvent?.Invoke(_current_health);
 
     if(_current_health > _MaxHealth)
@@ -101,6 +107,9 @@ public class HealthComponent: MonoBehaviour{
 
     if(_TargetAnimator != null && TriggerDeadAnimation)
       _TargetAnimator.SetBool("is_dead", _current_health <= 0);
+
+    if(_TargetAudioHandler != null && TriggerDeadAnimation)
+      _TargetAudioHandler.TriggerSound(AudioID_Dead);
   }
   
 
@@ -163,7 +172,7 @@ public class HealthComponent: MonoBehaviour{
 
 
   public void FromRuntimeData(RuntimeData data){
-    Debug.Log(string.Format("runtime health: {0}", data.CurrentHealth));
+    DEBUGModeUtils.Log(string.Format("runtime health: {0}", data.CurrentHealth));
     _current_health = data.CurrentHealth;
     _check_health();
 

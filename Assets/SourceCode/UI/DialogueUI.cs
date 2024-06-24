@@ -12,6 +12,7 @@ using UnityEngine.Rendering;
 using System.Linq;
 
 
+[RequireComponent(typeof(AudioSource))]
 public class DialogueUI: MonoBehaviour{
   [Serializable]
   public class DialogueData{
@@ -51,6 +52,9 @@ public class DialogueUI: MonoBehaviour{
   [SerializeField]
   private GameObject _SequenceHandlerPrefab;
 
+  [SerializeField]
+  private AudioClip _DialogueAudio;
+
 
   private Dictionary<char, float> _character_delay_map = new();
 
@@ -59,14 +63,16 @@ public class DialogueUI: MonoBehaviour{
 
   private SequenceHandlerVS _sequence_handler = null;
 
+  private AudioSource _audio_source;
+
 
   private char _get_last_char_in_rt(string rt_str){
     int _last_idx = rt_str.Length-1;
     while(_last_idx >= 0){
       if(rt_str[_last_idx] != '>')
         return rt_str[_last_idx];
-
-      _last_idx = rt_str.LastIndexOf('<', 0, _last_idx+1);
+        
+      _last_idx = rt_str.LastIndexOf('<', _last_idx);
       _last_idx--;
     }
 
@@ -101,6 +107,9 @@ public class DialogueUI: MonoBehaviour{
       float _timer = _DefaultPerCharacterDelay;
 
       _TextContainer.text = _rb_str.RichTextSubString(i+1);
+      
+      if(_DialogueAudio != null)
+        _audio_source.PlayOneShot(_DialogueAudio);
 
       char _last_char = _get_last_char_in_rt(_TextContainer.text);
       if(_character_delay_map.ContainsKey(_last_char))
@@ -128,6 +137,8 @@ public class DialogueUI: MonoBehaviour{
       Debug.LogWarning("Prefab for SequenceHandler is null.");
       return;
     }
+
+    _audio_source = GetComponent<AudioSource>();
     
     GameObject _test_obj = Instantiate(_SequenceHandlerPrefab);
     if(_test_obj.GetComponent<SequenceHandlerVS>() == null){
@@ -143,7 +154,7 @@ public class DialogueUI: MonoBehaviour{
     if(_sequence_handler == null)
       return;
 
-    Debug.Log("Dialogue start trigger");
+    DEBUGModeUtils.Log("Dialogue start trigger");
     _sequence_handler.StartTriggerAsync();
   }
 

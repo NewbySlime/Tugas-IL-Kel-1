@@ -11,6 +11,7 @@ public class CanvasAutoCameraSetter: MonoBehaviour{
 
 
   private void _game_handler_scene_initialized(string scene_id, GameHandler.GameContext context){
+    DEBUGModeUtils.Log("game handler scene initialized");
     _canvas.worldCamera = FindAnyObjectByType<Camera>();
     if(_canvas.worldCamera == null){
       Debug.LogWarning("No Camera found.");
