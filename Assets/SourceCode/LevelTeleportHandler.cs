@@ -69,7 +69,7 @@ public class LevelTeleportHandler: CheckpointHandler{
     PlayerController _player = FindAnyObjectByType<PlayerController>();
     if(_player != null){
       string _last_scene = _GameHandler.GetLastScene();
-      Debug.Log(string.Format("Last scene {0}", _last_scene));
+      Debug.Log(string.Format("[LevelTeleportHandler] Last scene {0}", _last_scene));
       if(_last_scene == _ArriveSceneID)
         TeleportObject(_player.gameObject);
     }
