@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: InteractionHandler Class Reference</title>
+<title>FlavourOfRoemahNusantara: InteractionHandler Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -98,6 +100,9 @@ $(function(){initNavTree('class_interaction_handler.html',''); initResizable(); 
   <div class="headertitle"><div class="title">InteractionHandler Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class for handling interaction with other objects that has <a class="el" href="class_interactable_interface.html" title="Interface component that any object can use to receive input/interaction from InteractionHandler....">InteractableInterface</a>. This class acts as the actor, all events surrounding interactions are handled here. For further explanation, see <b>Reference/Diagrams/InteractionHandling.drawio</b>  
+ <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for InteractionHandler:</div>
 <div class="dyncontent">
@@ -110,16 +115,93 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7df94a4e6c88517b63b080940e4a66ba" id="r_a7df94a4e6c88517b63b080940e4a66ba"><td class="memItemLeft" align="right" valign="top"><a id="a7df94a4e6c88517b63b080940e4a66ba" name="a7df94a4e6c88517b63b080940e4a66ba"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr>
 <tr class="separator:a7df94a4e6c88517b63b080940e4a66ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb8d2762c5db8db09cd80326486ed748" id="r_acb8d2762c5db8db09cd80326486ed748"><td class="memItemLeft" align="right" valign="top"><a id="acb8d2762c5db8db09cd80326486ed748" name="acb8d2762c5db8db09cd80326486ed748"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Interaction_OnEnter</b> (Collider2D collider)</td></tr>
+<tr class="memitem:acb8d2762c5db8db09cd80326486ed748" id="r_acb8d2762c5db8db09cd80326486ed748"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acb8d2762c5db8db09cd80326486ed748">Interaction_OnEnter</a> (Collider2D collider)</td></tr>
+<tr class="memdesc:acb8d2762c5db8db09cd80326486ed748"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch <a class="el" href="class_rigidbody_message_relay.html#a7d1cd6218dc6a0d62cfb83236d96cbc2" title="(For 2D space)">RigidbodyMessageRelay.OnTriggerEntered2DEvent</a> event from the target body. It will trigger an "interactable enter" event to the entered object and readjust the interactable focus to a valid one.  <br /></td></tr>
 <tr class="separator:acb8d2762c5db8db09cd80326486ed748"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f733e29464240e206dc4f59deec11ec" id="r_a1f733e29464240e206dc4f59deec11ec"><td class="memItemLeft" align="right" valign="top"><a id="a1f733e29464240e206dc4f59deec11ec" name="a1f733e29464240e206dc4f59deec11ec"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Interaction_OnExit</b> (Collider2D collider)</td></tr>
+<tr class="memitem:a1f733e29464240e206dc4f59deec11ec" id="r_a1f733e29464240e206dc4f59deec11ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f733e29464240e206dc4f59deec11ec">Interaction_OnExit</a> (Collider2D collider)</td></tr>
+<tr class="memdesc:a1f733e29464240e206dc4f59deec11ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch <a class="el" href="class_rigidbody_message_relay.html#a3432c12a236192d0f072bf99b48b909e" title="(For 2D space)">RigidbodyMessageRelay.OnTriggerExited2DEvent</a> event from the target body. It will trigger an "interactable exit" event to the exited object and readjust the interactable focus to a valid one.  <br /></td></tr>
 <tr class="separator:a1f733e29464240e206dc4f59deec11ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab65de0961c7412c690252f6c371230f2" id="r_ab65de0961c7412c690252f6c371230f2"><td class="memItemLeft" align="right" valign="top"><a id="ab65de0961c7412c690252f6c371230f2" name="ab65de0961c7412c690252f6c371230f2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnInteract</b> (InputValue value)</td></tr>
-<tr class="separator:ab65de0961c7412c690252f6c371230f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af40802b91d7035a59719eb0a690baa03" id="r_af40802b91d7035a59719eb0a690baa03"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af40802b91d7035a59719eb0a690baa03">TriggerInteraction</a> ()</td></tr>
+<tr class="memdesc:af40802b91d7035a59719eb0a690baa03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to trigger an interaction event to a nearest and valid interactable object. The trigger event will be skipped when there are no current valid focus to an interactable.  <br /></td></tr>
+<tr class="separator:af40802b91d7035a59719eb0a690baa03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class for handling interaction with other objects that has <a class="el" href="class_interactable_interface.html" title="Interface component that any object can use to receive input/interaction from InteractionHandler....">InteractableInterface</a>. This class acts as the actor, all events surrounding interactions are handled here. For further explanation, see <b>Reference/Diagrams/InteractionHandling.drawio</b> </p>
+<p>This class uses external component(s);</p><ul>
+<li><a class="el" href="class_rigidbody_message_relay.html" title="Component to relaying/retransmit any physics events from Unity&#39;s event system to C# event system.">RigidbodyMessageRelay</a> for getting physics events of the target body used.</li>
+<li><a class="el" href="class_interactable_interface.html" title="Interface component that any object can use to receive input/interaction from InteractionHandler....">InteractableInterface</a> for signalling the interface for interaction events. </li>
+</ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="acb8d2762c5db8db09cd80326486ed748" name="acb8d2762c5db8db09cd80326486ed748"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb8d2762c5db8db09cd80326486ed748">&#9670;&#160;</a></span>Interaction_OnEnter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void InteractionHandler.Interaction_OnEnter </td>
+          <td>(</td>
+          <td class="paramtype">Collider2D</td>          <td class="paramname"><span class="paramname"><em>collider</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to catch <a class="el" href="class_rigidbody_message_relay.html#a7d1cd6218dc6a0d62cfb83236d96cbc2" title="(For 2D space)">RigidbodyMessageRelay.OnTriggerEntered2DEvent</a> event from the target body. It will trigger an "interactable enter" event to the entered object and readjust the interactable focus to a valid one. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">collider</td><td>The entered object</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1f733e29464240e206dc4f59deec11ec" name="a1f733e29464240e206dc4f59deec11ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f733e29464240e206dc4f59deec11ec">&#9670;&#160;</a></span>Interaction_OnExit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void InteractionHandler.Interaction_OnExit </td>
+          <td>(</td>
+          <td class="paramtype">Collider2D</td>          <td class="paramname"><span class="paramname"><em>collider</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to catch <a class="el" href="class_rigidbody_message_relay.html#a3432c12a236192d0f072bf99b48b909e" title="(For 2D space)">RigidbodyMessageRelay.OnTriggerExited2DEvent</a> event from the target body. It will trigger an "interactable exit" event to the exited object and readjust the interactable focus to a valid one. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">collider</td><td>The exited object</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af40802b91d7035a59719eb0a690baa03" name="af40802b91d7035a59719eb0a690baa03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af40802b91d7035a59719eb0a690baa03">&#9670;&#160;</a></span>TriggerInteraction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool InteractionHandler.TriggerInteraction </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to trigger an interaction event to a nearest and valid interactable object. The trigger event will be skipped when there are no current valid focus to an interactable. </p>
+<dl class="section return"><dt>Returns</dt><dd>Is the trigger event succeeded or not</dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Assets/SourceCode/<b>InteractionHandler.cs</b></li>
 </ul>

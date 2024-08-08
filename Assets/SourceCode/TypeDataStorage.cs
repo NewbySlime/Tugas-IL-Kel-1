@@ -4,36 +4,35 @@ using Unity.VisualScripting;
 
 
 /// <summary>
-/// Kelas untuk menyimpan tipe-tipe yang berbeda tanpa harus memberi tahu tipenya secara eksplisit.
+/// Storage class that stores any object based on the type of the data (the data type are for C# Dictionary's key). The class only stores one data for a type.
 /// </summary>
 public class TypeDataStorage{
   private Dictionary<Type, object> _data = new Dictionary<Type, object>();
   
 
   /// <summary>
-  /// Untuk memeberikan data berdasarakan tipe "T".
-  /// NOTE: setiap tipe hanya bisa satu data di kelas ini, jika lebih, akan di overwrite.
+  /// Add a data to the storage. Previous data with the same type will be replaced with the new one.
   /// </summary>
-  /// <typeparam name="T">Tipe data yang mau dimasukkan</typeparam>
-  /// <param name="data">Data yang mau dimasukkan</param>
+  /// <param name="data">The data to store</param>
+  /// <typeparam name="T">The type of the data</typeparam>
   public void AddData<T>(T data){
     _data[typeof(T)] = data;
   }
 
   /// <summary>
-  /// Untuk menghapus data berdasarkan tipe "T".
+  /// Remove certain data based on the type from the storage system.
   /// </summary>
-  /// <typeparam name="T">Tipe data yang mau dihapuskan</typeparam>
+  /// <typeparam name="T">The type of the data</typeparam>
   public void RemoveData<T>(){
     _data.Remove(typeof(T));
   }
 
-  /// <summary>
-  /// Untuk mengambil data berdasarkan tipe "T".
-  /// </summary>
-  /// <typeparam name="T">Tipe data yang mau diambil</typeparam>
-  /// <returns>Data tertentu berdasarkan "T", namun akan mengeluarkan "default" atau null.</returns>
   #nullable enable
+  /// <summary>
+  /// (C# Generic) <inheritdoc cref="GetData"/>
+  /// </summary>
+  /// <typeparam name="T">The type of the data</typeparam>
+  /// <returns>The stored data</returns>
   public T? GetData<T>(){
     if(_data.ContainsKey(typeof(T)))
       return (T)_data[typeof(T)];
@@ -44,6 +43,11 @@ public class TypeDataStorage{
 
 
   #nullable enable
+  /// <summary>
+  /// Get the data stored based on the type of the fetched data.
+  /// </summary>
+  /// <param name="type">The type of the data</param>
+  /// <returns>The stored data</returns>
   public object? GetData(Type type){
     if(_data.ContainsKey(type))
       return _data[type];

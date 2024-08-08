@@ -6,9 +6,19 @@ using UnityEngine;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system for logging a message.
+  /// </summary>
   public class LoggingSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
+    /// <returns>The Sequence ID</returns>
     public static string GetSequenceIDStatic(){ return "LoggingSequence"; }
 
+    /// <summary>
+    /// Type used for determine which log type to put the message in.
+    /// </summary>
     public enum LogType{
       Normal,
       Warning,
@@ -16,8 +26,18 @@ namespace SequenceHelper{
     }
 
     [Serializable]
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SeqData{
+      /// <summary>
+      /// Log type to be used.
+      /// </summary>
       public LogType MessageType;
+
+      /// <summary>
+      /// Log message to be sent.
+      /// </summary>
       public string Message;
     }
 
@@ -63,6 +83,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Debug Log")]
   [UnitCategory("Sequence")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="LoggingSequence"/>
+  /// </summary>
   public class LoggingSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _logtype_value;

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['mousefollower_0',['MouseFollower',['../class_mouse_follower.html',1,'']]],
-  ['movementcontroller_1',['MovementController',['../class_movement_controller.html',1,'']]]
+  ['jarotbossbehaviour_0',['JarotBossBehaviour',['../class_jarot_boss_behaviour.html',1,'']]]
 ];

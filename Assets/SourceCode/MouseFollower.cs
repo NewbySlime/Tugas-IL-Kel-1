@@ -1,6 +1,10 @@
 using UnityEngine;
 
 
+/// <summary>
+/// As the name suggest, this component will moves this object to world position of the mouse (pointer position). The component will update the position in rendering update and also physics update.
+/// NOTE: since Unity gives its pointer position based on the screen space, this class converts it to world position based on the camera target reference.
+/// </summary>
 public class MouseFollower: MonoBehaviour{
   [SerializeField]
   private Camera _BaseCamera;

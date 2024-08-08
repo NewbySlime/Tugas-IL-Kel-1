@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: ItemButton Class Reference</title>
+<title>FlavourOfRoemahNusantara: ItemButton Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -100,7 +102,7 @@ $(function(){initNavTree('class_item_button.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 
-<p>Komponen untuk mengontrol tombol dan memproses jika komponen ini di "bind" dengan Item pada Inventory.  
+<p>OUTDATED This UI class handles button interaction with using certain item to bind and be associated with.  
  <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for ItemButton:</div>
@@ -115,24 +117,28 @@ Public Member Functions</h2></td></tr>
 delegate void&#160;</td><td class="memItemRight" valign="bottom"><b>OnButtonPressed</b> (string item_id)</td></tr>
 <tr class="separator:aab6f630d62840cf046b7ffd461e9adbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a100570e447f7bc78e9ef1d97a5fc3479" id="r_a100570e447f7bc78e9ef1d97a5fc3479"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a100570e447f7bc78e9ef1d97a5fc3479">SetItem</a> (string item_id)</td></tr>
-<tr class="memdesc:a100570e447f7bc78e9ef1d97a5fc3479"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk menyiapkan Item ID pada Komponen ini.  <br /></td></tr>
+<tr class="memdesc:a100570e447f7bc78e9ef1d97a5fc3479"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bind an item to this button by ID.  <br /></td></tr>
 <tr class="separator:a100570e447f7bc78e9ef1d97a5fc3479"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8ca3ac5a77317bbe39cb42f5d2cdc35" id="r_ad8ca3ac5a77317bbe39cb42f5d2cdc35"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad8ca3ac5a77317bbe39cb42f5d2cdc35">SetItemCount</a> (uint count)</td></tr>
-<tr class="memdesc:ad8ca3ac5a77317bbe39cb42f5d2cdc35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk memberikan info tentang berapa banyak Item yang terkait di komponen ini.  <br /></td></tr>
+<tr class="memdesc:ad8ca3ac5a77317bbe39cb42f5d2cdc35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the item count to display.  <br /></td></tr>
 <tr class="separator:ad8ca3ac5a77317bbe39cb42f5d2cdc35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd549600ac62dabe6b35f18572ad2f44" id="r_abd549600ac62dabe6b35f18572ad2f44"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd549600ac62dabe6b35f18572ad2f44">OnPointerClick</a> (PointerEventData _event_data)</td></tr>
-<tr class="memdesc:abd549600ac62dabe6b35f18572ad2f44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ke-trigger jika GameObject ini diklik.  <br /></td></tr>
+<tr class="memdesc:abd549600ac62dabe6b35f18572ad2f44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch "clicked" event from <b>IPointerClickHandler</b>.  <br /></td></tr>
 <tr class="separator:abd549600ac62dabe6b35f18572ad2f44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="events" name="events"></a>
 Events</h2></td></tr>
 <tr class="memitem:af864cc5fb71e7e932ec8ca388dd028dd" id="r_af864cc5fb71e7e932ec8ca388dd028dd"><td class="memItemLeft" align="right" valign="top"><a id="af864cc5fb71e7e932ec8ca388dd028dd" name="af864cc5fb71e7e932ec8ca388dd028dd"></a>
 OnButtonPressed&#160;</td><td class="memItemRight" valign="bottom"><b>OnButtonPressedEvent</b></td></tr>
-<tr class="memdesc:af864cc5fb71e7e932ec8ca388dd028dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event jika tombol pada GameObject ini dipencet. <br /></td></tr>
+<tr class="memdesc:af864cc5fb71e7e932ec8ca388dd028dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event for when this button has been pressed. This event will tells the listener the item ID associated with the button. <br /></td></tr>
 <tr class="separator:af864cc5fb71e7e932ec8ca388dd028dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Komponen untuk mengontrol tombol dan memproses jika komponen ini di "bind" dengan Item pada Inventory. </p>
+<div class="textblock"><p>OUTDATED This UI class handles button interaction with using certain item to bind and be associated with. </p>
+<p>This class uses external component(s);</p><ul>
+<li>Target <b>Unity's MaskableGraphics</b> for displaying the Image of the associated item.</li>
+<li><b>Unity's TMP Text UI</b> for displaying item count for the associated item. </li>
+</ul>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="abd549600ac62dabe6b35f18572ad2f44" name="abd549600ac62dabe6b35f18572ad2f44"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abd549600ac62dabe6b35f18572ad2f44">&#9670;&#160;</a></span>OnPointerClick()</h2>
@@ -149,10 +155,10 @@ OnButtonPressed&#160;</td><td class="memItemRight" valign="bottom"><b>OnButtonPr
       </table>
 </div><div class="memdoc">
 
-<p>Ke-trigger jika GameObject ini diklik. </p>
+<p>Function to catch "clicked" event from <b>IPointerClickHandler</b>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_event_data</td><td>Event data dari Unity</td></tr>
+    <tr><td class="paramname">_event_data</td><td>The event data</td></tr>
   </table>
   </dd>
 </dl>
@@ -174,10 +180,10 @@ OnButtonPressed&#160;</td><td class="memItemRight" valign="bottom"><b>OnButtonPr
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi untuk menyiapkan Item ID pada Komponen ini. </p>
+<p>Bind an item to this button by ID. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">item_id</td><td>ID Item yang mau di-set</td></tr>
+    <tr><td class="paramname">item_id</td><td>The target item ID</td></tr>
   </table>
   </dd>
 </dl>
@@ -199,10 +205,10 @@ OnButtonPressed&#160;</td><td class="memItemRight" valign="bottom"><b>OnButtonPr
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi untuk memberikan info tentang berapa banyak Item yang terkait di komponen ini. </p>
+<p>Set the item count to display. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">count</td><td>Berapa banyak Item yang ada</td></tr>
+    <tr><td class="paramname">count</td><td>The item count</td></tr>
   </table>
   </dd>
 </dl>

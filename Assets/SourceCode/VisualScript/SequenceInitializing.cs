@@ -8,6 +8,9 @@ using System.Linq;
 
 
 [UnitCategory("Sequence/SequenceUtility")]
+/// <summary>
+/// Visual Scripting Node for creating or adding sequence data for use by <see cref="SequenceHandlerVS"/>. 
+/// </summary>
 public class AddSequence: Unit{
   [DoNotSerialize]
   private ControlInput _input_flow;
@@ -54,6 +57,10 @@ public class AddSequence: Unit{
 
 [UnitTitle("Create Without IO Flow")]
 [UnitCategory("Sequence/SequenceUtility")]
+/// <summary>
+/// <inheritdoc cref="AddSequence"/>
+/// This class only serves as an entry-point of creating the sequence data plus the flow needed, unlike <see cref="AddSequence"/> Node.
+/// </summary>
 public class CreateWIOSequence: Unit{
   [DoNotSerialize]
   private ControlOutput _seqinit_flow;
@@ -85,6 +92,9 @@ public class CreateWIOSequence: Unit{
 
 
 [UnitCategory(".Interface")]
+/// <summary>
+/// Interface Visual Scripting Node that can be used for creating a custom Sequence processing.
+/// </summary>
 public class AddSubSequence: Unit{
   [DoNotSerialize]
   private ControlInput _input_flow;
@@ -99,6 +109,10 @@ public class AddSubSequence: Unit{
   
   private SequenceHandlerVS.SequenceInitializeData _init_data;
 
+  /// <summary>
+  /// The Unit/Node definition for the Visual Script Object.
+  /// Important to override in case to create new members in the Node.
+  /// </summary>
   protected override void Definition(){
     _input_flow = ControlInput("InputFlow", (flow) => {
       _init_data = flow.GetValue<SequenceHandlerVS.SequenceInitializeData>(_seqinit_input);
@@ -121,6 +135,10 @@ public class AddSubSequence: Unit{
     });
   }
 
-
+  /// <summary>
+  /// Virtual function to get supplied Sequence data about the inheriting class.
+  /// </summary>
+  /// <param name="flow">The Visual Scripting flow</param>
+  /// <param name="init_data">The resulting inherited <see cref="SequenceHandlerVS.SequenceInitializeData.DataPart"/> data.</param>
   protected virtual void AddData(Flow flow, out SequenceHandlerVS.SequenceInitializeData.DataPart init_data){init_data = null;}
 }

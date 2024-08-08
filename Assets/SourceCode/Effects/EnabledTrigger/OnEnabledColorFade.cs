@@ -2,6 +2,12 @@ using System.Collections;
 using UnityEngine;
 
 
+/// <summary>
+/// A class that gives a "fade" effect when the object is being enabled.
+/// 
+/// This class uses Component(s);
+/// - <see cref="IMaterialReference"/> passed as a GameObject to get the target Material.
+/// </summary>
 public class OnEnabledColorFade: MonoBehaviour, IEnableTrigger, IObjectInitialized{
   [SerializeField]
   private GameObject _MaterialReference;
@@ -27,15 +33,16 @@ public class OnEnabledColorFade: MonoBehaviour, IEnableTrigger, IObjectInitializ
 
 
   private void _trigger_effect(){
-    DEBUGModeUtils.Log(string.Format("trigger effect {0}", !EnableTrigger));
-    DEBUGModeUtils.Log(string.Format("trigger effect {0}", _effect_coroutine != null));
-    DEBUGModeUtils.Log(string.Format("trigger effect {0}", !IsInitialized));
     if(!EnableTrigger || _effect_coroutine != null || !IsInitialized)
       return;
 
     _effect_coroutine = StartCoroutine(_trigger_effect_co_func());
   }
 
+  /// <summary>
+  /// Coroutine function that handles the lifetime of the effect.
+  /// </summary>
+  /// <returns>Coroutine helper object.</returns>
   private IEnumerator _trigger_effect_co_func(){
     Color _mult_to_color = _FadeFromColorMult;
     _mult_to_color.a = 0;
@@ -57,6 +64,10 @@ public class OnEnabledColorFade: MonoBehaviour, IEnableTrigger, IObjectInitializ
     _effect_finished();
   }
 
+  /// <summary>
+  /// Resets everything to a finished state to completely to make sure that everything is in finished state.
+  /// This is used when the effect is finished or an actor wants to cancel the effect.
+  /// </summary>
   private void _effect_finished(){
     _effect_coroutine = null;
 
@@ -68,6 +79,7 @@ public class OnEnabledColorFade: MonoBehaviour, IEnableTrigger, IObjectInitializ
 
 
   private IEnumerator _start_co_func(){
+    // let it all finished
     yield return null;
     yield return new WaitForEndOfFrame();
 
@@ -90,6 +102,9 @@ public class OnEnabledColorFade: MonoBehaviour, IEnableTrigger, IObjectInitializ
   }
 
 
+  /// <summary>
+  /// Function used to stop the ongoing effect.
+  /// </summary>
   public void CancelEffect(){
     if(_effect_coroutine == null)
       return;
@@ -99,10 +114,16 @@ public class OnEnabledColorFade: MonoBehaviour, IEnableTrigger, IObjectInitializ
   }
 
 
+  /// <summary>
+  /// Function to catch Unity's "Enabled" event.
+  /// </summary>
   public void OnEnable(){
     _trigger_effect();
   }
 
+  /// <summary>
+  /// Function to catch Unity's "Disabled" event.
+  /// </summary>
   public void OnDisable(){
     CancelEffect();
   }

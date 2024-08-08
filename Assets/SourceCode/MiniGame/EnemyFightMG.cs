@@ -2,7 +2,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+/// <summary>
+/// Class to handler Minigame system for when Enemy Battles in the Game.
+/// In this class, there are conditions as an outcomes;
+/// - Win condition is based on if all the "enemies" are defeated.
+/// - Defeat condition is based on if all the "allies" are defeated.
+/// 
+/// NOTE: bound objects should have <see cref="HealthComponent"/> and <see cref="ObjectFriendlyHandler"/> for the Minigame to work properly.
+/// 
+/// Optional Component(s);
+/// - <see cref="ObjectSpawner"/> Spawn Object(s) that then be bound to the class based on <see cref="ObjectFriendlyHandler"/>.
+/// 
+/// <seealso cref="MiniGameHandler"/>
+/// </summary>
 public class EnemyFightMG: MiniGameHandler{
+  /// <summary>
+  /// Metadata about the bound object.
+  /// </summary>
   private struct _object_metadata{
     public GameObject obj;
     public HealthComponent health_component; 
@@ -16,7 +32,9 @@ public class EnemyFightMG: MiniGameHandler{
 
   private Dictionary<int, _object_metadata> _list_watched_allies = new();
 
-
+  /// <summary>
+  /// Check when an enemy died. If all enemies died, the Minigame then trigger "winning" state.
+  /// </summary>
   private void _on_enemy_died(){
     List<int> _removed_list = new();
     foreach(int id in _list_watched_enemies.Keys){
@@ -37,6 +55,9 @@ public class EnemyFightMG: MiniGameHandler{
       _GameFinished(ResultCase.Win);
   }
 
+  /// <summary>
+  /// Check when an ally died. If all allies died, the Minigame then trigger "losing" state.
+  /// </summary>
   private void _on_ally_died(){
     List<int> _removed_list = new();
     foreach(int id in _list_watched_allies.Keys){
@@ -69,13 +90,37 @@ public class EnemyFightMG: MiniGameHandler{
   }
 
 
+  /// <summary>
+  /// Virtual function for when an enemy died.
+  /// </summary>
+  /// <param name="obj">The enemy object</param>
   protected virtual void _OnEnemyDied(GameObject obj){}
+  
+  /// <summary>
+  /// Virtual function for when an enemy is bound to the class.
+  /// </summary>
+  /// <param name="obj">The enemy object</param>
   protected virtual void _OnEnemyAddedToWatchList(GameObject obj){}
 
+
+  /// <summary>
+  /// Virtual function for when an ally died.
+  /// </summary>
+  /// <param name="obj">The ally object</param>
   protected virtual void _OnAllyDied(GameObject obj){}
+
+  /// <summary>
+  /// Virtual function for when an ally is bound to the class.
+  /// </summary>
+  /// <param name="obj">The ally object</param>
   protected virtual void _OnAllyAddedToWatchList(GameObject obj){}
 
 
+  /// <summary>
+  /// Function to bind object to the class for watching the object.
+  /// Binding it as an "ally" or "enemy" is based on the <see cref="ObjectFriendlyHandler"/>. 
+  /// </summary>
+  /// <param name="obj">The target object</param>
   public void AddWatchObject(GameObject obj){
     ObjectFriendlyHandler _friendly_handler = obj.GetComponent<ObjectFriendlyHandler>();
     if(_friendly_handler == null){
@@ -117,6 +162,10 @@ public class EnemyFightMG: MiniGameHandler{
   }
 
   
+  /// <summary>
+  /// Bind object(s) spawned by <see cref="ObjectSpawner"/> to the class. The function mechanism is the same as <see cref="AddWatchObject(GameObject)"/>.
+  /// </summary>
+  /// <param name="spawner">The target spawner</param>
   public void AddWatchObjectFromSpawner(ObjectSpawner spawner){
     List<GameObject> _list_spawned = spawner.GetSpawnedObjectList();
     foreach(GameObject _spawned_obj in _list_spawned){

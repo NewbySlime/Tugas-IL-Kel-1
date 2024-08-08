@@ -5,6 +5,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+/// <summary>
+/// Button for showing bound recipe data and handling the interactions. This class also used by <see cref="RecipeBookUI"/>.
+/// 
+/// This class uses external component(s);
+/// - <b>Unity's MaskableGraphics</b> for showing the resulting item image from a bound recipe.
+/// - <b>Unity's TMP Text UI</b> for presenting the data related to the recipe.
+/// 
+/// This class uses autoload(s);
+/// - <see cref="ItemDatabase"/> for getting data of items.
+/// </summary>
 public class RecipeDataButtonUI: ButtonBaseUI, IObjectInitialized{
   [SerializeField]
   private Image _ItemImageUI;
@@ -22,9 +32,13 @@ public class RecipeDataButtonUI: ButtonBaseUI, IObjectInitialized{
   private string _current_item_id = "";
 
 
+  /// <summary>
+  /// Is the object initialized or not yet.
+  /// </summary>
   public bool IsInitialized{private get; set;} = false;
 
 
+  // to bind a recipe based on the ID supplied.
   private void _set_item_id(string item_id){
     _current_item_id = item_id;
 
@@ -78,6 +92,7 @@ public class RecipeDataButtonUI: ButtonBaseUI, IObjectInitialized{
   }
 
 
+  // extends start function to wait until every object is initialized for immediate use.
   private IEnumerator _start_co_func(){
     yield return null;
     yield return new WaitForEndOfFrame();
@@ -96,6 +111,11 @@ public class RecipeDataButtonUI: ButtonBaseUI, IObjectInitialized{
     StartCoroutine(_start_co_func());
   }
 
+
+  /// <summary>
+  /// To set and bind the recipe using the ID supplied.
+  /// </summary>
+  /// <param name="recipe_item_id">The recipe ID</param>
   public void SetRecipeID(string recipe_item_id){
     _set_item_id(recipe_item_id);
   }

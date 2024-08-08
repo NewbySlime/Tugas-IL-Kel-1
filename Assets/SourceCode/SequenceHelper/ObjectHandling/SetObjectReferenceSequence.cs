@@ -5,13 +5,28 @@ using JetBrains.Annotations;
 
 
 namespace SequenceHelper{
-  // needed a Sequence Object since the referenced object's lifetime started on runtime, not at scene starting (or changing scene)
+  /// <summary>
+  /// A custom Sequencing system to set object within certain <see cref="ObjectReference.ObjRefID"/> to a new ID.
+  /// NOTE: needed a Sequence Object since the referenced object's lifetime started on runtime, not at scene starting (or changing scene).
+  /// </summary>
   public class SetObjectReferenceSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "set_object_reference";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target object to be referenced using the new ID.
+      /// </summary>
       public ObjectReference.ObjRefID RefID;
 
+      /// <summary>
+      /// The new ID for the reference.
+      /// </summary>
       public string NewRefID;
     }
 
@@ -49,6 +64,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Set Object Reference")]
   [UnitCategory("Sequence/ObjectHandling")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="SetObjectReferenceSequence"/>.
+  /// </summary>
   public class SetObjectReferenceSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _obj_ref_input;

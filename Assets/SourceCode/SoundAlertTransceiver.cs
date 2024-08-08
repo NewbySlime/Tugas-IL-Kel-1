@@ -6,10 +6,24 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(CircleCollider2D))]
+/// <summary>
+/// Class to "transmit sound" that can be received by <see cref="SoundAlertReceiver"/>. This class is used to create an "imaginary sound" using an area of effect to accomodate Unity's Sound system for a Game object's ability to "hear" a sound that can be used to trigger a flag in the object.
+/// For further explanation, see <b>Reference/Diagrams/SoundAlert.drawio</b>
+/// 
+/// This class uses following component(s);
+/// - Unity's <b>CircleCollider2D</b> physics body (as trigger) for the area of effect to capture nearby <see cref="SoundAlertReceiver"/> objects.
+/// </summary>
 public class SoundAlertTransceiver: MonoBehaviour{
   [Serializable]
+  /// <summary>
+  /// Configuration for using <see cref="SoundAlertTransceiver"/>'s "sound" transmitting function.
+  /// </summary>
   public struct AlertConfig{
     public float SoundRangeMax;
+
+    /// <summary>
+    /// Speed reference for area of effect's range. This variable is calculated alongside <see cref="SoundRangeMax"/> to get the resulting range.
+    /// </summary>
     public float MaxCollisionSpeedReference;
   }
 
@@ -56,15 +70,27 @@ public class SoundAlertTransceiver: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Sets the configuration for transmitting "sound".
+  /// </summary>
+  /// <param name="config">The new configuration</param>
   public void SetAlertConfig(AlertConfig config){
     _this_config = config;
   }
 
+  /// <summary>
+  /// Trigger transmitting "sound" to nearby <see cref="SoundAlertReceiver"/>.
+  /// </summary>
   public void TriggerSound(){
     StartCoroutine(_trigger_sound());
   }
 
 
+  /// <summary>
+  /// Function to catch <b>CircleCollder2D</b> event for when an object has entered its body.
+  /// This function is to add an object (if it is <see cref="SoundAlertReceiver"/>) to be added to "nearby" list.
+  /// </summary>
+  /// <param name="collider">The body that entered</param>
   public void OnTriggerEnter2D(Collider2D collider){
     DEBUGModeUtils.Log(string.Format("receiver added {0}", collider.gameObject.name));
     SoundAlertReceiver _receiver = collider.gameObject.GetComponent<SoundAlertReceiver>();
@@ -75,6 +101,11 @@ public class SoundAlertTransceiver: MonoBehaviour{
     _alert_receiver_list.Add(_receiver);
   }
 
+  /// <summary>
+  /// Function to catch <b>CircleCollider2D</b> event for when an object has exited its body.
+  /// This function si to remove an object from "nearby" list.
+  /// </summary>
+  /// <param name="collider">The body that exited</param>
   public void OnTriggerExit2D(Collider2D collider){
     SoundAlertReceiver _receiver = collider.gameObject.GetComponent<SoundAlertReceiver>();
     if(_receiver == null || !_alert_receiver_list.Contains(_receiver))

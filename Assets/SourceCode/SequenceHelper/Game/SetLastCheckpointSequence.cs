@@ -3,10 +3,22 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to set the last checkpoint with the supplied ID for Checkpoint.
+  /// </summary>
   public class SetLastCheckpointSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "set_last_checkpoint";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The ID for Checkpoint to be set as the last Checkpoint.
+      /// </summary>
       public string CheckpointID;
     }
 
@@ -57,6 +69,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Set Last Checkpoint")]
   [UnitCategory("Sequence/Game")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="SetLastCheckpointSequence"/>.
+  /// </summary>
   public class SetLastCheckpointSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _checkpoint_id_input;

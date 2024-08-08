@@ -6,11 +6,21 @@ using UnityEngine.UIElements;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to set the target object the enemy will attack. 
+  /// </summary>
   public class SetEnemyTargetSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
     public const string SequenceID = "set_enemy_target";
 
     public struct SequenceData{
+      /// <summary>
+      /// The object that will be targeted by the enemy.
+      /// </summary>
       public ObjectReference.ObjRefID TargetObj;
+      
+      /// <summary>
+      /// The enemy object.
+      /// </summary>
       public ObjectReference.ObjRefID EnemyObj;
     }
 
@@ -64,6 +74,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Set Enemy Target")]
   [UnitCategory("Sequence/Enemy")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="SetEnemyTargetSequence"/>.
+  /// </summary>
   public class SetEnemyTargetSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _target_ref_input;

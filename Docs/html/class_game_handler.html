@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: GameHandler Class Reference</title>
+<title>FlavourOfRoemahNusantara: GameHandler Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -97,11 +99,15 @@ $(function(){initNavTree('class_game_handler.html',''); initResizable(); });
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#properties">Properties</a> &#124;
 <a href="#events">Events</a> &#124;
 <a href="class_game_handler-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">GameHandler Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class for handling Game's functions, events, and other objects/components that serves as the internal functions.  
+ <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for GameHandler:</div>
 <div class="dyncontent">
@@ -111,124 +117,422 @@ Inheritance diagram for GameHandler:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_handler_1_1_runtime_scene_data.html">RuntimeSceneData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scene data for build mode. Loaded in _load_runtime_scene_data function.  <a href="class_game_handler_1_1_runtime_scene_data.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_handler_1_1_runtime_scene_data_wrapper.html">RuntimeSceneDataWrapper</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper to store multiple RuntimeSceneData with <b>Serializeable</b> attribute.  <a href="class_game_handler_1_1_runtime_scene_data_wrapper.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_handler_1_1_scene_data.html">SceneData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">(ONLY USE IN DEBUG MODE) Data about a certain scene. For build mode counterpart of this see RuntimeSceneData.  <a href="class_game_handler_1_1_scene_data.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_handler_1_1_scene_metadata.html">SceneMetadata</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Metadata about a scene attached.  <a href="class_game_handler_1_1_scene_metadata.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a05be125f39d51b3f9fa21bfb02e43466" id="r_a05be125f39d51b3f9fa21bfb02e43466"><td class="memItemLeft" align="right" valign="top"><a id="a05be125f39d51b3f9fa21bfb02e43466" name="a05be125f39d51b3f9fa21bfb02e43466"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>GameContext</b> { <b>InGame</b>
+<tr class="memitem:a05be125f39d51b3f9fa21bfb02e43466" id="r_a05be125f39d51b3f9fa21bfb02e43466"><td class="memItemLeft" align="right" valign="top"><a id="a05be125f39d51b3f9fa21bfb02e43466" name="a05be125f39d51b3f9fa21bfb02e43466"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a05be125f39d51b3f9fa21bfb02e43466">GameContext</a> { <b>InGame</b>
 , <b>MainMenu</b>
  }</td></tr>
+<tr class="memdesc:a05be125f39d51b3f9fa21bfb02e43466"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tells the current context of the scene. <br /></td></tr>
 <tr class="separator:a05be125f39d51b3f9fa21bfb02e43466"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad96e2cc1c1c5fb666482e963584cf161" id="r_ad96e2cc1c1c5fb666482e963584cf161"><td class="memItemLeft" align="right" valign="top"><a id="ad96e2cc1c1c5fb666482e963584cf161" name="ad96e2cc1c1c5fb666482e963584cf161"></a>
-delegate void&#160;</td><td class="memItemRight" valign="bottom"><b>SceneChangedInitializing</b> (string scene_id, GameContext context)</td></tr>
+delegate void&#160;</td><td class="memItemRight" valign="bottom"><b>SceneChangedInitializing</b> (string scene_id, <a class="el" href="#a05be125f39d51b3f9fa21bfb02e43466">GameContext</a> context)</td></tr>
 <tr class="separator:ad96e2cc1c1c5fb666482e963584cf161"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e9f59993db2f56956dc60ba6c53ab50" id="r_a5e9f59993db2f56956dc60ba6c53ab50"><td class="memItemLeft" align="right" valign="top"><a id="a5e9f59993db2f56956dc60ba6c53ab50" name="a5e9f59993db2f56956dc60ba6c53ab50"></a>
-delegate void&#160;</td><td class="memItemRight" valign="bottom"><b>SceneChangedFinished</b> (string scene_id, GameContext context)</td></tr>
+delegate void&#160;</td><td class="memItemRight" valign="bottom"><b>SceneChangedFinished</b> (string scene_id, <a class="el" href="#a05be125f39d51b3f9fa21bfb02e43466">GameContext</a> context)</td></tr>
 <tr class="separator:a5e9f59993db2f56956dc60ba6c53ab50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b4cbf9cef3ed2c0182c90d5f8a585da" id="r_a5b4cbf9cef3ed2c0182c90d5f8a585da"><td class="memItemLeft" align="right" valign="top"><a id="a5b4cbf9cef3ed2c0182c90d5f8a585da" name="a5b4cbf9cef3ed2c0182c90d5f8a585da"></a>
 delegate void&#160;</td><td class="memItemRight" valign="bottom"><b>SceneRemoving</b> ()</td></tr>
 <tr class="separator:a5b4cbf9cef3ed2c0182c90d5f8a585da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b1bd91e61c1478c2aaffab7017cc148" id="r_a1b1bd91e61c1478c2aaffab7017cc148"><td class="memItemLeft" align="right" valign="top"><a id="a1b1bd91e61c1478c2aaffab7017cc148" name="a1b1bd91e61c1478c2aaffab7017cc148"></a>
-delegate void&#160;</td><td class="memItemRight" valign="bottom"><b>ScenarioStateChanged</b> (string scenario)</td></tr>
-<tr class="separator:a1b1bd91e61c1478c2aaffab7017cc148"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6a2bc0de7c144d2d32523603db7f2c3" id="r_af6a2bc0de7c144d2d32523603db7f2c3"><td class="memItemLeft" align="right" valign="top"><a id="af6a2bc0de7c144d2d32523603db7f2c3" name="af6a2bc0de7c144d2d32523603db7f2c3"></a>
-delegate void&#160;</td><td class="memItemRight" valign="bottom"><b>ScenarioFinished</b> (string scenario)</td></tr>
-<tr class="separator:af6a2bc0de7c144d2d32523603db7f2c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8fbe43ee5494abc88b6d6f786359b0a5" id="r_a8fbe43ee5494abc88b6d6f786359b0a5"><td class="memItemLeft" align="right" valign="top"><a id="a8fbe43ee5494abc88b6d6f786359b0a5" name="a8fbe43ee5494abc88b6d6f786359b0a5"></a>
-delegate void&#160;</td><td class="memItemRight" valign="bottom"><b>SubScenarioStateChanged</b> (string scenario, string last_subid, string next_subid)</td></tr>
-<tr class="separator:a8fbe43ee5494abc88b6d6f786359b0a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7950c6b2131279d35c0480b57e7efe3f" id="r_a7950c6b2131279d35c0480b57e7efe3f"><td class="memItemLeft" align="right" valign="top"><a id="a7950c6b2131279d35c0480b57e7efe3f" name="a7950c6b2131279d35c0480b57e7efe3f"></a>
-delegate void&#160;</td><td class="memItemRight" valign="bottom"><b>SubScenarioFinished</b> (string scenario, string subscenario)</td></tr>
-<tr class="separator:a7950c6b2131279d35c0480b57e7efe3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6e4ed4b2ad3f11801542afaa78a53b1" id="r_aa6e4ed4b2ad3f11801542afaa78a53b1"><td class="memItemLeft" align="right" valign="top"><a id="aa6e4ed4b2ad3f11801542afaa78a53b1" name="aa6e4ed4b2ad3f11801542afaa78a53b1"></a>
+delegate void&#160;</td><td class="memItemRight" valign="bottom"><b>LoadDataFromPersistance</b> (<a class="el" href="class_persistance_context.html">PersistanceContext</a> context)</td></tr>
+<tr class="separator:aa6e4ed4b2ad3f11801542afaa78a53b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a404ad1f46021f5c1297af823f1df68bf" id="r_a404ad1f46021f5c1297af823f1df68bf"><td class="memItemLeft" align="right" valign="top"><a id="a404ad1f46021f5c1297af823f1df68bf" name="a404ad1f46021f5c1297af823f1df68bf"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Awake</b> ()</td></tr>
 <tr class="separator:a404ad1f46021f5c1297af823f1df68bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c923e4fda0563b92b6f0ac69df90dc4" id="r_a8c923e4fda0563b92b6f0ac69df90dc4"><td class="memItemLeft" align="right" valign="top"><a id="a8c923e4fda0563b92b6f0ac69df90dc4" name="a8c923e4fda0563b92b6f0ac69df90dc4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr>
 <tr class="separator:a8c923e4fda0563b92b6f0ac69df90dc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac249f96eb8fdc54043048273b776a07e" id="r_ac249f96eb8fdc54043048273b776a07e"><td class="memItemLeft" align="right" valign="top"><a id="ac249f96eb8fdc54043048273b776a07e" name="ac249f96eb8fdc54043048273b776a07e"></a>
-IEnumerator&#160;</td><td class="memItemRight" valign="bottom"><b>StartScenario</b> (string scenario_id)</td></tr>
-<tr class="separator:ac249f96eb8fdc54043048273b776a07e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cd6415f3f4ddd36d4b020a7916e4a65" id="r_a3cd6415f3f4ddd36d4b020a7916e4a65"><td class="memItemLeft" align="right" valign="top"><a id="a3cd6415f3f4ddd36d4b020a7916e4a65" name="a3cd6415f3f4ddd36d4b020a7916e4a65"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetEnableScenario</b> (string scenario_id, bool enabled)</td></tr>
-<tr class="separator:a3cd6415f3f4ddd36d4b020a7916e4a65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66f5029cbcdc7ad681ee52281d9d9991" id="r_a66f5029cbcdc7ad681ee52281d9d9991"><td class="memItemLeft" align="right" valign="top"><a id="a66f5029cbcdc7ad681ee52281d9d9991" name="a66f5029cbcdc7ad681ee52281d9d9991"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>GetEnableScenario</b> (string scenario_id)</td></tr>
-<tr class="separator:a66f5029cbcdc7ad681ee52281d9d9991"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4703e59dca7f54ba2878ae8956b24d2d" id="r_a4703e59dca7f54ba2878ae8956b24d2d"><td class="memItemLeft" align="right" valign="top"><a id="a4703e59dca7f54ba2878ae8956b24d2d" name="a4703e59dca7f54ba2878ae8956b24d2d"></a>
-<a class="el" href="class_scenario_handler.html">ScenarioHandler</a>?&#160;</td><td class="memItemRight" valign="bottom"><b>GetScenario</b> (string scenario_id)</td></tr>
-<tr class="separator:a4703e59dca7f54ba2878ae8956b24d2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acee2ed4356d652569b560af6e5e4844a" id="r_acee2ed4356d652569b560af6e5e4844a"><td class="memItemLeft" align="right" valign="top"><a id="acee2ed4356d652569b560af6e5e4844a" name="acee2ed4356d652569b560af6e5e4844a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>GameOverTrigger</b> ()</td></tr>
-<tr class="separator:acee2ed4356d652569b560af6e5e4844a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00bd3ba02ed394875871326283230010" id="r_a00bd3ba02ed394875871326283230010"><td class="memItemLeft" align="right" valign="top"><a id="a00bd3ba02ed394875871326283230010" name="a00bd3ba02ed394875871326283230010"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>LoadGame</b> ()</td></tr>
+<tr class="memdesc:a00bd3ba02ed394875871326283230010"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a save file that saved previous state of the Game. <br /></td></tr>
 <tr class="separator:a00bd3ba02ed394875871326283230010"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c14868dedfc120f5539ed545c40052b" id="r_a1c14868dedfc120f5539ed545c40052b"><td class="memItemLeft" align="right" valign="top"><a id="a1c14868dedfc120f5539ed545c40052b" name="a1c14868dedfc120f5539ed545c40052b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>StartNewGame</b> ()</td></tr>
+<tr class="memdesc:a1c14868dedfc120f5539ed545c40052b"><td class="mdescLeft">&#160;</td><td class="mdescRight">To reset Game's data and variables and start a new Game. <br /></td></tr>
 <tr class="separator:a1c14868dedfc120f5539ed545c40052b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a509d6391d8079be4923f9f46e3203a46" id="r_a509d6391d8079be4923f9f46e3203a46"><td class="memItemLeft" align="right" valign="top"><a id="a509d6391d8079be4923f9f46e3203a46" name="a509d6391d8079be4923f9f46e3203a46"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SaveGame</b> ()</td></tr>
+<tr class="memdesc:a509d6391d8079be4923f9f46e3203a46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger a Game Save event. If an object wants to store a data to save file, subscribe to <a class="el" href="class_persistance_context.html#aff456e9d15066c826794afacdcef4cf9" title="Saving trigger event. To store a data, use ParseData.">PersistanceContext.PersistanceSavingEvent</a> in <a class="el" href="class_persistance_context.html" title="Class for handling data, storing and loading the data with the OS&#39; filesystem. The path for save file...">PersistanceContext</a> attached to this object. <br /></td></tr>
 <tr class="separator:a509d6391d8079be4923f9f46e3203a46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0155624fc116a1fe9e5bc9826091d62" id="r_af0155624fc116a1fe9e5bc9826091d62"><td class="memItemLeft" align="right" valign="top"><a id="af0155624fc116a1fe9e5bc9826091d62" name="af0155624fc116a1fe9e5bc9826091d62"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>RestartFromLastCheckpoint</b> ()</td></tr>
+<tr class="memdesc:af0155624fc116a1fe9e5bc9826091d62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restart the Game from the last saved Game state. <br /></td></tr>
 <tr class="separator:af0155624fc116a1fe9e5bc9826091d62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3ebf688397ef3a1c2577bc9b2d1d7d2" id="r_af3ebf688397ef3a1c2577bc9b2d1d7d2"><td class="memItemLeft" align="right" valign="top"><a id="af3ebf688397ef3a1c2577bc9b2d1d7d2" name="af3ebf688397ef3a1c2577bc9b2d1d7d2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetLastCheckpoint</b> (string checkpoint_id)</td></tr>
+<tr class="memitem:af3ebf688397ef3a1c2577bc9b2d1d7d2" id="r_af3ebf688397ef3a1c2577bc9b2d1d7d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af3ebf688397ef3a1c2577bc9b2d1d7d2">SetLastCheckpoint</a> (string checkpoint_id)</td></tr>
+<tr class="memdesc:af3ebf688397ef3a1c2577bc9b2d1d7d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the last checkpoint that the player entered last time.  <br /></td></tr>
 <tr class="separator:af3ebf688397ef3a1c2577bc9b2d1d7d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9189090681a4c0ffd1d5239da367ec5" id="r_aa9189090681a4c0ffd1d5239da367ec5"><td class="memItemLeft" align="right" valign="top"><a id="aa9189090681a4c0ffd1d5239da367ec5" name="aa9189090681a4c0ffd1d5239da367ec5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ChangeScene</b> (string scene_id)</td></tr>
-<tr class="separator:aa9189090681a4c0ffd1d5239da367ec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b7252ef6cbbe5f6b10fd7421ea90d07" id="r_a6b7252ef6cbbe5f6b10fd7421ea90d07"><td class="memItemLeft" align="right" valign="top"><a id="a6b7252ef6cbbe5f6b10fd7421ea90d07" name="a6b7252ef6cbbe5f6b10fd7421ea90d07"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><b>GetLastScene</b> ()</td></tr>
+<tr class="memitem:a66096ffc25b4aa915802a313ba49d48f" id="r_a66096ffc25b4aa915802a313ba49d48f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a66096ffc25b4aa915802a313ba49d48f">ChangeScene</a> (string scene_id, string teleport_to=&quot;&quot;, bool do_save=true)</td></tr>
+<tr class="memdesc:a66096ffc25b4aa915802a313ba49d48f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change Game's scene to a new scene. This does not automatically teleport the Player, instead it uses checkpoint (teleport) ID from the previous scene to determine where to teleport to. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_level_teleport_handler.html" title="Extended CheckpointHandler object for triggering teleportation between level/scene when an object has...">LevelTeleportHandler</a></dd></dl>
+ <br /></td></tr>
+<tr class="separator:a66096ffc25b4aa915802a313ba49d48f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed822e9ab8c38ac64adb697dcdb7e007" id="r_aed822e9ab8c38ac64adb697dcdb7e007"><td class="memItemLeft" align="right" valign="top"><a id="aed822e9ab8c38ac64adb697dcdb7e007" name="aed822e9ab8c38ac64adb697dcdb7e007"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ChangeSceneToMainMenu</b> ()</td></tr>
+<tr class="memdesc:aed822e9ab8c38ac64adb697dcdb7e007"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change Game's scene to main menu scene. This uses <a class="el" href="#a66096ffc25b4aa915802a313ba49d48f" title="Change Game&#39;s scene to a new scene. This does not automatically teleport the Player,...">ChangeScene</a> function with hardcoded scene ID. <br /></td></tr>
+<tr class="separator:aed822e9ab8c38ac64adb697dcdb7e007"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b7252ef6cbbe5f6b10fd7421ea90d07" id="r_a6b7252ef6cbbe5f6b10fd7421ea90d07"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b7252ef6cbbe5f6b10fd7421ea90d07">GetLastScene</a> ()</td></tr>
+<tr class="memdesc:a6b7252ef6cbbe5f6b10fd7421ea90d07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get scene ID of the previous scene.  <br /></td></tr>
 <tr class="separator:a6b7252ef6cbbe5f6b10fd7421ea90d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadaea3b157e2e44bd7ed58bef8f44f84" id="r_aadaea3b157e2e44bd7ed58bef8f44f84"><td class="memItemLeft" align="right" valign="top"><a id="aadaea3b157e2e44bd7ed58bef8f44f84" name="aadaea3b157e2e44bd7ed58bef8f44f84"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>QuitGame</b> ()</td></tr>
+<tr class="memdesc:aadaea3b157e2e44bd7ed58bef8f44f84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prompt the Game to quit the Game program. <br /></td></tr>
+<tr class="separator:aadaea3b157e2e44bd7ed58bef8f44f84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33e1cd5b674d5dbbd05b5cee4c0648d2" id="r_a33e1cd5b674d5dbbd05b5cee4c0648d2"><td class="memItemLeft" align="right" valign="top"><a id="a33e1cd5b674d5dbbd05b5cee4c0648d2" name="a33e1cd5b674d5dbbd05b5cee4c0648d2"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>PauseGame</b> ()</td></tr>
+<tr class="memdesc:a33e1cd5b674d5dbbd05b5cee4c0648d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prompt to pause the Game. It will show the UI for pausing, and then when closed by this object or by the UI presented, the Game will be resumed. <br /></td></tr>
 <tr class="separator:a33e1cd5b674d5dbbd05b5cee4c0648d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6cebddda8c9426e3abaa2619f3e1cf51" id="r_a6cebddda8c9426e3abaa2619f3e1cf51"><td class="memItemLeft" align="right" valign="top"><a id="a6cebddda8c9426e3abaa2619f3e1cf51" name="a6cebddda8c9426e3abaa2619f3e1cf51"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ResumeGame</b> ()</td></tr>
+<tr class="memdesc:a6cebddda8c9426e3abaa2619f3e1cf51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resume the paused Game that have been paused by <a class="el" href="#a33e1cd5b674d5dbbd05b5cee4c0648d2" title="Prompt to pause the Game. It will show the UI for pausing, and then when closed by this object or by ...">PauseGame</a>. This will hide the UI for pausing. <br /></td></tr>
 <tr class="separator:a6cebddda8c9426e3abaa2619f3e1cf51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a608ba53240fb3f7873eb78a20a38f8d7" id="r_a608ba53240fb3f7873eb78a20a38f8d7"><td class="memItemLeft" align="right" valign="top"><a id="a608ba53240fb3f7873eb78a20a38f8d7" name="a608ba53240fb3f7873eb78a20a38f8d7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>AddLoadingQueue</b> (<a class="el" href="interface_i_loading_queue.html">ILoadingQueue</a> queue)</td></tr>
+<tr class="memitem:a2157671d48d64dabe5a3487811927e33" id="r_a2157671d48d64dabe5a3487811927e33"><td class="memItemLeft" align="right" valign="top"><a id="a2157671d48d64dabe5a3487811927e33" name="a2157671d48d64dabe5a3487811927e33"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>OpenSettingsUI</b> ()</td></tr>
+<tr class="memdesc:a2157671d48d64dabe5a3487811927e33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show the UI for settings. Hide the UI by using <a class="el" href="#af7d4e7223cec0af7fe80f26cb5bcb24f" title="Hide the settings UI. To show the UI, see OpenSettingsUI.">CloseSettingsUI</a>. <br /></td></tr>
+<tr class="separator:a2157671d48d64dabe5a3487811927e33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7d4e7223cec0af7fe80f26cb5bcb24f" id="r_af7d4e7223cec0af7fe80f26cb5bcb24f"><td class="memItemLeft" align="right" valign="top"><a id="af7d4e7223cec0af7fe80f26cb5bcb24f" name="af7d4e7223cec0af7fe80f26cb5bcb24f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>CloseSettingsUI</b> ()</td></tr>
+<tr class="memdesc:af7d4e7223cec0af7fe80f26cb5bcb24f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hide the settings UI. To show the UI, see <a class="el" href="#a2157671d48d64dabe5a3487811927e33" title="Show the UI for settings. Hide the UI by using CloseSettingsUI.">OpenSettingsUI</a>. <br /></td></tr>
+<tr class="separator:af7d4e7223cec0af7fe80f26cb5bcb24f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a608ba53240fb3f7873eb78a20a38f8d7" id="r_a608ba53240fb3f7873eb78a20a38f8d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a608ba53240fb3f7873eb78a20a38f8d7">AddLoadingQueue</a> (<a class="el" href="interface_i_loading_queue.html">ILoadingQueue</a> queue)</td></tr>
+<tr class="memdesc:a608ba53240fb3f7873eb78a20a38f8d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add queue for blocking the scene initializing progress. This is used for signaling this object to wait until all objects in queue is loaded.  <br /></td></tr>
 <tr class="separator:a608ba53240fb3f7873eb78a20a38f8d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51f14077c64c5933ace23242cfe7556a" id="r_a51f14077c64c5933ace23242cfe7556a"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51f14077c64c5933ace23242cfe7556a">GetCurrentSceneID</a> ()</td></tr>
+<tr class="memdesc:a51f14077c64c5933ace23242cfe7556a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get scene ID for current scene.  <br /></td></tr>
+<tr class="separator:a51f14077c64c5933ace23242cfe7556a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2851b33418f74debce935e07d683d466" id="r_a2851b33418f74debce935e07d683d466"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a05be125f39d51b3f9fa21bfb02e43466">GameContext</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2851b33418f74debce935e07d683d466">GetCurrentSceneContext</a> ()</td></tr>
+<tr class="memdesc:a2851b33418f74debce935e07d683d466"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get scene context for current scene.  <br /></td></tr>
+<tr class="separator:a2851b33418f74debce935e07d683d466"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9adce66faa007df2f7c4c71b5a754916" id="r_a9adce66faa007df2f7c4c71b5a754916"><td class="memItemLeft" align="right" valign="top"><a id="a9adce66faa007df2f7c4c71b5a754916" name="a9adce66faa007df2f7c4c71b5a754916"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>TriggerPlayerSpotted</b> ()</td></tr>
+<tr class="memdesc:a9adce66faa007df2f7c4c71b5a754916"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger Game Over when player is spotted. This uses <a class="el" href="#a5aeacd334c1fc870f8df4b3511e69e7b" title="Trigger a Game Over event.">TriggerGameOver</a> using hardcoded parameters. <br /></td></tr>
+<tr class="separator:a9adce66faa007df2f7c4c71b5a754916"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aeacd334c1fc870f8df4b3511e69e7b" id="r_a5aeacd334c1fc870f8df4b3511e69e7b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5aeacd334c1fc870f8df4b3511e69e7b">TriggerGameOver</a> (string cause_text)</td></tr>
+<tr class="memdesc:a5aeacd334c1fc870f8df4b3511e69e7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger a Game Over event.  <br /></td></tr>
+<tr class="separator:a5aeacd334c1fc870f8df4b3511e69e7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80e03ba6087b7fc94e1b6abcb687592e" id="r_a80e03ba6087b7fc94e1b6abcb687592e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a80e03ba6087b7fc94e1b6abcb687592e">TriggerRecipeAdded</a> (string recipe_item_id)</td></tr>
+<tr class="memdesc:a80e03ba6087b7fc94e1b6abcb687592e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start an animation for when a recipe is added to player catalogue. Even with the animation is playing, this function can still be used but it will be queued for the next animation.  <br /></td></tr>
+<tr class="separator:a80e03ba6087b7fc94e1b6abcb687592e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab41208ee48b4d22c61dca32dc1ea9735" id="r_ab41208ee48b4d22c61dca32dc1ea9735"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab41208ee48b4d22c61dca32dc1ea9735">OnPauseGame</a> (InputValue value)</td></tr>
+<tr class="memdesc:ab41208ee48b4d22c61dca32dc1ea9735"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch "PauseGame" input event. Used for redirecting it to <a class="el" href="#a33e1cd5b674d5dbbd05b5cee4c0648d2" title="Prompt to pause the Game. It will show the UI for pausing, and then when closed by this object or by ...">PauseGame</a>.  <br /></td></tr>
+<tr class="separator:ab41208ee48b4d22c61dca32dc1ea9735"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85279b5dc8eb68ed48f6eb05b57576f6" id="r_a85279b5dc8eb68ed48f6eb05b57576f6"><td class="memItemLeft" align="right" valign="top"><a id="a85279b5dc8eb68ed48f6eb05b57576f6" name="a85279b5dc8eb68ed48f6eb05b57576f6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetGameScenario</b> ()</td></tr>
+<tr class="memdesc:a85279b5dc8eb68ed48f6eb05b57576f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resetting the Game's scenario to default scenario. <br /></td></tr>
+<tr class="separator:a85279b5dc8eb68ed48f6eb05b57576f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
+<tr class="memitem:a7c5ec76af7ebe3eb3c0e7fb8ac6f0e2f" id="r_a7c5ec76af7ebe3eb3c0e7fb8ac6f0e2f"><td class="memItemLeft" align="right" valign="top"><a id="a7c5ec76af7ebe3eb3c0e7fb8ac6f0e2f" name="a7c5ec76af7ebe3eb3c0e7fb8ac6f0e2f"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><b>RuntimeSceneDataFile</b> = &quot;GameConfigs/RuntimeSceneData&quot;</td></tr>
+<tr class="memdesc:a7c5ec76af7ebe3eb3c0e7fb8ac6f0e2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Path to file containing the scene data for build. Data contained in here are automatically created in function _load_runtime_scene_data whenever this class are initiated in debug mode. <br /></td></tr>
+<tr class="separator:a7c5ec76af7ebe3eb3c0e7fb8ac6f0e2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97d1e7c6235641b47ede7e4b90569873" id="r_a97d1e7c6235641b47ede7e4b90569873"><td class="memItemLeft" align="right" valign="top"><a id="a97d1e7c6235641b47ede7e4b90569873" name="a97d1e7c6235641b47ede7e4b90569873"></a>
 const string&#160;</td><td class="memItemRight" valign="bottom"><b>DefaultSceneID</b> = &quot;main_menu_scene&quot;</td></tr>
+<tr class="memdesc:a97d1e7c6235641b47ede7e4b90569873"><td class="mdescLeft">&#160;</td><td class="mdescRight">ID for entry point scene that also serves as a main menu. <br /></td></tr>
 <tr class="separator:a97d1e7c6235641b47ede7e4b90569873"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16097ed3f55b974cf1e9d6ef8b931075" id="r_a16097ed3f55b974cf1e9d6ef8b931075"><td class="memItemLeft" align="right" valign="top"><a id="a16097ed3f55b974cf1e9d6ef8b931075" name="a16097ed3f55b974cf1e9d6ef8b931075"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><b>DefaultGameSceneID</b> = &quot;intro_game_scene&quot;</td></tr>
+<tr class="memdesc:a16097ed3f55b974cf1e9d6ef8b931075"><td class="mdescLeft">&#160;</td><td class="mdescRight">ID for entry point scene for starting a new game. <br /></td></tr>
+<tr class="separator:a16097ed3f55b974cf1e9d6ef8b931075"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaedf2b58442855bfabab8e1e7a8db262" id="r_aaedf2b58442855bfabab8e1e7a8db262"><td class="memItemLeft" align="right" valign="top"><a id="aaedf2b58442855bfabab8e1e7a8db262" name="aaedf2b58442855bfabab8e1e7a8db262"></a>
-const string&#160;</td><td class="memItemRight" valign="bottom"><b>DefaultScenarioID</b> = &quot;default_scenario&quot;</td></tr>
+const string&#160;</td><td class="memItemRight" valign="bottom"><b>DefaultScenarioID</b> = &quot;intro_scenario&quot;</td></tr>
+<tr class="memdesc:aaedf2b58442855bfabab8e1e7a8db262"><td class="mdescLeft">&#160;</td><td class="mdescRight">ID for entry point scenario. <br /></td></tr>
 <tr class="separator:aaedf2b58442855bfabab8e1e7a8db262"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:a15396d4ceca010c96ba57e5c9bae1eef" id="r_a15396d4ceca010c96ba57e5c9bae1eef"><td class="memItemLeft" align="right" valign="top"><a id="a15396d4ceca010c96ba57e5c9bae1eef" name="a15396d4ceca010c96ba57e5c9bae1eef"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>SceneInitialized</b><code> [get]</code></td></tr>
+<tr class="memdesc:a15396d4ceca010c96ba57e5c9bae1eef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag if current scene already initialized or not yet. <br /></td></tr>
+<tr class="separator:a15396d4ceca010c96ba57e5c9bae1eef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43a6efc046bd5bd352436432aebf03de" id="r_a43a6efc046bd5bd352436432aebf03de"><td class="memItemLeft" align="right" valign="top"><a id="a43a6efc046bd5bd352436432aebf03de" name="a43a6efc046bd5bd352436432aebf03de"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>SceneInitializing</b><code> [get]</code></td></tr>
+<tr class="memdesc:a43a6efc046bd5bd352436432aebf03de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag if current scene is still initilizing. <br /></td></tr>
+<tr class="separator:a43a6efc046bd5bd352436432aebf03de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8908ac6a1d9fae96e302b81a318a403e" id="r_a8908ac6a1d9fae96e302b81a318a403e"><td class="memItemLeft" align="right" valign="top"><a id="a8908ac6a1d9fae96e302b81a318a403e" name="a8908ac6a1d9fae96e302b81a318a403e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>Initialized</b><code> [get]</code></td></tr>
+<tr class="memdesc:a8908ac6a1d9fae96e302b81a318a403e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag if this object has been initialized or not. <br /></td></tr>
+<tr class="separator:a8908ac6a1d9fae96e302b81a318a403e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a230b4456ff63eaccf573f3012e854e29" id="r_a230b4456ff63eaccf573f3012e854e29"><td class="memItemLeft" align="right" valign="top"><a id="a230b4456ff63eaccf573f3012e854e29" name="a230b4456ff63eaccf573f3012e854e29"></a>
+<a class="el" href="class_persistance_context.html">PersistanceContext</a>&#160;</td><td class="memItemRight" valign="bottom"><b>PersistanceHandler</b><code> [get]</code></td></tr>
+<tr class="memdesc:a230b4456ff63eaccf573f3012e854e29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Persistance handler used by this <a class="el" href="class_game_handler.html" title="Class for handling Game&#39;s functions, events, and other objects/components that serves as the internal...">GameHandler</a>. <br /></td></tr>
+<tr class="separator:a230b4456ff63eaccf573f3012e854e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="events" name="events"></a>
 Events</h2></td></tr>
 <tr class="memitem:ae5ead4e3276264f44c2b79bb0810752d" id="r_ae5ead4e3276264f44c2b79bb0810752d"><td class="memItemLeft" align="right" valign="top"><a id="ae5ead4e3276264f44c2b79bb0810752d" name="ae5ead4e3276264f44c2b79bb0810752d"></a>
 SceneChangedInitializing&#160;</td><td class="memItemRight" valign="bottom"><b>SceneChangedInitializingEvent</b></td></tr>
+<tr class="memdesc:ae5ead4e3276264f44c2b79bb0810752d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event for when a scene is initializing. <br /></td></tr>
 <tr class="separator:ae5ead4e3276264f44c2b79bb0810752d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2588f877e687b045d2c8848dc4742c3e" id="r_a2588f877e687b045d2c8848dc4742c3e"><td class="memItemLeft" align="right" valign="top"><a id="a2588f877e687b045d2c8848dc4742c3e" name="a2588f877e687b045d2c8848dc4742c3e"></a>
 SceneChangedFinished&#160;</td><td class="memItemRight" valign="bottom"><b>SceneChangedFinishedEvent</b></td></tr>
+<tr class="memdesc:a2588f877e687b045d2c8848dc4742c3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event for when a scene has changed and finished initializing. <br /></td></tr>
 <tr class="separator:a2588f877e687b045d2c8848dc4742c3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2ffba9ca55832226cad49393a99764f" id="r_ae2ffba9ca55832226cad49393a99764f"><td class="memItemLeft" align="right" valign="top"><a id="ae2ffba9ca55832226cad49393a99764f" name="ae2ffba9ca55832226cad49393a99764f"></a>
 SceneRemoving&#160;</td><td class="memItemRight" valign="bottom"><b>SceneRemovingEvent</b></td></tr>
+<tr class="memdesc:ae2ffba9ca55832226cad49393a99764f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event for when prompted to change scene but still preparing (not yet changed). <br /></td></tr>
 <tr class="separator:ae2ffba9ca55832226cad49393a99764f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2c6845c2dc1d34aa0e465fe9644fc6e" id="r_aa2c6845c2dc1d34aa0e465fe9644fc6e"><td class="memItemLeft" align="right" valign="top"><a id="aa2c6845c2dc1d34aa0e465fe9644fc6e" name="aa2c6845c2dc1d34aa0e465fe9644fc6e"></a>
-ScenarioStateChanged&#160;</td><td class="memItemRight" valign="bottom"><b>ScenarioStateChangedEvent</b></td></tr>
-<tr class="separator:aa2c6845c2dc1d34aa0e465fe9644fc6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4de9d005a28acf5737aee213898c410b" id="r_a4de9d005a28acf5737aee213898c410b"><td class="memItemLeft" align="right" valign="top"><a id="a4de9d005a28acf5737aee213898c410b" name="a4de9d005a28acf5737aee213898c410b"></a>
-ScenarioFinished&#160;</td><td class="memItemRight" valign="bottom"><b>ScenarioFinishedEvent</b></td></tr>
-<tr class="separator:a4de9d005a28acf5737aee213898c410b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67687ec51c7665f6545e0eb82a5ced88" id="r_a67687ec51c7665f6545e0eb82a5ced88"><td class="memItemLeft" align="right" valign="top"><a id="a67687ec51c7665f6545e0eb82a5ced88" name="a67687ec51c7665f6545e0eb82a5ced88"></a>
-SubScenarioStateChanged&#160;</td><td class="memItemRight" valign="bottom"><b>SubScenarioStateChangedEvent</b></td></tr>
-<tr class="separator:a67687ec51c7665f6545e0eb82a5ced88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9efb4fa2028720a12cd977995fef9461" id="r_a9efb4fa2028720a12cd977995fef9461"><td class="memItemLeft" align="right" valign="top"><a id="a9efb4fa2028720a12cd977995fef9461" name="a9efb4fa2028720a12cd977995fef9461"></a>
-SubScenarioFinished&#160;</td><td class="memItemRight" valign="bottom"><b>SubScenarioFinishedEvent</b></td></tr>
-<tr class="separator:a9efb4fa2028720a12cd977995fef9461"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa551e9197aee09f92be4ec95c17d064" id="r_afa551e9197aee09f92be4ec95c17d064"><td class="memItemLeft" align="right" valign="top"><a id="afa551e9197aee09f92be4ec95c17d064" name="afa551e9197aee09f92be4ec95c17d064"></a>
+LoadDataFromPersistance&#160;</td><td class="memItemRight" valign="bottom"><b>LoadDataFromPersistanceEvent</b></td></tr>
+<tr class="memdesc:afa551e9197aee09f92be4ec95c17d064"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event for when a save file is being loaded from attached persistance in this object. <br /></td></tr>
+<tr class="separator:afa551e9197aee09f92be4ec95c17d064"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class for handling Game's functions, events, and other objects/components that serves as the internal functions. </p>
+<p>This class uses following component(s);</p><ul>
+<li><a class="el" href="class_persistance_context.html" title="Class for handling data, storing and loading the data with the OS&#39; filesystem. The path for save file...">PersistanceContext</a> for handling file save for a game state in certain time.</li>
+</ul>
+<p>This class uses external component(s);</p><ul>
+<li>Object for containing <a class="el" href="class_scenario_handler_v_s.html" title="Class for handling a list of subscenario contained in this class. For a class that handles sets of sc...">ScenarioHandlerVS</a>.</li>
+<li><a class="el" href="class_level_checkpoint_database.html" title="Database for storing data about CheckpointHandler in a certain scene. This database have to be update...">LevelCheckpointDatabase</a> for storing data about all checkpoint in a scene.</li>
+<li><a class="el" href="class_game_time_handler.html" title="Class for handling the Game&#39;s time also handling scenario for period of time. Period of time defined ...">GameTimeHandler</a> for setting up the Game's time.</li>
+<li><a class="el" href="class_scenario_diagram_v_s.html" title="Class for handling Scenarios. This class acts as a server that holds a list of ScenarioHandlerVS....">ScenarioDiagramVS</a> for handling Game's scenario or parts of the Game's story.</li>
+<li><a class="el" href="class_game_u_i_handler.html" title="Helper class for storing all the UI objects used in the Game. All UI objects are added by hardcoding ...">GameUIHandler</a> for getting all UIs in the Game.</li>
+<li><a class="el" href="class_input_focus_context.html" title="Helper class that can be used by any object to know if certain object has the privilege to use the in...">InputFocusContext</a> for handling the Game's input.</li>
+<li><a class="el" href="class_game_runtime_data.html" title="Class used for temporarily storing data in the Game as the data in the scene will be removed when cha...">GameRuntimeData</a> for storing data about the Game in runtime for use inbetween scenes.</li>
+<li><a class="el" href="class_game_over_u_i.html" title="UI Component for showing Game Over screen.">GameOverUI</a></li>
+<li><a class="el" href="class_fade_u_i.html" title="Base class used for blocking screen with a UI element attached to this object. The UI also handles sh...">FadeUI</a> UI for covering up the screen.</li>
+<li><a class="el" href="class_loading_u_i.html" title="UI Class for handling Loading animation based on the supplied AsyncOperation fron any source,...">LoadingUI</a></li>
+</ul>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_game_u_i_handler.html" title="Helper class for storing all the UI objects used in the Game. All UI objects are added by hardcoding ...">GameUIHandler</a>, <a class="el" href="class_game_time_handler.html" title="Class for handling the Game&#39;s time also handling scenario for period of time. Period of time defined ...">GameTimeHandler</a>, <a class="el" href="class_game_runtime_data.html" title="Class used for temporarily storing data in the Game as the data in the scene will be removed when cha...">GameRuntimeData</a></dd></dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a608ba53240fb3f7873eb78a20a38f8d7" name="a608ba53240fb3f7873eb78a20a38f8d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a608ba53240fb3f7873eb78a20a38f8d7">&#9670;&#160;</a></span>AddLoadingQueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameHandler.AddLoadingQueue </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="interface_i_loading_queue.html">ILoadingQueue</a></td>          <td class="paramname"><span class="paramname"><em>queue</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add queue for blocking the scene initializing progress. This is used for signaling this object to wait until all objects in queue is loaded. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">queue</td><td>Loading interface object</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a66096ffc25b4aa915802a313ba49d48f" name="a66096ffc25b4aa915802a313ba49d48f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66096ffc25b4aa915802a313ba49d48f">&#9670;&#160;</a></span>ChangeScene()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameHandler.ChangeScene </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>scene_id</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>teleport_to</em><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>do_save</em><span class="paramdefsep"> = </span><span class="paramdefval">true</span></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Change Game's scene to a new scene. This does not automatically teleport the Player, instead it uses checkpoint (teleport) ID from the previous scene to determine where to teleport to. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_level_teleport_handler.html" title="Extended CheckpointHandler object for triggering teleportation between level/scene when an object has...">LevelTeleportHandler</a></dd></dl>
+</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">scene_id</td><td>The scene to change to</td></tr>
+    <tr><td class="paramname">teleport_to</td><td>Force teleport to a checkpoint (teleport) by ID</td></tr>
+    <tr><td class="paramname">do_save</td><td>Force save after changing scene</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2851b33418f74debce935e07d683d466" name="a2851b33418f74debce935e07d683d466"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2851b33418f74debce935e07d683d466">&#9670;&#160;</a></span>GetCurrentSceneContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a05be125f39d51b3f9fa21bfb02e43466">GameContext</a> GameHandler.GetCurrentSceneContext </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get scene context for current scene. </p>
+<dl class="section return"><dt>Returns</dt><dd>The scene context</dd></dl>
+
+</div>
+</div>
+<a id="a51f14077c64c5933ace23242cfe7556a" name="a51f14077c64c5933ace23242cfe7556a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51f14077c64c5933ace23242cfe7556a">&#9670;&#160;</a></span>GetCurrentSceneID()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string GameHandler.GetCurrentSceneID </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get scene ID for current scene. </p>
+<dl class="section return"><dt>Returns</dt><dd>The current scene ID</dd></dl>
+
+</div>
+</div>
+<a id="a6b7252ef6cbbe5f6b10fd7421ea90d07" name="a6b7252ef6cbbe5f6b10fd7421ea90d07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b7252ef6cbbe5f6b10fd7421ea90d07">&#9670;&#160;</a></span>GetLastScene()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string GameHandler.GetLastScene </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get scene ID of the previous scene. </p>
+<dl class="section return"><dt>Returns</dt><dd>The scene ID</dd></dl>
+
+</div>
+</div>
+<a id="ab41208ee48b4d22c61dca32dc1ea9735" name="ab41208ee48b4d22c61dca32dc1ea9735"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab41208ee48b4d22c61dca32dc1ea9735">&#9670;&#160;</a></span>OnPauseGame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameHandler.OnPauseGame </td>
+          <td>(</td>
+          <td class="paramtype">InputValue</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to catch "PauseGame" input event. Used for redirecting it to <a class="el" href="#a33e1cd5b674d5dbbd05b5cee4c0648d2" title="Prompt to pause the Game. It will show the UI for pausing, and then when closed by this object or by ...">PauseGame</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Unity's input data</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af3ebf688397ef3a1c2577bc9b2d1d7d2" name="af3ebf688397ef3a1c2577bc9b2d1d7d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3ebf688397ef3a1c2577bc9b2d1d7d2">&#9670;&#160;</a></span>SetLastCheckpoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameHandler.SetLastCheckpoint </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>checkpoint_id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the last checkpoint that the player entered last time. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">checkpoint_id</td><td>The target checkpoint ID</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5aeacd334c1fc870f8df4b3511e69e7b" name="a5aeacd334c1fc870f8df4b3511e69e7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5aeacd334c1fc870f8df4b3511e69e7b">&#9670;&#160;</a></span>TriggerGameOver()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameHandler.TriggerGameOver </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>cause_text</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Trigger a Game Over event. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cause_text</td><td>The cause of the Game Over event</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a80e03ba6087b7fc94e1b6abcb687592e" name="a80e03ba6087b7fc94e1b6abcb687592e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80e03ba6087b7fc94e1b6abcb687592e">&#9670;&#160;</a></span>TriggerRecipeAdded()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameHandler.TriggerRecipeAdded </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>recipe_item_id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start an animation for when a recipe is added to player catalogue. Even with the animation is playing, this function can still be used but it will be queued for the next animation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">recipe_item_id</td><td>The recipe ID added to player</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Assets/SourceCode/<b>GameHandler.cs</b></li>
 </ul>

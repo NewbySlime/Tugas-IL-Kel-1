@@ -9,17 +9,38 @@ using UnityEngine.UIElements;
 // TODO check stuck
 [RequireComponent(typeof(Seeker))]
 [RequireComponent(typeof(MovementController))]
+/// <summary>
+/// Component for controlling <see cref="MovementController"/> autonomously using pathfinding in 2D space. For further explanation, see <b>Reference/Diagrams/AIMovement.drawio</b>
+/// 
+/// This class uses following component(s);
+/// - Arongranberg's <b>Seeker</b> Pathfinding object for processing a graph of path to a target position.
+/// - <see cref="MovementController"/> for movement used in the Game.
+/// 
+/// Thanks to Arongranberg's Pathfinding "A* Project" library to make this possible.
+/// </summary>
 public class PathFollower: MonoBehaviour{
-  public delegate void FinishedFollowing();
+  /// <summary>
+  /// Event for when the follower has arrived to the target position.
+  /// </summary>
   public event FinishedFollowing FinishedFollowingEvent;
+  public delegate void FinishedFollowing();
 
-  public delegate void StuckFollowing();
+  /// <summary>
+  /// Event for when the follower stuck for some seconds
+  /// </summary>
   public event StuckFollowing StuckFollowingEvent;
+  public delegate void StuckFollowing();
 
-  public delegate void PathFound();
+  /// <summary>
+  /// Event for when a path has been found.
+  /// </summary>
   public event PathFound PathFoundEvent;
-  public delegate void PathError();
+  public delegate void PathFound();
+  /// <summary>
+  /// Event for when the follower object cannot find a path.
+  /// </summary>
   public event PathError PathErrorEvent;
+  public delegate void PathError();
 
 
   [SerializeField]
@@ -79,6 +100,8 @@ public class PathFollower: MonoBehaviour{
 
   private bool _path_found = false;
   private bool _path_calculating = false;
+
+  // Check if the path is valid to the follower conditions.
   private void _on_path_found(Path _new_path){
     DEBUGModeUtils.Log("Path found");
     if(!_new_path.error && _new_path.path.Count >= 1){
@@ -119,6 +142,7 @@ public class PathFollower: MonoBehaviour{
   }
 
   
+  // Update the path foreach an update interval, since the path is also based on this object's position
   private IEnumerator _update_path(){
     while(true){
       yield return new WaitForSeconds(_PathUpdateInterval);
@@ -138,6 +162,8 @@ public class PathFollower: MonoBehaviour{
     _current_trigger_coroutine = null;
   }
   
+  // Controls the movement based on the path to the target position.
+  // See Reference/Diagrams/AIMovement.drawio for further explanation about the movement system.
   private IEnumerator _follow_path(Vector3 target_pos){
     _target_position = target_pos;
     DEBUGModeUtils.Log("finding new path...");
@@ -329,6 +355,10 @@ public class PathFollower: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Follow and move to a designated position.
+  /// </summary>
+  /// <param name="target_pos">The target position to move</param>
   public void FollowPathAsync(Vector3 target_pos){
     DEBUGModeUtils.Log(string.Format("is moving {0}", IsMoving()));
     if(IsMoving())
@@ -337,19 +367,37 @@ public class PathFollower: MonoBehaviour{
     _move_coroutine = StartCoroutine(_follow_path(target_pos));
   }
 
+  /// <summary>
+  /// Check if the follower object is currently stuck (no valid path is found).
+  /// </summary>
+  /// <returns>Is the follower object stuck</returns>
   public bool IsStuck(){
     return _is_stuck;
   }
 
+  /// <summary>
+  /// Check if the follower object is currently moving to a designated spot.
+  /// </summary>
+  /// <returns>Is the follower object moving</returns>
   public bool IsMoving(){
     return _move_coroutine != null;
   }
 
+  /// <summary>
+  /// Check if the follower object is currently jumping.
+  /// </summary>
+  /// <returns>Is the follower object jumping</returns>
   public bool IsJumping(){
     return _jumping_flag;
   }
 
 
+  /// <summary>
+  /// Prompt the follower object to cancel following a path to a designated spot.
+  /// The cancellation process can be unsuccessful due to;
+  /// - If the follower object is still jumping (<see cref="MovementController.ForceJump(Vector3)"/>).
+  /// </summary>
+  /// <returns>Is the cancellation successful or not</returns>
   public bool CancelMoving(){
     if(_jumping_flag)
       return false;
@@ -369,6 +417,11 @@ public class PathFollower: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Force this follower object to jump to a target position.
+  /// This will ignore processings such as movement (following) processing. 
+  /// </summary>
+  /// <param name="target_jump">The target position</param>
   public void ForceJump(Vector3 target_jump){
     if(_current_trigger_coroutine != null)
       StopCoroutine(_current_trigger_coroutine);

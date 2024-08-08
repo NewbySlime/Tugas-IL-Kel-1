@@ -3,12 +3,27 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to set the configuration of <see cref="MovementController"/>.
+  /// </summary>
   public class SetMovementConfigSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "set_movement_config";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target object to modify the config with.
+      /// </summary>
       public ObjectReference.ObjRefID TargetObjRef;
 
+      /// <summary>
+      /// Flag if the <see cref="MovementController"/> should walk.
+      /// </summary>
       public bool Walk;
     }
 
@@ -54,6 +69,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Set Config")]
   [UnitCategory("Sequence/Game/MoveController")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="SetMovementConfigSequence"/>.
+  /// </summary>
   public class SetMovementConfigSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _target_obj_input;

@@ -3,10 +3,22 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system for triggering GameOver event by calling <see cref="GameHandler"/> function.
+  /// </summary>
   public class TriggerGameOverSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "trigger_game_over";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The cause message to be used for the cause of GameOver.
+      /// </summary>
       public string CauseText;
     }
 
@@ -50,6 +62,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Trigger Game Over")]
   [UnitCategory("Sequence/Game")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="TriggerGameOverSequence"/>.
+  /// </summary>
   public class TriggerGameOverSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _cause_text_input;

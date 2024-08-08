@@ -6,6 +6,9 @@ using Unity.VisualScripting;
 
 
 [UnitCategory("Quest/QuestUtility")]
+/// <summary>
+/// Visual Scripting Node to prep/add a quest data for <see cref="QuestHandlerVS"/>.
+/// </summary>
 public class CreateQuest: Unit{
   [DoNotSerialize]
   private ControlOutput _quest_output_flow;
@@ -50,6 +53,9 @@ public class CreateQuest: Unit{
 
 
 [UnitCategory(".Interface")]
+/// <summary>
+/// Interface Visual Scripting Node that can be used for creating a custom Quest Mechanics.
+/// </summary>
 public class AddQuest: Unit{
   [DoNotSerialize]
   private ControlInput _quest_input_flow;
@@ -64,6 +70,10 @@ public class AddQuest: Unit{
 
   private QuestHandlerVS.InitQuestInfo _init_data;
 
+  /// <summary>
+  /// The Unit/Node definition for the Visual Script Object.
+  /// Important to override in case to create new members in the Node.
+  /// </summary>
   protected override void Definition(){
     _quest_input_flow = ControlInput("InputFlow", (flow) => {
       _init_data = flow.GetValue<QuestHandlerVS.InitQuestInfo>(_quest_input);
@@ -82,5 +92,10 @@ public class AddQuest: Unit{
     _quest_output = ValueOutput("QuestData", (flow) => { return _init_data; });
   }
 
+  /// <summary>
+  /// Virtual function to get supplied data about the inheriting class.
+  /// </summary>
+  /// <param name="flow">The Visual Scripting flow</param>
+  /// <param name="init_data">The resulting inherited <see cref="QuestHandlerVS.InitQuestInfo"/> data.</param>
   protected virtual void AddData(Flow flow, out QuestHandlerVS.InitQuestInfo init_data){init_data = null;}
 }

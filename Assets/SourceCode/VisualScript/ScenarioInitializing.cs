@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.VisualScripting;
 using System.Runtime.InteropServices.WindowsRuntime;
+using SequenceHelper;
 
 
 
 
 [UnitCategory("Scenario")]
+/// <summary>
+/// Visual Scripting Node for creating or adding new scenario data for use by <see cref="ScenarioDiagramVS"/>.
+/// </summary>
 public class AddScenario: Unit{
   [DoNotSerialize]
   private ControlInput _input_flow;
@@ -57,6 +61,9 @@ public class AddScenario: Unit{
 
 
 [UnitCategory("Scenario")]
+/// <summary>
+/// Visual Scripting Node for adding subscenario data to a scenario data for use by <see cref="ScenarioHandlerVS"/>.
+/// </summary>
 public class AddSubScenario: Unit{
   [DoNotSerialize]
   private ControlInput _input_flow;

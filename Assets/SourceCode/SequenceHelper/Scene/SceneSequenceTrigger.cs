@@ -4,10 +4,22 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to start a sequence based on the ID for <see cref="LevelSequenceDatabase"/>.
+  /// </summary>
   public class SceneSequenceTrigger: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "sequence_trigger";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target Sequence to be started.
+      /// </summary>
       public string SequenceID;
     }
 
@@ -75,6 +87,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Sequence Trigger")]
   [UnitCategory("Sequence")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="SceneSequenceTrigger"/>.
+  /// </summary>
   public class SceneSequenceTriggerVS: AddSubSequence{
     [DoNotSerialize]
     public ValueInput _sequence_id_input;

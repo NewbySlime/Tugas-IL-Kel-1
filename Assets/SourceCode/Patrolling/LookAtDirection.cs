@@ -4,7 +4,13 @@ using System.Collections;
 
 
 namespace PatrolActions{
+  /// <summary>
+  /// An extension of <see cref="PatrolAction"/> that handles the object to force look at certain direction.
+  /// </summary>
   public class LookAtDirection: PatrolAction{
+    /// <summary>
+    /// Target direction to look at.
+    /// </summary>
     public Vector2 Direction;
 
     public System.Type GetPatrolType(){
@@ -22,6 +28,9 @@ namespace PatrolActions{
 
   [UnitTitle("LookAtDirection")]
   [UnitCategory("Patrol")]
+  /// <summary>
+  /// An extension of <see cref="PatrolNodeBase"/> for <see cref="LookAtDirection"/>.
+  /// </summary>
   public class LookAtDirectionUnit: PatrolNodeBase{
     [DoNotSerialize]
     private ValueInput _direction_input;

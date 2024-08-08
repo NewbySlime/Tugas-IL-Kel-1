@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: PersistanceContext Class Reference</title>
+<title>FlavourOfRoemahNusantara: PersistanceContext Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -101,6 +103,9 @@ $(function(){initNavTree('class_persistance_context.html',''); initResizable(); 
   <div class="headertitle"><div class="title">PersistanceContext Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class for handling data, storing and loading the data with the OS' filesystem. The path for save file can be readjusted using <b>_SaveFileLocation</b>. For any objects that wanted to store or load the data, use <a class="el" href="interface_persistance_context_1_1_i_persistance.html" title="Interface class for parsing data to format that PersistanceContext use for storing/loading data.">PersistanceContext.IPersistance</a> and also use the events used in this class. For further explanation, see <b>Reference/Diagrams/SaveSystem.drawio</b>  
+ <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for PersistanceContext:</div>
 <div class="dyncontent">
@@ -111,6 +116,7 @@ Inheritance diagram for PersistanceContext:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_persistance_context_1_1_i_persistance.html">IPersistance</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface class for parsing data to format that <a class="el" href="class_persistance_context.html" title="Class for handling data, storing and loading the data with the OS&#39; filesystem. The path for save file...">PersistanceContext</a> use for storing/loading data.  <a href="interface_persistance_context_1_1_i_persistance.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -126,32 +132,165 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr
 <tr class="separator:a5b4376666470d5a4dcaae6bac9cde1c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28c310fe45c726f4763999ca293bcf6b" id="r_a28c310fe45c726f4763999ca293bcf6b"><td class="memItemLeft" align="right" valign="top"><a id="a28c310fe45c726f4763999ca293bcf6b" name="a28c310fe45c726f4763999ca293bcf6b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>WriteSave</b> ()</td></tr>
+<tr class="memdesc:a28c310fe45c726f4763999ca293bcf6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger a save event and handles writing to filesystem. This will also invokes signal for event that another object can use (<a class="el" href="#aff456e9d15066c826794afacdcef4cf9" title="Saving trigger event. To store a data, use ParseData.">PersistanceSavingEvent</a>) to store its data. <br /></td></tr>
 <tr class="separator:a28c310fe45c726f4763999ca293bcf6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a8038828e02b324f221bd4caf12d7a6" id="r_a8a8038828e02b324f221bd4caf12d7a6"><td class="memItemLeft" align="right" valign="top"><a id="a8a8038828e02b324f221bd4caf12d7a6" name="a8a8038828e02b324f221bd4caf12d7a6"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>ReadSave</b> ()</td></tr>
+<tr class="memitem:a8a8038828e02b324f221bd4caf12d7a6" id="r_a8a8038828e02b324f221bd4caf12d7a6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8a8038828e02b324f221bd4caf12d7a6">ReadSave</a> ()</td></tr>
+<tr class="memdesc:a8a8038828e02b324f221bd4caf12d7a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger a load event and handles reading from filesystem. After reading the data, the function will invoke signal for event that another object can use (<a class="el" href="#a4dee1599d060dd8860349bb7bd97b629" title="Loading trigger event. To get a data from PersistanceContext, use OverwriteData.">PersistanceLoadingEvent</a>) to get its data.  <br /></td></tr>
 <tr class="separator:a8a8038828e02b324f221bd4caf12d7a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae231c253c5196c14b72972e03cc09f05" id="r_ae231c253c5196c14b72972e03cc09f05"><td class="memItemLeft" align="right" valign="top"><a id="ae231c253c5196c14b72972e03cc09f05" name="ae231c253c5196c14b72972e03cc09f05"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ParseData</b> (<a class="el" href="interface_persistance_context_1_1_i_persistance.html">IPersistance</a> target)</td></tr>
+<tr class="memitem:a3c3f480a9a601871f0c49e6c5021540d" id="r_a3c3f480a9a601871f0c49e6c5021540d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c3f480a9a601871f0c49e6c5021540d">SetSaveFileName</a> (string file_name)</td></tr>
+<tr class="memdesc:a3c3f480a9a601871f0c49e6c5021540d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manually sets the file location. The path will be appended to appdata/localdata folder path in Unity's default.  <br /></td></tr>
+<tr class="separator:a3c3f480a9a601871f0c49e6c5021540d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d5ce9ce369e27219a45dc6625ecb941" id="r_a3d5ce9ce369e27219a45dc6625ecb941"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3d5ce9ce369e27219a45dc6625ecb941">IsSaveValid</a> ()</td></tr>
+<tr class="memdesc:a3d5ce9ce369e27219a45dc6625ecb941"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the save file is valid (existed) and can be read.  <br /></td></tr>
+<tr class="separator:a3d5ce9ce369e27219a45dc6625ecb941"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae231c253c5196c14b72972e03cc09f05" id="r_ae231c253c5196c14b72972e03cc09f05"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae231c253c5196c14b72972e03cc09f05">ParseData</a> (<a class="el" href="interface_persistance_context_1_1_i_persistance.html">IPersistance</a> target)</td></tr>
+<tr class="memdesc:ae231c253c5196c14b72972e03cc09f05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse and store the data from <a class="el" href="interface_persistance_context_1_1_i_persistance.html" title="Interface class for parsing data to format that PersistanceContext use for storing/loading data.">IPersistance</a> to a format this component can use. This function only store the data to temporary storage in this component, not actually write a part of the data in the filesystem. For actually write the data to filesystem, see <a class="el" href="#a28c310fe45c726f4763999ca293bcf6b" title="Trigger a save event and handles writing to filesystem. This will also invokes signal for event that ...">WriteSave</a>.  <br /></td></tr>
 <tr class="separator:ae231c253c5196c14b72972e03cc09f05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aede31e7a18273555a13059c241b53dcb" id="r_aede31e7a18273555a13059c241b53dcb"><td class="memItemLeft" align="right" valign="top"><a id="aede31e7a18273555a13059c241b53dcb" name="aede31e7a18273555a13059c241b53dcb"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>OverwriteData</b> (<a class="el" href="interface_persistance_context_1_1_i_persistance.html">IPersistance</a> data)</td></tr>
+<tr class="memitem:aede31e7a18273555a13059c241b53dcb" id="r_aede31e7a18273555a13059c241b53dcb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aede31e7a18273555a13059c241b53dcb">OverwriteData</a> (<a class="el" href="interface_persistance_context_1_1_i_persistance.html">IPersistance</a> data)</td></tr>
+<tr class="memdesc:aede31e7a18273555a13059c241b53dcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets and parse the data from a format that this component use to a format that inheriting <a class="el" href="interface_persistance_context_1_1_i_persistance.html" title="Interface class for parsing data to format that PersistanceContext use for storing/loading data.">IPersistance</a> class use. This function only gets the data from temporary storage in this component, not getting the data from filesystem. For actually reading the data from filesystem, see <a class="el" href="#a8a8038828e02b324f221bd4caf12d7a6" title="Trigger a load event and handles reading from filesystem. After reading the data, the function will i...">ReadSave</a>.  <br /></td></tr>
 <tr class="separator:aede31e7a18273555a13059c241b53dcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad69cc8ec3817c5b49e37603c02488a7b" id="r_ad69cc8ec3817c5b49e37603c02488a7b"><td class="memItemLeft" align="right" valign="top"><a id="ad69cc8ec3817c5b49e37603c02488a7b" name="ad69cc8ec3817c5b49e37603c02488a7b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ClearData</b> ()</td></tr>
+<tr class="memdesc:ad69cc8ec3817c5b49e37603c02488a7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all the stored data from supplied <a class="el" href="interface_persistance_context_1_1_i_persistance.html" title="Interface class for parsing data to format that PersistanceContext use for storing/loading data.">IPersistance</a>. <br /></td></tr>
+<tr class="separator:ad69cc8ec3817c5b49e37603c02488a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:aab3b037452cef82fd995585e75db4554" id="r_aab3b037452cef82fd995585e75db4554"><td class="memItemLeft" align="right" valign="top"><a id="aab3b037452cef82fd995585e75db4554" name="aab3b037452cef82fd995585e75db4554"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsInitialized</b><code> [get]</code></td></tr>
+<tr class="memdesc:aab3b037452cef82fd995585e75db4554"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag if the object is ready or not yet. <br /></td></tr>
 <tr class="separator:aab3b037452cef82fd995585e75db4554"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="events" name="events"></a>
 Events</h2></td></tr>
 <tr class="memitem:aff456e9d15066c826794afacdcef4cf9" id="r_aff456e9d15066c826794afacdcef4cf9"><td class="memItemLeft" align="right" valign="top"><a id="aff456e9d15066c826794afacdcef4cf9" name="aff456e9d15066c826794afacdcef4cf9"></a>
 PersistanceSaving&#160;</td><td class="memItemRight" valign="bottom"><b>PersistanceSavingEvent</b></td></tr>
+<tr class="memdesc:aff456e9d15066c826794afacdcef4cf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saving trigger event. To store a data, use <a class="el" href="#ae231c253c5196c14b72972e03cc09f05" title="Parse and store the data from IPersistance to a format this component can use. This function only sto...">ParseData</a>. <br /></td></tr>
 <tr class="separator:aff456e9d15066c826794afacdcef4cf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4dee1599d060dd8860349bb7bd97b629" id="r_a4dee1599d060dd8860349bb7bd97b629"><td class="memItemLeft" align="right" valign="top"><a id="a4dee1599d060dd8860349bb7bd97b629" name="a4dee1599d060dd8860349bb7bd97b629"></a>
 PersistanceLoading&#160;</td><td class="memItemRight" valign="bottom"><b>PersistanceLoadingEvent</b></td></tr>
+<tr class="memdesc:a4dee1599d060dd8860349bb7bd97b629"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loading trigger event. To get a data from <a class="el" href="class_persistance_context.html" title="Class for handling data, storing and loading the data with the OS&#39; filesystem. The path for save file...">PersistanceContext</a>, use <a class="el" href="#aede31e7a18273555a13059c241b53dcb" title="Gets and parse the data from a format that this component use to a format that inheriting IPersistanc...">OverwriteData</a>. <br /></td></tr>
 <tr class="separator:a4dee1599d060dd8860349bb7bd97b629"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class for handling data, storing and loading the data with the OS' filesystem. The path for save file can be readjusted using <b>_SaveFileLocation</b>. For any objects that wanted to store or load the data, use <a class="el" href="interface_persistance_context_1_1_i_persistance.html" title="Interface class for parsing data to format that PersistanceContext use for storing/loading data.">PersistanceContext.IPersistance</a> and also use the events used in this class. For further explanation, see <b>Reference/Diagrams/SaveSystem.drawio</b> </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3d5ce9ce369e27219a45dc6625ecb941" name="a3d5ce9ce369e27219a45dc6625ecb941"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d5ce9ce369e27219a45dc6625ecb941">&#9670;&#160;</a></span>IsSaveValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PersistanceContext.IsSaveValid </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if the save file is valid (existed) and can be read. </p>
+<dl class="section return"><dt>Returns</dt><dd>Is the save file valid</dd></dl>
+
+</div>
+</div>
+<a id="aede31e7a18273555a13059c241b53dcb" name="aede31e7a18273555a13059c241b53dcb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aede31e7a18273555a13059c241b53dcb">&#9670;&#160;</a></span>OverwriteData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PersistanceContext.OverwriteData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="interface_persistance_context_1_1_i_persistance.html">IPersistance</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets and parse the data from a format that this component use to a format that inheriting <a class="el" href="interface_persistance_context_1_1_i_persistance.html" title="Interface class for parsing data to format that PersistanceContext use for storing/loading data.">IPersistance</a> class use. This function only gets the data from temporary storage in this component, not getting the data from filesystem. For actually reading the data from filesystem, see <a class="el" href="#a8a8038828e02b324f221bd4caf12d7a6" title="Trigger a load event and handles reading from filesystem. After reading the data, the function will i...">ReadSave</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>The target data to overwrite</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Is the overwriting process successful or not</dd></dl>
+
+</div>
+</div>
+<a id="ae231c253c5196c14b72972e03cc09f05" name="ae231c253c5196c14b72972e03cc09f05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae231c253c5196c14b72972e03cc09f05">&#9670;&#160;</a></span>ParseData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PersistanceContext.ParseData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="interface_persistance_context_1_1_i_persistance.html">IPersistance</a></td>          <td class="paramname"><span class="paramname"><em>target</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parse and store the data from <a class="el" href="interface_persistance_context_1_1_i_persistance.html" title="Interface class for parsing data to format that PersistanceContext use for storing/loading data.">IPersistance</a> to a format this component can use. This function only store the data to temporary storage in this component, not actually write a part of the data in the filesystem. For actually write the data to filesystem, see <a class="el" href="#a28c310fe45c726f4763999ca293bcf6b" title="Trigger a save event and handles writing to filesystem. This will also invokes signal for event that ...">WriteSave</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>The source of data</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8a8038828e02b324f221bd4caf12d7a6" name="a8a8038828e02b324f221bd4caf12d7a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a8038828e02b324f221bd4caf12d7a6">&#9670;&#160;</a></span>ReadSave()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PersistanceContext.ReadSave </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Trigger a load event and handles reading from filesystem. After reading the data, the function will invoke signal for event that another object can use (<a class="el" href="#a4dee1599d060dd8860349bb7bd97b629" title="Loading trigger event. To get a data from PersistanceContext, use OverwriteData.">PersistanceLoadingEvent</a>) to get its data. </p>
+<dl class="section return"><dt>Returns</dt><dd>Is the loading process successful or not</dd></dl>
+
+</div>
+</div>
+<a id="a3c3f480a9a601871f0c49e6c5021540d" name="a3c3f480a9a601871f0c49e6c5021540d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c3f480a9a601871f0c49e6c5021540d">&#9670;&#160;</a></span>SetSaveFileName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PersistanceContext.SetSaveFileName </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>file_name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Manually sets the file location. The path will be appended to appdata/localdata folder path in Unity's default. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_name</td><td>Path to the save file</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Assets/SourceCode/<b>PersistanceContext.cs</b></li>
 </ul>

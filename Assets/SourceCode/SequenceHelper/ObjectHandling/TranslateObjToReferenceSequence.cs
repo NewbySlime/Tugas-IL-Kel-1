@@ -5,6 +5,9 @@ using Unity.VisualScripting;
 namespace SequenceHelper{
   [UnitTitle("Translate Obj To Reference")]
   [UnitCategory("Sequence/ObjectHandling")]
+  /// <summary>
+  /// Sequence helper to be used to parsing a supplied <b>GameObject</b> as a reference.
+  /// </summary>
   public class TranslateObjToReferenceSequenceVS: Unit{
     [DoNotSerialize]
     private ValueInput _obj_input;

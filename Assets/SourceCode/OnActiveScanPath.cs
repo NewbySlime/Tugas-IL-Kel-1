@@ -2,6 +2,12 @@ using Pathfinding;
 using UnityEngine;
 
 
+/// <summary>
+/// Trigger class for rescaning <b>Pathfinding.NavGraph</b>'s pathfinding data for each time this class get enabled or disabled. The target to trigger is based on the name of the pathfinding graph.
+/// 
+/// This class uses external component(s);
+/// - Arongranberg's <b>NavGraph</b> Pathfinding object that is the target of the rescanning.
+/// </summary>
 public class OnActiveScanPath: MonoBehaviour{
   [SerializeField]
   private string GraphName;
@@ -21,6 +27,7 @@ public class OnActiveScanPath: MonoBehaviour{
   }
 
 
+  // get NavGraph based on the supplied name
   private NavGraph _get_nav(string name){
     NavGraph _result = null;
     for(int i = 0; i < AstarPath.active.data.graphs.Length; i++){
@@ -44,6 +51,9 @@ public class OnActiveScanPath: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Function to catch Unity's "Object Enabled" event.
+  /// </summary>
   public void OnEnable(){
     if(!ScanOnEnable)
       return;
@@ -51,6 +61,9 @@ public class OnActiveScanPath: MonoBehaviour{
     _trigger_scan();
   }
 
+  /// <summary>
+  /// Function to catch Unity's "Object Disabled" event.
+  /// </summary>
   public void OnDisable(){
     DEBUGModeUtils.Log("on disable");
     if(!ScanOnDisable)

@@ -3,10 +3,22 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system for setting "allow interaction" flag in <see cref="PlayerController"/>. This is the same as <see cref="SetPlayerConfigFlagSequence"/> but if the designer doesn't know what state or config the player is in, they can use this.
+  /// </summary>
   public class SetPlayerEnableInteractionSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "set_player_enable_interaction";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// Flag for allowing player interaction.
+      /// </summary>
       public bool Enable;
     }
 
@@ -46,6 +58,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Set Enable Interaction")]
   [UnitCategory("Sequence/Player")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="SetPlayerEnableInteractionSequence"/>.
+  /// </summary>
   public class SetPlayerEnableInteractionSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _enable_input;

@@ -5,9 +5,10 @@ using UnityEngine;
 
 
 /// <summary>
-/// Database untuk membantu mencari resep Item.
-/// Komponen ini memerlukan komponen lain:
-///   - ItemDatabase
+/// Database class for storing all the recipe data. Recipe datas are reinterpreted using Tree data structure for utility functions in this database (ex. item combination parser).
+/// 
+/// This class uses autoload(s);
+/// - <see cref="ItemDatabase"/> for getting data that has <see cref="ItemRecipeData"/>.
 /// </summary>
 public class ItemRecipeDatabase: MonoBehaviour{
   private class _recipe_node{
@@ -22,9 +23,7 @@ public class ItemRecipeDatabase: MonoBehaviour{
 
 
   #nullable enable
-  /// <summary>
-  /// Fungsi untuk menerima "message" dari ItemDatabase sesudah inisialisasi.
-  /// </summary>
+  // Function used for catching event from ItemDatabase when it is initialized.
   private void ItemDatabase_Initialized(){
     DEBUGModeUtils.Log("test start");
     List<string> _item_list = _item_database.GetItemList();
@@ -75,10 +74,11 @@ public class ItemRecipeDatabase: MonoBehaviour{
 
 
   /// <summary>
-  /// Fungsi untuk mendapatkan hasil dari resep (list ItemID) atau pilihan yang diberikan.
+  /// Parse a combination of items that resembles a certain recipe for a certain item.
+  /// If the combination does not resemble any recipe, this function will return empty string.
   /// </summary>
-  /// <param name="item_list">List pilihan item</param>
-  /// <returns>ItemID jika resep berhasil, string kosong jika resep salah. </returns>
+  /// <param name="item_list">Combination of items</param>
+  /// <returns>The resulting item ID</returns>
   public string RecipeParse(List<string> item_list){
     item_list.Sort();
 
@@ -98,6 +98,11 @@ public class ItemRecipeDatabase: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Get the items needed for creating a target item based on its <see cref="ItemRecipeData"/>.
+  /// </summary>
+  /// <param name="item_id">The target item ID</param>
+  /// <returns>The needed combination for the recipe</returns>
   public List<string> GetItemNeeded(string item_id){
     List<string> _result = new();
     if(!_item_recipe_map.ContainsKey(item_id))

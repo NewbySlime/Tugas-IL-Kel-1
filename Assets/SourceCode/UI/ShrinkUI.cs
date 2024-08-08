@@ -2,8 +2,13 @@ using System;
 using UnityEngine;
 
 
+/// <summary>
+/// Extended <see cref="TimingBaseUI"/> UI effect for shrinking the target object. 
+/// </summary>
 public class ShrinkUI: TimingBaseUI{
   [SerializeField]
+  // The target object to shrink.
+  // NOTE: ignore the naming, since this effect stripped from dialogue bubble before the need to create TimingBaseUI and external UI effect helper.
   private GameObject _DialoguePivot;
 
   [SerializeField]
@@ -16,6 +21,7 @@ public class ShrinkUI: TimingBaseUI{
   private Vector2 _pivot_base_scale;
 
   [HideInInspector]
+  // Should the target be shrinked in the next effect trigger.
   public bool DoShrink = true;
 
 

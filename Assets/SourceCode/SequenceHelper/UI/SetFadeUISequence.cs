@@ -5,12 +5,32 @@ using System.Collections;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// a custom Sequencing system to for hiding/showing the Fade UI (to block the screen).
+  /// </summary>
   public class SetFadeUISequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "set_fade_ui";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// Do hide/show the Fade UI.
+      /// </summary>
       public bool FadeToShow;
+
+      /// <summary>
+      /// Flag to skip the fade animation.
+      /// </summary>
       public bool SkipAnimation;
+
+      /// <summary>
+      /// Flag for telling the Sequence system for wait until the fade animation finished.
+      /// </summary>
       public bool WaitUntilFinish;
     }
 
@@ -57,6 +77,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Set Fade UI")]
   [UnitCategory("Sequence/UI")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node from sequence <see cref="SetFadeUISequence"/>.
+  /// </summary>
   public class SetFadeUISequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _fade_cover_input;

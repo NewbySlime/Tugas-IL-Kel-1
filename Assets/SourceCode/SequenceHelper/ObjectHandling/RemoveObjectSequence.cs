@@ -3,10 +3,22 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system for removing target object based on <see cref="ObjectReference.ObjRefID"/>.
+  /// </summary>
   public class RemoveObjectSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for reistering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "remove_object";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target object to be removed for the Game.
+      /// </summary>
       public ObjectReference.ObjRefID RefID;
     }
 
@@ -46,6 +58,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Remove Object")]
   [UnitCategory("Sequence/Object")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="RemoveObjectSequence"/>.
+  /// </summary>
   public class RemoveObjectSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _ref_id_input;

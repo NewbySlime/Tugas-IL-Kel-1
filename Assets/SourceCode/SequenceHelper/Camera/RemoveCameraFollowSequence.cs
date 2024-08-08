@@ -3,10 +3,22 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system that remove certain follow object.
+  /// </summary>
   public class RemoveCameraFollowSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for reigstering to <see cref="SequenceDatabase"/>
+    /// </summary>
     public const string SequenceID = "remove_camera_follow";
     
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// Target Object Reference to be removed from following list.
+      /// </summary>
       public ObjectReference.ObjRefID RefID;
     }
 
@@ -59,6 +71,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Remove Camera Follow")]
   [UnitCategory("Sequence/Camera")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="RemoveCameraFollowSequence"/>.
+  /// </summary>
   public class RemoveCameraFollowSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _ref_id_input;

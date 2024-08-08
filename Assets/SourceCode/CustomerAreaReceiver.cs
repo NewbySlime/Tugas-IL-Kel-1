@@ -1,0 +1,1 @@
+// TODO: next update, component for food receiver as a customer

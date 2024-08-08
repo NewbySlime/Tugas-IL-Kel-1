@@ -348,8 +348,8 @@ MonoBehaviour:
   DEBUG_ChangeSceneStartLoad: 1
   DEBUG_UseCustomInitScenarios: 1
   DEBUG_ListInitializeScenario:
-  - ScenarioID: checkpoint_3
-    SubScenarioIdx: 2
+  - ScenarioID: checkpoint_2
+    SubScenarioIdx: 0
     TriggerEntrySequence: 0
   DEBUG_InitTimePeriod: 1
 --- !u!114 &193816743365179125

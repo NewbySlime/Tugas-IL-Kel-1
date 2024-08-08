@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: ItemDatabase Class Reference</title>
+<title>FlavourOfRoemahNusantara: ItemDatabase Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -101,7 +103,7 @@ $(function(){initNavTree('class_item_database.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 
-<p>Database pada game untuk menyimpan data-data semua Item.  
+<p>Database Class for loading and storing data for items. The database will find any prefab (data) in a determined folder with the prefab that has <a class="el" href="class_item_metadata.html" title="Base item data for ItemDatabase that stores identifiers about the item. This data is important for cr...">ItemMetadata</a> data component for early identification. NOTE: for creating custom data component for an item, the database will use interface function <b>ItemDatabase_LoadData(TypeDataStorage)</b>.  
  <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for ItemDatabase:</div>
@@ -119,26 +121,28 @@ delegate void&#160;</td><td class="memItemRight" valign="bottom"><b>OnInitialize
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr>
 <tr class="separator:a0891a7bd4b3213485d52e7b0fcbde30b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af00507ed3bfdd3094f65d03d14aedbd3" id="r_af00507ed3bfdd3094f65d03d14aedbd3"><td class="memItemLeft" align="right" valign="top">List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af00507ed3bfdd3094f65d03d14aedbd3">GetItemList</a> ()</td></tr>
-<tr class="memdesc:af00507ed3bfdd3094f65d03d14aedbd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Untuk mendapatkan list semua ItemID yang ada pada game.  <br /></td></tr>
+<tr class="memdesc:af00507ed3bfdd3094f65d03d14aedbd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a list of all items (by ID) stored in the database.  <br /></td></tr>
 <tr class="separator:af00507ed3bfdd3094f65d03d14aedbd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2300b36373628bb92b50d57f150312e4" id="r_a2300b36373628bb92b50d57f150312e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_type_data_storage.html">TypeDataStorage</a>?&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2300b36373628bb92b50d57f150312e4">GetItemData</a> (string ItemID)</td></tr>
-<tr class="memdesc:a2300b36373628bb92b50d57f150312e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk mendapatkan data-data terkait item berdasarkan ItemID.  <br /></td></tr>
+<tr class="memdesc:a2300b36373628bb92b50d57f150312e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a certain item data based on the supplied ID.  <br /></td></tr>
 <tr class="separator:a2300b36373628bb92b50d57f150312e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:ac83dcd9b319445187afeff29452ffc2f" id="r_ac83dcd9b319445187afeff29452ffc2f"><td class="memItemLeft" align="right" valign="top"><a id="ac83dcd9b319445187afeff29452ffc2f" name="ac83dcd9b319445187afeff29452ffc2f"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsInitialized</b> = false<code> [get]</code></td></tr>
+<tr class="memdesc:ac83dcd9b319445187afeff29452ffc2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag if this class is ready or not yet. <br /></td></tr>
 <tr class="separator:ac83dcd9b319445187afeff29452ffc2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="events" name="events"></a>
 Events</h2></td></tr>
 <tr class="memitem:aab36958d57f88b55e75dbe2b84e62788" id="r_aab36958d57f88b55e75dbe2b84e62788"><td class="memItemLeft" align="right" valign="top"><a id="aab36958d57f88b55e75dbe2b84e62788" name="aab36958d57f88b55e75dbe2b84e62788"></a>
 OnInitializedCallback&#160;</td><td class="memItemRight" valign="bottom"><b>OnInitializedEvent</b></td></tr>
+<tr class="memdesc:aab36958d57f88b55e75dbe2b84e62788"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event for when the database has been initialized. <br /></td></tr>
 <tr class="separator:aab36958d57f88b55e75dbe2b84e62788"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Database pada game untuk menyimpan data-data semua Item. </p>
+<div class="textblock"><p>Database Class for loading and storing data for items. The database will find any prefab (data) in a determined folder with the prefab that has <a class="el" href="class_item_metadata.html" title="Base item data for ItemDatabase that stores identifiers about the item. This data is important for cr...">ItemMetadata</a> data component for early identification. NOTE: for creating custom data component for an item, the database will use interface function <b>ItemDatabase_LoadData(TypeDataStorage)</b>. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a2300b36373628bb92b50d57f150312e4" name="a2300b36373628bb92b50d57f150312e4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2300b36373628bb92b50d57f150312e4">&#9670;&#160;</a></span>GetItemData()</h2>
@@ -155,14 +159,14 @@ OnInitializedCallback&#160;</td><td class="memItemRight" valign="bottom"><b>OnIn
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi untuk mendapatkan data-data terkait item berdasarkan ItemID. </p>
+<p>Get a certain item data based on the supplied ID. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ItemID</td><td>ID yang dicari</td></tr>
+    <tr><td class="paramname">ItemID</td><td>The target item</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Data-data pada item</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Item data for the target item</dd></dl>
 
 </div>
 </div>
@@ -181,8 +185,8 @@ OnInitializedCallback&#160;</td><td class="memItemRight" valign="bottom"><b>OnIn
       </table>
 </div><div class="memdoc">
 
-<p>Untuk mendapatkan list semua ItemID yang ada pada game. </p>
-<dl class="section return"><dt>Returns</dt><dd>List ItemID</dd></dl>
+<p>Get a list of all items (by ID) stored in the database. </p>
+<dl class="section return"><dt>Returns</dt><dd>The list of item ID</dd></dl>
 
 </div>
 </div>

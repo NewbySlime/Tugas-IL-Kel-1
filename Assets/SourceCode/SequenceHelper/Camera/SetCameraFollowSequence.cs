@@ -3,11 +3,27 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system that add the target object to the follow list of the global <b>Camera2D</b>.
+  /// </summary>
   public class SetCameraFollowSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "set_camera_follow";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// Target Object Reference to be added.
+      /// </summary>
       public ObjectReference.ObjRefID RefID;
+
+      /// <summary>
+      /// The follow weight used by <see cref="FollowerCamera2D"/>.
+      /// </summary>
       public float Weight;
     }
 
@@ -60,6 +76,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Set Camera Follow")]
   [UnitCategory("Sequence/Camera")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="SetCameraFollowSequence"/>.
+  /// </summary>
   public class SetCameraFollowSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _ref_id_input;

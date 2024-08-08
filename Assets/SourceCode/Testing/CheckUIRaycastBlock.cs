@@ -4,8 +4,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 
+/// <summary>
+/// Testing class to know which UI Object that blocks a mouse input.
+/// 
+/// Reference: https://forum.unity.com/threads/how-to-detect-if-mouse-is-over-ui.1025533/
+/// </summary>
 public class CheckUIRaycastBlock: MonoBehaviour{
-
   private void _trigger_mouse_raycast(){
     PointerEventData _current_mouse_event = new PointerEventData(EventSystem.current){
       position = Input.mousePosition
@@ -18,6 +22,10 @@ public class CheckUIRaycastBlock: MonoBehaviour{
   }
 
   
+  /// <summary>
+  /// Input event catch function to trigger a check.
+  /// </summary>
+  /// <param name="value">Input data from Unity</param>
   public void OnCheckTrigger(InputValue value){
     if(!value.isPressed)
       return;

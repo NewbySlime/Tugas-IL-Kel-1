@@ -6,8 +6,19 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
+/// <summary>
+/// Class to handles activation of its child objects based on the condition of the current scenario in the Game.
+/// For further explanation, see <b>Reference/Diagrams/Scenario.drawio</b>
+/// 
+/// This class uses autoload(s);
+/// - <see cref="GameHandler"/> for game events and such.
+/// - <see cref="ScenarioDiagramVS"/> as the Game's scenario handling.
+/// </summary>
 public class ScenarioInterface: MonoBehaviour{
   [Serializable]
+  /// <summary>
+  /// Filter data used as a condition for activation of child objects.
+  /// </summary>
   private struct _ScenarioFilter{
     public string ScenarioID;
     public string SubScenarioID;
@@ -131,6 +142,9 @@ public class ScenarioInterface: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Function to catch Unity's "Object Destroyed" event.
+  /// </summary>
   public void OnDestroy(){
     DEBUGModeUtils.Log("scenario interface destroy");
     if(IsInitialized)
@@ -161,6 +175,10 @@ public class ScenarioInterface: MonoBehaviour{
     IsInitialized = true;
   }
 
+  /// <summary>
+  /// Set all associated objects to the scenario to be activated or deactivated.
+  /// </summary>
+  /// <param name="active">Flag for activation</param>
   public void SetInterfaceActive(bool active){
     if(!gameObject.activeInHierarchy)
       return;
@@ -168,6 +186,9 @@ public class ScenarioInterface: MonoBehaviour{
     StartCoroutine(_set_interface_active(active));
   }
 
+  /// <summary>
+  /// Function to catch Unity's "Object Enabled" event.
+  /// </summary>
   public void OnEnable(){
     if(!IsInitialized)
       return;

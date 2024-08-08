@@ -15,26 +15,80 @@ using UnityEngine.SceneManagement;
 
 
 [RequireComponent(typeof(PersistanceContext))]
+/// <summary>
+/// Class for handling Game's functions, events, and other objects/components that serves as the internal functions.
+/// 
+/// This class uses following component(s);
+/// - <see cref="PersistanceContext"/> for handling file save for a game state in certain time.
+/// 
+/// This class uses external component(s);
+/// - Object for containing <see cref="ScenarioHandlerVS"/>.
+/// - <see cref="LevelCheckpointDatabase"/> for storing data about all checkpoint in a scene.
+/// - <see cref="GameTimeHandler"/> for setting up the Game's time.
+/// - <see cref="ScenarioDiagramVS"/> for handling Game's scenario or parts of the Game's story.
+/// - <see cref="GameUIHandler"/> for getting all UIs in the Game.
+/// - <see cref="InputFocusContext"/> for handling the Game's input.
+/// - <see cref="GameRuntimeData"/> for storing data about the Game in runtime for use inbetween scenes.
+/// - <see cref="GameOverUI"/>
+/// - <see cref="FadeUI"/> UI for covering up the screen.
+/// - <see cref="LoadingUI"/>
+/// 
+/// <seealso cref="GameUIHandler"/>
+/// <seealso cref="GameTimeHandler"/>
+/// <seealso cref="GameRuntimeData"/>
+/// </summary>
 public class GameHandler: MonoBehaviour{
+  /// <summary>
+  /// Path to file containing the scene data for build.
+  /// Data contained in here are automatically created in function <see cref="_load_runtime_scene_data"/> whenever this class are initiated in debug mode.
+  /// </summary>
   public const string RuntimeSceneDataFile = "GameConfigs/RuntimeSceneData";
 
+
+  /// <summary>
+  /// ID for entry point scene that also serves as a main menu.
+  /// </summary>
   public const string DefaultSceneID = "main_menu_scene";
-  public const string DefaultGameSceneID = "intro_game_scene"; 
+
+  /// <summary>
+  /// ID for entry point scene for starting a new game.
+  /// </summary>
+  public const string DefaultGameSceneID = "intro_game_scene";
+
+  /// <summary>
+  /// ID for entry point scenario.
+  /// </summary>
   public const string DefaultScenarioID = "intro_scenario";
 
-  public delegate void SceneChangedInitializing(string scene_id, GameContext context);
+
+  /// <summary>
+  /// Event for when a scene is initializing.
+  /// </summary>
   public event SceneChangedInitializing SceneChangedInitializingEvent;
+  public delegate void SceneChangedInitializing(string scene_id, GameContext context);
 
-  public delegate void SceneChangedFinished(string scene_id, GameContext context);
+  /// <summary>
+  /// Event for when a scene has changed and finished initializing. 
+  /// </summary>
   public event SceneChangedFinished SceneChangedFinishedEvent;
+  public delegate void SceneChangedFinished(string scene_id, GameContext context);
 
-  public delegate void SceneRemoving();
+  /// <summary>
+  /// Event for when prompted to change scene but still preparing (not yet changed).
+  /// </summary>
   public event SceneRemoving SceneRemovingEvent;
+  public delegate void SceneRemoving();
 
-  public delegate void LoadDataFromPersistance(PersistanceContext context);
+  /// <summary>
+  /// Event for when a save file is being loaded from attached persistance in this object.
+  /// </summary>
   public event LoadDataFromPersistance LoadDataFromPersistanceEvent;
+  public delegate void LoadDataFromPersistance(PersistanceContext context);
 
 
+  /// <summary>
+  /// Tells the current context of the scene.
+  /// </summary>
   public enum GameContext{
     InGame,
     MainMenu
@@ -42,35 +96,64 @@ public class GameHandler: MonoBehaviour{
 
 
   [Serializable]
+  /// <summary>
+  /// Metadata about a scene attached.
+  /// </summary>
   public class SceneMetadata{
     public string SceneID;
-    public GameContext SceneContext;   
+    public GameContext SceneContext; 
   }
 
   [Serializable]
+  /// <summary>
+  /// (ONLY USE IN DEBUG MODE) Data about a certain scene. For build mode counterpart of this see <see cref="RuntimeSceneData"/>.
+  /// </summary>
   public class SceneData{
+    /// <summary>
+    /// Scene's metadata, stuff like identifier and the context of it.
+    /// </summary>
     public SceneMetadata Metadata;
 
+    /// <summary>
+    /// The Unity's Scene file.
+    /// </summary>
     public UnityEngine.Object SceneFile;
   }
 
 
   [Serializable]
+  /// <summary>
+  /// Scene data for build mode. Loaded in <see cref="_load_runtime_scene_data"/> function.
+  /// </summary>
   public class RuntimeSceneData{
+    /// <inheritdoc cref="SceneData.Metadata"/>
     public SceneMetadata Metadata;
 
+    /// <summary>
+    /// Scene identifier used by Unity's Scene handling system.
+    /// </summary>
     public string SceneName;
   }
 
   [Serializable]
+  /// <summary>
+  /// Wrapper to store multiple <see cref="RuntimeSceneData"/> with <b>Serializeable</b> attribute.
+  /// </summary>
   public class RuntimeSceneDataWrapper{
     public RuntimeSceneData[] SceneDataList = new RuntimeSceneData[0];
   }
 
 
   [Serializable]
+  /// <summary>
+  /// Current context/state of certain scene. This class can also be used for saving data.
+  /// </summary>
   private class SceneContext: PersistanceContext.IPersistance{
     public string SceneID;
+
+    /// <summary>
+    /// Which checkpoint the Player pass through in a scene.
+    /// </summary>
     public string LastCheckpointID;
 
     public string GetDataID(){
@@ -88,6 +171,9 @@ public class GameHandler: MonoBehaviour{
   }
 
   [Serializable]
+  /// <summary>
+  /// Wrapper to store multiple <see cref="SceneContext"/> with <see cref="Serializeable"/> attribute. This class can also be used for saving data.
+  /// </summary>
   private class SceneContextCollection: PersistanceContext.IPersistance{
     public SceneContext[] SceneContexts = new SceneContext[0];
 
@@ -107,6 +193,9 @@ public class GameHandler: MonoBehaviour{
 
 
   [Serializable]
+  /// <summary>
+  /// Data about the current state of the Game.
+  /// </summary>
   private class GameLevelContext: PersistanceContext.IPersistance{
     public string CurrentSceneID;
 
@@ -128,6 +217,9 @@ public class GameHandler: MonoBehaviour{
 
 #if DEBUG
   [Serializable]
+  /// <summary>
+  /// Data used for instantly configure a scenario. Only for debugging mode.
+  /// </summary>
   private struct SetScenarioData{
     public string ScenarioID;
     public int SubScenarioIdx;
@@ -136,11 +228,6 @@ public class GameHandler: MonoBehaviour{
   }
 #endif
 
-  
-
-
-  [SerializeField]
-  private GameObject _ScenarioObjectContainer;
 
   [SerializeField]
   private List<SceneData> _SceneMetadataList;
@@ -157,6 +244,7 @@ public class GameHandler: MonoBehaviour{
   private bool DEBUG_UseCustomInitScenarios = false;
 
   [SerializeField]
+  // Only useable if DEBUG_UseCustomInitScenarios is enabled.
   private List<SetScenarioData> DEBUG_ListInitializeScenario;
 
   [SerializeField]
@@ -180,10 +268,7 @@ public class GameHandler: MonoBehaviour{
   private GameRuntimeData _runtime_data;
 
   private GameOverUI _game_over_ui;
-  private FadeUI _game_over_fadeui;
-
   private LoadingUI _level_loading_ui;
-  
   private FadeUI _fade_ui;
 
 
@@ -202,14 +287,26 @@ public class GameHandler: MonoBehaviour{
   private bool _trigger_settings_hide = false;
 
   private bool _scene_initialized = false;
+  /// <summary>
+  /// Flag if current scene already initialized or not yet.
+  /// </summary>
   public bool SceneInitialized{get => _scene_initialized;}
 
   private bool _scene_initializing = false;
+  /// <summary>
+  /// Flag if current scene is still initilizing.
+  /// </summary>
   public bool SceneInitializing{get => _scene_initializing;}
 
   private bool _obj_initialized = false;
+  /// <summary>
+  /// Flag if this object has been initialized or not.
+  /// </summary>
   public bool Initialized{get => _obj_initialized;}
   
+  /// <summary>
+  /// Persistance handler used by this <see cref="GameHandler"/>.
+  /// </summary>
   public PersistanceContext PersistanceHandler{private set; get;}
 
 
@@ -231,6 +328,7 @@ public class GameHandler: MonoBehaviour{
   }
 
 
+  // Function for blocking scene initializing process to embed the custom scenario. Which then uses _set_custom_scenario() function to actually configure the custom scenario.
   private IEnumerator _use_custom_scenario(){
     BaseLoadingQueue _load_queue = new(){
       LoadFlag = false
@@ -251,7 +349,7 @@ public class GameHandler: MonoBehaviour{
   }
 #endif
 
-
+  // Resets Game's scenario to default state.
   private IEnumerator _reset_game_scenario(){
     yield return _scenario_diagram.ResetAllScenario();
 
@@ -260,6 +358,8 @@ public class GameHandler: MonoBehaviour{
   }
 
 
+  // Function for handling to show and hide Pause UI based on the interaction.
+  // This coroutine function will be finished (when Pause UI hidden) when _trigger_pause_hide flag is enabled.
   private IEnumerator _pause_co_func(){
     _trigger_pause_hide = false;
 
@@ -275,6 +375,8 @@ public class GameHandler: MonoBehaviour{
   }
 
 
+  // Function for handling to show and hide Settings UI based on the interaction.
+  // This coroutine function will be finished (when Settings UI hidden) when _trigger_settings_hide flag is enabled.
   private IEnumerator _settings_co_func(){
     _trigger_settings_hide = false;
 
@@ -471,7 +573,8 @@ public class GameHandler: MonoBehaviour{
     Application.Quit();
   }
 
-  
+
+  // Coroutine for triggering save file in PersistanceContext  
   private IEnumerator _save_game_co_func(){
     Debug.Log("Saving data...");
     
@@ -483,6 +586,7 @@ public class GameHandler: MonoBehaviour{
     _ui_handler.SetUtilityHUDUIMode(GameUIHandler.UtilityHUDUIEnum.SaveHintUI, false);
   }
 
+  // Event for catching saving event from PersistanceContext
   private void _persistance_saving(PersistanceContext context){
     GameLevelContext _game_context = new GameLevelContext{
       CurrentSceneID = _current_scene
@@ -505,6 +609,7 @@ public class GameHandler: MonoBehaviour{
   }
 
 
+  // Function to trigger animation for a recipe has been added to Player's catalogue
   private IEnumerator _trigger_recipe_added(string recipe_item_id){
     RecipeBookUI _recipe_book_ui = _ui_handler.GetRecipeBookUI();
     bool _current_trigger = _recipe_book_ui.IsEffectTriggering;
@@ -639,12 +744,6 @@ public class GameHandler: MonoBehaviour{
       throw new MissingComponentException();
     }
 
-    _game_over_fadeui = _game_over_ui.GetComponent<FadeUI>();
-    if(_game_over_fadeui == null){
-      Debug.LogError("GameOverUI Object does not have FadeUI.");
-      throw new MissingComponentException();
-    }
-
     // tunggu sampai start selanjutnya / menunggu semua objek inisialisasi
     yield return new WaitForNextFrameUnit();
     yield return new WaitForEndOfFrame();
@@ -691,14 +790,24 @@ public class GameHandler: MonoBehaviour{
 
 
 #if DEBUG
+  /// <summary>
+  /// Load a save file that saved previous state of the Game.
+  /// </summary>
+  /// <param name="change_scene">Should loading only load the data or also change the scene</param>
   public void LoadGame(bool change_scene = true){
     StartCoroutine(_load_game(change_scene));
 #else
+  /// <summary>
+  /// Load a save file that saved previous state of the Game.
+  /// </summary>
   public void LoadGame(){
     StartCoroutine(_load_game(true));
 #endif
   }
 
+  /// <summary>
+  /// To reset Game's data and variables and start a new Game.
+  /// </summary>
   public void StartNewGame(){
     PersistanceHandler.ClearData();
     _runtime_data.ClearData();
@@ -715,15 +824,26 @@ public class GameHandler: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Trigger a Game Save event.
+  /// If an object wants to store a data to save file, subscribe to <see cref="PersistanceContext.PersistanceSavingEvent"/> in <see cref="PersistanceContext"/> attached to this object.
+  /// </summary>
   public void SaveGame(){
     StartCoroutine(_save_game_co_func());
   }
 
 
+  /// <summary>
+  /// Restart the Game from the last saved Game state.
+  /// </summary>
   public void RestartFromLastCheckpoint(){
     LoadGame();
   }
 
+  /// <summary>
+  /// Set the last checkpoint that the player entered last time.
+  /// </summary>
+  /// <param name="checkpoint_id">The target checkpoint ID</param>
   public void SetLastCheckpoint(string checkpoint_id){
     if(!_scene_context_map.ContainsKey(_current_scene))
       _scene_context_map[_current_scene] = new SceneContext{
@@ -735,24 +855,45 @@ public class GameHandler: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Change Game's scene to a new scene.
+  /// This does not automatically teleport the Player, instead it uses checkpoint (teleport) ID from the previous scene to determine where to teleport to.
+  /// <seealso cref="LevelTeleportHandler"/>
+  /// </summary>
+  /// <param name="scene_id">The scene to change to</param>
+  /// <param name="teleport_to">Force teleport to a checkpoint (teleport) by ID</param>
+  /// <param name="do_save">Force save after changing scene</param>
   public void ChangeScene(string scene_id, string teleport_to = "", bool do_save = true){
     StartCoroutine(_change_scene(scene_id, teleport_to, do_save));
   }
 
+  /// <summary>
+  /// Change Game's scene to main menu scene. This uses <see cref="ChangeScene"/> function with hardcoded scene ID. 
+  /// </summary>
   public void ChangeSceneToMainMenu(){
     ChangeScene(DefaultSceneID);
   }
 
+  /// <summary>
+  /// Get scene ID of the previous scene.
+  /// </summary>
+  /// <returns>The scene ID</returns>
   public string GetLastScene(){
     return _last_scene;
   }
 
 
+  /// <summary>
+  /// Prompt the Game to quit the Game program.
+  /// </summary>
   public void QuitGame(){
     StartCoroutine(_quit_game());
   }
 
 
+  /// <summary>
+  /// Prompt to pause the Game. It will show the UI for pausing, and then when closed by this object or by the UI presented, the Game will be resumed. 
+  /// </summary>
   public void PauseGame(){
     if(_trigger_pause_coroutine != null || !_scene_initialized || _current_context != GameContext.InGame)
       return;
@@ -760,11 +901,17 @@ public class GameHandler: MonoBehaviour{
     _trigger_pause_coroutine = StartCoroutine(_pause_co_func());
   }
 
+  /// <summary>
+  /// Resume the paused Game that have been paused by <see cref="PauseGame"/>. This will hide the UI for pausing.
+  /// </summary>
   public void ResumeGame(){
     _trigger_pause_hide = true;
   }
 
 
+  /// <summary>
+  /// Show the UI for settings. Hide the UI by using <see cref="CloseSettingsUI"/>.
+  /// </summary>
   public void OpenSettingsUI(){
     if(_trigger_settings_coroutine != null)
       return;
@@ -772,21 +919,36 @@ public class GameHandler: MonoBehaviour{
     _trigger_settings_coroutine = StartCoroutine(_settings_co_func());
   }
 
+  /// <summary>
+  /// Hide the settings UI. To show the UI, see <see cref="OpenSettingsUI"/>.
+  /// </summary>
   public void CloseSettingsUI(){
     _trigger_settings_hide = true;
   }
 
 
 
+  /// <summary>
+  /// Add queue for blocking the scene initializing progress. This is used for signaling this object to wait until all objects in queue is loaded.
+  /// </summary>
+  /// <param name="queue">Loading interface object</param>
   public void AddLoadingQueue(ILoadingQueue queue){
     _scene_loading_object_list.Add(queue);
   }
 
 
+  /// <summary>
+  /// Get scene ID for current scene.
+  /// </summary>
+  /// <returns>The current scene ID</returns>
   public string GetCurrentSceneID(){
     return _current_scene;
   }
 
+  /// <summary>
+  /// Get scene context for current scene.
+  /// </summary>
+  /// <returns>The scene context</returns>
   public GameContext GetCurrentSceneContext(){
     if(!_scene_map.ContainsKey(_current_scene)){
       Debug.LogWarning(string.Format("No Metadata found for Scene: '{0}'", _current_scene));
@@ -797,12 +959,19 @@ public class GameHandler: MonoBehaviour{
   }
 
 
-
   // MARK: Game Triggers
+
+  /// <summary>
+  /// Trigger Game Over when player is spotted. This uses <see cref="TriggerGameOver"/> using hardcoded parameters.
+  /// </summary>
   public void TriggerPlayerSpotted(){
     TriggerGameOver("Kamu Ketahuan!");
   }
 
+  /// <summary>
+  /// Trigger a Game Over event.
+  /// </summary>
+  /// <param name="cause_text">The cause of the Game Over event</param>
   public void TriggerGameOver(string cause_text){
     _ui_handler.ResetMainUIMode();
 
@@ -816,12 +985,21 @@ public class GameHandler: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Start an animation for when a recipe is added to player catalogue. Even with the animation is playing, this function can still be used but it will be queued for the next animation.
+  /// </summary>
+  /// <param name="recipe_item_id">The recipe ID added to player</param>
   public void TriggerRecipeAdded(string recipe_item_id){
     StartCoroutine(_trigger_recipe_added(recipe_item_id));
   }
 
 
   // MARK: Input Handlings
+
+  /// <summary>
+  /// Function to catch "PauseGame" input event. Used for redirecting it to <see cref="PauseGame"/>.
+  /// </summary>
+  /// <param name="value">Unity's input data</param>
   public void OnPauseGame(InputValue value){
     if(value.isPressed){
       // Unpause will be handled by PauseGameUI
@@ -830,6 +1008,9 @@ public class GameHandler: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Resetting the Game's scenario to default scenario.
+  /// </summary>
   public void ResetGameScenario(){
     StartCoroutine(_reset_game_scenario());
   }

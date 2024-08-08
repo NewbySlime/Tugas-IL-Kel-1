@@ -4,10 +4,22 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to trigger target <see cref="MiniGameHandler"/> object.
+  /// </summary>
   public class TriggerMiniGameSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "trigger_mini_game";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target <see cref="MiniGameHandler"/> object.
+      /// </summary>
       public ObjectReference.ObjRefID MiniGameObject;
     }
 
@@ -53,6 +65,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Trigger Mini Game")]
   [UnitCategory("Sequence/Game")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="TriggerMiniGameSequence"/>.
+  /// </summary>
   public class TriggerMiniGameSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _mini_game_input;

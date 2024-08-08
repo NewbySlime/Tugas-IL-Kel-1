@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: DamagerComponent Class Reference</title>
+<title>FlavourOfRoemahNusantara: DamagerComponent Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -95,10 +97,14 @@ $(function(){initNavTree('class_damager_component.html',''); initResizable(); })
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="class_damager_component-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">DamagerComponent Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Component that gives an object functionality to become an object that can damage another object that has <a class="el" href="class_health_component.html" title="Base component for Game&#39;s entities to handle health system for the entity. When the entity is &quot;dead&quot; ...">HealthComponent</a>. This class is handled by <a class="el" href="class_weapon_handler.html" title="Component for handling weapon and gives its wielder (such as PlayerController) Game interactions for ...">WeaponHandler</a> or can be entirely independent (as an example <a class="el" href="class_trap_component.html" title="Helper class for DamagerComponent to make it as a static damager (not moving). As this component does...">TrapComponent</a>).  
+ <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for DamagerComponent:</div>
 <div class="dyncontent">
@@ -108,9 +114,14 @@ Inheritance diagram for DamagerComponent:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_damager_component_1_1_damage_data.html">DamageData</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_damager_component_1_1_damager_context.html">DamagerContext</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Damager's context or configuration data.  <a href="struct_damager_component_1_1_damager_context.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_damager_component_1_1_damager_data.html">DamagerData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data about the damager.  <a href="struct_damager_component_1_1_damager_data.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_damager_component_1_1_damager_trigger_data.html">DamagerTriggerData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data used as a parameter in TriggerDamager or interface function <b>DamagerComponent_TriggerDamager</b>.  <a href="struct_damager_component_1_1_damager_trigger_data.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -121,19 +132,263 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr
 <tr class="memitem:ac912911877040fb7acb0b0e1b3c7c3bf" id="r_ac912911877040fb7acb0b0e1b3c7c3bf"><td class="memItemLeft" align="right" valign="top"><a id="ac912911877040fb7acb0b0e1b3c7c3bf" name="ac912911877040fb7acb0b0e1b3c7c3bf"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>FixedUpdate</b> ()</td></tr>
 <tr class="separator:ac912911877040fb7acb0b0e1b3c7c3bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad53b6c8e388bf9a18e2b800428ffe00e" id="r_ad53b6c8e388bf9a18e2b800428ffe00e"><td class="memItemLeft" align="right" valign="top"><a id="ad53b6c8e388bf9a18e2b800428ffe00e" name="ad53b6c8e388bf9a18e2b800428ffe00e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetDamageData</b> (<a class="el" href="struct_damager_component_1_1_damage_data.html">DamageData</a> damage_data)</td></tr>
-<tr class="separator:ad53b6c8e388bf9a18e2b800428ffe00e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85548a5c48de3c9c83981991dcab2547" id="r_a85548a5c48de3c9c83981991dcab2547"><td class="memItemLeft" align="right" valign="top"><a id="a85548a5c48de3c9c83981991dcab2547" name="a85548a5c48de3c9c83981991dcab2547"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetDamagerContext</b> (<a class="el" href="struct_damager_component_1_1_damager_context.html">DamagerContext</a> context)</td></tr>
+<tr class="memitem:ad7bc28ef91300a73d7b0de1988a907f4" id="r_ad7bc28ef91300a73d7b0de1988a907f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad7bc28ef91300a73d7b0de1988a907f4">SetDamagerData</a> (<a class="el" href="struct_damager_component_1_1_damager_data.html">DamagerData</a> damage_data)</td></tr>
+<tr class="memdesc:ad7bc28ef91300a73d7b0de1988a907f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set and replace <a class="el" href="struct_damager_component_1_1_damager_data.html" title="Data about the damager.">DamagerData</a> with new one.  <br /></td></tr>
+<tr class="separator:ad7bc28ef91300a73d7b0de1988a907f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85548a5c48de3c9c83981991dcab2547" id="r_a85548a5c48de3c9c83981991dcab2547"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85548a5c48de3c9c83981991dcab2547">SetDamagerContext</a> (<a class="el" href="struct_damager_component_1_1_damager_context.html">DamagerContext</a> context)</td></tr>
+<tr class="memdesc:a85548a5c48de3c9c83981991dcab2547"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set and apply the configuration of this component and another component related to this.  <br /></td></tr>
 <tr class="separator:a85548a5c48de3c9c83981991dcab2547"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0817c7e4baeb4a87e1571d84310fef12" id="r_a0817c7e4baeb4a87e1571d84310fef12"><td class="memItemLeft" align="right" valign="top"><a id="a0817c7e4baeb4a87e1571d84310fef12" name="a0817c7e4baeb4a87e1571d84310fef12"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>TriggerDamager</b> ()</td></tr>
-<tr class="separator:a0817c7e4baeb4a87e1571d84310fef12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7b2bf33d69b684ca7f767e4a1c198b5" id="r_aa7b2bf33d69b684ca7f767e4a1c198b5"><td class="memItemLeft" align="right" valign="top"><a id="aa7b2bf33d69b684ca7f767e4a1c198b5" name="aa7b2bf33d69b684ca7f767e4a1c198b5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnCollisionEnter2D</b> (Collision2D collision)</td></tr>
+<tr class="memitem:a76744f509b211b00cceebdc87bbfb41a" id="r_a76744f509b211b00cceebdc87bbfb41a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_damager_component_1_1_damager_data.html">DamagerData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76744f509b211b00cceebdc87bbfb41a">GetDamagerData</a> ()</td></tr>
+<tr class="memdesc:a76744f509b211b00cceebdc87bbfb41a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current data of <a class="el" href="struct_damager_component_1_1_damager_data.html" title="Data about the damager.">DamagerData</a>.  <br /></td></tr>
+<tr class="separator:a76744f509b211b00cceebdc87bbfb41a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af39cdda51cb508d02ad6cf76699e9606" id="r_af39cdda51cb508d02ad6cf76699e9606"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_damager_component_1_1_damager_context.html">DamagerContext</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af39cdda51cb508d02ad6cf76699e9606">GetDamagerContext</a> ()</td></tr>
+<tr class="memdesc:af39cdda51cb508d02ad6cf76699e9606"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current configuration of this component.  <br /></td></tr>
+<tr class="separator:af39cdda51cb508d02ad6cf76699e9606"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e30962a025cc011f93dcbf0764cef88" id="r_a3e30962a025cc011f93dcbf0764cef88"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e30962a025cc011f93dcbf0764cef88">SetDamagerExcludeLayer</a> (LayerMask excluded_layer)</td></tr>
+<tr class="memdesc:a3e30962a025cc011f93dcbf0764cef88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set which layer to be excluded from the physics processing. This exclusion method will not interfere or instead adapting with any feature that modifies the layer mask.  <br /></td></tr>
+<tr class="separator:a3e30962a025cc011f93dcbf0764cef88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab41900f319b2d2b52bbef55d7f75cc4e" id="r_ab41900f319b2d2b52bbef55d7f75cc4e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab41900f319b2d2b52bbef55d7f75cc4e">SetDamagerSprite</a> (Sprite texture)</td></tr>
+<tr class="memdesc:ab41900f319b2d2b52bbef55d7f75cc4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the sprite of this damager object.  <br /></td></tr>
+<tr class="separator:ab41900f319b2d2b52bbef55d7f75cc4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d23af5fa1762881cc91dbaea5bdf724" id="r_a0d23af5fa1762881cc91dbaea5bdf724"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d23af5fa1762881cc91dbaea5bdf724">TriggerDamager</a> (<a class="el" href="struct_damager_component_1_1_damager_trigger_data.html">DamagerTriggerData</a> data)</td></tr>
+<tr class="memdesc:a0d23af5fa1762881cc91dbaea5bdf724"><td class="mdescLeft">&#160;</td><td class="mdescRight">To initialize this component with using current data for use as a damager and giving force to this object based on the trigger data.  <br /></td></tr>
+<tr class="separator:a0d23af5fa1762881cc91dbaea5bdf724"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7b2bf33d69b684ca7f767e4a1c198b5" id="r_aa7b2bf33d69b684ca7f767e4a1c198b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7b2bf33d69b684ca7f767e4a1c198b5">OnCollisionEnter2D</a> (Collision2D collision)</td></tr>
+<tr class="memdesc:aa7b2bf33d69b684ca7f767e4a1c198b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch Unity's <b>Collider2D</b> event when an object entered.  <br /></td></tr>
 <tr class="separator:aa7b2bf33d69b684ca7f767e4a1c198b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4521917a029ee9849f4a53bb79997cc" id="r_ac4521917a029ee9849f4a53bb79997cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac4521917a029ee9849f4a53bb79997cc">OnTriggerEnter2D</a> (Collider2D collider)</td></tr>
+<tr class="memdesc:ac4521917a029ee9849f4a53bb79997cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch Unity's <b>Collider2D</b> event when an object exited.  <br /></td></tr>
+<tr class="separator:ac4521917a029ee9849f4a53bb79997cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a1876602c2932bd05d08edbc121c58406" id="r_a1876602c2932bd05d08edbc121c58406"><td class="memItemLeft" align="right" valign="top"><a id="a1876602c2932bd05d08edbc121c58406" name="a1876602c2932bd05d08edbc121c58406"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>AllowMultipleHitsSameObject</b> = false</td></tr>
+<tr class="separator:a1876602c2932bd05d08edbc121c58406"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Component that gives an object functionality to become an object that can damage another object that has <a class="el" href="class_health_component.html" title="Base component for Game&#39;s entities to handle health system for the entity. When the entity is &quot;dead&quot; ...">HealthComponent</a>. This class is handled by <a class="el" href="class_weapon_handler.html" title="Component for handling weapon and gives its wielder (such as PlayerController) Game interactions for ...">WeaponHandler</a> or can be entirely independent (as an example <a class="el" href="class_trap_component.html" title="Helper class for DamagerComponent to make it as a static damager (not moving). As this component does...">TrapComponent</a>). </p>
+<p>This class uses external component(s);</p><ul>
+<li><b>SpriteRenderer</b> for displaying sprite for the damager/projectile (optional if displayed in another object).</li>
+<li><a class="el" href="class_sound_alert_transceiver.html" title="Class to &quot;transmit sound&quot; that can be received by SoundAlertReceiver. This class is used to create an...">SoundAlertTransceiver</a> for alerting any object using "sound" range.</li>
+<li><b>AudioSource</b> for playing a sound when the object is interacted. </li>
+</ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="af39cdda51cb508d02ad6cf76699e9606" name="af39cdda51cb508d02ad6cf76699e9606"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af39cdda51cb508d02ad6cf76699e9606">&#9670;&#160;</a></span>GetDamagerContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_damager_component_1_1_damager_context.html">DamagerContext</a> DamagerComponent.GetDamagerContext </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get current configuration of this component. </p>
+<dl class="section return"><dt>Returns</dt><dd>Current <a class="el" href="class_damager_component.html" title="Component that gives an object functionality to become an object that can damage another object that ...">DamagerComponent</a></dd></dl>
+
+</div>
+</div>
+<a id="a76744f509b211b00cceebdc87bbfb41a" name="a76744f509b211b00cceebdc87bbfb41a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76744f509b211b00cceebdc87bbfb41a">&#9670;&#160;</a></span>GetDamagerData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_damager_component_1_1_damager_data.html">DamagerData</a> DamagerComponent.GetDamagerData </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get current data of <a class="el" href="struct_damager_component_1_1_damager_data.html" title="Data about the damager.">DamagerData</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>Current <a class="el" href="struct_damager_component_1_1_damager_data.html" title="Data about the damager.">DamagerData</a></dd></dl>
+
+</div>
+</div>
+<a id="aa7b2bf33d69b684ca7f767e4a1c198b5" name="aa7b2bf33d69b684ca7f767e4a1c198b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7b2bf33d69b684ca7f767e4a1c198b5">&#9670;&#160;</a></span>OnCollisionEnter2D()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DamagerComponent.OnCollisionEnter2D </td>
+          <td>(</td>
+          <td class="paramtype">Collision2D</td>          <td class="paramname"><span class="paramname"><em>collision</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to catch Unity's <b>Collider2D</b> event when an object entered. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">collision</td><td>The entered object</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac4521917a029ee9849f4a53bb79997cc" name="ac4521917a029ee9849f4a53bb79997cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4521917a029ee9849f4a53bb79997cc">&#9670;&#160;</a></span>OnTriggerEnter2D()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DamagerComponent.OnTriggerEnter2D </td>
+          <td>(</td>
+          <td class="paramtype">Collider2D</td>          <td class="paramname"><span class="paramname"><em>collider</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to catch Unity's <b>Collider2D</b> event when an object exited. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">collider</td><td>The exited object</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a85548a5c48de3c9c83981991dcab2547" name="a85548a5c48de3c9c83981991dcab2547"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85548a5c48de3c9c83981991dcab2547">&#9670;&#160;</a></span>SetDamagerContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DamagerComponent.SetDamagerContext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_damager_component_1_1_damager_context.html">DamagerContext</a></td>          <td class="paramname"><span class="paramname"><em>context</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set and apply the configuration of this component and another component related to this. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">context</td><td>The new configuration data</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad7bc28ef91300a73d7b0de1988a907f4" name="ad7bc28ef91300a73d7b0de1988a907f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7bc28ef91300a73d7b0de1988a907f4">&#9670;&#160;</a></span>SetDamagerData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DamagerComponent.SetDamagerData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_damager_component_1_1_damager_data.html">DamagerData</a></td>          <td class="paramname"><span class="paramname"><em>damage_data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set and replace <a class="el" href="struct_damager_component_1_1_damager_data.html" title="Data about the damager.">DamagerData</a> with new one. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">damage_data</td><td>The new damager data</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3e30962a025cc011f93dcbf0764cef88" name="a3e30962a025cc011f93dcbf0764cef88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e30962a025cc011f93dcbf0764cef88">&#9670;&#160;</a></span>SetDamagerExcludeLayer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DamagerComponent.SetDamagerExcludeLayer </td>
+          <td>(</td>
+          <td class="paramtype">LayerMask</td>          <td class="paramname"><span class="paramname"><em>excluded_layer</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set which layer to be excluded from the physics processing. This exclusion method will not interfere or instead adapting with any feature that modifies the layer mask. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">excluded_layer</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab41900f319b2d2b52bbef55d7f75cc4e" name="ab41900f319b2d2b52bbef55d7f75cc4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab41900f319b2d2b52bbef55d7f75cc4e">&#9670;&#160;</a></span>SetDamagerSprite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DamagerComponent.SetDamagerSprite </td>
+          <td>(</td>
+          <td class="paramtype">Sprite</td>          <td class="paramname"><span class="paramname"><em>texture</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the sprite of this damager object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">texture</td><td>The source sprite</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0d23af5fa1762881cc91dbaea5bdf724" name="a0d23af5fa1762881cc91dbaea5bdf724"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d23af5fa1762881cc91dbaea5bdf724">&#9670;&#160;</a></span>TriggerDamager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DamagerComponent.TriggerDamager </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_damager_component_1_1_damager_trigger_data.html">DamagerTriggerData</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>To initialize this component with using current data for use as a damager and giving force to this object based on the trigger data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>The trigger data</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Assets/SourceCode/<b>DamagerComponent.cs</b></li>
 </ul>

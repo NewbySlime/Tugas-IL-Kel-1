@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
+/// <summary>
+/// Database for storing and handling sequence for certain scene.
+/// This database can exist (optionally) in every scene. Since the data stored can be different each scene.
+/// </summary>
 public class LevelSequenceDatabase: MonoBehaviour{
   [Serializable]
   private struct _SequenceMetadata{
@@ -24,6 +27,10 @@ public class LevelSequenceDatabase: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Start certain sequence asynchronously.
+  /// </summary>
+  /// <param name="sequence_id">Sequence ID to start</param>
   public void StartSequenceAsync(string sequence_id){
     if(!HasSequence(sequence_id))
       return;
@@ -32,6 +39,11 @@ public class LevelSequenceDatabase: MonoBehaviour{
     _metadata.Handler.StartTriggerAsync();
   }
 
+  /// <summary>
+  /// Start certain sequence synchronously (controlled coroutine).
+  /// </summary>
+  /// <param name="sequence_id">Sequence ID to start</param>
+  /// <returns>Coroutine helper object</returns>
   public IEnumerator StartSequence(string sequence_id){
     if(!HasSequence(sequence_id))
       yield break;
@@ -40,6 +52,11 @@ public class LevelSequenceDatabase: MonoBehaviour{
     yield return _metadata.Handler.StartTrigger();
   }
 
+  /// <summary>
+  /// To check if certain sequence exist in this database
+  /// </summary>
+  /// <param name="sequence_id">The target sequence ID to check</param>
+  /// <returns>Is the sequence exist</returns>
   public bool HasSequence(string sequence_id){
     return _sequence_map.ContainsKey(sequence_id);
   }

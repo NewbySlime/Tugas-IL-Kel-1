@@ -4,12 +4,31 @@ using UnityEngine.Rendering;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system for flipping an object based on the axis using <see cref="FlipInterface"/>.
+  /// </summary>
   public class FlipObjectSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "flip_object";
 
+    /// <summary>
+    /// Data fo rhte Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target object to flip.
+      /// </summary>
       public ObjectReference.ObjRefID RefID;
+
+      /// <summary>
+      /// Flip in x axis.
+      /// </summary>
       public bool FlipX;
+      /// <summary>
+      /// Flip in y axis
+      /// </summary>
       public bool FlipY;
     }
 
@@ -56,6 +75,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Flip Object")]
   [UnitCategory("Sequence/Object")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="FlipObjectSequence"/>.
+  /// </summary>
   public class FlipObjectSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _ref_obj_input;

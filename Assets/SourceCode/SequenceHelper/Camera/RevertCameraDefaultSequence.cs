@@ -3,9 +3,18 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system that revert the camera settings like following list, smooth time, and pivot object to default.
+  /// </summary>
   public class RevertCameraDefaultSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "revert_camera_default";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{}
 
 
@@ -51,6 +60,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Revert Camera To Default")]
   [UnitCategory("Sequence/Camera")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="RevertCameraDefaultSequence"/>.
+  /// </summary>
   public class RevertCameraDefaultSequenceVS: AddSubSequence{
     protected override void AddData(Flow flow, out SequenceHandlerVS.SequenceInitializeData.DataPart init_data){
       init_data = new(){

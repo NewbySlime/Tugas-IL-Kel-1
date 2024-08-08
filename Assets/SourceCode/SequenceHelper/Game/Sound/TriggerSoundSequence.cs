@@ -4,15 +4,38 @@ using System.Collections;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system that will play an audio with soundtrack supplied.
+  /// </summary>
   public class TriggerSoundSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "trigger_sound";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target object that has <b>AudioSource</b>.
+      /// </summary>
       public ObjectReference.ObjRefID SoundObjectRef;
 
+      /// <summary>
+      /// The audio file to be played.
+      /// </summary>
       public AudioClip Audio;
+
+      /// <summary>
+      /// The volume value when the audio is played.
+      /// </summary>
       public float Volume;
 
+      
+      /// <summary>
+      /// The delay time before being played.
+      /// </summary>
       public float Delay;
     }
 
@@ -74,6 +97,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Trigger Sound")]
   [UnitCategory("Sequence/Game/Sound")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="TriggerSoundSequence"/>.
+  /// </summary>
   public class TriggerSoundSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _sound_target_obj_input;

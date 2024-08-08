@@ -3,10 +3,22 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system for removing focus context from <see cref="InputFocusContext"/> based on the target object.
+  /// </summary>
   public class RemoveInputFocusSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for register to <see cref="SequenceDatabase"/>.
+    /// </summary>    
     public const string SequenceID = "remove_input_focus";
-    
+
+    /// <summary>
+    /// Data fo rthe Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The focus cotnext data.
+      /// </summary>
       public RegisterInputFocusSequence.InputFocusData FocusData;
     }
 
@@ -57,6 +69,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Remove Input Focus")]
   [UnitCategory("Sequence/Input")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="RemoveInputFocusSequence"/>.
+  /// </summary>
   public class RemoveInputFocusSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _input_focus_input;

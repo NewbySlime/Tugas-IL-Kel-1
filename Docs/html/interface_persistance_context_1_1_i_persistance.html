@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: PersistanceContext.IPersistance Interface Reference</title>
+<title>FlavourOfRoemahNusantara: PersistanceContext.IPersistance Interface Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -98,19 +100,110 @@ $(function(){initNavTree('interface_persistance_context_1_1_i_persistance.html',
   <div class="headertitle"><div class="title">PersistanceContext.IPersistance Interface Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Interface class for parsing data to format that <a class="el" href="class_persistance_context.html" title="Class for handling data, storing and loading the data with the OS&#39; filesystem. The path for save file...">PersistanceContext</a> use for storing/loading data.  
+ <a href="#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for PersistanceContext.IPersistance:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="interface_persistance_context_1_1_i_persistance.png" usemap="#PersistanceContext.IPersistance_map" alt=""/>
+  <map id="PersistanceContext.IPersistance_map" name="PersistanceContext.IPersistance_map">
+<area href="class_inventory_data_1_1_runtime_data.html" title="Data structure for save file that contains data related to the InventoryData." alt="InventoryData.RuntimeData" shape="rect" coords="0,56,246,80"/>
+<area href="class_player_controller_1_1_runtime_data.html" title="Data structure for storing to a save file in for PersistanceContext." alt="PlayerController.RuntimeData" shape="rect" coords="256,56,502,80"/>
+<area href="class_recipe_discovery_component_1_1_runtime_data.html" title="Data structure for storing to a save file in for PersistanceContext." alt="RecipeDiscoveryComponent.RuntimeData" shape="rect" coords="512,56,758,80"/>
+<area href="class_scenario_diagram_v_s_1_1_persistance_data.html" title="Data for persistance use. This data contains about the state of the scenarios contained in ScenarioDi..." alt="ScenarioDiagramVS.PersistanceData" shape="rect" coords="768,56,1014,80"/>
+<area href="class_scenario_handler_v_s_1_1_persistance_data.html" title="Data for persistance use. This data contains about the state of this scneario." alt="ScenarioHandlerVS.PersistanceData" shape="rect" coords="1024,56,1270,80"/>
+<area href="class_settings_u_i_1_1_runtime_data.html" title="The runtime data related to this class for use in GameRuntimeData or for saving to PersistanceContext..." alt="SettingsUI.RuntimeData" shape="rect" coords="1280,56,1526,80"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a906b649de95e7cf5326c25128df46705" id="r_a906b649de95e7cf5326c25128df46705"><td class="memItemLeft" align="right" valign="top"><a id="a906b649de95e7cf5326c25128df46705" name="a906b649de95e7cf5326c25128df46705"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><b>GetDataID</b> ()</td></tr>
+<tr class="memitem:a906b649de95e7cf5326c25128df46705" id="r_a906b649de95e7cf5326c25128df46705"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a906b649de95e7cf5326c25128df46705">GetDataID</a> ()</td></tr>
+<tr class="memdesc:a906b649de95e7cf5326c25128df46705"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the data identifier. Inheriting class should create a unique ID for its data.  <br /></td></tr>
 <tr class="separator:a906b649de95e7cf5326c25128df46705"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93b3e22d4a9460e43afd83e5422d6d6a" id="r_a93b3e22d4a9460e43afd83e5422d6d6a"><td class="memItemLeft" align="right" valign="top"><a id="a93b3e22d4a9460e43afd83e5422d6d6a" name="a93b3e22d4a9460e43afd83e5422d6d6a"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><b>GetData</b> ()</td></tr>
+<tr class="memitem:a93b3e22d4a9460e43afd83e5422d6d6a" id="r_a93b3e22d4a9460e43afd83e5422d6d6a"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a93b3e22d4a9460e43afd83e5422d6d6a">GetData</a> ()</td></tr>
+<tr class="memdesc:a93b3e22d4a9460e43afd83e5422d6d6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the data contained in inheriting class using string format. NOTE: the data should not contain double quotes (") and single quote (') due to JSON format used by &lt;see cref="<a class="el" href="class_persistance_context.html" title="Class for handling data, storing and loading the data with the OS&#39; filesystem. The path for save file...">PersistanceContext</a>"/&gt;. If it contains the prohibited character, the data should be encoded in other type.  <br /></td></tr>
 <tr class="separator:a93b3e22d4a9460e43afd83e5422d6d6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a510b8b322ab24e2237d15578de46230b" id="r_a510b8b322ab24e2237d15578de46230b"><td class="memItemLeft" align="right" valign="top"><a id="a510b8b322ab24e2237d15578de46230b" name="a510b8b322ab24e2237d15578de46230b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetData</b> (string data)</td></tr>
+<tr class="memitem:a510b8b322ab24e2237d15578de46230b" id="r_a510b8b322ab24e2237d15578de46230b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a510b8b322ab24e2237d15578de46230b">SetData</a> (string data)</td></tr>
+<tr class="memdesc:a510b8b322ab24e2237d15578de46230b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overwrites data of inheriting class based on the data supplied.  <br /></td></tr>
 <tr class="separator:a510b8b322ab24e2237d15578de46230b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Interface class for parsing data to format that <a class="el" href="class_persistance_context.html" title="Class for handling data, storing and loading the data with the OS&#39; filesystem. The path for save file...">PersistanceContext</a> use for storing/loading data. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a93b3e22d4a9460e43afd83e5422d6d6a" name="a93b3e22d4a9460e43afd83e5422d6d6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93b3e22d4a9460e43afd83e5422d6d6a">&#9670;&#160;</a></span>GetData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string PersistanceContext.IPersistance.GetData </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the data contained in inheriting class using string format. NOTE: the data should not contain double quotes (") and single quote (') due to JSON format used by &lt;see cref="<a class="el" href="class_persistance_context.html" title="Class for handling data, storing and loading the data with the OS&#39; filesystem. The path for save file...">PersistanceContext</a>"/&gt;. If it contains the prohibited character, the data should be encoded in other type. </p>
+<dl class="section return"><dt>Returns</dt><dd>The data in string format</dd></dl>
+
+<p>Implemented in <a class="el" href="class_inventory_data_1_1_runtime_data.html#a02055c8586c3d5e223dcd92e1f4b7404">InventoryData.RuntimeData</a>, <a class="el" href="class_player_controller_1_1_runtime_data.html#a971b06ee7c9bea5f74908823805bf617">PlayerController.RuntimeData</a>, <a class="el" href="class_recipe_discovery_component_1_1_runtime_data.html#af21417974c6a4f73f21f041b6e5313cf">RecipeDiscoveryComponent.RuntimeData</a>, <a class="el" href="class_settings_u_i_1_1_runtime_data.html#a7f71711e94935045fbf87c833d6fe7a4">SettingsUI.RuntimeData</a>, <a class="el" href="class_scenario_diagram_v_s_1_1_persistance_data.html#aba73a02320a42576ad7727663803da7f">ScenarioDiagramVS.PersistanceData</a>, and <a class="el" href="class_scenario_handler_v_s_1_1_persistance_data.html#ab50bfb47ee062b504cbd292046d1b426">ScenarioHandlerVS.PersistanceData</a>.</p>
+
+</div>
+</div>
+<a id="a906b649de95e7cf5326c25128df46705" name="a906b649de95e7cf5326c25128df46705"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a906b649de95e7cf5326c25128df46705">&#9670;&#160;</a></span>GetDataID()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string PersistanceContext.IPersistance.GetDataID </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the data identifier. Inheriting class should create a unique ID for its data. </p>
+<dl class="section return"><dt>Returns</dt><dd>The data ID</dd></dl>
+
+<p>Implemented in <a class="el" href="class_inventory_data_1_1_runtime_data.html#a75df9d0e529d745301fdf4b9ab063240">InventoryData.RuntimeData</a>, <a class="el" href="class_player_controller_1_1_runtime_data.html#ab18b6b1c5b72e884023d05ce7a27b458">PlayerController.RuntimeData</a>, <a class="el" href="class_recipe_discovery_component_1_1_runtime_data.html#aa185070bf921361822be5a64fea66da2">RecipeDiscoveryComponent.RuntimeData</a>, <a class="el" href="class_settings_u_i_1_1_runtime_data.html#ab4e60a23b64cbe373b02d19708967df0">SettingsUI.RuntimeData</a>, <a class="el" href="class_scenario_diagram_v_s_1_1_persistance_data.html#ae9be3138b5c75b75715917de3cffa3d2">ScenarioDiagramVS.PersistanceData</a>, and <a class="el" href="class_scenario_handler_v_s_1_1_persistance_data.html#a5dbae9dac467e8e97d8ec32df13d967c">ScenarioHandlerVS.PersistanceData</a>.</p>
+
+</div>
+</div>
+<a id="a510b8b322ab24e2237d15578de46230b" name="a510b8b322ab24e2237d15578de46230b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a510b8b322ab24e2237d15578de46230b">&#9670;&#160;</a></span>SetData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PersistanceContext.IPersistance.SetData </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Overwrites data of inheriting class based on the data supplied. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Data in string format</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="class_inventory_data_1_1_runtime_data.html#adbb5e209de6732ee4a19280d815570d4">InventoryData.RuntimeData</a>, <a class="el" href="class_player_controller_1_1_runtime_data.html#a65a35026dbd4f29d623233aabcca05f4">PlayerController.RuntimeData</a>, <a class="el" href="class_recipe_discovery_component_1_1_runtime_data.html#abd68bec08e591fd1443c4c7c4fe81d71">RecipeDiscoveryComponent.RuntimeData</a>, <a class="el" href="class_settings_u_i_1_1_runtime_data.html#a20170e8e00827cfd696a9b5d8fa48e13">SettingsUI.RuntimeData</a>, <a class="el" href="class_scenario_diagram_v_s_1_1_persistance_data.html#ae7e2c1f7108468150406c223e7455234">ScenarioDiagramVS.PersistanceData</a>, and <a class="el" href="class_scenario_handler_v_s_1_1_persistance_data.html#a3a6a40edc7600acbe42bdbecce94a6c4">ScenarioHandlerVS.PersistanceData</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this interface was generated from the following file:<ul>
 <li>Assets/SourceCode/<b>PersistanceContext.cs</b></li>
 </ul>

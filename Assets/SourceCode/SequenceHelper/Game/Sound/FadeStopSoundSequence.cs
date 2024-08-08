@@ -5,12 +5,27 @@ using System.Data.Common;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to stop an <b>AudioSource</b> with fading effect.
+  /// </summary>
   public class FadeStopSoundSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "fade_stop_sound";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target object to stop the <b>AudioSource</b>.
+      /// </summary>
       public ObjectReference.ObjRefID SoundObject;
 
+      /// <summary>
+      /// Time for the fade effect.
+      /// </summary>
       public float FadeTime;
     }
 
@@ -73,6 +88,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Fade Stop Sound")]
   [UnitCategory("Sequence/Game/Sound")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="FadeStopSoundSequence"/>.
+  /// </summary>
   public class FadeStopSoundSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _sound_object_input;

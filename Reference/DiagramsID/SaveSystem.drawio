@@ -1,0 +1,91 @@
+<mxfile host="65bd71144e">
+    <diagram id="NL4XnY8xgStqVYodnRyv" name="Page-1">
+        <mxGraphModel dx="651" dy="427" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="&lt;h1&gt;Apa Itu PersistanceContext&lt;/h1&gt;&lt;p&gt;Adalah kelas yang membantu Game dalam membuat Save File. Semua kelas atau Objek bisa membuat datanya sendiri cukup dengan Key dan Value yang dimasukkan untuk save file.&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="120" width="280" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="735" y="120" width="360" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="Isi objek IPersistance" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="805" y="140" width="220" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Key&lt;br&gt;(berupa string)" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="775" y="215" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="Value&lt;br&gt;(isi data berupa string)" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="915" y="215" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="&lt;h1&gt;Bentuk Penggunaan&lt;/h1&gt;&lt;p&gt;Setiap ada objek yang men-trigger PersistanceContext untuk melakukan &quot;Save&quot;, objek tersebut akan memberikan event yang semua objek bisa gunakan untuk menyimpan data mereka.&lt;/p&gt;&lt;p&gt;Kemudian dari kumpulan data tersebut disimpan dalam bentuk file.&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="560" width="260" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="PersistanceContext" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="740" y="500" width="350" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="PlayerController" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="855" y="720" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="" style="endArrow=classic;html=1;exitX=0.492;exitY=0.985;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.48;entryY=-0.021;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="10" target="11" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="1050" y="700" as="sourcePoint"/>
+                        <mxPoint x="1100" y="660" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="13" value="" style="endArrow=classic;html=1;entryX=0.512;entryY=1.017;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.531;exitY=0.017;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="11" target="10" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="1050" y="710" as="sourcePoint"/>
+                        <mxPoint x="1100" y="660" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="14" value="Objek memberikan IPersistance&lt;br&gt;dari data struct nya" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="930" y="590" width="180" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="PlayerController menerima event dari PersistanceContext" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="700" y="660" width="180" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="HealthComponent" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="670" y="900" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="InventoryData" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="1040" y="900" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="" style="endArrow=classic;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.19;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="18" target="11" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="940" y="830" as="sourcePoint"/>
+                        <mxPoint x="990" y="780" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="20" value="" style="endArrow=classic;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.809;exitY=0.009;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="17" target="11" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="1079.1666666666665" y="910" as="sourcePoint"/>
+                        <mxPoint x="955.8333333333335" y="790" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="21" value="PlayerController diberikan IPersistance yang kemudian datanya disimpan di IPersistance PlayerController" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="817.5" y="860" width="195" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="" style="endArrow=classic;html=1;exitX=0.42;exitY=1.009;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="11" target="17" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="940" y="790" as="sourcePoint"/>
+                        <mxPoint x="990" y="740" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="23" value="PlayerController meminta IPersistance" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="720" y="800" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="PlayerController meminta IPersistance" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="980" y="800" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="" style="endArrow=classic;html=1;exitX=0.552;exitY=1.009;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="11" target="18">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="915.3999999999999" y="790.5400000000002" as="sourcePoint"/>
+                        <mxPoint x="770" y="910" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

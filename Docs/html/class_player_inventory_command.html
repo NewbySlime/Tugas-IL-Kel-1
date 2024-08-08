@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: PlayerInventoryCommand Class Reference</title>
+<title>FlavourOfRoemahNusantara: PlayerInventoryCommand Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -99,7 +101,7 @@ $(function(){initNavTree('class_player_inventory_command.html',''); initResizabl
 </div><!--header-->
 <div class="contents">
 
-<p>Komponen untuk menambah fungsi Console. Fungsi yang diberikan adalah memodifikasi Inventory Player. Komponen yang diperlukan:  
+<p>OUTDATED Extension component for <a class="el" href="class_console_u_i_controller.html" title="OUTDATED Class for console feature of the Game, any user can input any available command for testing/...">ConsoleUIController</a> as to handle some commands for player handling.  
  <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for PlayerInventoryCommand:</div>
@@ -111,13 +113,20 @@ Inheritance diagram for PlayerInventoryCommand:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a0f26b41d1435d347bb81c3f4609a477c" id="r_a0f26b41d1435d347bb81c3f4609a477c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0f26b41d1435d347bb81c3f4609a477c">ConsoleHandler_CommandAccept</a> (string[] args)</td></tr>
-<tr class="memdesc:a0f26b41d1435d347bb81c3f4609a477c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk menerima "message" dari ConsoleHandler (<a class="el" href="class_console_u_i_controller.html" title="Ini adalah controller (pengontrol UI) untuk membantu developer yang ingin menggunakan fungsi/mekanik ...">ConsoleUIController</a>).  <br /></td></tr>
+<tr class="memdesc:a0f26b41d1435d347bb81c3f4609a477c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch command message from <a class="el" href="class_console_u_i_controller.html" title="OUTDATED Class for console feature of the Game, any user can input any available command for testing/...">ConsoleUIController</a>.  <br /></td></tr>
 <tr class="separator:a0f26b41d1435d347bb81c3f4609a477c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Komponen untuk menambah fungsi Console. Fungsi yang diberikan adalah memodifikasi Inventory Player. Komponen yang diperlukan: </p>
-<ul>
-<li><a class="el" href="class_console_u_i_controller.html" title="Ini adalah controller (pengontrol UI) untuk membantu developer yang ingin menggunakan fungsi/mekanik ...">ConsoleUIController</a> </li>
+<div class="textblock"><p>OUTDATED Extension component for <a class="el" href="class_console_u_i_controller.html" title="OUTDATED Class for console feature of the Game, any user can input any available command for testing/...">ConsoleUIController</a> as to handle some commands for player handling. </p>
+<p>List of command(s);</p><ul>
+<li><b>[player.addItem [item_id] [item_count]]</b> Command for adding items to player's inventory system. Arguments:<ul>
+<li><b>[item_id]</b> What kind of item to add.</li>
+<li><b>[item_count]</b> How many items to add.</li>
+</ul>
+</li>
+</ul>
+<p>This class uses following component(s);</p><ul>
+<li><a class="el" href="class_console_u_i_controller.html" title="OUTDATED Class for console feature of the Game, any user can input any available command for testing/...">ConsoleUIController</a> for handling command inputs from user. </li>
 </ul>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a0f26b41d1435d347bb81c3f4609a477c" name="a0f26b41d1435d347bb81c3f4609a477c"></a>
@@ -135,10 +144,10 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi untuk menerima "message" dari ConsoleHandler (<a class="el" href="class_console_u_i_controller.html" title="Ini adalah controller (pengontrol UI) untuk membantu developer yang ingin menggunakan fungsi/mekanik ...">ConsoleUIController</a>). </p>
+<p>Function to catch command message from <a class="el" href="class_console_u_i_controller.html" title="OUTDATED Class for console feature of the Game, any user can input any available command for testing/...">ConsoleUIController</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">args</td><td></td></tr>
+    <tr><td class="paramname">args</td><td>User's command input</td></tr>
   </table>
   </dd>
 </dl>

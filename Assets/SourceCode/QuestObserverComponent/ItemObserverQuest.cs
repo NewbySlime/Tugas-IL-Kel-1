@@ -3,12 +3,26 @@ using Unity.VisualScripting;
 using System.Reflection;
 
 
+/// <summary>
+/// Class for creating conditions for continuing a quest by checking how many item the Player has.
+/// 
+/// Required Instantiated Object(s);
+/// - <see cref="ItemDatabase"/> for getting about data of certain Items
+/// - <see cref="GameHandler"/> for using level changed event to refresh the current inventory state
+/// - <see cref="PlayerController"/> with component <see cref="InventoryData"/> as a checking target
+/// </summary>
 public class ItemObserverQuest: MonoBehaviour, IQuestData, IQuestHandler{
+  /// <summary>
+  /// Quest class ID used by <see cref="QuestDatabase"/> for identifying the quest type.
+  /// </summary>
   public const string QuestID = "item_observer";
 
   public event IQuestHandler.QuestUpdated QuestUpdatedEvent;
   public event IQuestHandler.QuestFinished QuestFinishedEvent;
 
+  /// <summary>
+  /// Quest data used for comparing to the current state of Player's Inventory.
+  /// </summary>
   public class QuestData{
     public string ItemID;
     public uint ItemCount;
@@ -155,6 +169,9 @@ public class ItemObserverQuest: MonoBehaviour, IQuestData, IQuestHandler{
 
 
 [UnitCategory("Quest")]
+/// <summary>
+/// An extended <see cref="AddQuest"/> node for quest <see cref="ItemObserverQuest"/>.
+/// </summary>
 public class ItemObserverQuestVS: AddQuest{
   [DoNotSerialize]
   private ValueInput _item_id_input;

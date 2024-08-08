@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: GameRuntimeData Class Reference</title>
+<title>FlavourOfRoemahNusantara: GameRuntimeData Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -98,6 +100,10 @@ $(function(){initNavTree('class_game_runtime_data.html',''); initResizable(); })
   <div class="headertitle"><div class="title">GameRuntimeData Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class used for temporarily storing data in the Game as the data in the scene will be removed when changing scene. This class uses two identifiers for a data, an ID for the data and the type of the data. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_type_data_storage.html" title="Storage class that stores any object based on the type of the data (the data type are for C# Dictiona...">TypeDataStorage</a></dd></dl>
+ 
+ <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for GameRuntimeData:</div>
 <div class="dyncontent">
@@ -107,16 +113,88 @@ Inheritance diagram for GameRuntimeData:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a498c694b388d6b7b70e595f9edc16f1d" id="r_a498c694b388d6b7b70e595f9edc16f1d"><td class="memItemLeft" align="right" valign="top"><a id="a498c694b388d6b7b70e595f9edc16f1d" name="a498c694b388d6b7b70e595f9edc16f1d"></a>
-T?&#160;</td><td class="memItemRight" valign="bottom"><b>GetData&lt; T &gt;</b> (string data_id)</td></tr>
+<tr class="memitem:a498c694b388d6b7b70e595f9edc16f1d" id="r_a498c694b388d6b7b70e595f9edc16f1d"><td class="memItemLeft" align="right" valign="top">T?&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a498c694b388d6b7b70e595f9edc16f1d">GetData&lt; T &gt;</a> (string data_id)</td></tr>
+<tr class="memdesc:a498c694b388d6b7b70e595f9edc16f1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the data stored in this class based on the identifiers. Returns null if the data does not exist.  <br /></td></tr>
 <tr class="separator:a498c694b388d6b7b70e595f9edc16f1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8fcceacfd56b2a1dd3a6cf6705d73b6f" id="r_a8fcceacfd56b2a1dd3a6cf6705d73b6f"><td class="memItemLeft" align="right" valign="top"><a id="a8fcceacfd56b2a1dd3a6cf6705d73b6f" name="a8fcceacfd56b2a1dd3a6cf6705d73b6f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetData&lt; T &gt;</b> (string data_id, T data)</td></tr>
+<tr class="memitem:a8fcceacfd56b2a1dd3a6cf6705d73b6f" id="r_a8fcceacfd56b2a1dd3a6cf6705d73b6f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8fcceacfd56b2a1dd3a6cf6705d73b6f">SetData&lt; T &gt;</a> (string data_id, T data)</td></tr>
+<tr class="memdesc:a8fcceacfd56b2a1dd3a6cf6705d73b6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store a data based on the identifiers. This will replace the existing data with similar identifiers.  <br /></td></tr>
 <tr class="separator:a8fcceacfd56b2a1dd3a6cf6705d73b6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afffa88bed3123c23073e43c52b8e49dd" id="r_afffa88bed3123c23073e43c52b8e49dd"><td class="memItemLeft" align="right" valign="top"><a id="afffa88bed3123c23073e43c52b8e49dd" name="afffa88bed3123c23073e43c52b8e49dd"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ClearData</b> ()</td></tr>
+<tr class="memdesc:afffa88bed3123c23073e43c52b8e49dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all data stored in this class. <br /></td></tr>
 <tr class="separator:afffa88bed3123c23073e43c52b8e49dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class used for temporarily storing data in the Game as the data in the scene will be removed when changing scene. This class uses two identifiers for a data, an ID for the data and the type of the data. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_type_data_storage.html" title="Storage class that stores any object based on the type of the data (the data type are for C# Dictiona...">TypeDataStorage</a></dd></dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a498c694b388d6b7b70e595f9edc16f1d" name="a498c694b388d6b7b70e595f9edc16f1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a498c694b388d6b7b70e595f9edc16f1d">&#9670;&#160;</a></span>GetData&lt; T &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">T? GameRuntimeData.GetData&lt; T &gt; </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>data_id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the data stored in this class based on the identifiers. Returns null if the data does not exist. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data_id</td><td>ID of the data</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of the data</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The data stored</dd></dl>
+
+</div>
+</div>
+<a id="a8fcceacfd56b2a1dd3a6cf6705d73b6f" name="a8fcceacfd56b2a1dd3a6cf6705d73b6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fcceacfd56b2a1dd3a6cf6705d73b6f">&#9670;&#160;</a></span>SetData&lt; T &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameRuntimeData.SetData&lt; T &gt; </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>data_id</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Store a data based on the identifiers. This will replace the existing data with similar identifiers. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data_id</td><td>ID for the data</td></tr>
+    <tr><td class="paramname">data</td><td>Type of the data</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Assets/SourceCode/<b>GameRuntimeData.cs</b></li>
 </ul>

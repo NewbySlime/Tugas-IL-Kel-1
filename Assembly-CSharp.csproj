@@ -90,7 +90,6 @@
     <Compile Include="Assets\SourceCode\SequenceInterface.cs" />
     <Compile Include="Assets\SourceCode\UI\BattleBarUI.cs" />
     <Compile Include="Assets\SourceCode\LookAtToRotation.cs" />
-    <Compile Include="Assets\SourceCode\AudioManager.cs" />
     <Compile Include="Assets\SourceCode\SequenceHelper\Timing\TimerSequence.cs" />
     <Compile Include="Assets\SourceCode\VisualScript\ScenarioHandlerVS.cs" />
     <Compile Include="Assets\SourceCode\UI\SplashScreenUI.cs" />
@@ -104,7 +103,6 @@
     <Compile Include="Assets\SourceCode\ObjectSpawner.cs" />
     <Compile Include="Assets\SourceCode\CharacterSpriteData.cs" />
     <Compile Include="Assets\SourceCode\ItemPickerComponent.cs" />
-    <Compile Include="Assets\SourceCode\SequenceHelper\Audio\TriggerAudioSourceSequence.cs" />
     <Compile Include="Assets\SourceCode\Effects\BaseVisual\SpriteMaterialReference.cs" />
     <Compile Include="Assets\SourceCode\LevelTeleportHandler.cs" />
     <Compile Include="Assets\SourceCode\SequenceHelper\Game\Spawner\TriggerSpawnSequence.cs" />
@@ -112,11 +110,8 @@
     <Compile Include="Assets\SourceCode\Effects\Vital\RecoveryEffect.cs" />
     <Compile Include="Assets\SourceCode\Effects\EnabledTrigger\IEnableTrigger.cs" />
     <Compile Include="Assets\SourceCode\SequenceHelper\Persistance\TriggerSaveSequence.cs" />
-    <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\AotStubs.cs" />
     <Compile Include="Assets\SourceCode\SequenceHelper\PlayerHandling\SetPlayerConfigSequence.cs" />
-    <Compile Include="Assets\SourceCode\UI\MainGameHandlerUI.cs" />
     <Compile Include="Assets\SourceCode\UI\GridLayoutResizer.cs" />
-    <Compile Include="Assets\SourceCode\UI\GameSettingsHandlerUI.cs" />
     <Compile Include="Assets\SourceCode\InventoryData.cs" />
     <Compile Include="Assets\SourceCode\UI\PromptUI.cs" />
     <Compile Include="Assets\SourceCode\ItemHealData.cs" />
@@ -138,7 +133,6 @@
     <Compile Include="Assets\SourceCode\Effects\BaseVisual\IMaterialReference.cs" />
     <Compile Include="Assets\SourceCode\RecipeDiscoveryComponent.cs" />
     <Compile Include="Assets\SourceCode\UI\HealthBarUI.cs" />
-    <Compile Include="Assets\SourceCode\VisualScript\InputFocusContext.cs" />
     <Compile Include="Assets\SourceCode\MiniGameHandler.cs" />
     <Compile Include="Assets\SourceCode\UI\MainMenuUI.cs" />
     <Compile Include="Assets\SourceCode\Interactable\CookingInteraction.cs" />
@@ -159,11 +153,8 @@
     <Compile Include="Assets\SourceCode\UI\ButtonBaseUI.cs" />
     <Compile Include="Assets\SourceCode\SequenceHelper\ObjectHandling\SetObjectActiveSequence.cs" />
     <Compile Include="Assets\SourceCode\UI\GameOverUI.cs" />
-    <Compile Include="Assets\SourceCode\UI\HurtUI.cs" />
     <Compile Include="Assets\SourceCode\SequenceHelper\Game\MoveController\SetMovementConfigSequence.cs" />
-    <Compile Include="Assets\SourceCode\ItemInstance.cs" />
     <Compile Include="Assets\SourceCode\SequenceHelper\Game\MoveController\SetLookAtSequence.cs" />
-    <Compile Include="Assets\SourceCode\SequenceHelper\Game\Inventory\RemoveItemFromInventorySequence.cs" />
     <Compile Include="Assets\SourceCode\UI\ConsoleUIController.cs" />
     <Compile Include="Assets\SourceCode\ObjectUtility.cs" />
     <Compile Include="Assets\SourceCode\Effects\Vital\DamagedEffect.cs" />
@@ -197,8 +188,10 @@
     <Compile Include="Assets\SourceCode\ItemMetadata.cs" />
     <Compile Include="Assets\SourceCode\PlayerInventoryCommand.cs" />
     <Compile Include="Assets\SourceCode\TestThrower.cs" />
+    <Compile Include="Assets\SourceCode\SequenceHelper\Documentation.cs" />
     <Compile Include="Assets\SourceCode\SequenceHelper\ObjectHandling\FlipObjectSequence.cs" />
     <Compile Include="Assets\SourceCode\UI\ChooseRecipeListUI.cs" />
+    <Compile Include="Assets\SourceCode\Patrolling\Documentation.cs" />
     <Compile Include="Assets\SourceCode\TestBreakableObject.cs" />
     <Compile Include="Assets\SourceCode\ItemTextureData.cs" />
     <Compile Include="Assets\SourceCode\IObjectInitialized.cs" />
@@ -224,7 +217,7 @@
     <Compile Include="Assets\SourceCode\SequenceHelper\Input\RemoveInputFocusSequence.cs" />
     <Compile Include="Assets\SourceCode\GameRuntimeData.cs" />
     <Compile Include="Assets\SourceCode\SequenceHelper\Timing\SetPeriodTimeSequence.cs" />
-    <Compile Include="Assets\SourceCode\SequenceHelper\Game\Inventory\AddItemToInventorySequence.cs" />
+    <Compile Include="Assets\SourceCode\InputFocusContext.cs" />
     <Compile Include="Assets\SourceCode\CharacterMetadata.cs" />
     <Compile Include="Assets\SourceCode\MathExtended.cs" />
     <Compile Include="Assets\SourceCode\SequenceHelper\Scene\SceneSequenceTrigger.cs" />
@@ -252,7 +245,6 @@
     <Compile Include="Assets\SourceCode\UI\RecipeBookUI.cs" />
     <Compile Include="Assets\SourceCode\GameTimeHandler.cs" />
     <Compile Include="Assets\SourceCode\TypeDataStorage.cs" />
-    <Compile Include="Assets\SourceCode\SequenceHelper\Audio\TriggerAudioSourceSequence copy.cs" />
     <Compile Include="Assets\SourceCode\Patrolling\LookAtDirection.cs" />
     <Compile Include="Assets\SourceCode\DEBUGModeUtils.cs" />
     <Compile Include="Assets\SourceCode\CookerComponent.cs" />
@@ -304,7 +296,7 @@
     <Compile Include="Assets\SourceCode\UI\PlayerHUDUI.cs" />
     <Compile Include="Assets\SourceCode\MouseFollower.cs" />
     <Compile Include="Assets\SourceCode\Effects\Vital\HealedEffect.cs" />
-    <Compile Include="Assets\SourceCode\UI\TextButtonUI.cs" />
+    <Compile Include="Assets\SourceCode\Testing\Documentation.cs" />
     <Compile Include="Assets\SourceCode\MovementController.cs" />
     <Compile Include="Assets\SourceCode\SequenceHelper\UI\SetMainUIMode.cs" />
     <Compile Include="Assets\SourceCode\FollowerBehaviour.cs" />
@@ -322,6 +314,7 @@
     <None Include="Assets\Resources\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\Resources\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Resources\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\Resources\Resource\Cutscenes\IMPORTANT.txt" />
     <None Include="Assets\Resources\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\Resources\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Resources\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />

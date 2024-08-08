@@ -3,6 +3,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
+/// <summary>
+/// Extended <see cref="CheckpointHandler"/> object for triggering teleportation between level/scene when an object has entered its area.
+/// For further explanation, see <b>Reference/Diagrams/SceneData.drawio</b>
+/// </summary>
 public class LevelTeleportHandler: CheckpointHandler{
   [SerializeField]
   private string _ChangeSceneID;
@@ -10,7 +14,9 @@ public class LevelTeleportHandler: CheckpointHandler{
   [SerializeField]
   private string _ArriveSceneID;
 
-
+  /// <summary>
+  /// Should this object trigger changing scene when <see cref="PlayerController"/> has entered.
+  /// </summary>
   protected bool _TriggerChangeSceneOnEnter = false;
 
 
@@ -79,15 +85,26 @@ public class LevelTeleportHandler: CheckpointHandler{
   }
 
 
+  /// <summary>
+  /// Get ID for which scene to change scene to.
+  /// </summary>
+  /// <returns>The Scene ID</returns>
   public string GetChangeSceneID(){
     return _ChangeSceneID;
   }
 
+  /// <summary>
+  /// Get ID for which scene to arrive from what scene.
+  /// </summary>
+  /// <returns>The Scene ID</returns>
   public string GetArriveSceneID(){
     return _ArriveSceneID;
   }
 
 
+  /// <summary>
+  /// Trigger teleportation to target scene defined in this class.
+  /// </summary>
   public void TriggerTeleport(){
     _GameHandler.ChangeScene(_ChangeSceneID);
   }

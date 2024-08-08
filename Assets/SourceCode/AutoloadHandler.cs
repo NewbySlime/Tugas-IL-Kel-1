@@ -4,14 +4,17 @@ using UnityEngine;
 
 
 /// <summary>
-/// Ini adalah komponen untuk secara otomatis membuat semua Prefab yang ada di folder yang di register.
-/// NOTE: Setidaknya ada satu GameObject yang menggunakan AutoloadHandler agar bekerja
+/// Component for automatically creating (if not yet created) autoload objects (Prefabs) using Prefabs in a fixed folder path.
+/// NOTE: a scene should have one object that has this component in order for completed Game function (even with the entry-point scene has it, a developer might go into DEBUG context and runs a random scene).
 /// </summary>
 public class AutoloadHandler : MonoBehaviour{
+  /// <summary>
+  /// A static variable to let any <see cref="AutoloadHandler"/> object know that the autoload objects has been created.
+  /// </summary>
   static private bool _is_initialized = false;
 
   /// <summary>
-  /// List folder teregister untuk autoload
+  /// Path to a folder containing prefabs of autoload objects in Resources folder.
   /// </summary>
   static private string autoload_prefab_folder = "Scenes/AutoloadObject";
 

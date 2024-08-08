@@ -8,7 +8,17 @@ using UnityEngine.UI;
 
 
 /// <summary>
-/// Ini adalah controller (pengontrol UI) untuk membantu developer yang ingin menggunakan fungsi/mekanik game tanpa harus "trigger" yang menyebabkan mekanik itu terjadi.
+/// OUTDATED
+/// Class for console feature of the Game, any user can input any available command for testing/debugging purpose.
+/// 
+/// This class uses external component(s);
+/// - <b>Unity's TMP Text UI</b> for both command input and console/debug log data.
+/// - Wrapper <b>GameObject</b> containing all UI elements for the console.
+/// 
+/// This class uses following autoload(s);
+/// - <see cref="InputFocusContext"/> for asking focus for using input.
+/// 
+/// NOTE: only works in DEBUG context. 
 /// </summary>
 public class ConsoleUIController: MonoBehaviour, ISelectHandler, IDeselectHandler{
   [SerializeField]
@@ -31,10 +41,10 @@ public class ConsoleUIController: MonoBehaviour, ISelectHandler, IDeselectHandle
 
   
   /// <summary>
-  /// Fungsi untuk memisahkan kalimat menjadi kumpulan kata-kata.
+  /// Function to split a sentence into array of word.
   /// </summary>
-  /// <param name="command">Kalimat yang ingin diproses</param>
-  /// <returns>Kumpulan kata-kata yang sudah diproses</returns>
+  /// <param name="command">Sentence to be processed</param>
+  /// <returns>Resulting array of word</returns>
   private string[] _SplitCommandString(string command){
     string[] _splits = command.Split(' ');
     string[] _results = new string[0];
@@ -75,7 +85,7 @@ public class ConsoleUIController: MonoBehaviour, ISelectHandler, IDeselectHandle
 
   
   /// <summary>
-  /// Fungsi untuk mengupdate TextBox pada bagian Command.
+  /// Function to update the UI.
   /// </summary>
   private void _UpdateCommandText(){
     _CommandText.text = string.Format(_command_format, _current_line);
@@ -83,9 +93,9 @@ public class ConsoleUIController: MonoBehaviour, ISelectHandler, IDeselectHandle
 
 
   /// <summary>
-  /// Untuk mengaktifkan atau sebaliknya fungsi-fungsi yang terkait pada GameObject ini.
+  /// Function to enable the console.
   /// </summary>
-  /// <param name="enable">Apakah aktif?</param>
+  /// <param name="enable">Flag for enabling/showing the console</param>
   private void _SetEnable(bool enable){
     _WrapperContent.SetActive(enable);
     _selectable.interactable = enable;
@@ -93,6 +103,7 @@ public class ConsoleUIController: MonoBehaviour, ISelectHandler, IDeselectHandle
 
 
   public void Start(){
+#if DEBUG
     _input_context = FindObjectOfType<InputFocusContext>();
     _selectable = GetComponent<Selectable>();
 
@@ -100,9 +111,12 @@ public class ConsoleUIController: MonoBehaviour, ISelectHandler, IDeselectHandle
     ToggleConsole();
 
     _UpdateCommandText();
+#endif // DEBUG
   }
 
   public void Update(){
+#if DEBUG
+    // brief explanation: every input key supplied from Unity's input system passed per character to be processed as a sentence.
     if(_is_selected){
       foreach(char c in Input.inputString){
         if(c == '\b' && _current_line.Length > 0)
@@ -118,60 +132,70 @@ public class ConsoleUIController: MonoBehaviour, ISelectHandler, IDeselectHandle
       if(Input.inputString.Length > 0)
         _UpdateCommandText();
     }
+#endif // DEBUG
   }
 
 
   /// <summary>
-  /// Fungsi untuk toggle (state menjadi sebaliknya) Console.
+  /// Function to show/hide the console by toggling.
   /// </summary>
   public void ToggleConsole(){
+#if DEBUG
     _console_toggled = !_console_toggled;
     _SetEnable(_console_toggled);
 
     if(!_console_toggled){
       OnDeselect(null);
     }
+#endif // DEBUG
   }
 
 
   /// <summary>
-  /// Fungsi untuk memberikan Command ke komponen lainnya yang mengggunakan fungsi console.
+  /// Function to process the command supplied.
   /// </summary>
-  /// <param name="command">Command yang mau dijalankan kepada Game</param>
+  /// <param name="command">The command sentence</param>
   public void SendCommand(string command){
+#if DEBUG
     DEBUGModeUtils.Log(string.Format("command: {0}", command));
     string[] _command_split = _SplitCommandString(command);
     DEBUGModeUtils.Log(_command_split.Length);
     gameObject.SendMessage("ConsoleHandler_CommandAccept", _command_split,  SendMessageOptions.DontRequireReceiver);
+#endif // DEBUG
   }
 
-
   /// <summary>
-  /// Ke-trigger ketika panel "Console" diselect (dipilih/dipencet).
+  /// To catch the Unity's "UI focus" event.
   /// </summary>
-  /// <param name="_event_data">Data event dari Unity</param>
+  /// <param name="_event_data">Event data from Unity</param>
   public void OnSelect(BaseEventData _event_data){
+#if DEBUG
     _is_selected = true;
     _input_context.RegisterInputObject(this, InputFocusContext.ContextEnum.UI);
+#endif // DEBUG
   }
 
 
   /// <summary>
-  /// Ke-trigger ketika panel "Console" di-deselect (Tidak di fokuskan ke panel tersebut).
+  /// To catch the Unity's "UI unfocus" event.
   /// </summary>
-  /// <param name="_event_data">Data event dari Unity</param>
+  /// <param name="_event_data">Event data from Unity</param>
   public void OnDeselect(BaseEventData _event_data){
+#if DEBUG
     _is_selected = false;
     _input_context.RemoveInputObject(this, InputFocusContext.ContextEnum.UI);
+#endif // DEBUG
   }
 
 
   /// <summary>
-  /// Ke-trigger dari Input "ConsoleTrigger" 
+  /// To catch Unity's input event for "ConsoleToggle" key input.
   /// </summary>
-  /// <param name="value">Data event dari Unity</param>
+  /// <param name="value">Unity's input data</param>
   public void OnConsoleToggle(InputValue value){
+#if DEBUG
     if(value.isPressed)
       ToggleConsole();
+#endif // DEBUG
   }
 }

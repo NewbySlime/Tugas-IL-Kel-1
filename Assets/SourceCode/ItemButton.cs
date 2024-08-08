@@ -4,11 +4,15 @@ using UnityEngine.EventSystems;
 
 
 /// <summary>
-/// Komponen untuk mengontrol tombol dan memproses jika komponen ini di "bind" dengan Item pada Inventory.
+/// OUTDATED This UI class handles button interaction with using certain item to bind and be associated with.
+/// 
+/// This class uses external component(s);
+/// - Target <b>Unity's MaskableGraphics</b> for displaying the Image of the associated item.
+/// - <b>Unity's TMP Text UI</b> for displaying item count for the associated item.
 /// </summary>
 public class ItemButton: MonoBehaviour, IPointerClickHandler{
   /// <summary>
-  /// Event jika tombol pada GameObject ini dipencet.
+  /// Event for when this button has been pressed. This event will tells the listener the item ID associated with the button.
   /// </summary>
   public event OnButtonPressed OnButtonPressedEvent;
   public delegate void OnButtonPressed(string item_id);
@@ -25,9 +29,9 @@ public class ItemButton: MonoBehaviour, IPointerClickHandler{
   
   #nullable enable
   /// <summary>
-  /// Fungsi untuk menyiapkan Item ID pada Komponen ini. 
+  /// Bind an item to this button by ID.
   /// </summary>
-  /// <param name="item_id">ID Item yang mau di-set</param>
+  /// <param name="item_id">The target item ID</param>
   public void SetItem(string item_id){
     ItemDatabase _item_database = FindAnyObjectByType<ItemDatabase>();
     TypeDataStorage? _item_data = _item_database.GetItemData(item_id);
@@ -50,9 +54,9 @@ public class ItemButton: MonoBehaviour, IPointerClickHandler{
 
 
   /// <summary>
-  /// Fungsi untuk memberikan info tentang berapa banyak Item yang terkait di komponen ini.
+  /// Set the item count to display.
   /// </summary>
-  /// <param name="count">Berapa banyak Item yang ada</param>
+  /// <param name="count">The item count</param>
   public void SetItemCount(uint count){
     if(count == 1)
       _ItemCount.text = "";
@@ -61,11 +65,10 @@ public class ItemButton: MonoBehaviour, IPointerClickHandler{
   }
 
 
-
   /// <summary>
-  /// Ke-trigger jika GameObject ini diklik
+  /// Function to catch "clicked" event from <b>IPointerClickHandler</b>.
   /// </summary>
-  /// <param name="_event_data">Event data dari Unity</param>
+  /// <param name="_event_data">The event data</param>
   public void OnPointerClick(PointerEventData _event_data){
     OnButtonPressedEvent?.Invoke(_item_id);
   }

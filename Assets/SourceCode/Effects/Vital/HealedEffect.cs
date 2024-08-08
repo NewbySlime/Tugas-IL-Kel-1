@@ -3,6 +3,12 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(HealthComponent))]
+/// <summary>
+/// An extended <see cref="HealthComponent"/> feature that will give visual feedback to the object when the used character are "healed".
+/// 
+/// This class uses Component(s);
+/// - <b>SpriteRenderer</b> The target renderer to manipulate the visual.
+/// </summary>
 public class HealedEffect: MonoBehaviour{
   [SerializeField]
   private SpriteRenderer _TargetSpriteManipulation;
@@ -17,6 +23,10 @@ public class HealedEffect: MonoBehaviour{
   public float TimeEffect;
 
 
+  /// <summary>
+  /// Coroutine function that handles "healed" effect lifetime.
+  /// </summary>
+  /// <returns>Coroutine helper object</returns>
   private IEnumerator _on_healed(){
     float _timer = TimeEffect;
     while(_timer > 0){
@@ -31,6 +41,10 @@ public class HealedEffect: MonoBehaviour{
     _on_effect_finished();
   }
 
+  /// <summary>
+  /// Resets everything to a finished state to completely to make sure that everything is in finished state.
+  /// This is used when the effect is finished or an actor wants to cancel the effect.
+  /// </summary>
   private void _on_effect_finished(){
     _TargetSpriteManipulation.material.SetColor("_ColorAdditiveAfter", new Color(0,0,0,0));
 
@@ -57,6 +71,9 @@ public class HealedEffect: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Function used to stop the ongoing effect.
+  /// </summary>
   public void CancelEffect(){
     if(_effect_coroutine == null)
       return;

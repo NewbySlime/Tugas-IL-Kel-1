@@ -2,6 +2,11 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(Rigidbody2D))]
+/// <summary>
+/// TODO: next feature
+/// Component for making the object to become pickable item for <see cref="PickableObjectPickerHandler"/>.
+/// The difference between CollectibleComponent and this future class is to make the actor can pickup an object that cannot be collected.
+/// </summary>
 public class PickableObject: MonoBehaviour{
   private Rigidbody2D _rigidbody;
 

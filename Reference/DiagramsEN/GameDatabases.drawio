@@ -1,0 +1,92 @@
+<mxfile host="65bd71144e">
+    <diagram id="ATtf1RYG8toDPdy8yNsT" name="Page-1">
+        <mxGraphModel dx="1139" dy="747" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="24" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="470" y="620" width="380" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="&lt;h1&gt;Database&lt;/h1&gt;&lt;p&gt;Object used in the Game for storing datas that already defined by the developer. From the datas that are defined in developing phase, database objects will prep the data for use in the Game.&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="90" y="70" width="210" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="&lt;h1&gt;Prefab - Object's Data&lt;/h1&gt;&lt;p&gt;Databases using this system will fetch prefabs that contains the data about an object. After instanced objects' (from prefabs) data are fetched, the objects will be instantly destroyed.&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="90" y="310" width="250" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="&lt;h1&gt;From Level's Objects&lt;/h1&gt;&lt;p&gt;Database using this system will fetch all objects existed in a level with certain type related to the database. The fetched objects will be used as data.&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="560" y="310" width="220" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Database" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="225" y="490" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Prefab" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="75" y="700" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="6" target="5" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="475" y="630" as="sourcePoint"/>
+                        <mxPoint x="525" y="580" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="8" value="" style="endArrow=classic;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" parent="1" source="5" target="9" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="475" y="630" as="sourcePoint"/>
+                        <mxPoint x="525" y="580" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="9" value="Game Object" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="230" y="700" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="" style="endArrow=classic;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;curved=1;" parent="1" source="6" target="9" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="400" y="630" as="sourcePoint"/>
+                        <mxPoint x="450" y="580" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="165" y="680"/>
+                            <mxPoint x="260" y="680"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="13" value="Fetch Prefab File" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="120" y="590" width="80" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="Instantiate the prefab object" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="215" y="640" width="75" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="Takes the data from instanced object" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="560" width="100" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="Database" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="600" y="490" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="Game Object 1" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="680" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="Game Object 2" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="690" y="680" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="" style="endArrow=classic;html=1;curved=1;startArrow=classic;startFill=1;" parent="1" source="17" target="18" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="690" y="530" as="sourcePoint"/>
+                        <mxPoint x="430" y="510" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="21" value="" style="endArrow=classic;html=1;curved=1;startArrow=classic;startFill=1;" parent="1" source="17" target="19" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="661.578947368421" y="560" as="sourcePoint"/>
+                        <mxPoint x="603.421052631579" y="690" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="22" value="Fetch Data from Objects" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="530" y="560" width="100" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="Related Objects can use Database functions" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="490" y="640" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="Scene/Level" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="770" y="620" width="80" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

@@ -4,6 +4,9 @@ using Unity.VisualScripting;
 
 [UnitTitle("Add Character")]
 [UnitCategory("Dialogue/DialogueCharacterUI")]
+/// <summary>
+/// Extended <see cref="DialogueCharacterUI_DataInterface"/> Node for giving instruction to adding character for this part of dialogue data to <see cref="DialogueCharacterUI"/>.
+/// </summary>
 public class AddTalkingCharacter: DialogueCharacterUI_DataInterface{
   [DoNotSerialize]
   private ValueInput _character_id_input;

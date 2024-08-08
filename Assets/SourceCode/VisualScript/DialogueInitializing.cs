@@ -6,6 +6,11 @@ using System.Collections.Generic;
 
 [UnitTitle("Add Dialogue")]
 [UnitCategory("Dialogue")]
+/// <summary>
+/// Custom Visual Scripting node for adding dialogue data to <see cref="DialogueUI.DialogueSequence"/> supplied by input.
+/// This node also gives the functionality to add highlighted characters for this part of dialogue.
+/// And since each dialogue part has sequence data, that certain part can be inputted by using <see cref="CreateWIOSequence"/>.
+/// </summary>
 public class AddDialogue: Unit{
   [DoNotSerialize]
   private ControlInput _input_flow;
@@ -70,6 +75,9 @@ public class AddDialogue: Unit{
 
 [UnitTitle("Set Dialogue")]
 [UnitCategory("Dialogue")]
+/// <summary>
+/// Node to set the resulting (input) <see cref="DialogueUI.DialogueData"/> to the target object that will handle the data using interface function <b>DialogueData_SetInitData</b>.
+/// </summary>
 public class SetDialogueToGameObject: Unit{
   [DoNotSerialize]
   private ControlInput _input_flow;
@@ -102,6 +110,9 @@ public class SetDialogueToGameObject: Unit{
 
 [UnitTitle("Add Extended Dialogue")]
 [UnitCategory("Dialogue/.interface")]
+/// <summary>
+/// Interface Node that can be used/inherited for adding extended/custom data to part of <see cref="DialogueUI.DialogueData"/>.
+/// </summary>
 public class AddExtendedDialogueData: Unit{
   [DoNotSerialize]
   private ControlInput _input_flow;
@@ -115,6 +126,11 @@ public class AddExtendedDialogueData: Unit{
 
   private DialogueUI.DialogueSequence _dialogue_sequence;
 
+  /// <summary>
+  /// Virtual function to set or add extended/custom data by inheriting node class to the supplied <see cref="DialogueUI.DialogueData"/>.
+  /// </summary>
+  /// <param name="flow">The Visual Scripting flow</param>
+  /// <param name="data">The supplied part of dialogue data</param>
   protected virtual void SetExtendedData(Flow flow, DialogueUI.DialogueData data){}
 
   protected override void Definition(){

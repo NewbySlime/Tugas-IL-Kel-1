@@ -3,11 +3,27 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system that force <see cref="MovementController"/> to look at a determined direction.
+  /// </summary>
   public class SetLookAtSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "set_look_at";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target object that has <see cref="MovementController"/>.
+      /// </summary>
       public ObjectReference.ObjRefID TargetControllerRef;
+
+      /// <summary>
+      /// The direction the <see cref="MovementController"/> has to look at.
+      /// </summary>
       public Vector2 LookAt;
     }
 
@@ -53,6 +69,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Set Look At")]
   [UnitCategory("Sequence/Game/MovementController")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="SetLookAtSequence"/>.
+  /// </summary>
   public class SetLookAtSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _target_obj_ref_input;

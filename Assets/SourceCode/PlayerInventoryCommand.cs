@@ -3,23 +3,32 @@ using UnityEngine;
 
 
 
+[RequireComponent(typeof(ConsoleUIController))]
 /// <summary>
-/// Komponen untuk menambah fungsi Console. Fungsi yang diberikan adalah memodifikasi Inventory Player.
-/// Komponen yang diperlukan:
-///   - ConsoleUIController
+/// OUTDATED
+/// Extension component for <see cref="ConsoleUIController"/> as to handle some commands for player handling.
+/// 
+/// List of command(s);
+/// - <b>[player.addItem [item_id] [item_count]]</b>
+///   Command for adding items to player's inventory system.
+///   Arguments:
+///   - <b>[item_id]</b> What kind of item to add.
+///   - <b>[item_count]</b> How many items to add.
+/// 
+/// This class uses following component(s);
+/// - <see cref="ConsoleUIController"/> for handling command inputs from user.
 /// </summary>
 public class PlayerInventoryCommand: MonoBehaviour{
-  
   /// <summary>
-  /// Fungsi untuk menerima "message" dari ConsoleHandler (ConsoleUIController).
+  /// Function to catch command message from <see cref="ConsoleUIController"/>.
   /// </summary>
-  /// <param name="args"></param>
+  /// <param name="args">User's command input</param>
   public void ConsoleHandler_CommandAccept(string[] args){
     if(args.Length <= 0)
       return;
 
     switch(args[0]){
-      // Command untuk menambahkan Item ke Inventory Player
+      // Add an item to player's inventory system.
       case "player.addItem":{
         if(args.Length <= 1){
 

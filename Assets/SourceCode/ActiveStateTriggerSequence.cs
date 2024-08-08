@@ -2,6 +2,12 @@ using System.Collections;
 using UnityEngine;
 
 
+/// <summary>
+/// Extended <see cref="SequenceHandlerVS"/> component for utilizing Unity's "Enabling" event to trigger sequence stored in the base class.
+/// 
+/// This class uses autoload(s);
+/// - <see cref="GameHandler"/> for game events and such.
+/// </summary>
 public class ActiveStateTriggerSequence: SequenceHandlerVS{
   [SerializeField]
   private bool _TriggerOnlyOnce;
@@ -22,6 +28,7 @@ public class ActiveStateTriggerSequence: SequenceHandlerVS{
     StartTriggerAsync();
   }
 
+  // Bridging function to _trigger_sequence_co_func 
   private void _trigger_sequence(){
     if(!gameObject.activeInHierarchy || _game_handler == null || !_game_handler.SceneInitialized || (_TriggerOnlyOnce && _already_triggered))
       return;
@@ -32,6 +39,7 @@ public class ActiveStateTriggerSequence: SequenceHandlerVS{
   }
 
 
+  // Coroutine for "OnEnable" event but it will wait until next update for safe triggering.
   private IEnumerator _on_enable(){
     yield return null;
     yield return new WaitForEndOfFrame(); 
@@ -72,6 +80,9 @@ public class ActiveStateTriggerSequence: SequenceHandlerVS{
   }
 
 
+  /// <summary>
+  /// Function to catch Unity's "Enabled" event.
+  /// </summary>
   public void OnEnable(){
     StartCoroutine(_on_enable());
   }

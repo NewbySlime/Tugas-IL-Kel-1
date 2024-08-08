@@ -11,34 +11,94 @@ using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 
+/// <summary>
+/// Class that will handle both multi-character dialogue by also showing which character is talking.
+/// 
+/// This class uses external component(s);
+/// - <see cref="DialogueUI"/> base class used for handling dialogues.
+/// - <b>Unity's TMP Text UI</b> for displaying character names.
+/// 
+/// This class uses prefab(s);
+/// - Prefab for showing characters image using <see cref="CharacterFocusUI"/>.
+/// - Prefab for handling sequencing (<see cref="SequenceHandlerVS"/>).
+/// 
+/// This class uses following autoload(s);
+/// - <see cref="CharacterDatabase"/> for getting character data.
+/// - <see cref="InputFocusContext"/> for asking focus for using input.
+/// </summary>
 public class DialogueCharacterUI: MonoBehaviour{
+  /// <summary>
+  /// Extended data for <see cref="DialogueUI.DialogueData"/>.
+  /// </summary>
   public class ExtendedDialogue{
+    /// <summary>
+    /// Data of certain character to be included when the next dialogue started.
+    /// It will retain for next dialouges until it prompted to be removed or when <see cref="DialogueCharacterUI"/> started a new dialogue.
+    /// </summary>
     public struct CharacterInitData{
+      /// <summary>
+      /// The character's ID.
+      /// </summary>
       public string CharacterID;
+      
+      /// <summary>
+      /// At what position of the dialogue UI the character will be put.
+      /// </summary>
       public ShowLayoutPosition UIPosition;
     }
 
+    /// <summary>
+    /// Data of certain character to be removed when the next dialogue started.
+    /// </summary>
     public struct CharacterRemoveData{
+      /// <summary>
+      /// The character's ID.
+      /// </summary>
       public string CharacterID;
+
+      /// <summary>
+      /// Should the object skip the "hiding" animation.
+      /// </summary>
       public bool SkipAnimation;
     }
 
+    /// <summary>
+    /// List of <see cref="CharacterInitData"/>.
+    /// </summary>
+    /// <returns></returns>
     public List<CharacterInitData> AddedCharacters = new();
+
+    /// <summary>
+    /// List of <see cref="CharacterRemoveData"/>.
+    /// </summary>
+    /// <returns></returns>
     public List<CharacterRemoveData> RemovedCharacters = new();
   }
 
+  /// <summary>
+  /// Enum to tell apart of certain position of the dialogue UI.
+  /// Note for the enum:
+  /// - <b>Main</b> is the left part of the UI.
+  /// - <b>Secondary</b> is the right part of the UI. 
+  /// </summary>
   public enum ShowLayoutPosition{
     Main,
     Secondary
   }
 
+  /// <summary>
+  /// The reference representation of the single scene instance of the object.
+  /// </summary>
   public static ObjectReference.ObjRefID ObjectRef = new(){
     ID = "dialogue_character_ui"
   };
 
+  /// <summary>
+  /// The object's context for input focus.
+  /// </summary>
   public static InputFocusContext.ContextEnum InputContext = InputFocusContext.ContextEnum.UI;
 
-
+  // Data for list of characters included in the dialogue.
   private class _show_character_data{
     public CharacterFocusUI character_ui;
     public ShowLayoutPosition position;
@@ -75,8 +135,6 @@ public class DialogueCharacterUI: MonoBehaviour{
 
   private Dictionary<string, _show_character_data> _character_ui_instance_list = new();
 
-  private GameTimeHandler _time_handler;
-
   private InputFocusContext _input_context;
   private CharacterDatabase _character_database;
 
@@ -86,6 +144,10 @@ public class DialogueCharacterUI: MonoBehaviour{
   private bool _next_dialogue_flag = false;
 
 
+  /// <summary>
+  /// Function to hide some of the characters when the characters shown exceed the maximum number to be shown.
+  /// </summary>
+  /// <param name="target_parent">The object that has <see cref="CharacterFocusUI"/></param>
   private void _check_max_character_show_parallel(GameObject target_parent){
     int _c_idx = 0;
     for(int i = target_parent.transform.childCount-1; i >= 0; i--){
@@ -111,6 +173,12 @@ public class DialogueCharacterUI: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// String helper for appending character names.
+  /// </summary>
+  /// <param name="character_name">The name of the character</param>
+  /// <param name="before_list">The current list of appended names</param>
+  /// <returns></returns>
   private string _add_character_name(string character_name, string before_list){
     if(before_list.Length > 0)
       before_list += ", ";
@@ -119,25 +187,6 @@ public class DialogueCharacterUI: MonoBehaviour{
     return before_list;
   }
 
-
-  private IEnumerator _character_remove(string character_id, bool skip_animation = false){
-    if(!_character_ui_instance_list.ContainsKey(character_id))
-      yield break;
-
-    _show_character_data _data = _character_ui_instance_list[character_id];
-    _character_ui_instance_list.Remove(character_id);
-    if(_data.character_ui == null)
-      yield break;
-
-    FadeUI _fadeui = _data.character_ui.GetComponent<FadeUI>();
-    if(!skip_animation && _fadeui != null){
-      _fadeui.FadeToCover = false;
-      _fadeui.StartTimerAsync();
-      yield return new WaitUntil(_fadeui.TimerFinished);
-    }
-
-    Destroy(_data.character_ui.gameObject);
-  }
 
   private void _character_unfocus_all(){
     foreach(_show_character_data _data in _character_ui_instance_list.Values){
@@ -149,6 +198,13 @@ public class DialogueCharacterUI: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// To create/include a character based on <see cref="ExtendedDialogue.CharacterInitData"/> data.
+  /// </summary>
+  /// <param name="position">The part of the UI</param>
+  /// <param name="character_id">The character's ID</param>
+  /// <param name="force_focus">Put it to the focus on the start of the next dialogue</param>
+  /// <returns>Coroutine helper object</returns>
   private IEnumerator _character_create(ShowLayoutPosition position, string character_id, bool force_focus = false){
     if(_character_ui_instance_list.ContainsKey(character_id))
       yield break;
@@ -195,6 +251,38 @@ public class DialogueCharacterUI: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// To remove a character based on <see cref="ExtendedDialogue.CharacterRemoveData"/> data.
+  /// </summary>
+  /// <param name="character_id">The character's ID</param>
+  /// <param name="skip_animation">Skip the hide animation</param>
+  /// <returns>Coroutine helper object</returns>
+  private IEnumerator _character_remove(string character_id, bool skip_animation = false){
+    if(!_character_ui_instance_list.ContainsKey(character_id))
+      yield break;
+
+    _show_character_data _data = _character_ui_instance_list[character_id];
+    _character_ui_instance_list.Remove(character_id);
+    if(_data.character_ui == null)
+      yield break;
+
+    FadeUI _fadeui = _data.character_ui.GetComponent<FadeUI>();
+    if(!skip_animation && _fadeui != null){
+      _fadeui.FadeToCover = false;
+      _fadeui.StartTimerAsync();
+      yield return new WaitUntil(_fadeui.TimerFinished);
+    }
+
+    Destroy(_data.character_ui.gameObject);
+  }
+
+
+  /// <summary>
+  /// To show/focus a character, not create.
+  /// </summary>
+  /// <param name="character_id">The target character</param>
+  /// <param name="reorder">Put the character to the front</param>
+  /// <returns>Coroutine helper object</returns>
   private IEnumerator _character_show(string character_id, bool reorder = true){
     if(!_character_ui_instance_list.ContainsKey(character_id)){
       Debug.LogWarning(string.Format("Character is not yet instantiated in UI. (Character ID: '{0}')", character_id));
@@ -223,6 +311,13 @@ public class DialogueCharacterUI: MonoBehaviour{
       _DialogueBase.SkipDialogueAnimation();
   }
 
+
+  /// <summary>
+  /// For starting also resetting the dialogue UI with the newly supplied data.
+  /// This function will block the function (hence the use of Coroutine) until the UI finished presenting the dialouge data.
+  /// </summary>
+  /// <param name="dialogue">The dialogue data </param>
+  /// <returns>Coroutine helper object</returns>
   private IEnumerator _dialogue_start(DialogueUI.DialogueSequence dialogue){
     DEBUGModeUtils.Log("dialogue start"); 
     
@@ -323,6 +418,9 @@ public class DialogueCharacterUI: MonoBehaviour{
     _dialogue_finished_function();
   }
 
+  /// <summary>
+  /// Function triggered for when the dialouge coroutine is finished.
+  /// </summary>
   private void _dialogue_finished_function(){
     _input_context.RemoveInputObject(this, InputFocusContext.ContextEnum.UI);
     _dialogue_finished = true;
@@ -351,13 +449,6 @@ public class DialogueCharacterUI: MonoBehaviour{
 
     _game_handler.SceneChangedFinishedEvent += _game_scene_changed;
 
-
-    _time_handler = FindAnyObjectByType<GameTimeHandler>();
-    if(_time_handler == null){
-      Debug.LogError("Cannot find GameTimeHandler.");
-      throw new MissingComponentException();
-    }
-
     _input_context = FindAnyObjectByType<InputFocusContext>();
     if(_input_context == null){
       Debug.LogError("Cannot find InputFocusContext.");
@@ -382,6 +473,10 @@ public class DialogueCharacterUI: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Starts and resets the dialogue UI with the new supplied data.
+  /// </summary>
+  /// <param name="dialogue">The dialogue data</param>
   public void StartDialogue(DialogueUI.DialogueSequence dialogue){
     if(!IsDialogueFinished())
       CancelDialogue();
@@ -390,11 +485,18 @@ public class DialogueCharacterUI: MonoBehaviour{
     _dialogue_coroutine = StartCoroutine(_dialogue_start(dialogue));
   }
 
+  /// <summary>
+  /// Check if the dialouge is still running or not.
+  /// </summary>
+  /// <returns>Is finished or not</returns>
   public bool IsDialogueFinished(){
     return _dialogue_finished;
   }
 
 
+  /// <summary>
+  /// Function to stop and reset the dialogue.
+  /// </summary>
   public void CancelDialogue(){
     if(_dialogue_finished)
       return;
@@ -404,14 +506,33 @@ public class DialogueCharacterUI: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Add/shown another character outside the dialouge sequence data.
+  /// NOTE: when dialogue resets, the included characters are removed.
+  /// </summary>
+  /// <param name="position">Part of UI's position</param>
+  /// <param name="character_id">The character's ID</param>
+  /// <param name="force_focus">Should instantly focus the character when created</param>
   public void AddCharacterIn(ShowLayoutPosition position, string character_id, bool force_focus = false){
     StartCoroutine(_character_create(position, character_id, force_focus));
   }
 
+  /// <summary>
+  /// Remove shown character in the dialogue UI based on the ID.
+  /// </summary>
+  /// <param name="character_id">The character's ID</param>
+  /// <param name="skip_animation">Should the function skip the "hide" character</param>
+  /// <returns></returns>
   public IEnumerator RemoveCharacter(string character_id, bool skip_animation = false){
     yield return _character_remove(character_id, skip_animation);
   }
 
+
+  /// <summary>
+  /// Remove all shown character(s) based on <see cref="ShowLayoutPosition"/> in the dialogue UI.
+  /// </summary>
+  /// <param name="position">Part of the dialouge UI</param>
+  /// <param name="skip_animation"Should the function skip the "hide" character></param>
   public void ClearCharacterUIFrom(ShowLayoutPosition position, bool skip_animation = false){
     List<string> _list_remove = new();
     foreach(string id in _character_ui_instance_list.Keys){
@@ -427,6 +548,11 @@ public class DialogueCharacterUI: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// To catch Unity's input event for "UIAccept".
+  /// "UIAccept" is a. event for accept/skip/next input.
+  /// </summary>
+  /// <param name="value">The Unity's input data</param>
   public void OnUIAccept(InputValue value){
     if(!_input_context.InputAvailable(this))
       return;
@@ -435,6 +561,11 @@ public class DialogueCharacterUI: MonoBehaviour{
       _trigger_next_dialogue();
   }
 
+  /// <summary>
+  /// To catch Unity's input event for "MouseClicked".
+  /// This event is the same for "UIAccept" event.
+  /// </summary>
+  /// <param name="value">The Unity's input data</param>
   public void OnMouseClicked(InputValue value){
     if(!_input_context.InputAvailable(this))
       return;
@@ -443,6 +574,11 @@ public class DialogueCharacterUI: MonoBehaviour{
       _trigger_next_dialogue();
   }
 
+  /// <summary>
+  /// To catch Unity's input event for "InteractKey".
+  /// This event is the same for "UIAccept" event.
+  /// </summary>
+  /// <param name="value">The Unity's input data</param>
   public void OnInteractKey(InputValue value){
     if(!_input_context.InputAvailable(this))
       return;

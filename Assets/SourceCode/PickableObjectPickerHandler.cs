@@ -1,6 +1,10 @@
 using UnityEngine;
 
 
+/// <summary>
+/// TODO: next feature
+/// Class to handle picking object that has <see cref="PickableObject"/>. This only picks the object and occupies this object's "hands" and not directly transfer the picked object to inventory system.
+/// </summary>
 public class PickableObjectPickerHandler: MonoBehaviour{
   [SerializeField]
   private Transform _PickableTargetPosition;

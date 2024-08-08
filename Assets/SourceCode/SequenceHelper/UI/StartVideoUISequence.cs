@@ -6,10 +6,22 @@ using System.Collections;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to start a video with view-blocking UI. 
+  /// </summary>
   public class StartVideoUISequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "start_video_ui";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// Video source to be played.
+      /// </summary>
       public VideoClip Video;
     }
 
@@ -74,6 +86,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Start Video")]
   [UnitCategory("Sequence/UI")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="StartVideoUISequence"/>.
+  /// </summary>
   public class StartVideoUISequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _video_clip_input;

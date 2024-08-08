@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: LevelCheckpointDatabase Class Reference</title>
+<title>FlavourOfRoemahNusantara: LevelCheckpointDatabase Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -98,6 +100,9 @@ $(function(){initNavTree('class_level_checkpoint_database.html',''); initResizab
   <div class="headertitle"><div class="title">LevelCheckpointDatabase Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Database for storing data about <a class="el" href="class_checkpoint_handler.html" title="Extended AreaTrigger object for triggering save point when an object has entered its area.">CheckpointHandler</a> in a certain scene. This database have to be updated whenever a scene has been changed due to this class does not use nor store any data related to a scene. Instead, it will get all <a class="el" href="class_checkpoint_handler.html" title="Extended AreaTrigger object for triggering save point when an object has entered its area.">CheckpointHandler</a> object existed in the scene. This database should exist only once throughout the Game instance.  
+ <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for LevelCheckpointDatabase:</div>
 <div class="dyncontent">
@@ -107,13 +112,43 @@ Inheritance diagram for LevelCheckpointDatabase:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0a28753b50070cd30d63643da26d66b9" id="r_a0a28753b50070cd30d63643da26d66b9"><td class="memItemLeft" align="right" valign="top"><a id="a0a28753b50070cd30d63643da26d66b9" name="a0a28753b50070cd30d63643da26d66b9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr>
-<tr class="separator:a0a28753b50070cd30d63643da26d66b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30f005412102cbd6b970b4c48d69079e" id="r_a30f005412102cbd6b970b4c48d69079e"><td class="memItemLeft" align="right" valign="top"><a id="a30f005412102cbd6b970b4c48d69079e" name="a30f005412102cbd6b970b4c48d69079e"></a>
-<a class="el" href="class_checkpoint_handler.html">CheckpointHandler</a>?&#160;</td><td class="memItemRight" valign="bottom"><b>GetCheckpoint</b> (string checkpoint_id)</td></tr>
+<tr class="memitem:a1cf2e6091774d905beac921dfcac114a" id="r_a1cf2e6091774d905beac921dfcac114a"><td class="memItemLeft" align="right" valign="top"><a id="a1cf2e6091774d905beac921dfcac114a" name="a1cf2e6091774d905beac921dfcac114a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateDatabase</b> ()</td></tr>
+<tr class="memdesc:a1cf2e6091774d905beac921dfcac114a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update and get all <a class="el" href="class_checkpoint_handler.html" title="Extended AreaTrigger object for triggering save point when an object has entered its area.">CheckpointHandler</a>. <br /></td></tr>
+<tr class="separator:a1cf2e6091774d905beac921dfcac114a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30f005412102cbd6b970b4c48d69079e" id="r_a30f005412102cbd6b970b4c48d69079e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_checkpoint_handler.html">CheckpointHandler</a>?&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a30f005412102cbd6b970b4c48d69079e">GetCheckpoint</a> (string checkpoint_id)</td></tr>
+<tr class="memdesc:a30f005412102cbd6b970b4c48d69079e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get checkpoint object based on the ID. Returns null if no such checkpoint existed.  <br /></td></tr>
 <tr class="separator:a30f005412102cbd6b970b4c48d69079e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Database for storing data about <a class="el" href="class_checkpoint_handler.html" title="Extended AreaTrigger object for triggering save point when an object has entered its area.">CheckpointHandler</a> in a certain scene. This database have to be updated whenever a scene has been changed due to this class does not use nor store any data related to a scene. Instead, it will get all <a class="el" href="class_checkpoint_handler.html" title="Extended AreaTrigger object for triggering save point when an object has entered its area.">CheckpointHandler</a> object existed in the scene. This database should exist only once throughout the Game instance. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a30f005412102cbd6b970b4c48d69079e" name="a30f005412102cbd6b970b4c48d69079e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30f005412102cbd6b970b4c48d69079e">&#9670;&#160;</a></span>GetCheckpoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_checkpoint_handler.html">CheckpointHandler</a>? LevelCheckpointDatabase.GetCheckpoint </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>checkpoint_id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get checkpoint object based on the ID. Returns null if no such checkpoint existed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">checkpoint_id</td><td>The target checkpoint</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The checkpoint object</dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Assets/SourceCode/<b>LevelCheckpointDatabase.cs</b></li>
 </ul>

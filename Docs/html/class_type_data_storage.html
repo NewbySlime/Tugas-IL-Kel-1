@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: TypeDataStorage Class Reference</title>
+<title>FlavourOfRoemahNusantara: TypeDataStorage Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -99,26 +101,26 @@ $(function(){initNavTree('class_type_data_storage.html',''); initResizable(); })
 </div><!--header-->
 <div class="contents">
 
-<p>Kelas untuk menyimpan tipe-tipe yang berbeda tanpa harus memberi tahu tipenya secara eksplisit.  
+<p>Storage class that stores any object based on the type of the data (the data type are for C# Dictionary's key). The class only stores one data for a type.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a20fbd88f969ac45af8fca729afcb0e9e" id="r_a20fbd88f969ac45af8fca729afcb0e9e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a20fbd88f969ac45af8fca729afcb0e9e">AddData&lt; T &gt;</a> (T data)</td></tr>
-<tr class="memdesc:a20fbd88f969ac45af8fca729afcb0e9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Untuk memeberikan data berdasarakan tipe "T". NOTE: setiap tipe hanya bisa satu data di kelas ini, jika lebih, akan di overwrite.  <br /></td></tr>
+<tr class="memdesc:a20fbd88f969ac45af8fca729afcb0e9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a data to the storage. Previous data with the same type will be replaced with the new one.  <br /></td></tr>
 <tr class="separator:a20fbd88f969ac45af8fca729afcb0e9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a991d70f1b4231107680924245bddfc76" id="r_a991d70f1b4231107680924245bddfc76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a991d70f1b4231107680924245bddfc76">RemoveData&lt; T &gt;</a> ()</td></tr>
-<tr class="memdesc:a991d70f1b4231107680924245bddfc76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Untuk menghapus data berdasarkan tipe "T".  <br /></td></tr>
+<tr class="memdesc:a991d70f1b4231107680924245bddfc76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove certain data based on the type from the storage system.  <br /></td></tr>
 <tr class="separator:a991d70f1b4231107680924245bddfc76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92ff4d4a33f567df807e5bef6ec0fdfa" id="r_a92ff4d4a33f567df807e5bef6ec0fdfa"><td class="memItemLeft" align="right" valign="top">T?&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92ff4d4a33f567df807e5bef6ec0fdfa">GetData&lt; T &gt;</a> ()</td></tr>
-<tr class="memdesc:a92ff4d4a33f567df807e5bef6ec0fdfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Untuk mengambil data berdasarkan tipe "T".  <br /></td></tr>
+<tr class="memdesc:a92ff4d4a33f567df807e5bef6ec0fdfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">(C# Generic)   <br /></td></tr>
 <tr class="separator:a92ff4d4a33f567df807e5bef6ec0fdfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af442bb5cc831464e6418fe1caab51e96" id="r_af442bb5cc831464e6418fe1caab51e96"><td class="memItemLeft" align="right" valign="top"><a id="af442bb5cc831464e6418fe1caab51e96" name="af442bb5cc831464e6418fe1caab51e96"></a>
-object?&#160;</td><td class="memItemRight" valign="bottom"><b>GetData</b> (Type type)</td></tr>
+<tr class="memitem:af442bb5cc831464e6418fe1caab51e96" id="r_af442bb5cc831464e6418fe1caab51e96"><td class="memItemLeft" align="right" valign="top">object?&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af442bb5cc831464e6418fe1caab51e96">GetData</a> (Type type)</td></tr>
+<tr class="memdesc:af442bb5cc831464e6418fe1caab51e96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the data stored based on the type of the fetched data.  <br /></td></tr>
 <tr class="separator:af442bb5cc831464e6418fe1caab51e96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Kelas untuk menyimpan tipe-tipe yang berbeda tanpa harus memberi tahu tipenya secara eksplisit. </p>
+<div class="textblock"><p>Storage class that stores any object based on the type of the data (the data type are for C# Dictionary's key). The class only stores one data for a type. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a20fbd88f969ac45af8fca729afcb0e9e" name="a20fbd88f969ac45af8fca729afcb0e9e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a20fbd88f969ac45af8fca729afcb0e9e">&#9670;&#160;</a></span>AddData&lt; T &gt;()</h2>
@@ -135,19 +137,45 @@ object?&#160;</td><td class="memItemRight" valign="bottom"><b>GetData</b> (Type 
       </table>
 </div><div class="memdoc">
 
-<p>Untuk memeberikan data berdasarakan tipe "T". NOTE: setiap tipe hanya bisa satu data di kelas ini, jika lebih, akan di overwrite. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>Tipe data yang mau dimasukkan</td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Add a data to the storage. Previous data with the same type will be replaced with the new one. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td>Data yang mau dimasukkan</td></tr>
+    <tr><td class="paramname">data</td><td>The data to store</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type of the data</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af442bb5cc831464e6418fe1caab51e96" name="af442bb5cc831464e6418fe1caab51e96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af442bb5cc831464e6418fe1caab51e96">&#9670;&#160;</a></span>GetData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">object? TypeDataStorage.GetData </td>
+          <td>(</td>
+          <td class="paramtype">Type</td>          <td class="paramname"><span class="paramname"><em>type</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the data stored based on the type of the fetched data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>The type of the data</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The stored data</dd></dl>
 
 </div>
 </div>
@@ -158,7 +186,7 @@ object?&#160;</td><td class="memItemRight" valign="bottom"><b>GetData</b> (Type 
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">T? TypeDataStorage.GetData&lt; T &gt; </td>
+          <td class="memname">T? <a class="el" href="#af442bb5cc831464e6418fe1caab51e96">TypeDataStorage.GetData</a>&lt; T &gt; </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
@@ -166,14 +194,14 @@ object?&#160;</td><td class="memItemRight" valign="bottom"><b>GetData</b> (Type 
       </table>
 </div><div class="memdoc">
 
-<p>Untuk mengambil data berdasarkan tipe "T". </p>
+<p>(C# Generic)  </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>Tipe data yang mau diambil</td></tr>
+    <tr><td class="paramname">T</td><td>The type of the data</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Data tertentu berdasarkan "T", namun akan mengeluarkan "default" atau null.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The stored data</dd></dl>
 
 </div>
 </div>
@@ -192,10 +220,10 @@ object?&#160;</td><td class="memItemRight" valign="bottom"><b>GetData</b> (Type 
       </table>
 </div><div class="memdoc">
 
-<p>Untuk menghapus data berdasarkan tipe "T". </p>
+<p>Remove certain data based on the type from the storage system. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>Tipe data yang mau dihapuskan</td></tr>
+    <tr><td class="paramname">T</td><td>The type of the data</td></tr>
   </table>
   </dd>
 </dl>

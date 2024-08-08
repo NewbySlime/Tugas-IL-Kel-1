@@ -5,10 +5,22 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system that will trigger Dialogue Sequences by the data supplied.
+  /// </summary>
   public class TriggerDialogue: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "trigger_dialogue";
     
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// Dialogue Sequence data to be used for Dialogue presentation.
+      /// </summary>
       public DialogueUI.DialogueSequence DialogueList;
     }
 
@@ -66,6 +78,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Trigger Dialogue")]
   [UnitCategory("Sequence")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="TriggerDialogue"/>.
+  /// </summary>
   public class TriggerDialogueVS: AddSubSequence{
     [DoNotSerialize]
     private ControlOutput _dialogue_output_flow;

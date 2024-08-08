@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: AreaTrigger Class Reference</title>
+<title>FlavourOfRoemahNusantara: AreaTrigger Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -93,7 +95,6 @@ $(function(){initNavTree('class_area_trigger.html',''); initResizable(); });
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
@@ -101,22 +102,21 @@ $(function(){initNavTree('class_area_trigger.html',''); initResizable(); });
   <div class="headertitle"><div class="title">AreaTrigger Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class that triggers a sequence contained in this class by using event from <b>Collider2D</b> (as trigger) for when an object entered its physics body. Uses <a class="el" href="class_area_trigger_actuator.html" title="An actuator component for triggering AreaTrigger.">AreaTriggerActuator</a> to differentiate which object that can be use as a source of triggering.  
+ <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for AreaTrigger:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_area_trigger.png" usemap="#AreaTrigger_map" alt=""/>
   <map id="AreaTrigger_map" name="AreaTrigger_map">
-<area href="class_checkpoint_handler.html" alt="CheckpointHandler" shape="rect" coords="0,112,134,136"/>
-<area href="class_level_teleport_handler.html" alt="LevelTeleportHandler" shape="rect" coords="0,168,134,192"/>
+<area href="class_checkpoint_handler.html" title="Extended AreaTrigger object for triggering save point when an object has entered its area." alt="CheckpointHandler" shape="rect" coords="0,112,134,136"/>
+<area href="class_level_teleport_handler.html" title="Extended CheckpointHandler object for triggering teleportation between level/scene when an object has..." alt="LevelTeleportHandler" shape="rect" coords="0,168,134,192"/>
+<area href="class_teleport_interaction.html" title="A class that handles player level changing based on the interaction of the object...." alt="TeleportInteraction" shape="rect" coords="0,224,134,248"/>
   </map>
 </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_area_trigger_1_1_trigger_context.html">TriggerContext</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a258631a39bd3c05f22f218e54cab76de" id="r_a258631a39bd3c05f22f218e54cab76de"><td class="memItemLeft" align="right" valign="top"><a id="a258631a39bd3c05f22f218e54cab76de" name="a258631a39bd3c05f22f218e54cab76de"></a>
@@ -127,14 +127,60 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr
 Public Attributes</h2></td></tr>
 <tr class="memitem:a97afbaea4b9812102ce8a418e9bea8f6" id="r_a97afbaea4b9812102ce8a418e9bea8f6"><td class="memItemLeft" align="right" valign="top"><a id="a97afbaea4b9812102ce8a418e9bea8f6" name="a97afbaea4b9812102ce8a418e9bea8f6"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>TriggerOnEnter</b> = true</td></tr>
+<tr class="memdesc:a97afbaea4b9812102ce8a418e9bea8f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should the class trigger the sequence when an object entered its body? <br /></td></tr>
 <tr class="separator:a97afbaea4b9812102ce8a418e9bea8f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a609de3db2a5eafb0e6a323c2ffdbc4c6" id="r_a609de3db2a5eafb0e6a323c2ffdbc4c6"><td class="memItemLeft" align="right" valign="top"><a id="a609de3db2a5eafb0e6a323c2ffdbc4c6" name="a609de3db2a5eafb0e6a323c2ffdbc4c6"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>_OnObjectEnter</b> (Collider2D collider)</td></tr>
+<tr class="memitem:a609de3db2a5eafb0e6a323c2ffdbc4c6" id="r_a609de3db2a5eafb0e6a323c2ffdbc4c6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a609de3db2a5eafb0e6a323c2ffdbc4c6">_OnObjectEnter</a> (Collider2D collider)</td></tr>
+<tr class="memdesc:a609de3db2a5eafb0e6a323c2ffdbc4c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual function for handling event for when an object entered its body. This function will still be triggered even by an object that does not have <a class="el" href="class_area_trigger_actuator.html" title="An actuator component for triggering AreaTrigger.">AreaTriggerActuator</a>, so inheriting class can handle the trigger with its own filter.  <br /></td></tr>
 <tr class="separator:a609de3db2a5eafb0e6a323c2ffdbc4c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class that triggers a sequence contained in this class by using event from <b>Collider2D</b> (as trigger) for when an object entered its physics body. Uses <a class="el" href="class_area_trigger_actuator.html" title="An actuator component for triggering AreaTrigger.">AreaTriggerActuator</a> to differentiate which object that can be use as a source of triggering. </p>
+<p>This class uses external component(s);</p><ul>
+<li><a class="el" href="class_sequence_handler_v_s.html" title="Class for handling sequencing system. This class uses SequenceInterface for handling subsequences....">SequenceHandlerVS</a> for sequencing system used in this class.</li>
+<li><a class="el" href="class_rigidbody_message_relay.html" title="Component to relaying/retransmit any physics events from Unity&#39;s event system to C# event system.">RigidbodyMessageRelay</a> for handling <b>Collider2D</b>'s Unity event.</li>
+</ul>
+<p>This class uses autoload(s);</p><ul>
+<li><a class="el" href="class_game_handler.html" title="Class for handling Game&#39;s functions, events, and other objects/components that serves as the internal...">GameHandler</a> for game events and such. </li>
+</ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a609de3db2a5eafb0e6a323c2ffdbc4c6" name="a609de3db2a5eafb0e6a323c2ffdbc4c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a609de3db2a5eafb0e6a323c2ffdbc4c6">&#9670;&#160;</a></span>_OnObjectEnter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void AreaTrigger._OnObjectEnter </td>
+          <td>(</td>
+          <td class="paramtype">Collider2D</td>          <td class="paramname"><span class="paramname"><em>collider</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Virtual function for handling event for when an object entered its body. This function will still be triggered even by an object that does not have <a class="el" href="class_area_trigger_actuator.html" title="An actuator component for triggering AreaTrigger.">AreaTriggerActuator</a>, so inheriting class can handle the trigger with its own filter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">collider</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="class_checkpoint_handler.html#a418d9cad6783660a4bc6f6d07643534e">CheckpointHandler</a>, and <a class="el" href="class_level_teleport_handler.html#af055e8b6edb194c4099021ee2f80f845">LevelTeleportHandler</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Assets/SourceCode/<b>AreaTrigger.cs</b></li>
 </ul>

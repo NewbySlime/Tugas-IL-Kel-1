@@ -3,13 +3,17 @@ using UnityEngine;
 
 
 /// <summary>
-/// Komponen untuk menyimpan data Texture pada Item.
-/// Komponen yang diperlukan:
-///   - ItemMetadata
+/// Custom item data for <see cref="ItemDatabase"/> to store sprites used for this item.
 /// </summary>
 public class ItemTextureData: MonoBehaviour{
   [Serializable]
+  /// <summary>
+  /// Data structure for storing item images.
+  /// </summary>
   public class ItemData{
+    /// <summary>
+    /// General usage texture for item.
+    /// </summary>
     public Sprite SpriteTexture;
   }
 
@@ -17,10 +21,7 @@ public class ItemTextureData: MonoBehaviour{
   private ItemData _ItemData;
 
 
-  /// <summary>
-  /// Fungsi PENTING untuk membancu proses inisialisasi ItemDatabase.
-  /// </summary>
-  /// <param name="item_data">Penyimpanan data berdasarkan tipe yang diberikan dari ItemDatabse</param>
+  /// <inheritdoc cref="ItemMetadata.ItemDatabase_LoadData(TypeDataStorage)"/>
   public void ItemDatabase_LoadData(TypeDataStorage item_data){
     item_data.AddData(_ItemData);
   }

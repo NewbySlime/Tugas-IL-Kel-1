@@ -5,15 +5,37 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-
+/// <summary>
+/// Class for handling sequencing system. This class uses <see cref="SequenceInterface"/> for handling subsequences.
+/// For further explanation on how sequencing system works in the Game, read the diagram contained in <b>Reference/Diagrams/Sequence.drawio</b>
+/// 
+/// This class uses autoload(s);
+/// - <see cref="SequenceDatabase"/> to create sequence object.
+/// </summary>
 public class SequenceHandlerVS: MonoBehaviour, ISequenceAsync{
   [Serializable]
+  /// <summary>
+  /// Initializing data for creating sequence in <see cref="SequenceHandlerVS"/>.
+  /// </summary>
   public class SequenceInitializeData{
+    /// <summary>
+    /// Data for each sequence.
+    /// </summary>
     public class DataPart{
+      /// <summary>
+      /// The ID of what the sequence object should be.
+      /// </summary>
       public string SequenceID;
+
+      /// <summary>
+      /// The data specific to certain sequence object.
+      /// </summary>
       public object SequenceData;
     }
 
+    /// <summary>
+    /// List of sequence data.
+    /// </summary>
     public List<List<DataPart>> SequenceList;
   }
 
@@ -24,9 +46,16 @@ public class SequenceHandlerVS: MonoBehaviour, ISequenceAsync{
 
   private bool _sequence_triggering = false;
 
+  /// <summary>
+  /// Flag for if sequence data has been supplied.
+  /// </summary>
   public bool SequenceInitializeDataSet{get => _init_data != null;}
 
 
+  /// <summary>
+  /// This function is an extension from <see cref="SetInitdata"/> function which to update the sequence list and create and initialize sequence object using coroutine for yielding functions.
+  /// </summary>
+  /// <returns>Coroutine helper object</returns>
   private IEnumerator _update_sequence(){
     if(_init_data == null || _seq_database == null)
       yield break;
@@ -81,6 +110,7 @@ public class SequenceHandlerVS: MonoBehaviour, ISequenceAsync{
   }
 
 
+  // Trigger each sequence in order.
   private IEnumerator _sequence_start(){
     DEBUGModeUtils.Log("Sequence trigger start");
     _sequence_triggering = true;
@@ -105,20 +135,37 @@ public class SequenceHandlerVS: MonoBehaviour, ISequenceAsync{
   }
 
 
+  /// <summary>
+  /// Trigger to start every sequence in order using Coroutine.
+  /// </summary>
+  /// <returns>Coroutine helper object</returns>
   public IEnumerator StartTrigger(){
     yield return _sequence_start();
   }
 
 
+  /// <summary>
+  /// Trigger to start every sequence in order without blocking (asynchronously).
+  /// </summary>
   public void StartTriggerAsync(){
     StartCoroutine(_sequence_start());
   }
 
+  /// <summary>
+  /// To check if the handler still running the sequencing system or not.
+  /// </summary>
+  /// <returns>The resulting flag</returns>
   public bool IsTriggering(){
     return _sequence_triggering;
   }
 
 
+  /// <summary>
+  /// To set the prepping data for this class to create and prep a list of sequences.
+  /// This function can be used by Visual Scripting using normal calls.
+  /// The function does preparation asynchronously, that redirects to <see cref="_update_sequence"/>.
+  /// </summary>
+  /// <param name="data"></param>
   public void SetInitData(SequenceInitializeData data){
     _init_data = data;
     StartCoroutine(_update_sequence());

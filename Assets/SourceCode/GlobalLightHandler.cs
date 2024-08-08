@@ -4,6 +4,17 @@ using UnityEngine.Rendering.Universal;
 
 
 [RequireComponent(typeof(Light2D))]
+/// <summary>
+/// Class for handling lighting object used for Game world's light.
+/// This handler class also changes the configuration of the light based on the state of the Game (ex. the time period handled by <see cref="GameTimeHandler"/>).
+/// 
+/// This class uses following component(s);
+/// - <b>Light2D</b> the light object used as the Game world's light.
+/// 
+/// This class uses autoload(s);
+/// - <see cref="GameHandler"/> for game events and such.
+/// - <see cref="GameTimeHandler"/> for configuring Game's world time and watching its events.
+/// </summary>
 public class GlobalLightHandler: MonoBehaviour{
   [SerializeField]
   private float _LightDaytimeValue = 1;
@@ -16,9 +27,14 @@ public class GlobalLightHandler: MonoBehaviour{
   private GameHandler _game_handler;
   private GameTimeHandler _time_handler;
 
+
+  /// <summary>
+  /// Flag if the object is ready or not yet.
+  /// </summary>
   public bool IsInitialized{private get; set;} = false;
 
 
+  // Function to catch event for when the period of time has changed by the GameTimeHandler.
   private void _time_period_changed(){
     if(!gameObject.activeInHierarchy || _game_handler == null || !_game_handler.SceneInitialized || !IsInitialized)
       return;
@@ -52,6 +68,9 @@ public class GlobalLightHandler: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Function to catch "Object Destroyed" event by Unity.
+  /// </summary>
   public void OnDestroy(){
     _on_scene_removed();
   }
@@ -83,6 +102,9 @@ public class GlobalLightHandler: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Function to catch "Object Enabled" event by Unity.
+  /// </summary>
   public void OnEnable(){
     _time_period_changed();
   }

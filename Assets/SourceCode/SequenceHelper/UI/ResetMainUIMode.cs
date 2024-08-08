@@ -3,10 +3,22 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system reset the UI for Main.
+  /// </summary>
   public class ResetMainUIMode: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "reset_main_ui_mode";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// Should hiding the UI, the animation would be skipped.
+      /// </summary>
       public bool SkipAnimation;
     }
 
@@ -51,6 +63,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Reset Main UI Mode")]
   [UnitCategory("Sequence/UI")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="ResetMainUiMode"/>.
+  /// </summary>
   public class ResetMainUIModeVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _skip_animation_input;

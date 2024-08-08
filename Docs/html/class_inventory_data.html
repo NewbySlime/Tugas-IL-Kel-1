@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: InventoryData Class Reference</title>
+<title>FlavourOfRoemahNusantara: InventoryData Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -101,7 +103,7 @@ $(function(){initNavTree('class_inventory_data.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 
-<p>Komponen untuk menyimpan (berfungsi sebagai sistem Inventory) Item-Item yang dipunyai oleh suatu Object.  
+<p>Component to store items. Items can be added manually or automatically by class like <a class="el" href="class_collectible_component.html" title="Component as a functionality part of &quot;Item&quot; mechanic where this object becomes a collectible of an it...">CollectibleComponent</a>. This component store items by using list structure. Every stored item will be compiled in a list.  
  <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for InventoryData:</div>
@@ -112,9 +114,11 @@ Inheritance diagram for InventoryData:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_inventory_data_1_1_item_data.html">ItemData</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_inventory_data_1_1_item_data.html">ItemData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data structure for storing data used by <a class="el" href="class_inventory_data.html" title="Component to store items. Items can be added manually or automatically by class like CollectibleCompo...">InventoryData</a> of certain item.  <a href="class_inventory_data_1_1_item_data.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_inventory_data_1_1_runtime_data.html">RuntimeData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data structure for save file that contains data related to the <a class="el" href="class_inventory_data.html" title="Component to store items. Items can be added manually or automatically by class like CollectibleCompo...">InventoryData</a>.  <a href="class_inventory_data_1_1_runtime_data.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -132,47 +136,51 @@ delegate void&#160;</td><td class="memItemRight" valign="bottom"><b>OnItemRemove
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr>
 <tr class="separator:a8d340d9f3fce903b0692061f246fc88f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8361913e3957fd4b9546336c0624160a" id="r_a8361913e3957fd4b9546336c0624160a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8361913e3957fd4b9546336c0624160a">AddItem</a> (string item_id, uint count=1)</td></tr>
-<tr class="memdesc:a8361913e3957fd4b9546336c0624160a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk menambahkan Item ke Inventory.  <br /></td></tr>
+<tr class="memdesc:a8361913e3957fd4b9546336c0624160a"><td class="mdescLeft">&#160;</td><td class="mdescRight">To add an item to this inventory system.  <br /></td></tr>
 <tr class="separator:a8361913e3957fd4b9546336c0624160a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1aca2075f355c1d376952d74f7f4182" id="r_ac1aca2075f355c1d376952d74f7f4182"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac1aca2075f355c1d376952d74f7f4182">RemoveItem</a> (string item_id, uint count)</td></tr>
-<tr class="memdesc:ac1aca2075f355c1d376952d74f7f4182"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk menghapus Item dari Inventory. Bisa juga yang dihapus cuma beberapa Item yang sama.  <br /></td></tr>
+<tr class="memdesc:ac1aca2075f355c1d376952d74f7f4182"><td class="mdescLeft">&#160;</td><td class="mdescRight">To remove an item from this inventory system.  <br /></td></tr>
 <tr class="separator:ac1aca2075f355c1d376952d74f7f4182"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeee858935908bf84d07c85651d925570" id="r_aeee858935908bf84d07c85651d925570"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeee858935908bf84d07c85651d925570">RemoveItemList</a> (List&lt; string &gt; list_item)</td></tr>
-<tr class="memdesc:aeee858935908bf84d07c85651d925570"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk menghilangkan Item berdasarkan list yang diberikan. Jumlah Item yang dikurangi tergantung ada berapa ID Item yang sama pada list tersebut.  <br /></td></tr>
+<tr class="memdesc:aeee858935908bf84d07c85651d925570"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all item based on the filter (list of item ID) supplied. This will actually remove all the related items if all referenced item in the filter exist in the inventory. This will remove any item regardless of how many they are in the inventory.  <br /></td></tr>
 <tr class="separator:aeee858935908bf84d07c85651d925570"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a429daa9f438d7ab6ea6176c656e51ae0" id="r_a429daa9f438d7ab6ea6176c656e51ae0"><td class="memItemLeft" align="right" valign="top"><a id="a429daa9f438d7ab6ea6176c656e51ae0" name="a429daa9f438d7ab6ea6176c656e51ae0"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>RemoveAllItem</b> ()</td></tr>
+<tr class="memdesc:a429daa9f438d7ab6ea6176c656e51ae0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all items stored in the inventory. <br /></td></tr>
 <tr class="separator:a429daa9f438d7ab6ea6176c656e51ae0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b8334ccd419adbbff659f91699a2700" id="r_a3b8334ccd419adbbff659f91699a2700"><td class="memItemLeft" align="right" valign="top">List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3b8334ccd419adbbff659f91699a2700">GetContainedItems</a> ()</td></tr>
-<tr class="memdesc:a3b8334ccd419adbbff659f91699a2700"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk mendapatkan list Item-Item yang ada di Inventory.  <br /></td></tr>
+<tr class="memdesc:a3b8334ccd419adbbff659f91699a2700"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a list of item IDs contained in the inventory. This does not get the count of the item in the inventory.  <br /></td></tr>
 <tr class="separator:a3b8334ccd419adbbff659f91699a2700"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5a56f5c48c1add4481980f34183f8e9" id="r_af5a56f5c48c1add4481980f34183f8e9"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af5a56f5c48c1add4481980f34183f8e9">GetItemCount</a> (string item_id)</td></tr>
-<tr class="memdesc:af5a56f5c48c1add4481980f34183f8e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk mendapatkan berapa banyak Item berdasarkan Item ID.  <br /></td></tr>
+<tr class="memdesc:af5a56f5c48c1add4481980f34183f8e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the count of certain item contained in the inventory.  <br /></td></tr>
 <tr class="separator:af5a56f5c48c1add4481980f34183f8e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a645623e2ec0567e99e0de366da6b5070" id="r_a645623e2ec0567e99e0de366da6b5070"><td class="memItemLeft" align="right" valign="top"><a id="a645623e2ec0567e99e0de366da6b5070" name="a645623e2ec0567e99e0de366da6b5070"></a>
-<a class="el" href="class_inventory_data_1_1_runtime_data.html">RuntimeData</a>&#160;</td><td class="memItemRight" valign="bottom"><b>AsRuntimeData</b> ()</td></tr>
+<tr class="memitem:a645623e2ec0567e99e0de366da6b5070" id="r_a645623e2ec0567e99e0de366da6b5070"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_inventory_data_1_1_runtime_data.html">RuntimeData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a645623e2ec0567e99e0de366da6b5070">AsRuntimeData</a> ()</td></tr>
+<tr class="memdesc:a645623e2ec0567e99e0de366da6b5070"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the stored state of this component. For applying the state to this component, see <a class="el" href="#afe7e0d5ad8d8f745c633b75989423a42" title="Apply and modify this component to recreate from the supplied state. For getting current state of the...">FromRuntimeData</a>.  <br /></td></tr>
 <tr class="separator:a645623e2ec0567e99e0de366da6b5070"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe7e0d5ad8d8f745c633b75989423a42" id="r_afe7e0d5ad8d8f745c633b75989423a42"><td class="memItemLeft" align="right" valign="top"><a id="afe7e0d5ad8d8f745c633b75989423a42" name="afe7e0d5ad8d8f745c633b75989423a42"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>FromRuntimeData</b> (<a class="el" href="class_inventory_data_1_1_runtime_data.html">RuntimeData</a> data)</td></tr>
+<tr class="memitem:afe7e0d5ad8d8f745c633b75989423a42" id="r_afe7e0d5ad8d8f745c633b75989423a42"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe7e0d5ad8d8f745c633b75989423a42">FromRuntimeData</a> (<a class="el" href="class_inventory_data_1_1_runtime_data.html">RuntimeData</a> data)</td></tr>
+<tr class="memdesc:afe7e0d5ad8d8f745c633b75989423a42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply and modify this component to recreate from the supplied state. For getting current state of the object, see <a class="el" href="#a645623e2ec0567e99e0de366da6b5070" title="Get the stored state of this component. For applying the state to this component, see FromRuntimeData...">AsRuntimeData</a>.  <br /></td></tr>
 <tr class="separator:afe7e0d5ad8d8f745c633b75989423a42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="events" name="events"></a>
 Events</h2></td></tr>
 <tr class="memitem:aa81c82f0d35a96967892225c39e63a42" id="r_aa81c82f0d35a96967892225c39e63a42"><td class="memItemLeft" align="right" valign="top"><a id="aa81c82f0d35a96967892225c39e63a42" name="aa81c82f0d35a96967892225c39e63a42"></a>
 OnItemCountChanged&#160;</td><td class="memItemRight" valign="bottom"><b>OnItemCountChangedEvent</b></td></tr>
-<tr class="memdesc:aa81c82f0d35a96967892225c39e63a42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event untuk memberitahu apakah ada Item yang terganti jumlahnya. <br /></td></tr>
+<tr class="memdesc:aa81c82f0d35a96967892225c39e63a42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event for when a count for an item in the inventory have been modified (added or removed for x item(s)). <br /></td></tr>
 <tr class="separator:aa81c82f0d35a96967892225c39e63a42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a599e5e488ee1016c41607b6baf5e7150" id="r_a599e5e488ee1016c41607b6baf5e7150"><td class="memItemLeft" align="right" valign="top"><a id="a599e5e488ee1016c41607b6baf5e7150" name="a599e5e488ee1016c41607b6baf5e7150"></a>
 OnItemAdded&#160;</td><td class="memItemRight" valign="bottom"><b>OnItemAddedEvent</b></td></tr>
-<tr class="memdesc:a599e5e488ee1016c41607b6baf5e7150"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event untuk memberitahu apakah ada Item yang ditambahkan ke Inventory. <br /></td></tr>
+<tr class="memdesc:a599e5e488ee1016c41607b6baf5e7150"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event for when item with x count has been added to the inventory. <br /></td></tr>
 <tr class="separator:a599e5e488ee1016c41607b6baf5e7150"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af759191129f17a5aca4a9581609cef05" id="r_af759191129f17a5aca4a9581609cef05"><td class="memItemLeft" align="right" valign="top"><a id="af759191129f17a5aca4a9581609cef05" name="af759191129f17a5aca4a9581609cef05"></a>
 OnItemRemoved&#160;</td><td class="memItemRight" valign="bottom"><b>OnItemRemovedEvent</b></td></tr>
-<tr class="memdesc:af759191129f17a5aca4a9581609cef05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event untuk memberitahu apakah ada item yang dihapus/dihilangkan dari Inventory. <br /></td></tr>
+<tr class="memdesc:af759191129f17a5aca4a9581609cef05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event for when item with x count has been removed from the inventory. <br /></td></tr>
 <tr class="separator:af759191129f17a5aca4a9581609cef05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Komponen untuk menyimpan (berfungsi sebagai sistem Inventory) Item-Item yang dipunyai oleh suatu Object. </p>
+<div class="textblock"><p>Component to store items. Items can be added manually or automatically by class like <a class="el" href="class_collectible_component.html" title="Component as a functionality part of &quot;Item&quot; mechanic where this object becomes a collectible of an it...">CollectibleComponent</a>. This component store items by using list structure. Every stored item will be compiled in a list. </p>
+<p>This class uses autoload(s);</p><ul>
+<li><a class="el" href="class_item_database.html" title="Database Class for loading and storing data for items. The database will find any prefab (data) in a ...">ItemDatabase</a> database for getting data about certain item. </li>
+</ul>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a8361913e3957fd4b9546336c0624160a" name="a8361913e3957fd4b9546336c0624160a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8361913e3957fd4b9546336c0624160a">&#9670;&#160;</a></span>AddItem()</h2>
@@ -193,11 +201,56 @@ OnItemRemoved&#160;</td><td class="memItemRight" valign="bottom"><b>OnItemRemove
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi untuk menambahkan Item ke Inventory. </p>
+<p>To add an item to this inventory system. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">item_id</td><td>ID Item yang mau dimasukkan</td></tr>
-    <tr><td class="paramname">count</td><td>Jumlah Item yang mau ditambahkan</td></tr>
+    <tr><td class="paramname">item_id</td><td>What kind of item to be added</td></tr>
+    <tr><td class="paramname">count</td><td>How many items to be added</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a645623e2ec0567e99e0de366da6b5070" name="a645623e2ec0567e99e0de366da6b5070"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a645623e2ec0567e99e0de366da6b5070">&#9670;&#160;</a></span>AsRuntimeData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_inventory_data_1_1_runtime_data.html">RuntimeData</a> InventoryData.AsRuntimeData </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the stored state of this component. For applying the state to this component, see <a class="el" href="#afe7e0d5ad8d8f745c633b75989423a42" title="Apply and modify this component to recreate from the supplied state. For getting current state of the...">FromRuntimeData</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>The resulting state</dd></dl>
+
+</div>
+</div>
+<a id="afe7e0d5ad8d8f745c633b75989423a42" name="afe7e0d5ad8d8f745c633b75989423a42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe7e0d5ad8d8f745c633b75989423a42">&#9670;&#160;</a></span>FromRuntimeData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void InventoryData.FromRuntimeData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_inventory_data_1_1_runtime_data.html">RuntimeData</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apply and modify this component to recreate from the supplied state. For getting current state of the object, see <a class="el" href="#a645623e2ec0567e99e0de366da6b5070" title="Get the stored state of this component. For applying the state to this component, see FromRuntimeData...">AsRuntimeData</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>The previous state or any other stored state</td></tr>
   </table>
   </dd>
 </dl>
@@ -219,8 +272,8 @@ OnItemRemoved&#160;</td><td class="memItemRight" valign="bottom"><b>OnItemRemove
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi untuk mendapatkan list Item-Item yang ada di Inventory. </p>
-<dl class="section return"><dt>Returns</dt><dd>List Item ID</dd></dl>
+<p>Get a list of item IDs contained in the inventory. This does not get the count of the item in the inventory. </p>
+<dl class="section return"><dt>Returns</dt><dd>The list of items ocntained</dd></dl>
 
 </div>
 </div>
@@ -239,14 +292,14 @@ OnItemRemoved&#160;</td><td class="memItemRight" valign="bottom"><b>OnItemRemove
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi untuk mendapatkan berapa banyak Item berdasarkan Item ID. </p>
+<p>Get the count of certain item contained in the inventory. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">item_id</td><td>Item ID yang ingin dicek</td></tr>
+    <tr><td class="paramname">item_id</td><td>The target item to get</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Berapa banyak Item yang ada di Inventory</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Item count</dd></dl>
 
 </div>
 </div>
@@ -269,11 +322,11 @@ OnItemRemoved&#160;</td><td class="memItemRight" valign="bottom"><b>OnItemRemove
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi untuk menghapus Item dari Inventory. Bisa juga yang dihapus cuma beberapa Item yang sama. </p>
+<p>To remove an item from this inventory system. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">item_id</td><td>ID Item yang mau dihapus</td></tr>
-    <tr><td class="paramname">count</td><td>Jumlah Item yang mau dihapus</td></tr>
+    <tr><td class="paramname">item_id</td><td>What kind of item to be removed</td></tr>
+    <tr><td class="paramname">count</td><td>How many items to be removed</td></tr>
   </table>
   </dd>
 </dl>
@@ -295,14 +348,14 @@ OnItemRemoved&#160;</td><td class="memItemRight" valign="bottom"><b>OnItemRemove
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi untuk menghilangkan Item berdasarkan list yang diberikan. Jumlah Item yang dikurangi tergantung ada berapa ID Item yang sama pada list tersebut. </p>
+<p>Remove all item based on the filter (list of item ID) supplied. This will actually remove all the related items if all referenced item in the filter exist in the inventory. This will remove any item regardless of how many they are in the inventory. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">list_item</td><td>List ID Item yang mau dihapus</td></tr>
+    <tr><td class="paramname">list_item</td><td>The filter of items to be removed</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Apakah semua Item berhasil dihapus atau tidak</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 </div>
 </div>

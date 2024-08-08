@@ -5,7 +5,16 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-
+/// <summary>
+/// A class that handles interaction event with dialogue bubble. See <see cref="InteractionHandler"/> for interaction handling.
+/// 
+/// This class uses Component(s);
+/// - <see cref="DialogueUI"/> in <b>DialogueBubblePrefab</b> for Dialogue presentation handling.
+/// - <see cref="ShrinkUI"/> in <b>DialogueBubblePrefab</b> for "show" and "hide" effect to the UI.
+/// 
+/// Interlinked Component(s);
+/// - <see cref="InteractionHandler"/> uses the class events for processing interaction for Dialogue.
+/// </summary>
 public class DialogueInteraction: MonoBehaviour{
   [SerializeField]
   private GameObject _DialogueBubblePrefab;
@@ -46,7 +55,10 @@ public class DialogueInteraction: MonoBehaviour{
 
   private bool _is_interact_enter = false;
 
-
+  /// <summary>
+  /// Handles effect when showing the UI. Also handles Dialogue presentation later on with the supplied data.
+  /// </summary>
+  /// <param name="data">The dialogue data to use</param>
   private void _popup_dialogue(DialogueUI.DialogueData data){
     _dialogue_timeout = _DialogueHideTimeout;
 
@@ -58,6 +70,9 @@ public class DialogueInteraction: MonoBehaviour{
     _dialogue_ui.ChangeDialogue(data, false);
   }
 
+  /// <summary>
+  /// Handles effect when hiding the UI.
+  /// </summary>
   private void _hide_dialogue(){
     if(_game_handler == null || !_game_handler.SceneInitialized)
       return;
@@ -79,6 +94,9 @@ public class DialogueInteraction: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Function for when the class wants to skip the dialogue or proceed with the next Dialogue.
+  /// </summary>
   private void _next_dialogue(){
     if(!_dialogue_ui.IsDialogueFinished()){
       _dialogue_ui.SkipDialogueAnimation();
@@ -101,6 +119,9 @@ public class DialogueInteraction: MonoBehaviour{
     }
   }
 
+  /// <summary>
+  /// Works the same as _next_dialogue() but it picks the next Dialogue randomly.
+  /// </summary>
   private void _random_dialogue(){
     if(_dialogue_ui.IsDialogueFinished()){
       int _last_dialogue_index = _dialogue_index;
@@ -119,6 +140,10 @@ public class DialogueInteraction: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Coroutine function to handle auto resuming the Dialogue with timings to be used as a timer.
+  /// </summary>
+  /// <returns>Coroutine helper object</returns>
   private IEnumerator _auto_resume_co_func(){
     while(true){
       if(!_dialogue_ui.IsDialogueFinished()){
@@ -138,6 +163,7 @@ public class DialogueInteraction: MonoBehaviour{
 
 
   private void _on_scene_initialized(string scene_id, GameHandler.GameContext context){
+    // in case if an object already touched the Interaction border when the level is starting 
     TriggerDialogue();
   }
 
@@ -179,6 +205,9 @@ public class DialogueInteraction: MonoBehaviour{
   }
 
   
+  /// <summary>
+  /// Function to start the dialogue or skip/next the dialogue. This function also handles the showing/hiding when appropriate.
+  /// </summary>
   public void TriggerDialogue(){
     if(!gameObject.activeInHierarchy || _game_handler == null || !_game_handler.SceneInitialized || !_is_interact_enter)
       return;
@@ -200,17 +229,26 @@ public class DialogueInteraction: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Interface function used by <see cref="InteractableInterface"/> for when an "Interact" event is triggered. 
+  /// </summary>
   public void InteractableInterface_Interact(){
     _is_interact_enter = true;
     TriggerDialogue();
   }
 
+  /// <summary>
+  /// Interface function used by <see cref="InteractableInterface"/> for when an "InteractableExit" event is triggered, which means the Interaction border no longer register the entered object.
+  /// </summary>
   public void InteractableInterface_InteractableExit(){
     _is_interact_enter = false;
     _hide_dialogue();
   }
 
-
+  /// <summary>
+  /// Interface function used by <see cref="SetDialogueToGameObject"/> Sequence Node to pass the data created in the Unity Visual Script. 
+  /// </summary>
+  /// <param name="dialogue"></param>
   public void DialogueData_SetInitData(DialogueUI.DialogueSequence dialogue){
     _dialogue_sequence = dialogue;
   }

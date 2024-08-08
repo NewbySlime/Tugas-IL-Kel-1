@@ -4,11 +4,27 @@ using UnityEngine;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to set the object position.
+  /// </summary>
   public class SetObjectPositionSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "set_object_position";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target object to be moved.
+      /// </summary>
       public ObjectReference.ObjRefID RefID;
+      
+      /// <summary>
+      /// The determined position used for setting position.
+      /// </summary>
       public Vector3 SetPosition;
     }
 
@@ -47,6 +63,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Set Object Position")]
   [UnitCategory("Sequence/Object")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="SetObjectPositionSequence"/>.
+  /// </summary>
   public class SetObjectPositionSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _ref_obj_input;

@@ -5,7 +5,13 @@ using System.Collections;
 
 
 namespace PatrolActions{
+  /// <summary>
+  /// An extension of <see cref="PatrolAction"/> that handles moving to a target <b>Tranform</b>.
+  /// </summary>
   public class GoToObject: PatrolAction{
+    /// <summary>
+    /// Target object to travel to.
+    /// </summary>
     public Transform TargetObject;
 
     public Type GetPatrolType(){
@@ -29,6 +35,9 @@ namespace PatrolActions{
 
   [UnitTitle("GoToObject")]
   [UnitCategory("Patrol")]
+  /// <summary>
+  /// An extension of <see cref="PatrolNodeBase"/> for <see cref="GoToObject"/>.
+  /// </summary>
   public class GoToObjectUnit: PatrolNodeBase{
     [DoNotSerialize]
     private ValueInput _transform_input;

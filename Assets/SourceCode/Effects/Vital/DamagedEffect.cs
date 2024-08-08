@@ -5,9 +5,25 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(HealthComponent))]
+/// <summary>
+/// An extended <see cref="HealthComponent"/> feature that will give visual feedback to the object when the used character are "hit".
+/// 
+/// This class uses Component(s);
+/// - <b>SpriteRenderer"</b> The target renderer to manipulate the visual.
+/// 
+/// Optional Component(s);
+/// - <b>Rigidbody2D</b> The target body to give the "pushed" effect.
+/// - <b>Animator</b> The target Animation Handler
+/// - <see cref="AudioCollectionHandler"/> The target Audio Handler.
+/// 
+/// Indirectly Related Component(s);
+/// - <see cref="VulnerableEffect"/> If the object have the "vulnerable" effect, when hit, the effect will be cancelled.
+/// </summary>
 public class DamagedEffect: MonoBehaviour{
+  /// <summary>
+  /// Audio ID used for "damaged" effect. See also: <see cref="AudioCollectionHandler"/>
+  /// </summary>
   public const string AudioID_Hurt = "hurt";
-
 
   [SerializeField]
   private SpriteRenderer _TargetSpriteManipulation;
@@ -32,6 +48,10 @@ public class DamagedEffect: MonoBehaviour{
   public float ExaggerationForce;
 
 
+  /// <summary>
+  /// Coroutine function that handles "damaged" effect lifetime.
+  /// </summary>
+  /// <returns>Coroutine helper object</returns>
   private IEnumerator _on_damaged(){
     if(_vulnerable_effect != null)
       _vulnerable_effect.CancelEffect();
@@ -97,6 +117,10 @@ public class DamagedEffect: MonoBehaviour{
     _on_effect_finished();
   }
 
+  /// <summary>
+  /// Resets everything to a finished state to completely to make sure that everything is in finished state.
+  /// This is used when the effect is finished or an actor wants to cancel the effect.
+  /// </summary>
   private void _on_effect_finished(){
     _TargetSpriteManipulation.material.SetColor("_ColorMultiply", Color.white);
     _TargetSpriteManipulation.material.SetColor("_ColorAdditiveAfter", new Color(0,0,0,0));
@@ -135,6 +159,9 @@ public class DamagedEffect: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Function used to stop the ongoing effect.
+  /// </summary>
   public void CancelEffect(){
     if(_effect_coroutine == null)
       return;

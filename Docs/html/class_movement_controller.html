@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: MovementController Class Reference</title>
+<title>FlavourOfRoemahNusantara: MovementController Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -94,12 +96,15 @@ $(function(){initNavTree('class_movement_controller.html',''); initResizable(); 
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#properties">Properties</a> &#124;
 <a href="class_movement_controller-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">MovementController Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Komponen untuk mekanik movement. Karena ini hanya mekanik movement yang bisa dipakai Komponen lain, bisa dipakai oleh Player, Musuh, dan lainnya. Komponen ini memerlukan komponen lain:  
+<p>Component for handling movement system used in the Game. For further explanation, see <b>Reference/Diagrams/MovementController.drawio</b>  
  <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for MovementController:</div>
@@ -116,43 +121,106 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr
 <tr class="memitem:a1aa2630f9919e2d7d73cf461635445e0" id="r_a1aa2630f9919e2d7d73cf461635445e0"><td class="memItemLeft" align="right" valign="top"><a id="a1aa2630f9919e2d7d73cf461635445e0" name="a1aa2630f9919e2d7d73cf461635445e0"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>FixedUpdate</b> ()</td></tr>
 <tr class="separator:a1aa2630f9919e2d7d73cf461635445e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c79e7aa9ed1019de9688804beb5c594" id="r_a4c79e7aa9ed1019de9688804beb5c594"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c79e7aa9ed1019de9688804beb5c594">LookAt</a> (Vector2 direction)</td></tr>
+<tr class="memdesc:a4c79e7aa9ed1019de9688804beb5c594"><td class="mdescLeft">&#160;</td><td class="mdescRight">Force this object to look at certain direction.  <br /></td></tr>
+<tr class="separator:a4c79e7aa9ed1019de9688804beb5c594"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5fd1519b6884dc51cef40d133646d52" id="r_ac5fd1519b6884dc51cef40d133646d52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac5fd1519b6884dc51cef40d133646d52">DoWalk</a> (float walk_dir_x)</td></tr>
-<tr class="memdesc:ac5fd1519b6884dc51cef40d133646d52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk membuat bergerak secara horizontal Objek Game.  <br /></td></tr>
+<tr class="memdesc:ac5fd1519b6884dc51cef40d133646d52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Give input to this movement object to walk in a direction (X-Axis).  <br /></td></tr>
 <tr class="separator:ac5fd1519b6884dc51cef40d133646d52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84b7e947934d47cff6fec7af409b7dab" id="r_a84b7e947934d47cff6fec7af409b7dab"><td class="memItemLeft" align="right" valign="top"><a id="a84b7e947934d47cff6fec7af409b7dab" name="a84b7e947934d47cff6fec7af409b7dab"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>DoJump</b> ()</td></tr>
-<tr class="memdesc:a84b7e947934d47cff6fec7af409b7dab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk melakukan lompatan kepada Objek Game. Lompatan bisa berupa lompat saat diatas tanah, atau saat "Wall-Hugging" (Wall Jump). <br /></td></tr>
+<tr class="memdesc:a84b7e947934d47cff6fec7af409b7dab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to jump vertically. If the object is not on ground, but currently "wallhugging", this object will wall-jump instead of normal jump. <br /></td></tr>
 <tr class="separator:a84b7e947934d47cff6fec7af409b7dab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba862ed2d445f73903b5065737630ca2" id="r_aba862ed2d445f73903b5065737630ca2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba862ed2d445f73903b5065737630ca2">SetEnableMovement</a> (bool enabled)</td></tr>
+<tr class="memdesc:aba862ed2d445f73903b5065737630ca2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to enable the movement processing.  <br /></td></tr>
+<tr class="separator:aba862ed2d445f73903b5065737630ca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a935101ddf84ebf9687a4efdc2f0dcfb1" id="r_a935101ddf84ebf9687a4efdc2f0dcfb1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a935101ddf84ebf9687a4efdc2f0dcfb1">IsWallHuggingLeft</a> ()</td></tr>
+<tr class="memdesc:a935101ddf84ebf9687a4efdc2f0dcfb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if this object is currently wallhugging (using wall of the object's left side).  <br /></td></tr>
+<tr class="separator:a935101ddf84ebf9687a4efdc2f0dcfb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c986b60f0668a079b341f277b0569f0" id="r_a8c986b60f0668a079b341f277b0569f0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c986b60f0668a079b341f277b0569f0">IsWallHuggingRight</a> ()</td></tr>
+<tr class="memdesc:a8c986b60f0668a079b341f277b0569f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if this object is currently wallhugging (using wall of the object's right side).  <br /></td></tr>
+<tr class="separator:a8c986b60f0668a079b341f277b0569f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6e771cf8c7ccb30047761bee1e147ac" id="r_ab6e771cf8c7ccb30047761bee1e147ac"><td class="memItemLeft" align="right" valign="top">Rigidbody2D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6e771cf8c7ccb30047761bee1e147ac">GetRigidbody</a> ()</td></tr>
+<tr class="memdesc:ab6e771cf8c7ccb30047761bee1e147ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get <b>Rigidbody2D</b> physics body of this object.  <br /></td></tr>
+<tr class="separator:ab6e771cf8c7ccb30047761bee1e147ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5d1a55c4e7e21150cf8b847747a168d" id="r_ad5d1a55c4e7e21150cf8b847747a168d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad5d1a55c4e7e21150cf8b847747a168d">SetIgnoreOneWayCollision</a> (bool flag)</td></tr>
+<tr class="memdesc:ad5d1a55c4e7e21150cf8b847747a168d"><td class="mdescLeft">&#160;</td><td class="mdescRight">NOTE: Feature is unstable for now. Ignore "One way collision" objects from able to be interacted by this physics object.  <br /></td></tr>
+<tr class="separator:ad5d1a55c4e7e21150cf8b847747a168d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2326e69120478e54632e16b83820cdd" id="r_ab2326e69120478e54632e16b83820cdd"><td class="memItemLeft" align="right" valign="top">IEnumerator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2326e69120478e54632e16b83820cdd">ForceJump</a> (Vector3 target_pos)</td></tr>
+<tr class="memdesc:ab2326e69120478e54632e16b83820cdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Let this object to jump in certain trajectory to reach target position. This function is different from <a class="el" href="#a84b7e947934d47cff6fec7af409b7dab" title="Function to jump vertically. If the object is not on ground, but currently &quot;wallhugging&quot;,...">DoJump</a>, while the function only jumps in vertical direction, this function will jump in any direction in certain trajectory in order to land on target position. NOTE: This function will use delay before and after the jump. The delay variables can be changed in forcejump_startdelay and forcejump_finishdelay.  <br /></td></tr>
+<tr class="separator:ab2326e69120478e54632e16b83820cdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7107fec71bee186399b02d510f25ab8" id="r_aa7107fec71bee186399b02d510f25ab8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7107fec71bee186399b02d510f25ab8">OnGroundCheck_Enter</a> (Collider2D collider)</td></tr>
-<tr class="memdesc:aa7107fec71bee186399b02d510f25ab8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi pengecekan ketika Player menyentuh sesuatu (dengan Collision "GroundCheck")  <br /></td></tr>
+<tr class="memdesc:aa7107fec71bee186399b02d510f25ab8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch event for when an object entered in <b>GroundCheck</b> body collision (trigger).  <br /></td></tr>
 <tr class="separator:aa7107fec71bee186399b02d510f25ab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47118bf8235a917f152538e237d880b5" id="r_a47118bf8235a917f152538e237d880b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a47118bf8235a917f152538e237d880b5">OnGroundCheck_Exit</a> (Collider2D collider)</td></tr>
-<tr class="memdesc:a47118bf8235a917f152538e237d880b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi pengecekan ketika Collider pada Collision "GroundCheck" keluar.  <br /></td></tr>
+<tr class="memdesc:a47118bf8235a917f152538e237d880b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch event for when an object exited in <b>GroundCheck</b> body collision (trigger).  <br /></td></tr>
 <tr class="separator:a47118bf8235a917f152538e237d880b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f010a28d66901d56b68a8f44f92253f" id="r_a2f010a28d66901d56b68a8f44f92253f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f010a28d66901d56b68a8f44f92253f">OnHugWall_Left_Enter</a> (Collider2D collider)</td></tr>
-<tr class="memdesc:a2f010a28d66901d56b68a8f44f92253f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi pengecekan ketika Player menyentuh sesuatu (dengan Collision "WallHugLeft")  <br /></td></tr>
+<tr class="memdesc:a2f010a28d66901d56b68a8f44f92253f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch event for when an object entered in <b>WallHugLeft</b> body collision (trigger).  <br /></td></tr>
 <tr class="separator:a2f010a28d66901d56b68a8f44f92253f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92e881ae7f1fe3cae6c299ce793f669d" id="r_a92e881ae7f1fe3cae6c299ce793f669d"><td class="memItemLeft" align="right" valign="top"><a id="a92e881ae7f1fe3cae6c299ce793f669d" name="a92e881ae7f1fe3cae6c299ce793f669d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnHugWall_Left_Exit</b> (Collider2D collider)</td></tr>
-<tr class="memdesc:a92e881ae7f1fe3cae6c299ce793f669d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi pengecekan ketika Collider pada Collision "WallHugLeft" keluar. <br /></td></tr>
+<tr class="memitem:a92e881ae7f1fe3cae6c299ce793f669d" id="r_a92e881ae7f1fe3cae6c299ce793f669d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92e881ae7f1fe3cae6c299ce793f669d">OnHugWall_Left_Exit</a> (Collider2D collider)</td></tr>
+<tr class="memdesc:a92e881ae7f1fe3cae6c299ce793f669d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch event for when an object exited in <b>WallHugLeft</b> body collision (trigger).  <br /></td></tr>
 <tr class="separator:a92e881ae7f1fe3cae6c299ce793f669d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a783690f8b574c0c91e08c3529c8f88d5" id="r_a783690f8b574c0c91e08c3529c8f88d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a783690f8b574c0c91e08c3529c8f88d5">OnHugWall_Right_Enter</a> (Collider2D collider)</td></tr>
-<tr class="memdesc:a783690f8b574c0c91e08c3529c8f88d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi pengecekan ketika Player menyentuh sesuatu (dengan Collision "WallHugRight")  <br /></td></tr>
+<tr class="memdesc:a783690f8b574c0c91e08c3529c8f88d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch event for when an object entered in <b>WallHugRight</b> body collision (trigger).  <br /></td></tr>
 <tr class="separator:a783690f8b574c0c91e08c3529c8f88d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a995a19a74ade8f5c7c2c124662fa868c" id="r_a995a19a74ade8f5c7c2c124662fa868c"><td class="memItemLeft" align="right" valign="top"><a id="a995a19a74ade8f5c7c2c124662fa868c" name="a995a19a74ade8f5c7c2c124662fa868c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnHugWall_Right_Exit</b> (Collider2D collider)</td></tr>
-<tr class="memdesc:a995a19a74ade8f5c7c2c124662fa868c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi pengecekan ketika Collider pada Collision "WallHugRight" keluar. <br /></td></tr>
+<tr class="memitem:a995a19a74ade8f5c7c2c124662fa868c" id="r_a995a19a74ade8f5c7c2c124662fa868c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a995a19a74ade8f5c7c2c124662fa868c">OnHugWall_Right_Exit</a> (Collider2D collider)</td></tr>
+<tr class="memdesc:a995a19a74ade8f5c7c2c124662fa868c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch event for when an object exited in <b>WallHugRight</b> body collision (trigger).  <br /></td></tr>
 <tr class="separator:a995a19a74ade8f5c7c2c124662fa868c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae19564f958949914c32b856a873c3b10" id="r_ae19564f958949914c32b856a873c3b10"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae19564f958949914c32b856a873c3b10">OnCollisionEnter2D</a> (Collision2D collision)</td></tr>
+<tr class="memdesc:ae19564f958949914c32b856a873c3b10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch event for when this object collided with another object.  <br /></td></tr>
+<tr class="separator:ae19564f958949914c32b856a873c3b10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8e9c26b718fe70ac0882fbb7d9fdbd6" id="r_ad8e9c26b718fe70ac0882fbb7d9fdbd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad8e9c26b718fe70ac0882fbb7d9fdbd6">OnCollisionExit2D</a> (Collision2D collision)</td></tr>
+<tr class="memdesc:ad8e9c26b718fe70ac0882fbb7d9fdbd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch event for when previously colliding object are not colliding with this object.  <br /></td></tr>
+<tr class="separator:ad8e9c26b718fe70ac0882fbb7d9fdbd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a5fbe71866c7a6947df158a202505986f" id="r_a5fbe71866c7a6947df158a202505986f"><td class="memItemLeft" align="right" valign="top"><a id="a5fbe71866c7a6947df158a202505986f" name="a5fbe71866c7a6947df158a202505986f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>ToggleWalk</b> = false</td></tr>
+<tr class="memdesc:a5fbe71866c7a6947df158a202505986f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should the movement direction clamped to "walking" state. <br /></td></tr>
+<tr class="separator:a5fbe71866c7a6947df158a202505986f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65102e4a191a7566c766230d2e17476d" id="r_a65102e4a191a7566c766230d2e17476d"><td class="memItemLeft" align="right" valign="top"><a id="a65102e4a191a7566c766230d2e17476d" name="a65102e4a191a7566c766230d2e17476d"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>FixedLookAt</b> = false</td></tr>
+<tr class="memdesc:a65102e4a191a7566c766230d2e17476d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This will force this component to force only look at certain direction prompted using function <a class="el" href="#a4c79e7aa9ed1019de9688804beb5c594" title="Force this object to look at certain direction.">LookAt</a>. <br /></td></tr>
+<tr class="separator:a65102e4a191a7566c766230d2e17476d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a532b7a647d3caf22d9d8339810a144b0" id="r_a532b7a647d3caf22d9d8339810a144b0"><td class="memItemLeft" align="right" valign="top"><a id="a532b7a647d3caf22d9d8339810a144b0" name="a532b7a647d3caf22d9d8339810a144b0"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>GlideOnGround</b> = false</td></tr>
+<tr class="memdesc:a532b7a647d3caf22d9d8339810a144b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should this component disable the gliding prevention measures. <br /></td></tr>
+<tr class="separator:a532b7a647d3caf22d9d8339810a144b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:adf42779774e48bfd7d1322e23997cbe5" id="r_adf42779774e48bfd7d1322e23997cbe5"><td class="memItemLeft" align="right" valign="top"><a id="adf42779774e48bfd7d1322e23997cbe5" name="adf42779774e48bfd7d1322e23997cbe5"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><b>AudioID_Jump</b> = &quot;jump&quot;</td></tr>
+<tr class="memdesc:adf42779774e48bfd7d1322e23997cbe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Audio ID used for playing "jumping" character sound. <br /></td></tr>
+<tr class="separator:adf42779774e48bfd7d1322e23997cbe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:ad4a869372c7521f54df3e542afd95945" id="r_ad4a869372c7521f54df3e542afd95945"><td class="memItemLeft" align="right" valign="top"><a id="ad4a869372c7521f54df3e542afd95945" name="ad4a869372c7521f54df3e542afd95945"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>MovementSpeed</b><code> [get]</code></td></tr>
+<tr class="memdesc:ad4a869372c7521f54df3e542afd95945"><td class="mdescLeft">&#160;</td><td class="mdescRight">The supposed movement speed of the object. <br /></td></tr>
+<tr class="separator:ad4a869372c7521f54df3e542afd95945"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4821941703c217301841cac84d79087f" id="r_a4821941703c217301841cac84d79087f"><td class="memItemLeft" align="right" valign="top"><a id="a4821941703c217301841cac84d79087f" name="a4821941703c217301841cac84d79087f"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>ForceJumpStartDelay</b><code> [get]</code></td></tr>
+<tr class="memdesc:a4821941703c217301841cac84d79087f"><td class="mdescLeft">&#160;</td><td class="mdescRight">How long the action delay should be when forcing this component to jump. <br /></td></tr>
+<tr class="separator:a4821941703c217301841cac84d79087f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Komponen untuk mekanik movement. Karena ini hanya mekanik movement yang bisa dipakai Komponen lain, bisa dipakai oleh Player, Musuh, dan lainnya. Komponen ini memerlukan komponen lain: </p>
-<ul>
-<li>Rigidbody2D</li>
+<div class="textblock"><p>Component for handling movement system used in the Game. For further explanation, see <b>Reference/Diagrams/MovementController.drawio</b> </p>
+<p>IMPORTANT This class needs child objects to be functional;</p><ul>
+<li><b>"GroundCheck"</b> physics body (trigger) that has <a class="el" href="class_rigidbody_message_relay.html" title="Component to relaying/retransmit any physics events from Unity&#39;s event system to C# event system.">RigidbodyMessageRelay</a> to let this class know that this object has touched a ground.</li>
+<li>(Optional) <b>"WallHugRight"</b> and <b>"WallHugLeft"</b> physics body (trigger) that has <a class="el" href="class_rigidbody_message_relay.html" title="Component to relaying/retransmit any physics events from Unity&#39;s event system to C# event system.">RigidbodyMessageRelay</a> to let this class know that this object has touched a wall (that can be used for wall-jumping).</li>
 </ul>
-<p>Komponen ini memerlukan Child Object sebagai berikut:</p><ul>
-<li><a class="el" href="class_rigidbody_message_relay.html" title="Komponen sebagai alat untuk mempermudah komunikasi antar komponen dengan Rigidbody yang terpisah dian...">RigidbodyMessageRelay</a> (GroundCheck)</li>
-<li><a class="el" href="class_rigidbody_message_relay.html" title="Komponen sebagai alat untuk mempermudah komunikasi antar komponen dengan Rigidbody yang terpisah dian...">RigidbodyMessageRelay</a> (WallHugRight)</li>
-<li><a class="el" href="class_rigidbody_message_relay.html" title="Komponen sebagai alat untuk mempermudah komunikasi antar komponen dengan Rigidbody yang terpisah dian...">RigidbodyMessageRelay</a> (WallHugLeft) </li>
+<p>This class uses following component(s);</p><ul>
+<li><b>Rigidbody2D</b> physics body for this class.</li>
+<li><b>Collider2D (any shape)</b> collider component for the physics body.</li>
+</ul>
+<p>This class uses external component(s);</p><ul>
+<li><a class="el" href="class_rigidbody_message_relay.html" title="Component to relaying/retransmit any physics events from Unity&#39;s event system to C# event system.">RigidbodyMessageRelay</a> for getting physics event for another detached part of the body.</li>
+<li><b>Unity's Animator</b> component for handling movement animation.</li>
+<li><a class="el" href="class_audio_collection_handler.html" title="Class to store each AudioClip with its respective ID that will be used later on by another class or U...">AudioCollectionHandler</a> for playing certain audio used in the animation. </li>
 </ul>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac5fd1519b6884dc51cef40d133646d52" name="ac5fd1519b6884dc51cef40d133646d52"></a>
@@ -170,10 +238,171 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>OnHugWall_Right_Exit<
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi untuk membuat bergerak secara horizontal Objek Game. </p>
+<p>Give input to this movement object to walk in a direction (X-Axis). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">walk_dir_x</td><td>Arah pergerakan dalam horizontal.</td></tr>
+    <tr><td class="paramname">walk_dir_x</td><td>The normalized direction (in X-Axis)</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab2326e69120478e54632e16b83820cdd" name="ab2326e69120478e54632e16b83820cdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2326e69120478e54632e16b83820cdd">&#9670;&#160;</a></span>ForceJump()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IEnumerator MovementController.ForceJump </td>
+          <td>(</td>
+          <td class="paramtype">Vector3</td>          <td class="paramname"><span class="paramname"><em>target_pos</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Let this object to jump in certain trajectory to reach target position. This function is different from <a class="el" href="#a84b7e947934d47cff6fec7af409b7dab" title="Function to jump vertically. If the object is not on ground, but currently &quot;wallhugging&quot;,...">DoJump</a>, while the function only jumps in vertical direction, this function will jump in any direction in certain trajectory in order to land on target position. NOTE: This function will use delay before and after the jump. The delay variables can be changed in forcejump_startdelay and forcejump_finishdelay. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target_pos</td><td>The target position of the </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="ab6e771cf8c7ccb30047761bee1e147ac" name="ab6e771cf8c7ccb30047761bee1e147ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6e771cf8c7ccb30047761bee1e147ac">&#9670;&#160;</a></span>GetRigidbody()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Rigidbody2D MovementController.GetRigidbody </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get <b>Rigidbody2D</b> physics body of this object. </p>
+<dl class="section return"><dt>Returns</dt><dd>The physics body</dd></dl>
+
+</div>
+</div>
+<a id="a935101ddf84ebf9687a4efdc2f0dcfb1" name="a935101ddf84ebf9687a4efdc2f0dcfb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a935101ddf84ebf9687a4efdc2f0dcfb1">&#9670;&#160;</a></span>IsWallHuggingLeft()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MovementController.IsWallHuggingLeft </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if this object is currently wallhugging (using wall of the object's left side). </p>
+<dl class="section return"><dt>Returns</dt><dd>Is currently wallhugging</dd></dl>
+
+</div>
+</div>
+<a id="a8c986b60f0668a079b341f277b0569f0" name="a8c986b60f0668a079b341f277b0569f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c986b60f0668a079b341f277b0569f0">&#9670;&#160;</a></span>IsWallHuggingRight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MovementController.IsWallHuggingRight </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if this object is currently wallhugging (using wall of the object's right side). </p>
+<dl class="section return"><dt>Returns</dt><dd>Is currently wallhugging</dd></dl>
+
+</div>
+</div>
+<a id="a4c79e7aa9ed1019de9688804beb5c594" name="a4c79e7aa9ed1019de9688804beb5c594"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c79e7aa9ed1019de9688804beb5c594">&#9670;&#160;</a></span>LookAt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MovementController.LookAt </td>
+          <td>(</td>
+          <td class="paramtype">Vector2</td>          <td class="paramname"><span class="paramname"><em>direction</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Force this object to look at certain direction. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">direction</td><td>The direction to look at</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae19564f958949914c32b856a873c3b10" name="ae19564f958949914c32b856a873c3b10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae19564f958949914c32b856a873c3b10">&#9670;&#160;</a></span>OnCollisionEnter2D()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MovementController.OnCollisionEnter2D </td>
+          <td>(</td>
+          <td class="paramtype">Collision2D</td>          <td class="paramname"><span class="paramname"><em>collision</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to catch event for when this object collided with another object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">collision</td><td>The colliding object</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad8e9c26b718fe70ac0882fbb7d9fdbd6" name="ad8e9c26b718fe70ac0882fbb7d9fdbd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8e9c26b718fe70ac0882fbb7d9fdbd6">&#9670;&#160;</a></span>OnCollisionExit2D()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MovementController.OnCollisionExit2D </td>
+          <td>(</td>
+          <td class="paramtype">Collision2D</td>          <td class="paramname"><span class="paramname"><em>collision</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to catch event for when previously colliding object are not colliding with this object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">collision</td><td>The colliding object</td></tr>
   </table>
   </dd>
 </dl>
@@ -195,10 +424,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>OnHugWall_Right_Exit<
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi pengecekan ketika Player menyentuh sesuatu (dengan Collision "GroundCheck") </p>
+<p>Function to catch event for when an object entered in <b>GroundCheck</b> body collision (trigger). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">collider</td><td>Object hasil Collision</td></tr>
+    <tr><td class="paramname">collider</td><td>The entered object</td></tr>
   </table>
   </dd>
 </dl>
@@ -220,10 +449,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>OnHugWall_Right_Exit<
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi pengecekan ketika Collider pada Collision "GroundCheck" keluar. </p>
+<p>Function to catch event for when an object exited in <b>GroundCheck</b> body collision (trigger). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">collider</td><td>Object hasil Collision</td></tr>
+    <tr><td class="paramname">collider</td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -245,10 +474,35 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>OnHugWall_Right_Exit<
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi pengecekan ketika Player menyentuh sesuatu (dengan Collision "WallHugLeft") </p>
+<p>Function to catch event for when an object entered in <b>WallHugLeft</b> body collision (trigger). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">collider</td><td>Object hasil Collision</td></tr>
+    <tr><td class="paramname">collider</td><td>The entered object</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a92e881ae7f1fe3cae6c299ce793f669d" name="a92e881ae7f1fe3cae6c299ce793f669d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92e881ae7f1fe3cae6c299ce793f669d">&#9670;&#160;</a></span>OnHugWall_Left_Exit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MovementController.OnHugWall_Left_Exit </td>
+          <td>(</td>
+          <td class="paramtype">Collider2D</td>          <td class="paramname"><span class="paramname"><em>collider</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to catch event for when an object exited in <b>WallHugLeft</b> body collision (trigger). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">collider</td><td>The exited object</td></tr>
   </table>
   </dd>
 </dl>
@@ -270,10 +524,85 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>OnHugWall_Right_Exit<
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi pengecekan ketika Player menyentuh sesuatu (dengan Collision "WallHugRight") </p>
+<p>Function to catch event for when an object entered in <b>WallHugRight</b> body collision (trigger). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">collider</td><td>Object hasil Collision</td></tr>
+    <tr><td class="paramname">collider</td><td>The entered object</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a995a19a74ade8f5c7c2c124662fa868c" name="a995a19a74ade8f5c7c2c124662fa868c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a995a19a74ade8f5c7c2c124662fa868c">&#9670;&#160;</a></span>OnHugWall_Right_Exit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MovementController.OnHugWall_Right_Exit </td>
+          <td>(</td>
+          <td class="paramtype">Collider2D</td>          <td class="paramname"><span class="paramname"><em>collider</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to catch event for when an object exited in <b>WallHugRight</b> body collision (trigger). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">collider</td><td>The exited object</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aba862ed2d445f73903b5065737630ca2" name="aba862ed2d445f73903b5065737630ca2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba862ed2d445f73903b5065737630ca2">&#9670;&#160;</a></span>SetEnableMovement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MovementController.SetEnableMovement </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>enabled</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to enable the movement processing. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">enabled</td><td>Flag to enable movement processing</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad5d1a55c4e7e21150cf8b847747a168d" name="ad5d1a55c4e7e21150cf8b847747a168d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5d1a55c4e7e21150cf8b847747a168d">&#9670;&#160;</a></span>SetIgnoreOneWayCollision()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MovementController.SetIgnoreOneWayCollision </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>flag</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>NOTE: Feature is unstable for now. Ignore "One way collision" objects from able to be interacted by this physics object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">flag</td><td>Should the interaction ignored or not</td></tr>
   </table>
   </dd>
 </dl>

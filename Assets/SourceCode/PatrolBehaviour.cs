@@ -7,6 +7,22 @@ using System;
 
 [RequireComponent(typeof(PathFollower))]
 [RequireComponent(typeof(MovementController))]
+/// <summary>
+/// Behaviour class for patrolling system. The system uses <see cref="PathFollower"/> as its autonomous movement and a set of actions that a patrolling object can do. The sets of action nodes contained in namespace <see cref="PatrolActions"/>.
+/// This class also trigger Game Over event when a Game Over trigger object is registered. When an object has been registered to the trigger, there is a delay before a Game Over actually trigger.
+/// For creating custom patrol action, use interface <see cref="PatrolAction"/>.
+/// 
+/// This uses Visual Scripting but seperate from sequencing system. For setting the patrolling data, use <see cref="PatrolBehaviour.SetInitData(PatrolBehaviour.InitData)"/>.
+/// 
+/// This class uses following component(s);
+/// - <see cref="PathFollower"/> component for pathfinding and AI movement.
+/// - <see cref="MovementController"/> for controlling movement system used in the Game.
+/// 
+/// This class uses external component(s);
+/// - <see cref="AlertTrigger"/> for watching potential "enemy" (in this case, Player) object to be registered as a Game Over trigger object.
+/// - <see cref="BaseProgressUI"/> Progress bar for "alerted" progress.
+/// - <see cref="SoundAlertReceiver"/> receiver for "imaginary sound" transmitted by <see cref="SoundAlertTransceiver"/>. This object used for diverting patrol object's attantion.
+/// </summary>
 public class PatrolBehaviour: MonoBehaviour{
   [SerializeField]
   private float _TemporaryStopDelay = 2f;
@@ -19,22 +35,30 @@ public class PatrolBehaviour: MonoBehaviour{
 
   [SerializeField]
   private float __PathUpdateInterval = 0.3f;
+  /// <summary>
+  /// Update interval to recheck the pathfinding.
+  /// </summary>
   internal float _PathUpdateInterval{get => __PathUpdateInterval;}
 
-  // NOTE: nullable
   [SerializeField]
   private BaseProgressUI _AlertProgress;
 
-  // NOTE: nullable
   [SerializeField]
   private SoundAlertReceiver _SoundReceiver = null;
 
 
+  /// <summary>
+  /// Data for <see cref="PatrolBehaviour"/> used as patrol actions.
+  /// </summary>k
   public class InitData{
+    /// <summary>
+    /// Sets of patrolling actions.
+    /// </summary>
     public List<PatrolAction> PatrolSet = new List<PatrolAction>();
   }
 
 
+  // What type of actions to skip after an interruption.
   private static HashSet<Type> _allowed_skip_type = new HashSet<Type>{
     typeof(PatrolActions.WaitForSeconds),
     typeof(PatrolActions.LookAtDirection)
@@ -43,9 +67,15 @@ public class PatrolBehaviour: MonoBehaviour{
   private GameHandler _game_handler;
 
   private PathFollower _path_follower;
+  /// <summary>
+  /// Autonomous movement used in this class.
+  /// </summary>
   internal PathFollower _PathFollower{get => _path_follower;}
 
   private MovementController _movement_controller;
+  /// <summary>
+  /// Movement system used in this class.
+  /// </summary>
   internal MovementController _MovementController{get => _movement_controller;}
 
   private InitData _init_data;
@@ -61,6 +91,7 @@ public class PatrolBehaviour: MonoBehaviour{
   private HashSet<GameObject> _gameover_triggers = new HashSet<GameObject>();
 
 
+  // Coroutine function to play a sets of patrol actions repeatedly.
   private IEnumerator _patrolling_function(){
     if(_init_data == null || _init_data.PatrolSet.Count <= 0){
       Debug.LogWarning("Cannot continue patrol, InitData is not set or InitData Patrol list is empty.");
@@ -94,7 +125,7 @@ public class PatrolBehaviour: MonoBehaviour{
     }
   }
 
-  // set _stop_delay first
+  // Coroutine for forcing patrolling system to stop by delay.
   private IEnumerator _patrol_stopdelay(){
     if(_patrol_forcestopper == null)
       _patrol_forcestopper = StartCoroutine(_patrol_stopforce());
@@ -112,6 +143,7 @@ public class PatrolBehaviour: MonoBehaviour{
     _patrol_tmpstop = null;
   }
 
+  // Coroutine for focing patrolling system to stop permanently.
   private IEnumerator _patrol_stopforce(){
     yield return new WaitUntil(StopPatrol);
     _patrol_forcestopper = null;
@@ -129,6 +161,7 @@ public class PatrolBehaviour: MonoBehaviour{
   }
 
 
+  // Restart the patrol action system.
   private void _restart_func(){
     StartPatrol();
   }
@@ -148,7 +181,7 @@ public class PatrolBehaviour: MonoBehaviour{
 
 
   private void _on_alerted_enter(GameObject _object){
-    // cek kalau yang masuk player
+    // check if player has entered, then adds it to trigger for game over
     {PlayerController _player = _object.GetComponent<PlayerController>();
       if(_player != null){
         DEBUGModeUtils.Log("Player entered");
@@ -174,7 +207,7 @@ public class PatrolBehaviour: MonoBehaviour{
   }
 
   private void _on_alerted_exit(GameObject _object){
-    // cek kalau yang keluar player
+    // check if player has exited, then removes it from trigger for game over
     {PlayerController _player = _object.GetComponent<PlayerController>();
       if(_player != null){
         _gameover_triggers.Remove(_object);
@@ -233,9 +266,13 @@ public class PatrolBehaviour: MonoBehaviour{
 
 
   public void Update(){
+    // while the Game Over delay timer is still progressing, update the "Alerted" UI
+    if(_gameover_delay < _GameOverTimeout)
+      _update_alert_bar();
   }
 
   public void FixedUpdate(){
+    // handles the Game Over delay timer
     if(_gameover_triggers.Count > 0){
       DEBUGModeUtils.Log("Stop delay refreshed");
       _stop_delay = _TemporaryStopDelay;
@@ -245,8 +282,6 @@ public class PatrolBehaviour: MonoBehaviour{
         if(_gameover_delay < 0)
           _game_handler.TriggerPlayerSpotted();
       }
-
-      _update_alert_bar();
     }
     else{
       if(_gameover_delay < _GameOverTimeout){
@@ -255,13 +290,15 @@ public class PatrolBehaviour: MonoBehaviour{
         if(_gameover_delay >= _GameOverTimeout && _AlertProgress != null){
           StartCoroutine(UIUtility.SetHideUI(_AlertProgress.gameObject, true));
         }
-
-        _update_alert_bar();
       }
     }
   }
 
 
+  /// <summary>
+  /// Start the patrol action. It will skip the starting process if the object already started and not yet stopped.
+  /// </summary>
+  /// <returns>Is the starting process successful or not</returns>
   public bool StartPatrol(){
     if(IsPatrolling())  
       return false;
@@ -270,6 +307,10 @@ public class PatrolBehaviour: MonoBehaviour{
     return true;
   }
 
+  /// <summary>
+  /// Stop the patrol action. It will skip the stopping process if the object already stopped.
+  /// </summary>
+  /// <returns>Is the stopping process successful or not</returns>
   public bool StopPatrol(){
     if(!IsPatrolling())
       return false;
@@ -284,22 +325,18 @@ public class PatrolBehaviour: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Check if the patrol action currently still running or not.
+  /// </summary>
+  /// <returns>Is still patrolling or not</returns>
   public bool IsPatrolling(){
     return _patrol_coroutine != null; 
   }
 
-  public bool CancelPatrolling(){
-    if(!IsPatrolling())
-      return false;
 
-    if(_patrol_coroutine != null)
-      StopCoroutine(_patrol_coroutine);
-    _patrol_coroutine = null;
-
-    return true;
-  }
-
-
+  /// <summary>
+  /// Function to catch Unity's "Object Enabled" event.
+  /// </summary>
   public void OnEnable(){
     if(_game_handler == null || !_game_handler.SceneInitialized)
       return;
@@ -308,13 +345,30 @@ public class PatrolBehaviour: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Set patrolling data for the patrol system to be able to start.
+  /// </summary>
+  /// <param name="data">The patrolling data</param>
   public void SetInitData(InitData data){
     _init_data = data;
   }
 }
 
 
+/// <summary>
+/// Interface class used for defining actions for patrolling.
+/// </summary>
 public interface PatrolAction{
+  /// <summary>
+  /// Getting the inherited class type.
+  /// </summary>
+  /// <returns>The class type</returns>
   public Type GetPatrolType();
+
+  /// <summary>
+  /// Coroutine function that will control <see cref="PatrolBehaviour"/> based on the inheriting class.
+  /// </summary>
+  /// <param name="behaviour"></param>
+  /// <returns></returns>
   public IEnumerator DoAction(PatrolBehaviour behaviour);
 }

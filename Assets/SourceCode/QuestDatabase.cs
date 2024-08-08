@@ -2,7 +2,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+/// <summary>
+/// Database class for loading and storing custom quest handlers.
+/// The database will find any prefab in a determined folder with the prefab that has <see cref="IQuestData"/> and <see cref="IQuestHandler"/>. Custom quest handler objects have to inherit those two interface class with their own implementation for the interface.
+/// When inheriting <see cref="IQuestData"/>, an object has to determine its ID that is unique to each quest handler.
+/// </summary>
 public class QuestDatabase: MonoBehaviour{
+  /// <summary>
+  /// Path to a folder containing prefabs of custom quest handler object in Resources folder.
+  /// </summary>
   private static string quest_data_folder = "Scenes/PrefabObjects/Quests";
 
 
@@ -16,6 +24,9 @@ public class QuestDatabase: MonoBehaviour{
   private Dictionary<string, _quest_metadata> _quest_map = new();
 
   
+  /// <summary>
+  /// Flag if this object has been initialized or not.
+  /// </summary>
   public bool IsInitialized{get; private set;} = false;
 
 
@@ -50,6 +61,11 @@ public class QuestDatabase: MonoBehaviour{
 
 
   #nullable enable
+  /// <summary>
+  /// Get prefab for certain custom quest handler.
+  /// </summary>
+  /// <param name="quest_id">Which quest handler ID</param>
+  /// <returns>The quest handler prefab</returns>
   public GameObject? GetQuestPrefab(string quest_id){
     if(!_quest_map.ContainsKey(quest_id))
       return null;

@@ -2,10 +2,24 @@ var class_movement_controller =
 [
     [ "DoJump", "class_movement_controller.html#a84b7e947934d47cff6fec7af409b7dab", null ],
     [ "DoWalk", "class_movement_controller.html#ac5fd1519b6884dc51cef40d133646d52", null ],
+    [ "ForceJump", "class_movement_controller.html#ab2326e69120478e54632e16b83820cdd", null ],
+    [ "GetRigidbody", "class_movement_controller.html#ab6e771cf8c7ccb30047761bee1e147ac", null ],
+    [ "IsWallHuggingLeft", "class_movement_controller.html#a935101ddf84ebf9687a4efdc2f0dcfb1", null ],
+    [ "IsWallHuggingRight", "class_movement_controller.html#a8c986b60f0668a079b341f277b0569f0", null ],
+    [ "LookAt", "class_movement_controller.html#a4c79e7aa9ed1019de9688804beb5c594", null ],
+    [ "OnCollisionEnter2D", "class_movement_controller.html#ae19564f958949914c32b856a873c3b10", null ],
+    [ "OnCollisionExit2D", "class_movement_controller.html#ad8e9c26b718fe70ac0882fbb7d9fdbd6", null ],
     [ "OnGroundCheck_Enter", "class_movement_controller.html#aa7107fec71bee186399b02d510f25ab8", null ],
     [ "OnGroundCheck_Exit", "class_movement_controller.html#a47118bf8235a917f152538e237d880b5", null ],
     [ "OnHugWall_Left_Enter", "class_movement_controller.html#a2f010a28d66901d56b68a8f44f92253f", null ],
     [ "OnHugWall_Left_Exit", "class_movement_controller.html#a92e881ae7f1fe3cae6c299ce793f669d", null ],
     [ "OnHugWall_Right_Enter", "class_movement_controller.html#a783690f8b574c0c91e08c3529c8f88d5", null ],
-    [ "OnHugWall_Right_Exit", "class_movement_controller.html#a995a19a74ade8f5c7c2c124662fa868c", null ]
+    [ "OnHugWall_Right_Exit", "class_movement_controller.html#a995a19a74ade8f5c7c2c124662fa868c", null ],
+    [ "SetEnableMovement", "class_movement_controller.html#aba862ed2d445f73903b5065737630ca2", null ],
+    [ "SetIgnoreOneWayCollision", "class_movement_controller.html#ad5d1a55c4e7e21150cf8b847747a168d", null ],
+    [ "FixedLookAt", "class_movement_controller.html#a65102e4a191a7566c766230d2e17476d", null ],
+    [ "GlideOnGround", "class_movement_controller.html#a532b7a647d3caf22d9d8339810a144b0", null ],
+    [ "ToggleWalk", "class_movement_controller.html#a5fbe71866c7a6947df158a202505986f", null ],
+    [ "ForceJumpStartDelay", "class_movement_controller.html#a4821941703c217301841cac84d79087f", null ],
+    [ "MovementSpeed", "class_movement_controller.html#ad4a869372c7521f54df3e542afd95945", null ]
 ];

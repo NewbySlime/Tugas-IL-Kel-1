@@ -3,11 +3,27 @@ using UnityEngine;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system for binding the enemy (boss) object to the target <see cref="BossFightMG"/> object.
+  /// </summary>
   public class BossFightSetWatchBossSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "boss_fight_set_watch_boss";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target object that has <see cref="BossFightMG"/> component.
+      /// </summary>
       public ObjectReference.ObjRefID BossFightMGRef;
+
+      /// <summary>
+      /// The target enemy (boss) object.
+      /// </summary>
       public ObjectReference.ObjRefID TargetBossRef;
     }
 
@@ -61,6 +77,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Set Watch Boss")]
   [UnitCategory("Sequence/Game/BossFight")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="BossFightSetWatchBossSequence"/>.
+  /// </summary>
   public class BossFightSetWatchBossSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _mini_game_ref;

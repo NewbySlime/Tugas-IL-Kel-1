@@ -12,23 +12,53 @@ using UnityEngine.InputSystem.LowLevel;
 
 
 
-/// <summary>
-/// Komponen untuk mengontrol Objek Game berdasarkan input dari Player.
-/// </summary>
 [RequireComponent(typeof(MovementController))]
-[RequireComponent(typeof(WeaponHandler))]
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(HealthComponent))]
 [RequireComponent(typeof(InventoryData))]
 [RequireComponent(typeof(RecipeDiscoveryComponent))]
 [RequireComponent(typeof(OnDeadGameOverTrigger))]
+/// <summary>
+/// Class for translating user's input to available interactions in the Game. Some UI interaction handlings are detached from this component (ex. GameHandler handles the pausing system and UI).
+/// 
+/// This class uses following component(s);
+/// - <see cref="MovementController"/> for controlling movement system used in this Game.
+/// - Unity's <b>PlayerInput</b> for handling input from player.
+/// - <see cref="HealthComponent"/> for handling health system.
+/// - <see cref="InventoryData"/> for storing items.
+/// - <see cref="RecipeDiscoveryComponent"/> as to handle discoveries of undiscovered recipes at the start of the Game.
+/// - <see cref="OnDeadGameOverTrigger"/> as a separate trigger for triggering Game Over event when the object is dead.
+/// 
+/// This class uses external component(s);
+/// - <see cref="WeaponHandler"/> for controlling weapon system that can be used by player.
+/// - <see cref="InteractionHandler"/> for giving interaction interface between player and the Game's world objects.
+/// - <see cref="PickableObjectPickerHandler"/> for handling item picking system.
+/// - Unity's <b>Animator</b> Component for handling animation used for this object.
+/// - <see cref="AnimationTriggerFlagComponent"/> for listening to trigger flag that comes from Unity's animation system.
+/// - <see cref="MouseFollower"/> (gets by finding an instance) to get the mouse position.
+/// - <see cref="MultipleProgressBar"/> (gets by stored UI in <see cref="GameUIHandler"/>) as the weapon cooldown progress.
+/// r
+/// This class uses autoload(s);
+/// - <see cref="GameHandler"/> for Game events and such.
+/// - <see cref="PersistanceContext"/> for handling save files.
+/// - <see cref="GameUIHandler"/> for getting UI used in the Game.
+/// - <see cref="ItemDatabase"/> for getting data about certain item.
+/// - <see cref="InputFocusContext"/> for asking focus of input used.
+/// </summary>
 public class PlayerController: MonoBehaviour{
+  // Data ID used for IPersistance.
   private const string _PlayerRuntimeDataID = "player_data";
 
+  /// <summary>
+  /// Default Reference used for representation of the single scene instance of the object.
+  /// </summary>
   public static ObjectReference.ObjRefID DefaultRefID = new(){
     ID = "player_object"
   };
 
+  /// <summary>
+  /// Default input focus data for <see cref="PlayerController"/>.
+  /// </summary>
   public static RegisterInputFocusSequence.InputFocusData PlayerInputContext = new(){
     RefID = DefaultRefID,
     InputContext = InputFocusContext.ContextEnum.Player
@@ -36,6 +66,9 @@ public class PlayerController: MonoBehaviour{
 
 
   [Serializable]
+  /// <summary>
+  /// Data structure for storing to a save file in for <see cref="PersistanceContext"/>.
+  /// </summary>
   public class RuntimeData: PersistanceContext.IPersistance{
     public HealthComponent.RuntimeData PlayerHealth = new();
     
@@ -118,12 +151,29 @@ public class PlayerController: MonoBehaviour{
   private bool _is_jumping_pressed = false;
 
 
+  /// <summary>
+  /// Allows the player to use their <see cref="WeaponHandler"/>.
+  /// </summary>
   public bool AllowUseWeapon = true;
+
+  /// <summary>
+  /// Allows the player to jump.
+  /// </summary>
   public bool AllowJump = true;
 
+  /// <summary>
+  /// Should the Game Over triggered when the player is dead.
+  /// </summary>
   public bool TriggerGameOverOnDead = true;
+
+  /// <summary>
+  /// Should the <see cref="MovementController"/> disabled when the player is dead.
+  /// </summary>
   public bool DisableMovementOnDead = true;
 
+  /// <summary>
+  /// Can another components/objects use this object as a trigger.
+  /// </summary>
   public bool TriggerAvailable{private set; get;} = true;
 
 
@@ -143,6 +193,7 @@ public class PlayerController: MonoBehaviour{
     _weapon_counter_ui.SetProgress(_progress);
   }
 
+  // Function to catch trigger flag from AnimationTriggerFlagComponent.
   private void _on_anim_trigger(string trigger_name){
     DEBUGModeUtils.Log(string.Format("weapon trigger anim trigger {0}", trigger_name));
     switch(trigger_name){
@@ -333,6 +384,7 @@ public class PlayerController: MonoBehaviour{
   }
 
 
+  // Resets all functions that uses input from user.
   private void _reset_input(){
     _movement_controller.DoWalk(0);
 
@@ -341,6 +393,7 @@ public class PlayerController: MonoBehaviour{
     _check_ignore_one_way();
   }
 
+  // To check if the player have the input focus. If no, reset the inputs.
   private void _another_focus_context_registered(){
     if(_input_context.InputAvailable(this))
       return;
@@ -419,10 +472,12 @@ public class PlayerController: MonoBehaviour{
 
 
   public void Update(){
+    // Update all UI related
     _update_ammo_counter_ui();
   }
 
   public void FixedUpdate(){
+    // Handle look at to mouse, and timer handling
     if(_mouse_follower != null){
       _WeaponHandler.LookAt(_mouse_follower.transform.position);
     }
@@ -439,9 +494,10 @@ public class PlayerController: MonoBehaviour{
 
 
   /// <summary>
-  /// Input Handling ketika Player memberikan input untuk bergerak secara horizontal.
+  /// Function to catch "Strafe" input event.
+  /// This will translate the input for <see cref="MovementController.DoWalk(float)"/>.
   /// </summary>
-  /// <param name="value">Value yang diberikan Unity.</param>
+  /// <param name="value">Unity's input data</param>
   public void OnStrafe(InputValue value){
     DEBUGModeUtils.Log("strafe input");
     if(!_input_context.InputAvailable(this))
@@ -452,9 +508,9 @@ public class PlayerController: MonoBehaviour{
   }
 
   /// <summary>
-  /// Input Handling ketika Player memberikan input untuk melompat.
+  /// Function to catch "Jump" input event.
   /// </summary>
-  /// <param name="value">Value yang diberikan Unity.</param>
+  /// <param name="value">Unity's input data</param>
   public void OnJump(InputValue value){
     if(!_input_context.InputAvailable(this))
       return;
@@ -469,6 +525,11 @@ public class PlayerController: MonoBehaviour{
       _movement_controller.DoJump();
   }
 
+  /// <summary>
+  /// Function to catch "Duck" input event.
+  /// This is used for "ignoring" one way platforms.
+  /// </summary>
+  /// <param name="value">Unity's input data</param>
   public void OnDuck(InputValue value){
     if(!_input_context.InputAvailable(this))
       return;
@@ -477,6 +538,10 @@ public class PlayerController: MonoBehaviour{
     _check_ignore_one_way();
   }
 
+  /// <summary>
+  /// Function to catch "Fire" input event.
+  /// </summary>
+  /// <param name="value">Unity's input data</param>
   public void OnFire(InputValue value){
     DEBUGModeUtils.Log(string.Format("fire input {0} {1}", !AllowUseWeapon, !_input_context.InputAvailable(this)));
     if(!AllowUseWeapon || !_input_context.InputAvailable(this))
@@ -497,6 +562,11 @@ public class PlayerController: MonoBehaviour{
     }
   }
 
+  /// <summary>
+  /// Function to catch "Interact" input event.
+  /// The function uses the input to interact using <see cref="InteractionHandler.TriggerInteraction"/>.
+  /// </summary>
+  /// <param name="value">Unity's input data</param>
   public void OnInteract(InputValue value){
     if(!_input_context.InputAvailable(this))
       return;
@@ -513,11 +583,19 @@ public class PlayerController: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Sets to allow the player for using <see cref="InteractionHandler"/>.
+  /// </summary>
+  /// <param name="flag">Is player allowed to interact</param>
   public void SetEnableInteraction(bool flag){
     _InteractionFront.gameObject.SetActive(flag);
   }
 
 
+  /// <summary>
+  /// Get the stored state of player object. For applying a state to this player object, see <see cref="FromRuntimeData"/>.
+  /// </summary>
+  /// <returns>The resulting state</returns>
   public RuntimeData AsRuntimeData(){
     RuntimeData _this_rdata = new(){
       PlayerHealth = _health_component.AsRuntimeData(),
@@ -531,6 +609,10 @@ public class PlayerController: MonoBehaviour{
     return _this_rdata;
   }
 
+  /// <summary>
+  /// Apply and modify this player object to recreate the object based on the supplied state. For getting current state of the object, see <see cref="AsRuntimeData"/>.
+  /// </summary>
+  /// <param name="data">The state to use for recreating</param>
   public void FromRuntimeData(RuntimeData data){
     if(data == null)
       return;

@@ -5,6 +5,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
+/// <summary>
+/// Component for handling weapon and gives its wielder (such as <see cref="PlayerController"/>) Game interactions for combat system. The weapon bound in this component is based on the bound item that has data about <see cref="WeaponItem"/>.
+/// For ammo count handling, it is controlled by the wielder due to some wielder such as enemies might use the weapon with indefinite ammot count.
+/// 
+/// This class uses autoload(s);
+/// - <see cref="ItemDatabase"/> for getting data about certain item. 
+/// </summary>
 public class WeaponHandler: MonoBehaviour{
   private ItemDatabase _item_database;
 
@@ -18,6 +25,7 @@ public class WeaponHandler: MonoBehaviour{
   private float _weapon_delay = 0;
 
 
+  // This function uses coroutine to wait DamagerComponent finished initializing.
   private IEnumerator _trigger_weapon(){
     DEBUGModeUtils.Log(string.Format("firing has value {0}", _weapon_item.HasValue));
     if(!_weapon_item.HasValue)
@@ -71,6 +79,7 @@ public class WeaponHandler: MonoBehaviour{
   }
 
   public void FixedUpdate(){
+    // handles timing for weapon's cooldown
     _last_position = transform.position;
 
     if(_weapon_delay > 0)
@@ -78,6 +87,12 @@ public class WeaponHandler: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Trigger (fire/shoot/slash) the weapon.
+  /// This will not be triggered based on <see cref="CanShoot"/> function and if this class does not have bound weapon item.
+  /// For redirecting where the weapon should be pointing, see <see cref="LookAt"/>
+  /// </summary>
+  /// <returns>If triggering successful</returns>
   public bool TriggerWeapon(){
     if(!CanShoot() || !_weapon_item.HasValue)
       return false;
@@ -88,16 +103,29 @@ public class WeaponHandler: MonoBehaviour{
     return true;
   }
 
+  /// <summary>
+  /// Check if this class can trigger another one.
+  /// </summary>
+  /// <returns>Is this weapon can be triggered</returns>
   public bool CanShoot(){
     return _weapon_delay <= 0;
   }
 
 
+  /// <summary>
+  /// Points the weapon to a target position.
+  /// </summary>
+  /// <param name="position">The target position to point at</param>
   public void LookAt(Vector2 position){
     _weapon_direction = (position-(Vector2)transform.position).normalized;
   }
 
 
+  /// <summary>
+  /// Bind this component with certain item that has <see cref="WeaponItem"/> data and configure this component based on it.
+  /// </summary>
+  /// <param name="item_id">The target item ID to bind with</param>
+  /// <returns>If the binding was successful</returns>
   public bool SetWeaponItem(string item_id){
     TypeDataStorage _item_data = _item_database.GetItemData(item_id);
     if(_item_data == null)
@@ -112,6 +140,10 @@ public class WeaponHandler: MonoBehaviour{
     return true;
   }
 
+  /// <summary>
+  /// Get the bound item ID for the weapon configuration.
+  /// </summary>
+  /// <returns></returns>
   public string GetWeaponItem(){
     return _weapon_id;
   }

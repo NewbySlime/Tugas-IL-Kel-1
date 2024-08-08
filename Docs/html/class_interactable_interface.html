@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: InteractableInterface Class Reference</title>
+<title>FlavourOfRoemahNusantara: InteractableInterface Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -94,10 +96,14 @@ $(function(){initNavTree('class_interactable_interface.html',''); initResizable(
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#properties">Properties</a> &#124;
 <a href="class_interactable_interface-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">InteractableInterface Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Interface component that any object can use to receive input/interaction from <a class="el" href="class_interaction_handler.html" title="Class for handling interaction with other objects that has InteractableInterface. This class acts as ...">InteractionHandler</a>. This class only acts as a receiver, it does not handle events for when an interaction "view" has entered nor exited. For further explanation, see <b>Reference/Diagrams/InteractionHandling.drawio</b>  
+ <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for InteractableInterface:</div>
 <div class="dyncontent">
@@ -107,16 +113,76 @@ Inheritance diagram for InteractableInterface:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:aa47de41400cc27e3e461a7d55e4c3434" id="r_aa47de41400cc27e3e461a7d55e4c3434"><td class="memItemLeft" align="right" valign="top"><a id="aa47de41400cc27e3e461a7d55e4c3434" name="aa47de41400cc27e3e461a7d55e4c3434"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>InteractableInterface_InteractableEnter</b> ()</td></tr>
+<tr class="memdesc:aa47de41400cc27e3e461a7d55e4c3434"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to be called when this object entered <a class="el" href="class_interaction_handler.html" title="Class for handling interaction with other objects that has InteractableInterface. This class acts as ...">InteractionHandler</a> interaction "view". This function does not call on its own, it is being called by <a class="el" href="class_interaction_handler.html" title="Class for handling interaction with other objects that has InteractableInterface. This class acts as ...">InteractionHandler</a>. This is a function to catch interface message from <a class="el" href="class_interaction_handler.html" title="Class for handling interaction with other objects that has InteractableInterface. This class acts as ...">InteractionHandler</a>. <br /></td></tr>
+<tr class="separator:aa47de41400cc27e3e461a7d55e4c3434"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95e3ef28e5010254fb639640c2f0bd98" id="r_a95e3ef28e5010254fb639640c2f0bd98"><td class="memItemLeft" align="right" valign="top"><a id="a95e3ef28e5010254fb639640c2f0bd98" name="a95e3ef28e5010254fb639640c2f0bd98"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>TriggerInteractionEnter</b> ()</td></tr>
+<tr class="memdesc:a95e3ef28e5010254fb639640c2f0bd98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger for if this object entered the interaction "view". This will signaling other objects attached to this using message interface <b>InteractableInterface_InteractableEnter</b>. <br /></td></tr>
 <tr class="separator:a95e3ef28e5010254fb639640c2f0bd98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3ecd6ff3910baa7300588c8be522f69" id="r_aa3ecd6ff3910baa7300588c8be522f69"><td class="memItemLeft" align="right" valign="top"><a id="aa3ecd6ff3910baa7300588c8be522f69" name="aa3ecd6ff3910baa7300588c8be522f69"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>InteractableInterface_InteractableExit</b> ()</td></tr>
+<tr class="memdesc:aa3ecd6ff3910baa7300588c8be522f69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to be called when this object exited <a class="el" href="class_interaction_handler.html" title="Class for handling interaction with other objects that has InteractableInterface. This class acts as ...">InteractionHandler</a> interaction "view". This function does not call on its own, it is being called by <a class="el" href="class_interaction_handler.html" title="Class for handling interaction with other objects that has InteractableInterface. This class acts as ...">InteractionHandler</a>. This is a function to catch interface message from <a class="el" href="class_interaction_handler.html" title="Class for handling interaction with other objects that has InteractableInterface. This class acts as ...">InteractionHandler</a>. <br /></td></tr>
+<tr class="separator:aa3ecd6ff3910baa7300588c8be522f69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac15ed7a4184e509b7f6e33a23e54b59e" id="r_ac15ed7a4184e509b7f6e33a23e54b59e"><td class="memItemLeft" align="right" valign="top"><a id="ac15ed7a4184e509b7f6e33a23e54b59e" name="ac15ed7a4184e509b7f6e33a23e54b59e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>TriggerInteractionExit</b> ()</td></tr>
+<tr class="memdesc:ac15ed7a4184e509b7f6e33a23e54b59e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger for if this object exited the interaction "view". This will signalling other objects attached to this using message interface <b>InteractableInterface_InteractableExit</b>. <br /></td></tr>
 <tr class="separator:ac15ed7a4184e509b7f6e33a23e54b59e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00e283d05f6e50dfbd035e068d42322b" id="r_a00e283d05f6e50dfbd035e068d42322b"><td class="memItemLeft" align="right" valign="top"><a id="a00e283d05f6e50dfbd035e068d42322b" name="a00e283d05f6e50dfbd035e068d42322b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>InteractableInterface_Interact</b> ()</td></tr>
+<tr class="memdesc:a00e283d05f6e50dfbd035e068d42322b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to be called when an <a class="el" href="class_interaction_handler.html" title="Class for handling interaction with other objects that has InteractableInterface. This class acts as ...">InteractionHandler</a> has prompted to interact with objects near it (in its interaction "view"). This function does not call on its own, it is being called by <a class="el" href="class_interaction_handler.html" title="Class for handling interaction with other objects that has InteractableInterface. This class acts as ...">InteractionHandler</a>. This is a function to catch interface message from <a class="el" href="class_interaction_handler.html" title="Class for handling interaction with other objects that has InteractableInterface. This class acts as ...">InteractionHandler</a>. <br /></td></tr>
+<tr class="separator:a00e283d05f6e50dfbd035e068d42322b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac587e8cd8f60dce239459afd9aba5aa0" id="r_ac587e8cd8f60dce239459afd9aba5aa0"><td class="memItemLeft" align="right" valign="top"><a id="ac587e8cd8f60dce239459afd9aba5aa0" name="ac587e8cd8f60dce239459afd9aba5aa0"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>TriggerInteract</b> ()</td></tr>
+<tr class="memdesc:ac587e8cd8f60dce239459afd9aba5aa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger for if this object is being interacted by <a class="el" href="class_interaction_handler.html" title="Class for handling interaction with other objects that has InteractableInterface. This class acts as ...">InteractionHandler</a>. This will signalling other objects attached to this using message interface <b>InteractableInterface_Interact</b>. <br /></td></tr>
 <tr class="separator:ac587e8cd8f60dce239459afd9aba5aa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:a930d5446b82601329758ea4ae984c43a" id="r_a930d5446b82601329758ea4ae984c43a"><td class="memItemLeft" align="right" valign="top"><a id="a930d5446b82601329758ea4ae984c43a" name="a930d5446b82601329758ea4ae984c43a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>InteractOnAvailable</b><code> [get]</code></td></tr>
+<tr class="memdesc:a930d5446b82601329758ea4ae984c43a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can any <a class="el" href="class_interaction_handler.html" title="Class for handling interaction with other objects that has InteractableInterface. This class acts as ...">InteractionHandler</a> interact with this object? <br /></td></tr>
+<tr class="separator:a930d5446b82601329758ea4ae984c43a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c0cc8c1e0d6bf4cfb0cd90ec072d9f0" id="r_a5c0cc8c1e0d6bf4cfb0cd90ec072d9f0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c0cc8c1e0d6bf4cfb0cd90ec072d9f0">PassThrough</a><code> [get]</code></td></tr>
+<tr class="memdesc:a5c0cc8c1e0d6bf4cfb0cd90ec072d9f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should this interface block any interaction "view"?  <br /></td></tr>
+<tr class="separator:a5c0cc8c1e0d6bf4cfb0cd90ec072d9f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Interface component that any object can use to receive input/interaction from <a class="el" href="class_interaction_handler.html" title="Class for handling interaction with other objects that has InteractableInterface. This class acts as ...">InteractionHandler</a>. This class only acts as a receiver, it does not handle events for when an interaction "view" has entered nor exited. For further explanation, see <b>Reference/Diagrams/InteractionHandling.drawio</b> </p>
+<p>Message interface used for interaction;</p><ul>
+<li><a class="el" href="#aa47de41400cc27e3e461a7d55e4c3434" title="Function to be called when this object entered InteractionHandler interaction &quot;view&quot;....">InteractableInterface_InteractableEnter</a></li>
+<li><a class="el" href="#a00e283d05f6e50dfbd035e068d42322b" title="Function to be called when an InteractionHandler has prompted to interact with objects near it (in it...">InteractableInterface_Interact</a></li>
+<li><a class="el" href="#aa3ecd6ff3910baa7300588c8be522f69" title="Function to be called when this object exited InteractionHandler interaction &quot;view&quot;....">InteractableInterface_InteractableExit</a></li>
+</ul>
+<p>This class uses external component(s);</p><ul>
+<li>List of <b>GameObject</b>(s) to signalling any <a class="el" href="class_interactable_interface.html" title="Interface component that any object can use to receive input/interaction from InteractionHandler....">InteractableInterface</a> or any object that can receive message interface to this class. </li>
+</ul>
+</div><h2 class="groupheader">Property Documentation</h2>
+<a id="a5c0cc8c1e0d6bf4cfb0cd90ec072d9f0" name="a5c0cc8c1e0d6bf4cfb0cd90ec072d9f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c0cc8c1e0d6bf4cfb0cd90ec072d9f0">&#9670;&#160;</a></span>PassThrough</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool InteractableInterface.PassThrough</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Should this interface block any interaction "view"? </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Assets/SourceCode/<b>InteractableInterface.cs</b></li>
 </ul>

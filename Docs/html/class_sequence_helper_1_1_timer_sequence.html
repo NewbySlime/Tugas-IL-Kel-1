@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: SequenceHelper.TimerSequence Class Reference</title>
+<title>FlavourOfRoemahNusantara: SequenceHelper.TimerSequence Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -93,32 +95,110 @@ $(function(){initNavTree('class_sequence_helper_1_1_timer_sequence.html',''); in
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="class_sequence_helper_1_1_timer_sequence-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">SequenceHelper.TimerSequence Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>A custom Sequencing system for delaying a part of Sequence.  
+ <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for SequenceHelper.TimerSequence:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_sequence_helper_1_1_timer_sequence.png" usemap="#SequenceHelper.TimerSequence_map" alt=""/>
   <map id="SequenceHelper.TimerSequence_map" name="SequenceHelper.TimerSequence_map">
-<area href="interface_i_sequence_async.html" alt="ISequenceAsync" shape="rect" coords="207,0,404,24"/>
+<area href="interface_i_sequence_async.html" title="Interface class used for triggering the inheriting Sequence system." alt="ISequenceAsync" shape="rect" coords="207,0,404,24"/>
+<area href="interface_i_sequence_data.html" title="Interface class used to handle data for the inheriting Sequence system." alt="ISequenceData" shape="rect" coords="414,0,611,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_sequence_helper_1_1_timer_sequence_1_1_seq_data.html">SeqData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data for the Sequence system.  <a href="struct_sequence_helper_1_1_timer_sequence_1_1_seq_data.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a566535260157fb52ecdc422e0599657d" id="r_a566535260157fb52ecdc422e0599657d"><td class="memItemLeft" align="right" valign="top"><a id="a566535260157fb52ecdc422e0599657d" name="a566535260157fb52ecdc422e0599657d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>FixedUpdate</b> ()</td></tr>
 <tr class="separator:a566535260157fb52ecdc422e0599657d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c03b900eb2b64f21c91851c322f17cd" id="r_a1c03b900eb2b64f21c91851c322f17cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c03b900eb2b64f21c91851c322f17cd">StartTriggerAsync</a> ()</td></tr>
+<tr class="memdesc:a1c03b900eb2b64f21c91851c322f17cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to trigger the Sequence asynchronously.  <br /></td></tr>
 <tr class="separator:a1c03b900eb2b64f21c91851c322f17cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f2adea3dac9a6e5756f047db7352b78" id="r_a0f2adea3dac9a6e5756f047db7352b78"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0f2adea3dac9a6e5756f047db7352b78">IsTriggering</a> ()</td></tr>
+<tr class="memdesc:a0f2adea3dac9a6e5756f047db7352b78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to check if the Sequence is still playing or not.  <br /></td></tr>
 <tr class="separator:a0f2adea3dac9a6e5756f047db7352b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72ba7c291fae14748e773f713e1ab92c" id="r_a72ba7c291fae14748e773f713e1ab92c"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a72ba7c291fae14748e773f713e1ab92c">GetSequenceID</a> ()</td></tr>
+<tr class="memdesc:a72ba7c291fae14748e773f713e1ab92c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the ID about inheriting Sequence system.  <br /></td></tr>
+<tr class="separator:a72ba7c291fae14748e773f713e1ab92c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa68d934dd37d518cfcc01094474d2ef" id="r_aaa68d934dd37d518cfcc01094474d2ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa68d934dd37d518cfcc01094474d2ef">SetSequenceData</a> (object data)</td></tr>
+<tr class="memdesc:aaa68d934dd37d518cfcc01094474d2ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to set appropriate data used by the inheriting Sequence system.  <br /></td></tr>
+<tr class="separator:aaa68d934dd37d518cfcc01094474d2ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a95802e231137ba470e45c80ba1877c77" id="r_a95802e231137ba470e45c80ba1877c77"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a95802e231137ba470e45c80ba1877c77">GetSequenceIDStatic</a> ()</td></tr>
+<tr class="memdesc:a95802e231137ba470e45c80ba1877c77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sequence ID to be used for registering to <a class="el" href="class_sequence_database.html" title="Database class for loading and storing custom sequence handlers. The database will find any prefab in...">SequenceDatabase</a>.  <br /></td></tr>
+<tr class="separator:a95802e231137ba470e45c80ba1877c77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A custom Sequencing system for delaying a part of Sequence. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a72ba7c291fae14748e773f713e1ab92c" name="a72ba7c291fae14748e773f713e1ab92c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72ba7c291fae14748e773f713e1ab92c">&#9670;&#160;</a></span>GetSequenceID()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string SequenceHelper.TimerSequence.GetSequenceID </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the ID about inheriting Sequence system. </p>
+<dl class="section return"><dt>Returns</dt><dd>The Sequence ID</dd></dl>
+
+<p>Implements <a class="el" href="interface_i_sequence_data.html#a1060b03726f932e378940087893f8182">ISequenceData</a>.</p>
+
+</div>
+</div>
+<a id="a95802e231137ba470e45c80ba1877c77" name="a95802e231137ba470e45c80ba1877c77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95802e231137ba470e45c80ba1877c77">&#9670;&#160;</a></span>GetSequenceIDStatic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static string SequenceHelper.TimerSequence.GetSequenceIDStatic </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sequence ID to be used for registering to <a class="el" href="class_sequence_database.html" title="Database class for loading and storing custom sequence handlers. The database will find any prefab in...">SequenceDatabase</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>The ID</dd></dl>
+
+</div>
+</div>
 <a id="a0f2adea3dac9a6e5756f047db7352b78" name="a0f2adea3dac9a6e5756f047db7352b78"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0f2adea3dac9a6e5756f047db7352b78">&#9670;&#160;</a></span>IsTriggering()</h2>
 
@@ -134,7 +214,37 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>FixedUpdate</b> ()</t
       </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="interface_i_sequence_async.html">ISequenceAsync</a>.</p>
+<p>Function to check if the Sequence is still playing or not. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>Implements <a class="el" href="interface_i_sequence_async.html#a578a45f36a20e285351db303584527db">ISequenceAsync</a>.</p>
+
+</div>
+</div>
+<a id="aaa68d934dd37d518cfcc01094474d2ef" name="aaa68d934dd37d518cfcc01094474d2ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa68d934dd37d518cfcc01094474d2ef">&#9670;&#160;</a></span>SetSequenceData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SequenceHelper.TimerSequence.SetSequenceData </td>
+          <td>(</td>
+          <td class="paramtype">object</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to set appropriate data used by the inheriting Sequence system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>The data used by inheriting Sequence system.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="interface_i_sequence_data.html#a586c83f083b148c7fa8eeecb1b55e89e">ISequenceData</a>.</p>
 
 </div>
 </div>
@@ -153,12 +263,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>FixedUpdate</b> ()</t
       </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="interface_i_sequence_async.html">ISequenceAsync</a>.</p>
+<p>Function to trigger the Sequence asynchronously. </p>
+
+<p>Implements <a class="el" href="interface_i_sequence_async.html#ad18af6e4a867d4d748e3c4e01e1bb7bb">ISequenceAsync</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Assets/SourceCode/SequenceHelper/<b>TimingSequence.cs</b></li>
+<li>Assets/SourceCode/SequenceHelper/Timing/<b>TimerSequence.cs</b></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

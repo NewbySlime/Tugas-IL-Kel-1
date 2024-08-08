@@ -3,10 +3,22 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system that set the target object as the pivot target of <see cref="FollowerCamera2D"/>.
+  /// </summary>
   public class SetCameraPivotSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "set_camera_pivot";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// Target Object Reference for the target pivot.
+      /// </summary>
       public ObjectReference.ObjRefID RefID;
     }
 
@@ -51,6 +63,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Set Camera Pivot")]
   [UnitCategory("Sequence/Camera")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="SetCameraPivotSequence"/>.
+  /// </summary>
   public class SetCameraPivotSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _ref_id_input;

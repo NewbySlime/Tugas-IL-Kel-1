@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: DamagerComponent.DamagerContext Struct Reference</title>
+<title>FlavourOfRoemahNusantara: DamagerComponent.DamagerContext Struct Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -100,56 +102,98 @@ $(function(){initNavTree('struct_damager_component_1_1_damager_context.html','')
   <div class="headertitle"><div class="title">DamagerComponent.DamagerContext Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Damager's context or configuration data.  
+ <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_damager_component_1_1_damager_context_1_1_item_deplete.html">ItemDeplete</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data for telling the damager to use items when the component are triggered/fired.  <a href="struct_damager_component_1_1_damager_context_1_1_item_deplete.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ab434f7f8e85f8626a25f8e171208cdad" id="r_ab434f7f8e85f8626a25f8e171208cdad"><td class="memItemLeft" align="right" valign="top"><a id="ab434f7f8e85f8626a25f8e171208cdad" name="ab434f7f8e85f8626a25f8e171208cdad"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>OnCollisionAction</b> { <b>Nothing</b>
+<tr class="memitem:ab434f7f8e85f8626a25f8e171208cdad" id="r_ab434f7f8e85f8626a25f8e171208cdad"><td class="memItemLeft" align="right" valign="top"><a id="ab434f7f8e85f8626a25f8e171208cdad" name="ab434f7f8e85f8626a25f8e171208cdad"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab434f7f8e85f8626a25f8e171208cdad">OnCollisionAction</a> { <b>Nothing</b>
 , <b>EraseOnCollision</b>
-, <b>BounceOnCollision</b>
  }</td></tr>
+<tr class="memdesc:ab434f7f8e85f8626a25f8e171208cdad"><td class="mdescLeft">&#160;</td><td class="mdescRight">What the component should do when on collision with another object. <br /></td></tr>
 <tr class="separator:ab434f7f8e85f8626a25f8e171208cdad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb07ce26ba434cf780bc42bbccb42df6" id="r_aeb07ce26ba434cf780bc42bbccb42df6"><td class="memItemLeft" align="right" valign="top"><a id="aeb07ce26ba434cf780bc42bbccb42df6" name="aeb07ce26ba434cf780bc42bbccb42df6"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ProjectileType</b> { <b>Raycast</b>
-, <b>FloatingProjectile</b>
+<tr class="memitem:aeb07ce26ba434cf780bc42bbccb42df6" id="r_aeb07ce26ba434cf780bc42bbccb42df6"><td class="memItemLeft" align="right" valign="top"><a id="aeb07ce26ba434cf780bc42bbccb42df6" name="aeb07ce26ba434cf780bc42bbccb42df6"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb07ce26ba434cf780bc42bbccb42df6">ProjectileType</a> { <b>Raycast</b>
 , <b>NormalProjectile</b>
  }</td></tr>
+<tr class="memdesc:aeb07ce26ba434cf780bc42bbccb42df6"><td class="mdescLeft">&#160;</td><td class="mdescRight">What kind of type the damager would inherit that determines the behaviour of the component. <br /></td></tr>
 <tr class="separator:aeb07ce26ba434cf780bc42bbccb42df6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a7156e6392ba545ce22ce3130179b2c11" id="r_a7156e6392ba545ce22ce3130179b2c11"><td class="memItemLeft" align="right" valign="top"><a id="a7156e6392ba545ce22ce3130179b2c11" name="a7156e6392ba545ce22ce3130179b2c11"></a>
-ProjectileType&#160;</td><td class="memItemRight" valign="bottom"><b>_ProjectileType</b></td></tr>
+<a class="el" href="#aeb07ce26ba434cf780bc42bbccb42df6">ProjectileType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_ProjectileType</b></td></tr>
+<tr class="memdesc:a7156e6392ba545ce22ce3130179b2c11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of the <a class="el" href="class_damager_component.html" title="Component that gives an object functionality to become an object that can damage another object that ...">DamagerComponent</a>. <br /></td></tr>
 <tr class="separator:a7156e6392ba545ce22ce3130179b2c11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96b401aa94737f8da03ba122869b4430" id="r_a96b401aa94737f8da03ba122869b4430"><td class="memItemLeft" align="right" valign="top"><a id="a96b401aa94737f8da03ba122869b4430" name="a96b401aa94737f8da03ba122869b4430"></a>
-OnCollisionAction&#160;</td><td class="memItemRight" valign="bottom"><b>OnCollisionEffect</b></td></tr>
+<a class="el" href="#ab434f7f8e85f8626a25f8e171208cdad">OnCollisionAction</a>&#160;</td><td class="memItemRight" valign="bottom"><b>OnCollisionEffect</b></td></tr>
 <tr class="separator:a96b401aa94737f8da03ba122869b4430"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54dbb68d0e60ee8a2a88847f54fb3bd6" id="r_a54dbb68d0e60ee8a2a88847f54fb3bd6"><td class="memItemLeft" align="right" valign="top"><a id="a54dbb68d0e60ee8a2a88847f54fb3bd6" name="a54dbb68d0e60ee8a2a88847f54fb3bd6"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>DamageBasedOnSpeed</b></td></tr>
+<tr class="memdesc:a54dbb68d0e60ee8a2a88847f54fb3bd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should the damage be dynamically changed based on the speed of the projectile. <br /></td></tr>
 <tr class="separator:a54dbb68d0e60ee8a2a88847f54fb3bd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab85e384d480c51a88753e44b6ea3b597" id="r_ab85e384d480c51a88753e44b6ea3b597"><td class="memItemLeft" align="right" valign="top"><a id="ab85e384d480c51a88753e44b6ea3b597" name="ab85e384d480c51a88753e44b6ea3b597"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>ProjectileWeight</b></td></tr>
-<tr class="separator:ab85e384d480c51a88753e44b6ea3b597"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afba0b0d8a62bba116637244cc38c20c7" id="r_afba0b0d8a62bba116637244cc38c20c7"><td class="memItemLeft" align="right" valign="top"><a id="afba0b0d8a62bba116637244cc38c20c7" name="afba0b0d8a62bba116637244cc38c20c7"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>ProjectileGravityScale</b></td></tr>
+<tr class="memdesc:afba0b0d8a62bba116637244cc38c20c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The gravity scale the projectile should use. This modifies <b>Rigidbody</b> properties. <br /></td></tr>
+<tr class="separator:afba0b0d8a62bba116637244cc38c20c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49840259cfb95c82ae08573b84d4e58a" id="r_a49840259cfb95c82ae08573b84d4e58a"><td class="memItemLeft" align="right" valign="top"><a id="a49840259cfb95c82ae08573b84d4e58a" name="a49840259cfb95c82ae08573b84d4e58a"></a>
+PhysicsMaterial2D&#160;</td><td class="memItemRight" valign="bottom"><b>ProjectileMaterial</b></td></tr>
+<tr class="memdesc:a49840259cfb95c82ae08573b84d4e58a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The material configuration for physics. <br /></td></tr>
+<tr class="separator:a49840259cfb95c82ae08573b84d4e58a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ece9933d7778bb67206f4b5b1803f35" id="r_a1ece9933d7778bb67206f4b5b1803f35"><td class="memItemLeft" align="right" valign="top"><a id="a1ece9933d7778bb67206f4b5b1803f35" name="a1ece9933d7778bb67206f4b5b1803f35"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>ProjectileSize</b></td></tr>
+<tr class="memdesc:a1ece9933d7778bb67206f4b5b1803f35"><td class="mdescLeft">&#160;</td><td class="mdescRight">The size the projectile should use. This modifies <b>Transform</b> properties. <br /></td></tr>
 <tr class="separator:a1ece9933d7778bb67206f4b5b1803f35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adebaf3bdc48928ea2d9874f5bb9295fa" id="r_adebaf3bdc48928ea2d9874f5bb9295fa"><td class="memItemLeft" align="right" valign="top"><a id="adebaf3bdc48928ea2d9874f5bb9295fa" name="adebaf3bdc48928ea2d9874f5bb9295fa"></a>
-Vector3&#160;</td><td class="memItemRight" valign="bottom"><b>ProjectileStartDirection</b></td></tr>
-<tr class="separator:adebaf3bdc48928ea2d9874f5bb9295fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27ee04e7f16b21bdc36bb786206b15e2" id="r_a27ee04e7f16b21bdc36bb786206b15e2"><td class="memItemLeft" align="right" valign="top"><a id="a27ee04e7f16b21bdc36bb786206b15e2" name="a27ee04e7f16b21bdc36bb786206b15e2"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>ProjectileSpeed</b></td></tr>
+<tr class="memdesc:a27ee04e7f16b21bdc36bb786206b15e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The initial speed of the projectile. <br /></td></tr>
 <tr class="separator:a27ee04e7f16b21bdc36bb786206b15e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4977d8c8a807c76801855d0555b06a02" id="r_a4977d8c8a807c76801855d0555b06a02"><td class="memItemLeft" align="right" valign="top"><a id="a4977d8c8a807c76801855d0555b06a02" name="a4977d8c8a807c76801855d0555b06a02"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>DamagerLifetime</b></td></tr>
+<tr class="memdesc:a4977d8c8a807c76801855d0555b06a02"><td class="mdescLeft">&#160;</td><td class="mdescRight">The lifetime of the projectile. <br /></td></tr>
 <tr class="separator:a4977d8c8a807c76801855d0555b06a02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab39847541bd7135d38e8355bef4a4ada" id="r_ab39847541bd7135d38e8355bef4a4ada"><td class="memItemLeft" align="right" valign="top"><a id="ab39847541bd7135d38e8355bef4a4ada" name="ab39847541bd7135d38e8355bef4a4ada"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>AsCollectible</b></td></tr>
+<tr class="memdesc:ab39847541bd7135d38e8355bef4a4ada"><td class="mdescLeft">&#160;</td><td class="mdescRight">NOTE: Unused for now. Can the projectile becomes a collectible when the projectile is below the speed threshold stored in AllowCollectibleOnSpeedThreshold. <br /></td></tr>
+<tr class="separator:ab39847541bd7135d38e8355bef4a4ada"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77c7e050ee64d1b50fa1a1071e2e80f4" id="r_a77c7e050ee64d1b50fa1a1071e2e80f4"><td class="memItemLeft" align="right" valign="top"><a id="a77c7e050ee64d1b50fa1a1071e2e80f4" name="a77c7e050ee64d1b50fa1a1071e2e80f4"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>AllowCollectibleOnSpeedThreshold</b></td></tr>
+<tr class="memdesc:a77c7e050ee64d1b50fa1a1071e2e80f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">NOTE: Unused for now. The speed threshold used for letting the projectile to become a collectible in below this threshold. <br /></td></tr>
+<tr class="separator:a77c7e050ee64d1b50fa1a1071e2e80f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecd903ede90d35fc94b54aeeb6ee3b75" id="r_aecd903ede90d35fc94b54aeeb6ee3b75"><td class="memItemLeft" align="right" valign="top"><a id="aecd903ede90d35fc94b54aeeb6ee3b75" name="aecd903ede90d35fc94b54aeeb6ee3b75"></a>
+LayerMask&#160;</td><td class="memItemRight" valign="bottom"><b>ExcludeLayerHide</b></td></tr>
+<tr class="memdesc:aecd903ede90d35fc94b54aeeb6ee3b75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mask to exclude certain physics layer when the projectile is below the pssed threshold stored in SetExcludeLayerOnSpeedThreshold. <br /></td></tr>
+<tr class="separator:aecd903ede90d35fc94b54aeeb6ee3b75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38ef6a273cfb8945536be11b17df9fc8" id="r_a38ef6a273cfb8945536be11b17df9fc8"><td class="memItemLeft" align="right" valign="top"><a id="a38ef6a273cfb8945536be11b17df9fc8" name="a38ef6a273cfb8945536be11b17df9fc8"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>SetExcludeLayerOnSpeedThreshold</b></td></tr>
+<tr class="memdesc:a38ef6a273cfb8945536be11b17df9fc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The speed threshold used for letting the projectile use ExcludeLayerHide mask to exclude certain physics layer. <br /></td></tr>
+<tr class="separator:a38ef6a273cfb8945536be11b17df9fc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8db90f796057ab3c4304b8fc52cb356e" id="r_a8db90f796057ab3c4304b8fc52cb356e"><td class="memItemLeft" align="right" valign="top"><a id="a8db90f796057ab3c4304b8fc52cb356e" name="a8db90f796057ab3c4304b8fc52cb356e"></a>
 List&lt; <a class="el" href="struct_damager_component_1_1_damager_context_1_1_item_deplete.html">ItemDeplete</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ListDepleteItem</b></td></tr>
+<tr class="memdesc:a8db90f796057ab3c4304b8fc52cb356e"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of items the damager should deplete to become functional. <br /></td></tr>
 <tr class="separator:a8db90f796057ab3c4304b8fc52cb356e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae84cacd21800974b7915c2c93242e8aa" id="r_ae84cacd21800974b7915c2c93242e8aa"><td class="memItemLeft" align="right" valign="top"><a id="ae84cacd21800974b7915c2c93242e8aa" name="ae84cacd21800974b7915c2c93242e8aa"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>SoundAlertOnCollision</b></td></tr>
+<tr class="memdesc:ae84cacd21800974b7915c2c93242e8aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should the damager use <a class="el" href="class_sound_alert_transceiver.html" title="Class to &quot;transmit sound&quot; that can be received by SoundAlertReceiver. This class is used to create an...">SoundAlertTransceiver</a> when the projectile is colliding with another object. <br /></td></tr>
+<tr class="separator:ae84cacd21800974b7915c2c93242e8aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8a2ffe73b017c7966107749ac1906af" id="r_ad8a2ffe73b017c7966107749ac1906af"><td class="memItemLeft" align="right" valign="top"><a id="ad8a2ffe73b017c7966107749ac1906af" name="ad8a2ffe73b017c7966107749ac1906af"></a>
+<a class="el" href="struct_sound_alert_transceiver_1_1_alert_config.html">SoundAlertTransceiver.AlertConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SoundAlertConfig</b></td></tr>
+<tr class="memdesc:ad8a2ffe73b017c7966107749ac1906af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for using "alerting" feature used in <a class="el" href="class_sound_alert_transceiver.html" title="Class to &quot;transmit sound&quot; that can be received by SoundAlertReceiver. This class is used to create an...">SoundAlertTransceiver</a>. <br /></td></tr>
+<tr class="separator:ad8a2ffe73b017c7966107749ac1906af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac260c0ae3350edf2219730a26278e52c" id="r_ac260c0ae3350edf2219730a26278e52c"><td class="memItemLeft" align="right" valign="top"><a id="ac260c0ae3350edf2219730a26278e52c" name="ac260c0ae3350edf2219730a26278e52c"></a>
+AudioClip&#160;</td><td class="memItemRight" valign="bottom"><b>OnCollisionSound</b></td></tr>
+<tr class="memdesc:ac260c0ae3350edf2219730a26278e52c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The audio data used for when the projectile is colliding with another object. <br /></td></tr>
+<tr class="separator:ac260c0ae3350edf2219730a26278e52c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Damager's context or configuration data. </p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>Assets/SourceCode/<b>DamagerComponent.cs</b></li>
 </ul>
 </div><!-- contents -->

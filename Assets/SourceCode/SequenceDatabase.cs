@@ -4,7 +4,19 @@ using UnityEngine;
 
 
 
+/// <summary>
+/// Database class for loading and storing custom sequence handlers.
+/// The database will find any prefab in a determined folder with the prefab that has <see cref="ISequenceData"/> and <see cref="ISequenceAsync"/>. Custom sequence handler objects have to inherit those two interface class with their own implementation for the interface.
+/// When inheriting <see cref="ISequenceData"/>, an object has to determine its ID that is unique to each sequence handler.
+/// 
+/// This class uses prefab(s);
+/// - Prefab that has <see cref="SequenceHandlerVS"/> for handling sequence system.
+/// - Prefab that has <see cref="SequenceInterface"/> for handling sub sequences.
+/// </summary>
 public class SequenceDatabase: MonoBehaviour{
+  /// <summary>
+  /// Path to a folder containing prefabs of custom sequence handler object in Resources folder.
+  /// </summary>
   private static string sequence_data_folder = "Scenes/PrefabObjects/Sequences";
 
 
@@ -24,6 +36,9 @@ public class SequenceDatabase: MonoBehaviour{
   private Dictionary<string, _sequence_metadata> _sequence_map = new();
 
 
+  /// <summary>
+  /// Flag if this object has been initialized or not.
+  /// </summary>
   public bool IsInitialized{get; private set;} = false;
 
 
@@ -66,6 +81,11 @@ public class SequenceDatabase: MonoBehaviour{
 
 
   #nullable enable
+  /// <summary>
+  /// Get prefab for certain custom sequence handler. 
+  /// </summary>
+  /// <param name="sequence_id">The sequence ID</param>
+  /// <returns>The sequence handler prefab</returns>
   public GameObject? GetSequencePrefab(string sequence_id){
     if(!_sequence_map.ContainsKey(sequence_id))
       return null;
@@ -75,10 +95,18 @@ public class SequenceDatabase: MonoBehaviour{
   #nullable disable
 
 
+  /// <summary>
+  /// Get a default prefab for <see cref="SequenceInterface"/>.
+  /// </summary>
+  /// <returns><see cref="SequenceInterface"/> prefab</returns>
   public GameObject GetSequenceInterface(){
     return _InterfaceSequence;
   }
 
+  /// <summary>
+  /// Get a default prefab for <see cref="SequenceHandlerVS"/>.
+  /// </summary>
+  /// <returns><see cref="SequenceHandlerVS"/> prefab</returns>
   public GameObject GetSequenceHandlerBasePrefab(){
     return _SequenceHandlerBasePrefab;
   }

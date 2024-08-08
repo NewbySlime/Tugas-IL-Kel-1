@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: RigidbodyMessageRelay Class Reference</title>
+<title>FlavourOfRoemahNusantara: RigidbodyMessageRelay Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -100,7 +102,7 @@ $(function(){initNavTree('class_rigidbody_message_relay.html',''); initResizable
 </div><!--header-->
 <div class="contents">
 
-<p>Komponen sebagai alat untuk mempermudah komunikasi antar komponen dengan Rigidbody yang terpisah diantara GameObject. Komponen penting yang diperlukan pada Objek Game:  
+<p>Component to relaying/retransmit any physics events from Unity's event system to C# event system.  
  <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for RigidbodyMessageRelay:</div>
@@ -152,34 +154,39 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>OnTriggerExit2D</b> (
 Events</h2></td></tr>
 <tr class="memitem:ab918635b607c15ccc5e203777eb70b3a" id="r_ab918635b607c15ccc5e203777eb70b3a"><td class="memItemLeft" align="right" valign="top"><a id="ab918635b607c15ccc5e203777eb70b3a" name="ab918635b607c15ccc5e203777eb70b3a"></a>
 CollidingEventFunction&#160;</td><td class="memItemRight" valign="bottom"><b>OnCollisionEnteredEvent</b></td></tr>
+<tr class="memdesc:ab918635b607c15ccc5e203777eb70b3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event for when a collision happened. <br /></td></tr>
 <tr class="separator:ab918635b607c15ccc5e203777eb70b3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56c49886eeec00db2b0b26489da80cdc" id="r_a56c49886eeec00db2b0b26489da80cdc"><td class="memItemLeft" align="right" valign="top"><a id="a56c49886eeec00db2b0b26489da80cdc" name="a56c49886eeec00db2b0b26489da80cdc"></a>
-CollidingEventFunction&#160;</td><td class="memItemRight" valign="bottom"><b>OnCollsiionExitedEvent</b></td></tr>
-<tr class="separator:a56c49886eeec00db2b0b26489da80cdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a296d4e62861065f2dccc65a5f48ea0ad" id="r_a296d4e62861065f2dccc65a5f48ea0ad"><td class="memItemLeft" align="right" valign="top"><a id="a296d4e62861065f2dccc65a5f48ea0ad" name="a296d4e62861065f2dccc65a5f48ea0ad"></a>
+CollidingEventFunction&#160;</td><td class="memItemRight" valign="bottom"><b>OnCollisionExitedEvent</b></td></tr>
+<tr class="memdesc:a296d4e62861065f2dccc65a5f48ea0ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event for when an object is no longer colliding. <br /></td></tr>
+<tr class="separator:a296d4e62861065f2dccc65a5f48ea0ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2515729ee54bc6636261d87f16c430c1" id="r_a2515729ee54bc6636261d87f16c430c1"><td class="memItemLeft" align="right" valign="top"><a id="a2515729ee54bc6636261d87f16c430c1" name="a2515729ee54bc6636261d87f16c430c1"></a>
 TriggerEventFunction&#160;</td><td class="memItemRight" valign="bottom"><b>OnTriggerEnteredEvent</b></td></tr>
+<tr class="memdesc:a2515729ee54bc6636261d87f16c430c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event for when a physics object has entered this object's body (in trigger body context). <br /></td></tr>
 <tr class="separator:a2515729ee54bc6636261d87f16c430c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeea463ddddb1c30553a64185d6c515d0" id="r_aeea463ddddb1c30553a64185d6c515d0"><td class="memItemLeft" align="right" valign="top"><a id="aeea463ddddb1c30553a64185d6c515d0" name="aeea463ddddb1c30553a64185d6c515d0"></a>
 TriggerEventFunction&#160;</td><td class="memItemRight" valign="bottom"><b>OnTriggerExitedEvent</b></td></tr>
+<tr class="memdesc:aeea463ddddb1c30553a64185d6c515d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event for when a physics object has exited this object's body (in trigger body context). <br /></td></tr>
 <tr class="separator:aeea463ddddb1c30553a64185d6c515d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cfe9f8242d1ca973e65f3114902b158" id="r_a1cfe9f8242d1ca973e65f3114902b158"><td class="memItemLeft" align="right" valign="top"><a id="a1cfe9f8242d1ca973e65f3114902b158" name="a1cfe9f8242d1ca973e65f3114902b158"></a>
 CollidingEventFunction2D&#160;</td><td class="memItemRight" valign="bottom"><b>OnCollisionEntered2DEvent</b></td></tr>
+<tr class="memdesc:a1cfe9f8242d1ca973e65f3114902b158"><td class="mdescLeft">&#160;</td><td class="mdescRight">(For 2D space)  <br /></td></tr>
 <tr class="separator:a1cfe9f8242d1ca973e65f3114902b158"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92c80f5107a85e26a49041b60c6440f8" id="r_a92c80f5107a85e26a49041b60c6440f8"><td class="memItemLeft" align="right" valign="top"><a id="a92c80f5107a85e26a49041b60c6440f8" name="a92c80f5107a85e26a49041b60c6440f8"></a>
-CollidingEventFunction2D&#160;</td><td class="memItemRight" valign="bottom"><b>OnCollsiionExited2DEvent</b></td></tr>
-<tr class="separator:a92c80f5107a85e26a49041b60c6440f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac99c6acf3cd9cccaadec8ff739f8e1ea" id="r_ac99c6acf3cd9cccaadec8ff739f8e1ea"><td class="memItemLeft" align="right" valign="top"><a id="ac99c6acf3cd9cccaadec8ff739f8e1ea" name="ac99c6acf3cd9cccaadec8ff739f8e1ea"></a>
+CollidingEventFunction2D&#160;</td><td class="memItemRight" valign="bottom"><b>OnCollisionExited2DEvent</b></td></tr>
+<tr class="memdesc:ac99c6acf3cd9cccaadec8ff739f8e1ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">(For 2D space)  <br /></td></tr>
+<tr class="separator:ac99c6acf3cd9cccaadec8ff739f8e1ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d1cd6218dc6a0d62cfb83236d96cbc2" id="r_a7d1cd6218dc6a0d62cfb83236d96cbc2"><td class="memItemLeft" align="right" valign="top"><a id="a7d1cd6218dc6a0d62cfb83236d96cbc2" name="a7d1cd6218dc6a0d62cfb83236d96cbc2"></a>
 TriggerEventFunction2D&#160;</td><td class="memItemRight" valign="bottom"><b>OnTriggerEntered2DEvent</b></td></tr>
+<tr class="memdesc:a7d1cd6218dc6a0d62cfb83236d96cbc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">(For 2D space)  <br /></td></tr>
 <tr class="separator:a7d1cd6218dc6a0d62cfb83236d96cbc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3432c12a236192d0f072bf99b48b909e" id="r_a3432c12a236192d0f072bf99b48b909e"><td class="memItemLeft" align="right" valign="top"><a id="a3432c12a236192d0f072bf99b48b909e" name="a3432c12a236192d0f072bf99b48b909e"></a>
 TriggerEventFunction2D&#160;</td><td class="memItemRight" valign="bottom"><b>OnTriggerExited2DEvent</b></td></tr>
+<tr class="memdesc:a3432c12a236192d0f072bf99b48b909e"><td class="mdescLeft">&#160;</td><td class="mdescRight">(For 2D space)  <br /></td></tr>
 <tr class="separator:a3432c12a236192d0f072bf99b48b909e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Komponen sebagai alat untuk mempermudah komunikasi antar komponen dengan Rigidbody yang terpisah diantara GameObject. Komponen penting yang diperlukan pada Objek Game: </p>
-<ul>
-<li>RigidbodyX dan/atau ColliderXX </li>
-</ul>
+<div class="textblock"><p>Component to relaying/retransmit any physics events from Unity's event system to C# event system. </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>Assets/SourceCode/<b>RigidbodyMessageRelay.cs</b></li>
 </ul>

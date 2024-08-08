@@ -3,6 +3,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+/// <summary>
+/// Class for handling shader for "parallax" effect by being intermediate between current game state (camera position and such) and the shader attached.
+/// The shader mentioned is in Assets/Shaders/ParallaxLit.shadergraph 
+/// 
+/// This class uses external component(s);
+/// - Object with <see cref="IMaterialReference"/> that a reference to the shader in an attached graphic object.
+/// </summary>
 public class ParallaxComponent: MonoBehaviour{
   [SerializeField]
   private GameObject _TargetMaterial;
@@ -44,6 +51,10 @@ public class ParallaxComponent: MonoBehaviour{
   }
 
   
+  /// <summary>
+  /// Set the reference position for the parallax effect.
+  /// </summary>
+  /// <param name="pos">Reference position</param>
   public void SetPosition(Vector2 pos){
     _material_ref.GetMaterial().SetVector("_Position", pos);
   }

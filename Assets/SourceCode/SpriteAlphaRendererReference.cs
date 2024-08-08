@@ -1,6 +1,12 @@
 using UnityEngine;
 
 
+/// <summary>
+/// Class implementing interface <see cref="IAlphaRendererReference"/> for modifying an alpha value of a target <b>SpriteRenderer</b> component.
+/// 
+/// This class uses external component(s);
+/// - Unity's <b>SpriteRenderer</b> component as the target alpha manipulation.
+/// </summary>
 public class SpriteAlphaRendererReference: MonoBehaviour, IAlphaRendererReference{
   [SerializeField]
   private SpriteRenderer _TargetSpriteRenderer;

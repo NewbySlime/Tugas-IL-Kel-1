@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: ConsoleUIController Class Reference</title>
+<title>FlavourOfRoemahNusantara: ConsoleUIController Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -99,7 +101,7 @@ $(function(){initNavTree('class_console_u_i_controller.html',''); initResizable(
 </div><!--header-->
 <div class="contents">
 
-<p>Ini adalah controller (pengontrol UI) untuk membantu developer yang ingin menggunakan fungsi/mekanik game tanpa harus "trigger" yang menyebabkan mekanik itu terjadi.  
+<p>OUTDATED Class for console feature of the Game, any user can input any available command for testing/debugging purpose.  
  <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for ConsoleUIController:</div>
@@ -118,23 +120,31 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>Update</b> ()</td></t
 <tr class="separator:a844f84a6489b364af4eb27aa10a97e12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae492cecc8e0edaff12f5a8dcd7e00389" id="r_ae492cecc8e0edaff12f5a8dcd7e00389"><td class="memItemLeft" align="right" valign="top"><a id="ae492cecc8e0edaff12f5a8dcd7e00389" name="ae492cecc8e0edaff12f5a8dcd7e00389"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ToggleConsole</b> ()</td></tr>
-<tr class="memdesc:ae492cecc8e0edaff12f5a8dcd7e00389"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk toggle (state menjadi sebaliknya) Console. <br /></td></tr>
+<tr class="memdesc:ae492cecc8e0edaff12f5a8dcd7e00389"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to show/hide the console by toggling. <br /></td></tr>
 <tr class="separator:ae492cecc8e0edaff12f5a8dcd7e00389"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a483330834ad3860c4a46f877866d1023" id="r_a483330834ad3860c4a46f877866d1023"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a483330834ad3860c4a46f877866d1023">SendCommand</a> (string command)</td></tr>
-<tr class="memdesc:a483330834ad3860c4a46f877866d1023"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk memberikan Command ke komponen lainnya yang mengggunakan fungsi console.  <br /></td></tr>
+<tr class="memdesc:a483330834ad3860c4a46f877866d1023"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to process the command supplied.  <br /></td></tr>
 <tr class="separator:a483330834ad3860c4a46f877866d1023"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f18534301565357d1834afe846efb53" id="r_a0f18534301565357d1834afe846efb53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0f18534301565357d1834afe846efb53">OnSelect</a> (BaseEventData _event_data)</td></tr>
-<tr class="memdesc:a0f18534301565357d1834afe846efb53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ke-trigger ketika panel "Console" diselect (dipilih/dipencet).  <br /></td></tr>
+<tr class="memdesc:a0f18534301565357d1834afe846efb53"><td class="mdescLeft">&#160;</td><td class="mdescRight">To catch the Unity's "UI focus" event.  <br /></td></tr>
 <tr class="separator:a0f18534301565357d1834afe846efb53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38db45f7087bd43c4083ddde5636aacf" id="r_a38db45f7087bd43c4083ddde5636aacf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a38db45f7087bd43c4083ddde5636aacf">OnDeselect</a> (BaseEventData _event_data)</td></tr>
-<tr class="memdesc:a38db45f7087bd43c4083ddde5636aacf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ke-trigger ketika panel "Console" di-deselect (Tidak di fokuskan ke panel tersebut).  <br /></td></tr>
+<tr class="memdesc:a38db45f7087bd43c4083ddde5636aacf"><td class="mdescLeft">&#160;</td><td class="mdescRight">To catch the Unity's "UI unfocus" event.  <br /></td></tr>
 <tr class="separator:a38db45f7087bd43c4083ddde5636aacf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a643edae8be38e9509de875a26c6b6cc0" id="r_a643edae8be38e9509de875a26c6b6cc0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a643edae8be38e9509de875a26c6b6cc0">OnConsoleToggle</a> (InputValue value)</td></tr>
-<tr class="memdesc:a643edae8be38e9509de875a26c6b6cc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ke-trigger dari Input "ConsoleTrigger".  <br /></td></tr>
+<tr class="memdesc:a643edae8be38e9509de875a26c6b6cc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">To catch Unity's input event for "ConsoleToggle" key input.  <br /></td></tr>
 <tr class="separator:a643edae8be38e9509de875a26c6b6cc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Ini adalah controller (pengontrol UI) untuk membantu developer yang ingin menggunakan fungsi/mekanik game tanpa harus "trigger" yang menyebabkan mekanik itu terjadi. </p>
+<div class="textblock"><p>OUTDATED Class for console feature of the Game, any user can input any available command for testing/debugging purpose. </p>
+<p>This class uses external component(s);</p><ul>
+<li><b>Unity's TMP Text UI</b> for both command input and console/debug log data.</li>
+<li>Wrapper <b>GameObject</b> containing all UI elements for the console.</li>
+</ul>
+<p>This class uses following autoload(s);</p><ul>
+<li><a class="el" href="class_input_focus_context.html" title="Helper class that can be used by any object to know if certain object has the privilege to use the in...">InputFocusContext</a> for asking focus for using input.</li>
+</ul>
+<p>NOTE: only works in DEBUG context. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a643edae8be38e9509de875a26c6b6cc0" name="a643edae8be38e9509de875a26c6b6cc0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a643edae8be38e9509de875a26c6b6cc0">&#9670;&#160;</a></span>OnConsoleToggle()</h2>
@@ -151,10 +161,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>ToggleConsole</b> ()<
       </table>
 </div><div class="memdoc">
 
-<p>Ke-trigger dari Input "ConsoleTrigger". </p>
+<p>To catch Unity's input event for "ConsoleToggle" key input. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">value</td><td>Data event dari Unity</td></tr>
+    <tr><td class="paramname">value</td><td>Unity's input data</td></tr>
   </table>
   </dd>
 </dl>
@@ -176,10 +186,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>ToggleConsole</b> ()<
       </table>
 </div><div class="memdoc">
 
-<p>Ke-trigger ketika panel "Console" di-deselect (Tidak di fokuskan ke panel tersebut). </p>
+<p>To catch the Unity's "UI unfocus" event. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_event_data</td><td>Data event dari Unity</td></tr>
+    <tr><td class="paramname">_event_data</td><td>Event data from Unity</td></tr>
   </table>
   </dd>
 </dl>
@@ -201,10 +211,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>ToggleConsole</b> ()<
       </table>
 </div><div class="memdoc">
 
-<p>Ke-trigger ketika panel "Console" diselect (dipilih/dipencet). </p>
+<p>To catch the Unity's "UI focus" event. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_event_data</td><td>Data event dari Unity</td></tr>
+    <tr><td class="paramname">_event_data</td><td>Event data from Unity</td></tr>
   </table>
   </dd>
 </dl>
@@ -226,10 +236,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>ToggleConsole</b> ()<
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi untuk memberikan Command ke komponen lainnya yang mengggunakan fungsi console. </p>
+<p>Function to process the command supplied. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">command</td><td>Command yang mau dijalankan kepada Game</td></tr>
+    <tr><td class="paramname">command</td><td>The command sentence</td></tr>
   </table>
   </dd>
 </dl>

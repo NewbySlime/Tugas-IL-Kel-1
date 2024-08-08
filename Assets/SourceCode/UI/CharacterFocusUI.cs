@@ -5,6 +5,19 @@ using UnityEngine.UI;
 
 
 [RequireComponent(typeof(RectTransform))]
+/// <summary>
+/// UI element for showing and giving "focus" effect/animation to fullbody image of a character that used in <see cref="DialogueCharacterUI"/>.
+/// Image for the characters are fetched data from <see cref="CharacterDatabase"/>.
+/// 
+/// This class uses following component(s);
+/// - <b>RectTransform</b> for base UI's needed components.
+/// 
+/// This class uses external component(s);
+/// - <b>Image</b> UI for storing character's image.
+/// 
+/// This class uses following autoload(s);
+/// - <see cref="CharacterDatabase"/> for getting character data about the bound character.
+/// </summary>
 public class CharacterFocusUI: MonoBehaviour{
   [SerializeField]
   private Color _UnfocusMultColor;
@@ -39,6 +52,11 @@ public class CharacterFocusUI: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// To bind the Character ID with this class where the would be used to gather data to show Character Fullbody image. 
+  /// </summary>
+  /// <param name="character_id">The target character's ID</param>
+  /// <returns>If binding the ID successful</returns>
   public bool SetCharacter(string character_id){
     TypeDataStorage _data = _character_database.GetDataStorage(character_id);
     if(_data == null){
@@ -61,11 +79,19 @@ public class CharacterFocusUI: MonoBehaviour{
     return true;
   }
 
+  /// <summary>
+  /// To start "unfocus" effect.
+  /// </summary>
+  /// <returns>Coroutine helper object</returns>
   public IEnumerator UnfocusCharacter(){
     _TextureUI.material.SetColor("_ColorMultiply", _UnfocusMultColor);
     yield break;
   }
 
+  /// <summary>
+  /// To start "focus" effect.
+  /// </summary>
+  /// <returns>Coroutine helper object</returns>
   public IEnumerator FocusCharacter(){
     _TextureUI.material.SetColor("_ColorMultiply", Color.white);
     Vector3 _default_pos = _rt_transform.anchoredPosition;
@@ -84,10 +110,16 @@ public class CharacterFocusUI: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// To force hide the UI element.
+  /// </summary>
   public void HideCharacter(){
     _TextureUI.enabled = false;
   }
 
+  /// <summary>
+  /// To force show the UI element.
+  /// </summary>
   public void ShowCharacter(){
     _TextureUI.enabled = true;
   }

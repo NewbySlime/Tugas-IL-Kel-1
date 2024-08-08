@@ -3,12 +3,33 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to set the <see cref="PlayerController"/>'s configuration.
+  /// NOTE: since <see cref="PlayerController"/> object must be one in runtime, no need to supply <see cref="ObjectReference.ObjRefID"/>.
+  /// </summary>
   public class SetPlayerConfigFlagSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "set_player_walk_flag";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// Flag if the player can use a weapon.
+      /// </summary>
       public bool AllowUseWeapon;
+
+      /// <summary>
+      /// Flag if the player can jump.
+      /// </summary>
       public bool AllowJump;
+      
+      /// <summary>
+      /// Flag if the player can do interaction to another object.
+      /// </summary>
       public bool AllowInteraction;
     }
 
@@ -50,6 +71,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Set Player Config")]
   [UnitCategory("Sequence/Player")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="SetPlayerConfigFlagSequence"/>.
+  /// </summary>
   public class SetPlayerConfigFlagSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _allow_weapon_input;

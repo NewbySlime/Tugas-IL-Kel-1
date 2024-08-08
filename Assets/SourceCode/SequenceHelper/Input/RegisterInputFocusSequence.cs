@@ -3,15 +3,38 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to register certain object as an focus context used by <see cref="InputFocusContext"/>.
+  /// </summary>
   public class RegisterInputFocusSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "register_input_focus";
 
+    /// <summary>
+    /// Container data for focus context.
+    /// </summary>
     public struct InputFocusData{
+      /// <summary>
+      /// The target object for focus context.
+      /// </summary>
       public ObjectReference.ObjRefID RefID;
+      
+      /// <summary>
+      /// The context type for the input focus. 
+      /// </summary>
       public InputFocusContext.ContextEnum InputContext;
     }
 
+
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The focus context data.
+      /// </summary>
       public InputFocusData FocusData;
     }
 
@@ -64,6 +87,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Register Input Focus")]
   [UnitCategory("Sequence/Input")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="RegisterInputFocustSequence"/>.
+  /// </summary>
   public class RegisterInputFocusSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _input_focus_input;

@@ -1,0 +1,76 @@
+<mxfile host="65bd71144e">
+    <diagram id="49gne_mRPqOiUbtoT3TP" name="Page-1">
+        <mxGraphModel dx="1139" dy="747" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="12" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="490" y="350" width="365" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="&lt;h1&gt;GameRuntimeData&lt;/h1&gt;&lt;p&gt;Autoload class for storing data at runtime and only at the Game is running. The stored type can be all types of data.&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="90" y="90" width="270" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="&lt;h1&gt;The Usage&lt;/h1&gt;&lt;p&gt;When in Unity, triggering a scene changing would mean all the objects and data will be removed. Since this class has &quot;DontDestroy&quot; flag, the class cannot be destroyed when a scene is changing. Which the data stored in the class will be safe.&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="90" y="270" width="270" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="GameRuntimeData" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="870" y="160" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="PlayerObject" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="530" y="380" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="InventoryObject" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="690" y="380" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="When Changing Scene" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="70" width="100" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="" style="endArrow=classic;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="6" target="5" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="660" y="370" as="sourcePoint"/>
+                        <mxPoint x="710" y="320" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="10" value="" style="endArrow=classic;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="7" target="5" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="646.3636363636363" y="390" as="sourcePoint"/>
+                        <mxPoint x="893.6363636363635" y="230" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="11" value="Every objects stored its data at removal" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="700" y="260" width="140" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="Objects that will be removed at changing scene" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="613.75" y="490" width="117.5" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="1000" y="360" width="365" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="PlayerObject" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="1040" y="390" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="InventoryObject" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="1200" y="390" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="Created objects at the new scene" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="1123.75" y="500" width="117.5" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="" style="endArrow=classic;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="5" target="15" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="653.6842105263158" y="390" as="sourcePoint"/>
+                        <mxPoint x="940" y="230" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="19" value="" style="endArrow=classic;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="5" target="16" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="965.4999999999998" y="230" as="sourcePoint"/>
+                        <mxPoint x="1110" y="400" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="20" value="The stored data will be fetched at initialization" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="1080" y="240" width="161.25" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

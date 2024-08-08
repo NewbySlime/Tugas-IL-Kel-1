@@ -5,8 +5,16 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(HealthComponent))]
+/// <summary>
+/// Trigger class for triggering a Game Over event to <see cref="GameHandler"/>.
+/// 
+/// This class uses following component(s);
+/// - <see cref="HealthComponent"/> for listening vital events of this object.
+///
+/// This class uses external component(s);
+/// - <see cref="GameHandler"/> for game events and such.
+/// </summary>
 public class OnDeadGameOverTrigger: MonoBehaviour{
-  // TODO maybe cancel when health is above 0
   [SerializeField]
   private float _DeadDelay = 0;
 
@@ -20,7 +28,9 @@ public class OnDeadGameOverTrigger: MonoBehaviour{
 
   private Coroutine _current_dead_coroutine = null;
 
-
+  /// <summary>
+  /// Flag to enable triggering the Game Over event whenever this object is dead.
+  /// </summary>
   public bool TriggerEnable = true;
 
 
@@ -60,6 +70,9 @@ public class OnDeadGameOverTrigger: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Cancel the triggering to prevent Game Over event (after trigger, it will be delayed first before Game Over event).
+  /// </summary>
   public void CancelTrigger(){
     if(_current_dead_coroutine == null)
       return;

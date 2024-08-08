@@ -4,9 +4,18 @@ using System.Runtime.InteropServices.WindowsRuntime;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system for triggering "Saving" event.
+  /// </summary>
   public class TriggerSaveSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "trigger_save";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{}
     
     private SequenceData _seq_data;
@@ -49,6 +58,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Trigger Save")]
   [UnitCategory("Sequence/PersistanceHandling")]
+  /// <summary>
+  /// An extended <see cref"AddSubSequence"/> node for sequence <see cref="TriggerSaveSequence"/>.
+  /// </summary>
   public class TriggerSaveSequenceVS: AddSubSequence{
     protected override void AddData(Flow flow, out SequenceHandlerVS.SequenceInitializeData.DataPart init_data){
       init_data = new(){

@@ -9,11 +9,26 @@ using UnityEngine.UIElements;
 
 
 [RequireComponent(typeof(CircleCollider2D))]
+/// <summary>
+/// Class for giving an object a functionality to get "alerted" when a valid object is entering its view.
+/// An object can be valid when it is allowed to be collided or entered in this <b>Collider2D</b> area.
+/// For further explanation, see the diagram contained in <b>Reference/Diagrams/AlertTrigger.drawio</b>
+/// 
+/// This class uses following component(s);
+/// - <b>CircleCollider2D</b> trigger collider for watching objects entering or exiting.
+/// </summary>
 public class AlertTrigger: MonoBehaviour{
-  public delegate void AlertObjectEnter(GameObject gobject);
+  /// <summary>
+  /// Event for when a valid object entered its view.
+  /// </summary>
   public event AlertObjectEnter AlertObjectEnterEvent;
-  public delegate void AlertObjectExited(GameObject gobject);
+  public delegate void AlertObjectEnter(GameObject gobject);
+  
+  /// <summary>
+  /// Event for when a valid object exited its view.
+  /// </summary>
   public event AlertObjectExited AlertObjectExitedEvent;
+  public delegate void AlertObjectExited(GameObject gobject);
 
 
   [SerializeField]
@@ -22,9 +37,17 @@ public class AlertTrigger: MonoBehaviour{
   private float _ViewDistance;
 
   [SerializeField]
+  /// <summary>
+  /// List of compatible components that can be manipulated to match the configuration of this component.
+  /// Currently compatible component(s);
+  /// - <b>URP's Light2D</b>
+  /// </summary>
   private List<Component> _CompatibleComponents;
 
   [SerializeField]
+  /// <summary>
+  /// Layer(s) that can block its view.
+  /// </summary>
   private LayerMask _ObstructionLayer;
 
 
@@ -34,6 +57,7 @@ public class AlertTrigger: MonoBehaviour{
   private List<GameObject> _inside_focus = new List<GameObject>();
 
 
+  // Function to update the compatible components to match this class' configuration.
   private void _update_angle_component(){
     Dictionary<Type, Action<Component>> _compatible_function = new Dictionary<Type, Action<Component>>{
       {typeof(Light2D), (Component _target_component) => {
@@ -76,6 +100,7 @@ public class AlertTrigger: MonoBehaviour{
   }
 
   public void FixedUpdate(){
+    // watch objects that entered or exited its view
     foreach(GameObject _object in _inside_circle){
       Vector2 _object_dir = _object.transform.position - transform.position;
       float _object_dist = _object_dir.magnitude; _object_dir.Normalize();
@@ -105,10 +130,18 @@ public class AlertTrigger: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Function to catch <b>Collider2D</b> (as a trigger) event when an object is entered its area.
+  /// </summary>
+  /// <param name="collider">The object in question</param>
   public void OnTriggerEnter2D(Collider2D collider){
     _inside_circle.Add(collider.gameObject);
   }
 
+  /// <summary>
+  /// Function to catch <b>Collider2D</b> (as a trigger) event when an object is exiting its area.
+  /// </summary>
+  /// <param name="collider">The object in question</param>
   public void OnTriggerExit2D(Collider2D collider){
     if(!_inside_circle.Contains(collider.gameObject))
       return;

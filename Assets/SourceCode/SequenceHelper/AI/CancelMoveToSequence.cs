@@ -3,11 +3,23 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system that cancels the target's AI Pathfollower to make it stops moving by itself. 
+  /// </summary>
   public class CancelMoveToSequence: MonoBehaviour, ISequenceAsync,
   ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "cancel_move_to";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// Target Object Reference to stop the AI.
+      /// </summary>
       public ObjectReference.ObjRefID TargetRefID;
     }
 
@@ -53,6 +65,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Cancel Move To")]
   [UnitCategory("Sequence/AI")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="CancelMoveToSequence"/>.
+  /// </summary>
   public class CancelMoveToSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _target_obj_ref_input;

@@ -4,11 +4,27 @@ using UnityEngine;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to enable or disable a <see cref="ScenarioHandlerVS"/>.
+  /// </summary>
   public class SetEnableScenarioSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for reigstering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "set_enable_scenario";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target ID for Scenario to be enabled.
+      /// </summary>
       public string ScenarioID;
+
+      /// <summary>
+      /// Enable/Disable flag.
+      /// </summary>
       public bool Active;
     }
 
@@ -53,6 +69,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Set Enable Scenario")]
   [UnitCategory("Sequence/Scenario")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="SetEnableScenarioSequence"/>.
+  /// </summary>
   public class SetEnableScenarioSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _scenario_id_input;

@@ -3,10 +3,22 @@ using UnityEngine;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to set the smooth time value of the <see cref="FollowerCamera2D"/>.
+  /// </summary>
   public class SetCameraSmoothSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "set_camera_smooth";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// Smooth time to be supplied.
+      /// </summary>
       public float SmoothTime;
     }
 
@@ -51,6 +63,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Set Camera Smooth")]
   [UnitCategory("Sequence/Camera")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="SetCameraSmoothSequence"/>.
+  /// </summary>
   public class SetCameraSmoothSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _smooth_time_input;

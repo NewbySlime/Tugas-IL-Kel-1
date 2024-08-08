@@ -5,10 +5,25 @@ using System;
 using System.Linq;
 
 
+/// <summary>
+/// Class for handling the Game's time also handling scenario for period of time.
+/// Period of time defined in this class;  (period type | Scenario ID used)
+/// - Daytime | "daytime_scenario"
+/// - Nighttime | "nighttime_scenario"
+/// 
+/// This class uses autoload(s);
+/// - <see cref="GameHandler"/> for using scenario used by this class for changing period of time.
+/// </summary>
 public class GameTimeHandler: MonoBehaviour{
-  public delegate void OnTimePeriodChanged();
+  /// <summary>
+  /// Event for when the period of time has been changed.
+  /// </summary>
   public event OnTimePeriodChanged OnTimePeriodChangedEvent;
+  public delegate void OnTimePeriodChanged();
 
+  /// <summary>
+  /// Type of Game's period of time.
+  /// </summary>
   public enum GameTimePeriod{
     Daytime,
     Nighttime
@@ -52,28 +67,50 @@ public class GameTimeHandler: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Stops the Game's time by using Unity's time scale.
+  /// </summary>
   public void StopTime(){
     Time.timeScale = 0;
   }
 
+  /// <summary>
+  /// Resumes the Game's time by using Unity's time scale.
+  /// </summary>
   public void ResumeTime(){
     Time.timeScale = 1;
   }
 
+  /// <summary>
+  /// Check if the Game is still paused.
+  /// </summary>
+  /// <returns>Is the Game still in pausing state</returns>
   public bool IsPausing(){
     return Time.timeScale < 0.05; 
   }
 
 
+  /// <summary>
+  /// Set the timing scale used by Unity's engine.
+  /// </summary>
+  /// <param name="scale">The new timing scale</param>
   public void SetTimeScale(float scale){
     Time.timeScale = scale;
   }
 
+  /// <summary>
+  /// Get the scale in Unity's timing.
+  /// </summary>
+  /// <returns>Current timing scale</returns>
   public float GetTimeScale(){
     return Time.timeScale;
   }
 
 
+  /// <summary>
+  /// Change the period of time. This function uses Game's scenario to change the time period.
+  /// </summary>
+  /// <param name="time">Type of the period</param>
   public void SetTimePeriod(GameTimePeriod time){
     _current_time_period = time;
 
@@ -86,6 +123,10 @@ public class GameTimeHandler: MonoBehaviour{
     OnTimePeriodChangedEvent?.Invoke();
   }
 
+  /// <summary>
+  /// Get the current time period.
+  /// </summary>
+  /// <returns>Current time period</returns>
   public GameTimePeriod GetTimePeriod(){
     return _current_time_period;
   }

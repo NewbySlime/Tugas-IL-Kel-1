@@ -4,13 +4,32 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system for trigger scene/level change.
+  /// </summary>
   public class ChangeSceneSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for reigstering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "change_scene";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target Scnee/Level.
+      /// </summary>
       public string SceneID;
+      /// <summary>
+      /// Wait until scene is changed.
+      /// WARN: only use this from <see cref="SequenceHandlerVS"/> that has "DontDestroy" attribute for the object.
+      /// </summary>
       public bool WaitUntilSceneChanged;
 
+      /// <summary>
+      /// Flag to do save when the Game is changing scene.
+      /// </summary>
       public bool AutoSave; 
     }
 
@@ -73,6 +92,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Change Scene")]
   [UnitCategory("Sequence")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="ChangeSceneSequence"/>.
+  /// </summary>
   public class ChangeSceneSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _scene_id_input;

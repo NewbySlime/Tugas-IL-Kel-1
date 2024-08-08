@@ -6,36 +6,91 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class QuestHandlerVS: MonoBehaviour, IQuestHandler, ILoadingQueue{
+/// <summary>
+/// Class to create and handle the list of quest with the data supplied.
+/// This class doesn't handle specific quest with specific functionality, hence this class only serve as the server for the quest contained. To check which class that acts as specific quest functionality see <see cref="IQuestHandler"/> interface class.
+/// 
+/// This class uses autoload(s);
+/// - <see cref="QuestDatabase"/> for creating quest handler with specific functionality based on the supplied ID.
+/// </summary>
+public class QuestHandlerVS: MonoBehaviour, IQuestHandler, ILoadingQueue{ 
   public event IQuestHandler.QuestFinished QuestFinishedEvent;
   public event IQuestHandler.QuestUpdated QuestUpdatedEvent;
 
+  /// <summary>
+  /// Quest data for initializing the quest handling classes.
+  /// </summary>
   public class InitQuestInfo{
+    /// <summary>
+    /// The quest ID to create.
+    /// </summary>
     public string QuestID;
+
+    /// <summary>
+    /// The quest data that is specific to the target quest handler.
+    /// </summary>
     public object QuestData;
 
+    /// <summary>
+    /// List of subquest contained within the quest.
+    /// </summary>
+    /// <typeparam name="InitQuestInfo"></typeparam>
+    /// <returns></returns>
     public List<InitQuestInfo> SubquestList = new List<InitQuestInfo>();
   }
 
+  /// <summary>
+  /// Quest data related to this class.
+  /// </summary>
   public class QuestData{
+    /// <summary>
+    /// The title for this quest.
+    /// </summary>
     public string QuestTitle;
+
+    /// <summary>
+    /// The description for this quest.
+    /// </summary>
     public string QuestDescription;
   }
 
+
+  /// <summary>
+  /// Data representing the current state of the quest in question.
+  /// </summary>
   public class QuestInfo{
+    /// <summary>
+    /// The prefered types of UI the quest should be presented with.
+    /// </summary>
     public enum UIType{
       Normal,
       PercentageBar,
       Nested
     }
 
+    /// <summary>
+    /// The quest handler object.
+    /// </summary>
     public IQuestHandler QuestObject;
 
+    /// <summary>
+    /// The message for telling what the goal is.
+    /// </summary>
     public string GoalMessage;
+
+    /// <summary>
+    /// Current progress of the quest.
+    /// </summary>
     public float Progress;
 
+    /// <summary>
+    /// The preferred UI for presenting the quest.
+    /// </summary>
     public UIType UserInterfaceType;
 
+    /// <summary>
+    /// List of similar info for subquest. 
+    /// </summary>
     public List<QuestInfo> SubQuestInfo = new();
   }
 
@@ -56,9 +111,13 @@ public class QuestHandlerVS: MonoBehaviour, IQuestHandler, ILoadingQueue{
   private QuestData _quest_data = null;
   private InitQuestInfo _init_data = null;
 
+  /// <summary>
+  /// Is the object initialized or not yet.
+  /// </summary>
   public bool IsInitialized{get; private set;} = false;
 
   
+  // if one of the quest are updated.
   private void _quest_updated(IQuestHandler quest){
     if(!_unfinished_quest.Contains(quest) && quest.GetProgress() < 1)
       _unfinished_quest.Add(quest);
@@ -66,6 +125,7 @@ public class QuestHandlerVS: MonoBehaviour, IQuestHandler, ILoadingQueue{
     QuestUpdatedEvent?.Invoke(quest);
   }
 
+  // if one of the quest are finished.
   private void _quest_finished(IQuestHandler quest){
     DEBUGModeUtils.Log("another quest finished.");
     if(_unfinished_quest.Contains(quest))
@@ -76,6 +136,10 @@ public class QuestHandlerVS: MonoBehaviour, IQuestHandler, ILoadingQueue{
   }
 
 
+  /// <summary>
+  /// Function to set own quest data.
+  /// </summary>
+  /// <param name="data">The quest data</param>
   private void _set_quest_data(object data){
     if(data is not QuestData){
       Debug.LogError("Data is not QuestData.");
@@ -87,6 +151,7 @@ public class QuestHandlerVS: MonoBehaviour, IQuestHandler, ILoadingQueue{
 
 
   private HashSet<ILoadingQueue> _quest_loading_list = new();
+  // Function to check if the newly created queues are initialized/loaded.
   private bool _check_loading_list(){
     List<ILoadingQueue> _delete_list = new();
     foreach(ILoadingQueue _obj in _quest_loading_list){
@@ -101,6 +166,7 @@ public class QuestHandlerVS: MonoBehaviour, IQuestHandler, ILoadingQueue{
   }
 
 
+  // To add/remove quest handlers based on _init_data.
   private IEnumerator _update_quest(){
     DEBUGModeUtils.Log(string.Format("scenario update quest {0} {1}", _quest_database == null, _init_data == null));
     if(_quest_database == null || _init_data == null)
@@ -151,6 +217,7 @@ public class QuestHandlerVS: MonoBehaviour, IQuestHandler, ILoadingQueue{
   }
 
 
+  // Extended Start for waiting until all objects are initiliazed for immediate use.
   private IEnumerator _StartAsCoroutine(){
     _quest_database = FindAnyObjectByType<QuestDatabase>();
     if(_quest_database == null){
@@ -208,6 +275,11 @@ public class QuestHandlerVS: MonoBehaviour, IQuestHandler, ILoadingQueue{
   }
 
 
+  /// <summary>
+  /// Function to set this <see cref="InitQuestInfo"/> data for prepping the subquests.
+  /// This function can be used directly from Visual Scripting.
+  /// </summary>
+  /// <param name="init_data"></param>
   public void SetInitData(InitQuestInfo init_data){
     DEBUGModeUtils.Log("scenario set quest init data");
     DEBUGModeUtils.Log(string.Format("scenario quest data {0}", init_data == null));

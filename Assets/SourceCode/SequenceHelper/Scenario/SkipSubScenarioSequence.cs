@@ -3,10 +3,22 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system for skipping/continuing a subscenario contained in <see cref="ScenarioHandlerVS"/>.
+  /// </summary>
   public class SkipSubScenarioSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "skip_sub_scenario";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target Scenario (in ID) to make it progress.
+      /// </summary>
       public string ScenarioID;
     }
 
@@ -51,6 +63,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Skip SubScenario")]
   [UnitCategory("Sequence/Scenario")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="SkipSubScenarioSequence"/>.
+  /// </summary>
   public class SkipSubScenarioSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _scenario_id_input;

@@ -5,11 +5,15 @@ using UnityEngine;
 
 
 /// <summary>
-/// Komponen untuk mengatur Container kumpulan dari ItemButton.
+/// UI Component for creating, handling and containing the list of items in the component that can be interacted.
+/// 
+/// This class uses prefab(s);
+/// - Prefab that has <see cref="ItemButton"/> component for creating buttons for items.
 /// </summary>
 public class ItemContainerController: MonoBehaviour{
   /// <summary>
-  /// Event jika salah satu ItemButton pada ItemContainerController diklik.
+  /// Event for when one of the item buttons interacted (pressed).
+  /// This event also gives the ID for the contained item related to the interacted button. 
   /// </summary>
   public event OnItemButtonPressed OnItemButtonPressedEvent;
   public delegate void OnItemButtonPressed(string item_id);
@@ -23,18 +27,18 @@ public class ItemContainerController: MonoBehaviour{
 
 
 
-  /// <summary>
-  /// Fungsi helper untuk membantu proses pembuatan ItemButton dari Prefab.
-  /// </summary>
-  /// <returns>Komponen ItemButton dari GameObject yang dibuat</returns>
   private ItemButton _CreateNewItemButton(){
     GameObject _new_obj = Instantiate(_ButtonPrefab);
     ItemButton _item_button = _new_obj.GetComponent<ItemButton>();
     if(_item_button == null)
       return null;
 
-    _item_button.OnButtonPressedEvent += ItemButton_OnButtonPressed;
+    _item_button.OnButtonPressedEvent += _OnItemButtonPressed;
     return _item_button;
+  }
+
+  private void _OnItemButtonPressed(string item_id){
+    OnItemButtonPressedEvent?.Invoke(item_id);
   }
 
 
@@ -47,10 +51,10 @@ public class ItemContainerController: MonoBehaviour{
 
 
   /// <summary>
-  /// Fungsi untuk menambahkan Item ke Container, tombol dan UI lainnya akan dipersiapkan.
+  /// Function for adding item to the container based on the ID.
   /// </summary>
-  /// <param name="item_id">ID Item yang mau ditambahkan</param>
-  /// <param name="count">Jumlah Item yang mau ditambahkan</param>
+  /// <param name="item_id">The item ID</param>
+  /// <param name="count">The item count</param>
   public void AddItem(string item_id, uint count){
     if(_button_list.ContainsKey(item_id))
       RemoveItem(item_id);
@@ -74,10 +78,11 @@ public class ItemContainerController: MonoBehaviour{
   }
 
   /// <summary>
-  /// Fungsi untuk mengubah jumlah Item pada Tombol atau UI lainnya.
+  /// Function to change the item count for one of the contained item.
+  /// But if the container does not have the supposed item, the container will add the item using <see cref="AddItem"/> function.
   /// </summary>
-  /// <param name="item_id">ID Item yang mau dimodifikasi</param>
-  /// <param name="count">ID Item yang mau diganti jumlahnya</param>
+  /// <param name="item_id">The target item ID</param>
+  /// <param name="count">The item count</param>
   public void ChangeItemCount(string item_id, uint count){
     if(!_button_list.ContainsKey(item_id))
       AddItem(item_id, count);
@@ -88,9 +93,9 @@ public class ItemContainerController: MonoBehaviour{
   }
 
   /// <summary>
-  /// Fungsi untuk menghilangkan Item pada Container ini.
+  /// Function to remove the target item from the container.
   /// </summary>
-  /// <param name="item_id">ID Item yang mau dihapus</param>
+  /// <param name="item_id">The target item ID</param>
   public void RemoveItem(string item_id){
     if(!_button_list.ContainsKey(item_id))
       return;
@@ -104,29 +109,20 @@ public class ItemContainerController: MonoBehaviour{
 
 
   /// <summary>
-  /// Fungsi untuk mendapatkan list Item yang ada pada Container ini.
+  /// Function to get the list of contained item(s).
   /// </summary>
-  /// <returns>List ID Item pada Container</returns>
+  /// <returns>The resulting list of item(s)</returns>
   public List<string> GetListItem(){
     return _item_list;
   }
 
 
   /// <summary>
-  /// Fungsi untuk menghapus semua Item dari Container.
+  /// Function to remove all item from the container.
   /// </summary>
   public void RemoveAllItem(){
     List<string> _item_keylist = _button_list.Keys.ToList();
     foreach(string _item_id in _item_keylist)
       RemoveItem(_item_id);
-  }
-
-
-  /// <summary>
-  /// Fungsi untuk menerima event dari ItemButton, event OnButtonPressed
-  /// </summary>
-  /// <param name="item_id"></param>
-  public void ItemButton_OnButtonPressed(string item_id){
-    OnItemButtonPressedEvent?.Invoke(item_id);
   }
 }

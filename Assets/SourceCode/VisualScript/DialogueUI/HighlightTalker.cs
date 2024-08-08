@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 [UnitTitle("HighlightCharacter")]
 [UnitCategory("Dialogue")]
+/// <summary>
+/// Node that can be used for creating or adding to a list of highlighted character as a data that can be used by <see cref="AddDialogue"/> Node.
+/// </summary>
 public class AddHightlightCharacter: Unit{
   [DoNotSerialize]
   private ValueInput _highlight_input;

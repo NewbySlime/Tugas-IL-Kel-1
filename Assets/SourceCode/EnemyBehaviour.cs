@@ -6,6 +6,18 @@ using UnityEngine;
 [RequireComponent(typeof(FollowerBehaviour))]
 [RequireComponent(typeof(NPCRandomBehaviour))]
 [RequireComponent(typeof(PathFollower))]
+/// <summary>
+/// Base behaviour class for enemy. For behaviour diagram, look at <b>Reference/Diagrams/EnemyBehaviour.drawio</b>.
+/// 
+/// This behaviour uses following object(s);
+/// - <see cref="FollowerBehaviour"/> for following and targeting its enemy.
+/// - <see cref="NPCRandomBehaviour"/> for letting the object wander around aimlessly, waiting for an enemy to cross its path.
+/// - <see cref="PathFollower"/> component for pathfinding and AI movement.
+/// 
+/// This behaviour uses external component(s);
+/// - <see cref="AlertTrigger"/> for getting any enemy on its view.
+/// - <see cref="DamagerComponent"/> as a melee object used by this enemy.
+/// </summary>
 public class EnemyBehaviour: InterfaceEnemyBehaviour{
   [SerializeField]
   private AlertTrigger _AlertComponent;
@@ -115,6 +127,7 @@ public class EnemyBehaviour: InterfaceEnemyBehaviour{
   }
 
   public void FixedUpdate(){
+    // update used for checking if the enemy is in striking range.
     if(_path_follower.IsJumping())
       return;
 

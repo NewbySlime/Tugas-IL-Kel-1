@@ -5,6 +5,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+/// <summary>
+/// UI class for handling Main Menu options.
+/// 
+/// This class uses external component(s);
+/// - <see cref="ButtonBaseUI"/> class for handling the interactions for the UI.
+/// - <see cref="PromptUI"/> for reassuring the player to choose certain option.
+/// 
+/// This class uses autoload(s);
+/// - <see cref="GameHandler"/> for Game events and such.
+/// /// </summary>
 public class MainMenuUI: MonoBehaviour{
   [Serializable]
   public struct PromptData{
@@ -18,7 +28,13 @@ public class MainMenuUI: MonoBehaviour{
 
   [SerializeField]
   private ButtonBaseUI _LoadGameButton;
+
   [SerializeField]
+  /// <summary>
+  /// Object that has the button for "loading" option.
+  /// 
+  /// Brief explanation, the object will be hidden when the save file does not exists. So when the Game runs at the first time, the UI will hide the "loading" option as that option is not possible to do.
+  /// </summary>
   private GameObject _LoadGameButtonActiveTarget;
 
   [SerializeField]
@@ -41,6 +57,9 @@ public class MainMenuUI: MonoBehaviour{
 
 
 
+  /// <summary>
+  /// Catching event from <see cref="PromptUI"/>.
+  /// </summary>
   private void _on_prompt_accept(){
     switch(_current_prompt_context){
       case PromptContext.StartNewGame:{
@@ -54,11 +73,18 @@ public class MainMenuUI: MonoBehaviour{
     }
   }
 
+  /// <summary>
+  /// Catching event from <see cref="PromptUI"/>.
+  /// </summary>
   private void _on_prompt_cancel(){
     StartCoroutine(UIUtility.SetHideUI(_PromptUI.gameObject, true));
   }
 
 
+  /// <summary>
+  /// Show the <see cref="PromptUI"/> and set the needed configuration based on <see cref="PromptContext"/>.
+  /// </summary>
+  /// <param name="context">The current context to prompt</param>
   private void _trigger_prompt(PromptContext context){
     PromptData _data = new(){
       PromptText = "Error: Empty Prompt"
@@ -96,6 +122,10 @@ public class MainMenuUI: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Extending <see cref="Start"/> function for waiting next update (until all object initialized) so the object can use its functions.
+  /// </summary>
+  /// <returns></returns>
   private IEnumerator _start_as_coroutine(){
     yield return null;
     yield return new WaitForEndOfFrame();

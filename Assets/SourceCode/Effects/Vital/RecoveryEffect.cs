@@ -3,6 +3,13 @@ using System.Collections;
 
 
 [RequireComponent(typeof(HealthComponent))]
+/// <summary>
+/// An extended <see cref="HealthComponent"/> feature that will give visual feedback to the object when the used character are "recovering" after "hit".
+/// 
+/// This class uses Component(s);
+/// - <b>Rigidbody2D</b> The target body for excluding the physics layer.
+/// - <b>SpriteRenderer</b> The target renderer to manipulate the visual.
+/// </summary>
 public class RecoveryEffect: MonoBehaviour{
   [SerializeField]
   private LayerMask _ExcludedLayerRecovery;
@@ -23,6 +30,10 @@ public class RecoveryEffect: MonoBehaviour{
   public float BlinkVisibleInterval = 0.1f;
 
 
+  /// <summary>
+  /// Coroutine function that handles "damaged" effect lifetime.
+  /// </summary>
+  /// <returns>Coroutine helper object</returns>
   private IEnumerator _on_damaged(){
     if(_TargetRecoveryBody == null)
       yield break;

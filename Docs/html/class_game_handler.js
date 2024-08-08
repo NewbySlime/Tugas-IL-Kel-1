@@ -1,4 +1,40 @@
 var class_game_handler =
 [
-    [ "SceneMetadata", "class_game_handler_1_1_scene_metadata.html", null ]
+    [ "RuntimeSceneData", "class_game_handler_1_1_runtime_scene_data.html", "class_game_handler_1_1_runtime_scene_data" ],
+    [ "RuntimeSceneDataWrapper", "class_game_handler_1_1_runtime_scene_data_wrapper.html", null ],
+    [ "SceneData", "class_game_handler_1_1_scene_data.html", "class_game_handler_1_1_scene_data" ],
+    [ "SceneMetadata", "class_game_handler_1_1_scene_metadata.html", null ],
+    [ "GameContext", "class_game_handler.html#a05be125f39d51b3f9fa21bfb02e43466", [
+      [ "InGame", "class_game_handler.html#a05be125f39d51b3f9fa21bfb02e43466a7f3d370e94c8b1fea09838572013d8ec", null ],
+      [ "MainMenu", "class_game_handler.html#a05be125f39d51b3f9fa21bfb02e43466aad1111b48f98329333237912fc3b371b", null ]
+    ] ],
+    [ "AddLoadingQueue", "class_game_handler.html#a608ba53240fb3f7873eb78a20a38f8d7", null ],
+    [ "ChangeScene", "class_game_handler.html#a66096ffc25b4aa915802a313ba49d48f", null ],
+    [ "ChangeSceneToMainMenu", "class_game_handler.html#aed822e9ab8c38ac64adb697dcdb7e007", null ],
+    [ "CloseSettingsUI", "class_game_handler.html#af7d4e7223cec0af7fe80f26cb5bcb24f", null ],
+    [ "GetCurrentSceneContext", "class_game_handler.html#a2851b33418f74debce935e07d683d466", null ],
+    [ "GetCurrentSceneID", "class_game_handler.html#a51f14077c64c5933ace23242cfe7556a", null ],
+    [ "GetLastScene", "class_game_handler.html#a6b7252ef6cbbe5f6b10fd7421ea90d07", null ],
+    [ "LoadGame", "class_game_handler.html#a00bd3ba02ed394875871326283230010", null ],
+    [ "OnPauseGame", "class_game_handler.html#ab41208ee48b4d22c61dca32dc1ea9735", null ],
+    [ "OpenSettingsUI", "class_game_handler.html#a2157671d48d64dabe5a3487811927e33", null ],
+    [ "PauseGame", "class_game_handler.html#a33e1cd5b674d5dbbd05b5cee4c0648d2", null ],
+    [ "QuitGame", "class_game_handler.html#aadaea3b157e2e44bd7ed58bef8f44f84", null ],
+    [ "ResetGameScenario", "class_game_handler.html#a85279b5dc8eb68ed48f6eb05b57576f6", null ],
+    [ "RestartFromLastCheckpoint", "class_game_handler.html#af0155624fc116a1fe9e5bc9826091d62", null ],
+    [ "ResumeGame", "class_game_handler.html#a6cebddda8c9426e3abaa2619f3e1cf51", null ],
+    [ "SaveGame", "class_game_handler.html#a509d6391d8079be4923f9f46e3203a46", null ],
+    [ "SetLastCheckpoint", "class_game_handler.html#af3ebf688397ef3a1c2577bc9b2d1d7d2", null ],
+    [ "StartNewGame", "class_game_handler.html#a1c14868dedfc120f5539ed545c40052b", null ],
+    [ "TriggerGameOver", "class_game_handler.html#a5aeacd334c1fc870f8df4b3511e69e7b", null ],
+    [ "TriggerPlayerSpotted", "class_game_handler.html#a9adce66faa007df2f7c4c71b5a754916", null ],
+    [ "TriggerRecipeAdded", "class_game_handler.html#a80e03ba6087b7fc94e1b6abcb687592e", null ],
+    [ "Initialized", "class_game_handler.html#a8908ac6a1d9fae96e302b81a318a403e", null ],
+    [ "PersistanceHandler", "class_game_handler.html#a230b4456ff63eaccf573f3012e854e29", null ],
+    [ "SceneInitialized", "class_game_handler.html#a15396d4ceca010c96ba57e5c9bae1eef", null ],
+    [ "SceneInitializing", "class_game_handler.html#a43a6efc046bd5bd352436432aebf03de", null ],
+    [ "LoadDataFromPersistanceEvent", "class_game_handler.html#afa551e9197aee09f92be4ec95c17d064", null ],
+    [ "SceneChangedFinishedEvent", "class_game_handler.html#a2588f877e687b045d2c8848dc4742c3e", null ],
+    [ "SceneChangedInitializingEvent", "class_game_handler.html#ae5ead4e3276264f44c2b79bb0810752d", null ],
+    [ "SceneRemovingEvent", "class_game_handler.html#ae2ffba9ca55832226cad49393a99764f", null ]
 ];

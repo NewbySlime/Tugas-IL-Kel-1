@@ -7,10 +7,22 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system for pausing the Game's time.
+  /// </summary>
   public class PauseGameSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "pause_game_sequence";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// Flag to do pausing the time or not.
+      /// </summary>
       public bool IsPausing;
     }
 
@@ -57,6 +69,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Pause Game")]
   [UnitCategory("Sequence")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="PauseGameSequence"/>.
+  /// </summary>
   public class PauseGameSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _is_pausing_input;

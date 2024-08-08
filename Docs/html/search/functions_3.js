@@ -1,5 +1,21 @@
 var searchData=
 [
-  ['dojump_0',['DoJump',['../class_movement_controller.html#a84b7e947934d47cff6fec7af409b7dab',1,'MovementController']]],
-  ['dowalk_1',['DoWalk',['../class_movement_controller.html#ac5fd1519b6884dc51cef40d133646d52',1,'MovementController']]]
+  ['canceldialogue_0',['CancelDialogue',['../class_dialogue_character_u_i.html#a38a2c94ba8d5e2f67f7b21fbfe54590a',1,'DialogueCharacterUI']]],
+  ['canceleffect_1',['CancelEffect',['../class_on_enabled_color_fade.html#a5e064f105ba715405de4377df64f6708',1,'OnEnabledColorFade.CancelEffect()'],['../class_on_enabled_particle_trigger.html#a6052f94003e6d8cb9bb4662cffd8d3fc',1,'OnEnabledParticleTrigger.CancelEffect()'],['../class_damaged_effect.html#a286ae6e610c0fa17907d3688d2051a70',1,'DamagedEffect.CancelEffect()'],['../class_healed_effect.html#a404716c65319edf64d4a4ab5464a9d4d',1,'HealedEffect.CancelEffect()'],['../class_vulnerable_effect.html#a98d80427c43eee33a070746fa9c03792',1,'VulnerableEffect.CancelEffect()']]],
+  ['cancelmoving_2',['CancelMoving',['../class_path_follower.html#a5e0cdf3f05196a3b7c28e2f3e47f59fc',1,'PathFollower']]],
+  ['cancelsplashscreen_3',['CancelSplashScreen',['../class_splash_screen_u_i.html#a07401eb03e7729ca832e9ba643f3f221',1,'SplashScreenUI']]],
+  ['canceltrigger_4',['CancelTrigger',['../class_on_dead_game_over_trigger.html#a660a45ef549e7159eee36d86a90f770d',1,'OnDeadGameOverTrigger']]],
+  ['canshoot_5',['CanShoot',['../class_weapon_handler.html#a96b4018024944d4e8975e1146e7f2bdd',1,'WeaponHandler']]],
+  ['changedialogue_6',['ChangeDialogue',['../class_dialogue_u_i.html#a2d80d8d898acb41bae76b06933401b7b',1,'DialogueUI']]],
+  ['changeitemcount_7',['ChangeItemCount',['../class_item_container_controller.html#a4443196a82bce06e49b875fea918a0a3',1,'ItemContainerController']]],
+  ['changescene_8',['ChangeScene',['../class_game_handler.html#a66096ffc25b4aa915802a313ba49d48f',1,'GameHandler']]],
+  ['changescenetomainmenu_9',['ChangeSceneToMainMenu',['../class_game_handler.html#aed822e9ab8c38ac64adb697dcdb7e007',1,'GameHandler']]],
+  ['characterdatabase_5floaddata_10',['CharacterDatabase_LoadData',['../class_character_friendly_object_data.html#af4214638a6efa05e8e3d4984c9c88ba6',1,'CharacterFriendlyObjectData.CharacterDatabase_LoadData()'],['../class_character_metadata.html#a1414283a041296d3a7f18e1d3adbd663',1,'CharacterMetadata.CharacterDatabase_LoadData()'],['../class_character_sprite_data.html#a2bb5099121ed7f6a7be24e54b1419b60',1,'CharacterSpriteData.CharacterDatabase_LoadData()']]],
+  ['clearcharacteruifrom_11',['ClearCharacterUIFrom',['../class_dialogue_character_u_i.html#ae57ca1477f4ee84df20fc0e91c7bc842',1,'DialogueCharacterUI']]],
+  ['cleardata_12',['ClearData',['../class_game_runtime_data.html#afffa88bed3123c23073e43c52b8e49dd',1,'GameRuntimeData.ClearData()'],['../class_persistance_context.html#ad69cc8ec3817c5b49e37603c02488a7b',1,'PersistanceContext.ClearData()']]],
+  ['clearfollowobject_13',['ClearFollowObject',['../class_follower_camera2_d.html#afa29af4b89d2ed720a127f75cb593e68',1,'FollowerCamera2D']]],
+  ['clearregisters_14',['ClearRegisters',['../class_input_focus_context.html#a90f6c9a2ed5a600c96c143d5c12b597b',1,'InputFocusContext']]],
+  ['closesettingsui_15',['CloseSettingsUI',['../class_game_handler.html#af7d4e7223cec0af7fe80f26cb5bcb24f',1,'GameHandler']]],
+  ['consolehandler_5fcommandaccept_16',['ConsoleHandler_CommandAccept',['../class_player_inventory_command.html#a0f26b41d1435d347bb81c3f4609a477c',1,'PlayerInventoryCommand']]],
+  ['createnewcharacter_17',['CreateNewCharacter',['../class_character_database.html#ab199c3fb51b481a7570beece43b73f5c',1,'CharacterDatabase']]]
 ];

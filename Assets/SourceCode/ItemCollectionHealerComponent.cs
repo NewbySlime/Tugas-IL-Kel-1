@@ -3,6 +3,16 @@ using UnityEngine;
 
 [RequireComponent(typeof(InventoryData))]
 [RequireComponent(typeof(HealthComponent))]
+/// <summary>
+/// Component for automatically heal an object with <see cref="HealthComponent"/> whenever an item entered has a data about <see cref="ItemHealData"/>.
+/// 
+/// This class uses following component(s);
+/// - <see cref="InventoryData"/> for handling object's inventory.
+/// - <see cref="HealthComponent"/> the health system.
+/// 
+/// This class uses autoload(s);
+/// - <see cref="ItemDatabase"/> for getting data about an item.
+/// </summary>
 public class ItemCollectionHealerComponent: MonoBehaviour{
   [SerializeField]
   private bool _RemoveItemOnGet = true;

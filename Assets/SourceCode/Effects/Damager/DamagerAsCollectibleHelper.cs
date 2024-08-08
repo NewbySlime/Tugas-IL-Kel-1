@@ -2,6 +2,14 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(DamagerComponent))]
+/// <summary>
+/// An extended <see cref="DamagerComponent"/> feature that makes the Damager object becomes an item once the speed is in certain threshold.
+/// 
+/// The threshold data contained in <see cref="DamagerComponent.DamagerContext"/>>.
+/// 
+/// This class uses Component(s) such as;
+/// - <see cref="CollectibleComponent"/> to determine when the Item is being picked.
+/// </summary>
 public class DamagerAsCollectibleHelper: MonoBehaviour{
   [SerializeField]
   private CollectibleComponent _TargetCollectibleComponent;
@@ -40,6 +48,9 @@ public class DamagerAsCollectibleHelper: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// An interface function (Unity's Message) used for telling the object that the DamagerContet has changed.
+  /// </summary>
   public void DamagerData_OnContextChanged(){
     DamagerComponent.DamagerContext _context = _damager.GetDamagerContext();
     if(_context.AsCollectible)

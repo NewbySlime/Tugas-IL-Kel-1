@@ -3,6 +3,15 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(Canvas))]
+/// <summary>
+/// Class for storing and updating <see cref="ParallaxComponent"/> variables for each Unity's Update event.
+/// 
+/// This class uses following component(s);
+/// - Unity's <b>Canvas</b> for getting the camera bound to this canvas.
+/// 
+/// This class uses external component(s);
+/// - List of <see cref="ParallaxComponent"/> for handling the effect for each parallax images.
+/// </summary>
 public class CanvasParallaxHandler: MonoBehaviour{
   [SerializeField]
   private List<ParallaxComponent> _ListParallaxes;

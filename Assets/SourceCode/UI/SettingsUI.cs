@@ -8,8 +8,27 @@ using UnityEngine.UI;
 
 
 [RequireComponent(typeof(PersistanceContext))]
+/// <summary>
+/// UI Class for handling and giving interaction to modify the Game settings/configuration data.
+/// NOTE: this class deattach its save with the one provided by <see cref="GameHandler"/> by using own <see cref="PersistanceContext"/>. The save file path can be modified in the editor under <see cref="PersistanceContext"/> component.
+/// 
+/// This class uses following component(s);
+/// - <see cref="PersistanceContext"/> to use own save file different from the one provided by <see cref="GameHandler"/>.
+/// 
+/// This class uses external component(s);
+/// - <b>AudioMixer</b> the target mixer to modify the audio settings.
+/// - <b>Slider</b> interface interaction for modifiying settings.
+/// - <see cref="ButtonBaseUI"/> as the "back" button to close this UI.
+/// 
+/// This class uses autoload(s);
+/// - <see cref="GameHandler"/> for game events and such.
+/// - <see cref="InputFocusContext"/> for asking focus to use input.
+/// </summary>
 public class SettingsUI: MonoBehaviour{
   [Serializable]
+  /// <summary>
+  /// The runtime data related to this class for use in <see cref="GameRuntimeData"/> or for saving to <see cref="PersistanceContext"/>.
+  /// </summary>
   public class RuntimeData: PersistanceContext.IPersistance{
     public float MasterVolume = 0;
     public float SoundFXVolume = 0;
@@ -58,6 +77,8 @@ public class SettingsUI: MonoBehaviour{
   private float _auto_save_timer = 0;
 
 
+  // Coroutine function for auto save. The timer delay can be restarted by resetting _auto_save_timer to the original time.
+  // This function only giving "saving" trigger to PersistanceContext. To see how the data is given to PersistanceContext, see _persistance_saving function.
   private IEnumerator _auto_save_co_func(){
     while(_auto_save_timer > 0){
       yield return null;
@@ -69,6 +90,8 @@ public class SettingsUI: MonoBehaviour{
     _auto_save_coroutine = null;
   }
 
+  // Function to trigger auto save when a data has been changed.
+  // This function won't instantly save the data, but it will start the delay or resets the delay until auto save.
   private void _trigger_auto_save(){
     _auto_save_timer = _AutoSaveDelay;
     if(_auto_save_coroutine != null)
@@ -77,6 +100,7 @@ public class SettingsUI: MonoBehaviour{
     _auto_save_coroutine = StartCoroutine(_auto_save_co_func());
   }
 
+  // Update the data inputted from slider or any interaction to target AudioMixer.
   private void _update_sound_volume(){
     _TargetMixer.SetFloat("master_volume", _MasterSlider.value);
     _TargetMixer.SetFloat("music_volume", _MusicSlider.value);
@@ -138,6 +162,10 @@ public class SettingsUI: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Get the data related to this object as <see cref="RuntimeData"/>.
+  /// </summary>
+  /// <returns>This data</returns>
   public RuntimeData AsRuntimeData(){
     return new(){
       MasterVolume = _MasterSlider.value,
@@ -146,6 +174,10 @@ public class SettingsUI: MonoBehaviour{
     };
   }
 
+  /// <summary>
+  /// To parse the data related to this object from <see cref="RuntimeData"/> to be applied to this object.
+  /// </summary>
+  /// <param name="data">This new data</param>
   public void FromRuntimeData(RuntimeData data){
     if(data == null)
       return;
@@ -156,6 +188,11 @@ public class SettingsUI: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Function to catch "UICancel" input event.
+  /// This function is used to close this UI by prompting it to <see cref="GameHandler"/>, not self.
+  /// </summary>
+  /// <param name="value">Unity's input data</param>
   public void OnUICancel(InputValue value){
     if(!_focus_context.InputAvailable(this))
       return;

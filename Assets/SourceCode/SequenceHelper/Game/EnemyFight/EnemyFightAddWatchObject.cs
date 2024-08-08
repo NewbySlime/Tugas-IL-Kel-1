@@ -3,11 +3,27 @@ using UnityEngine;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to bind a target object to <see cref="EnemyFightMG"/>.
+  /// </summary>
   public class EnemyFightAddWatchObject: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "enemy_fight_add_watch_enemy";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The minigame object
+      /// </summary>
       public ObjectReference.ObjRefID MiniGameObjRef;
+
+      /// <summary>
+      /// Target Object Reference to bind with the minigame.
+      /// </summary>
       public ObjectReference.ObjRefID TargetObjRef;
     }
 
@@ -61,6 +77,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Add Watch Object")]
   [UnitCategory("Sequence/Game/EnemyFight")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="EnemyFightAddWatchObject"/>.
+  /// </summary>
   public class EnemyFightAddWatchObjectVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _mini_game_input;

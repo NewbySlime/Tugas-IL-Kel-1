@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: DialogueUI Class Reference</title>
+<title>FlavourOfRoemahNusantara: DialogueUI Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -99,6 +101,9 @@ $(function(){initNavTree('class_dialogue_u_i.html',''); initResizable(); });
   <div class="headertitle"><div class="title">DialogueUI Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Base class for handling dialogue animation, interactions and also processing dialogue data.  
+ <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for DialogueUI:</div>
 <div class="dyncontent">
@@ -108,7 +113,14 @@ Inheritance diagram for DialogueUI:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dialogue_u_i_1_1_dialogue_character_speed.html">DialogueCharacterSpeed</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data used for setting each character delay.  <a href="class_dialogue_u_i_1_1_dialogue_character_speed.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dialogue_u_i_1_1_dialogue_data.html">DialogueData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dialogue data to be used with <a class="el" href="class_dialogue_u_i.html" title="Base class for handling dialogue animation, interactions and also processing dialogue data.">DialogueUI</a>  <a href="class_dialogue_u_i_1_1_dialogue_data.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dialogue_u_i_1_1_dialogue_sequence.html">DialogueSequence</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A list of dialogues formed by <a class="el" href="class_add_dialogue.html" title="Custom Visual Scripting node for adding dialogue data to DialogueUI.DialogueSequence supplied by inpu...">AddDialogue</a> with using Visual Scripting.  <a href="class_dialogue_u_i_1_1_dialogue_sequence.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -116,25 +128,106 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3330c1c0742b53a95c101502210b66de" id="r_a3330c1c0742b53a95c101502210b66de"><td class="memItemLeft" align="right" valign="top"><a id="a3330c1c0742b53a95c101502210b66de" name="a3330c1c0742b53a95c101502210b66de"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr>
 <tr class="separator:a3330c1c0742b53a95c101502210b66de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6005b6ad0556d43556c8f121a09adf07" id="r_a6005b6ad0556d43556c8f121a09adf07"><td class="memItemLeft" align="right" valign="top"><a id="a6005b6ad0556d43556c8f121a09adf07" name="a6005b6ad0556d43556c8f121a09adf07"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Update</b> ()</td></tr>
-<tr class="separator:a6005b6ad0556d43556c8f121a09adf07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0133a665a4beb3af620babfe35fbc3e" id="r_ad0133a665a4beb3af620babfe35fbc3e"><td class="memItemLeft" align="right" valign="top"><a id="ad0133a665a4beb3af620babfe35fbc3e" name="ad0133a665a4beb3af620babfe35fbc3e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ChangeDialogue</b> (<a class="el" href="class_dialogue_u_i_1_1_dialogue_data.html">DialogueData</a> dialogue, bool skip_dialogue)</td></tr>
-<tr class="separator:ad0133a665a4beb3af620babfe35fbc3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae80bebc357637726e6aaf4e6a0c88b2a" id="r_ae80bebc357637726e6aaf4e6a0c88b2a"><td class="memItemLeft" align="right" valign="top"><a id="ae80bebc357637726e6aaf4e6a0c88b2a" name="ae80bebc357637726e6aaf4e6a0c88b2a"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsDialogueFinished</b> ()</td></tr>
+<tr class="memitem:a77a76bad9b502e1a1afdb29f7dfe8f5f" id="r_a77a76bad9b502e1a1afdb29f7dfe8f5f"><td class="memItemLeft" align="right" valign="top"><a id="a77a76bad9b502e1a1afdb29f7dfe8f5f" name="a77a76bad9b502e1a1afdb29f7dfe8f5f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>TriggerSequenceAsync</b> ()</td></tr>
+<tr class="memdesc:a77a76bad9b502e1a1afdb29f7dfe8f5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triggers sequence handler from the recently supplied dialouge data. <br /></td></tr>
+<tr class="separator:a77a76bad9b502e1a1afdb29f7dfe8f5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bbe0263e3095cda68d2c788fa4c261f" id="r_a0bbe0263e3095cda68d2c788fa4c261f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0bbe0263e3095cda68d2c788fa4c261f">IsSequenceTriggering</a> ()</td></tr>
+<tr class="memdesc:a0bbe0263e3095cda68d2c788fa4c261f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to check if current sequence handler is still playing.  <br /></td></tr>
+<tr class="separator:a0bbe0263e3095cda68d2c788fa4c261f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d80d8d898acb41bae76b06933401b7b" id="r_a2d80d8d898acb41bae76b06933401b7b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d80d8d898acb41bae76b06933401b7b">ChangeDialogue</a> (<a class="el" href="class_dialogue_u_i_1_1_dialogue_data.html">DialogueData</a> dialogue, bool skip_dialogue=false)</td></tr>
+<tr class="memdesc:a2d80d8d898acb41bae76b06933401b7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to add or change the dialogue data with the new dialouge.  <br /></td></tr>
+<tr class="separator:a2d80d8d898acb41bae76b06933401b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae80bebc357637726e6aaf4e6a0c88b2a" id="r_ae80bebc357637726e6aaf4e6a0c88b2a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae80bebc357637726e6aaf4e6a0c88b2a">IsDialogueFinished</a> ()</td></tr>
+<tr class="memdesc:ae80bebc357637726e6aaf4e6a0c88b2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to check if current dialogue is still playing or not.  <br /></td></tr>
 <tr class="separator:ae80bebc357637726e6aaf4e6a0c88b2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a282dea10ea214659d68b3812ceb6bd55" id="r_a282dea10ea214659d68b3812ceb6bd55"><td class="memItemLeft" align="right" valign="top"><a id="a282dea10ea214659d68b3812ceb6bd55" name="a282dea10ea214659d68b3812ceb6bd55"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SkipDialogueAnimation</b> ()</td></tr>
+<tr class="memdesc:a282dea10ea214659d68b3812ceb6bd55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prompt the UI to skip currently playing dialouge. <br /></td></tr>
 <tr class="separator:a282dea10ea214659d68b3812ceb6bd55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab982ffce879c6bf0f2c2ffaceeaa42a5" id="r_ab982ffce879c6bf0f2c2ffaceeaa42a5"><td class="memItemLeft" align="right" valign="top"><a id="ab982ffce879c6bf0f2c2ffaceeaa42a5" name="ab982ffce879c6bf0f2c2ffaceeaa42a5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ShowDialogue</b> ()</td></tr>
-<tr class="separator:ab982ffce879c6bf0f2c2ffaceeaa42a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18dc1f6bde6ca424aa42eefb8bc944ea" id="r_a18dc1f6bde6ca424aa42eefb8bc944ea"><td class="memItemLeft" align="right" valign="top"><a id="a18dc1f6bde6ca424aa42eefb8bc944ea" name="a18dc1f6bde6ca424aa42eefb8bc944ea"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>HideDialogue</b> ()</td></tr>
-<tr class="separator:a18dc1f6bde6ca424aa42eefb8bc944ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Base class for handling dialogue animation, interactions and also processing dialogue data. </p>
+<p>This class uses following component(s);</p><ul>
+<li><b>AudioSource</b> for giving auditorial interaction feedback.</li>
+</ul>
+<p>This class uses external component(s);</p><ul>
+<li><b>Unity's TMP Text</b> used for showing the dialogue.</li>
+</ul>
+<p>This class uses prefab(s);</p><ul>
+<li>Prefab for sequence handling (SequenceHandler). </li>
+</ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2d80d8d898acb41bae76b06933401b7b" name="a2d80d8d898acb41bae76b06933401b7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d80d8d898acb41bae76b06933401b7b">&#9670;&#160;</a></span>ChangeDialogue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DialogueUI.ChangeDialogue </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_dialogue_u_i_1_1_dialogue_data.html">DialogueData</a></td>          <td class="paramname"><span class="paramname"><em>dialogue</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>skip_dialogue</em><span class="paramdefsep"> = </span><span class="paramdefval">false</span></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to add or change the dialogue data with the new dialouge. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dialogue</td><td>The new dialogue data</td></tr>
+    <tr><td class="paramname">skip_dialogue</td><td>Should the dialogue animation be skipped or not</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae80bebc357637726e6aaf4e6a0c88b2a" name="ae80bebc357637726e6aaf4e6a0c88b2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae80bebc357637726e6aaf4e6a0c88b2a">&#9670;&#160;</a></span>IsDialogueFinished()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool DialogueUI.IsDialogueFinished </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to check if current dialogue is still playing or not. </p>
+<dl class="section return"><dt>Returns</dt><dd>Is current dialogue finished or not</dd></dl>
+
+</div>
+</div>
+<a id="a0bbe0263e3095cda68d2c788fa4c261f" name="a0bbe0263e3095cda68d2c788fa4c261f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bbe0263e3095cda68d2c788fa4c261f">&#9670;&#160;</a></span>IsSequenceTriggering()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool DialogueUI.IsSequenceTriggering </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to check if current sequence handler is still playing. </p>
+<dl class="section return"><dt>Returns</dt><dd>Is the sequence playing</dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Assets/SourceCode/UI/<b>DialogueUI.cs</b></li>
 </ul>

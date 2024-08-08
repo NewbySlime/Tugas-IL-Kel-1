@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: SequenceInterface Class Reference</title>
+<title>FlavourOfRoemahNusantara: SequenceInterface Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -98,6 +100,9 @@ $(function(){initNavTree('class_sequence_interface.html',''); initResizable(); }
   <div class="headertitle"><div class="title">SequenceInterface Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class as a part of Sequencing system in which this class handles subsequences that contains in a part of sequence data. All subsequences contained in this class will be triggered simultaneously. All subsequence objects are stored as a child object of this component. <a class="el" href="class_sequence_handler_v_s.html" title="Class for handling sequencing system. This class uses SequenceInterface for handling subsequences....">SequenceHandlerVS</a> uses this class as a way to split each subsequence data and handles it in this class.  
+ <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for SequenceInterface:</div>
 <div class="dyncontent">
@@ -107,13 +112,56 @@ Inheritance diagram for SequenceInterface:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad49600ef64cee5c69355eb09d514d852" id="r_ad49600ef64cee5c69355eb09d514d852"><td class="memItemLeft" align="right" valign="top"><a id="ad49600ef64cee5c69355eb09d514d852" name="ad49600ef64cee5c69355eb09d514d852"></a>
-IEnumerator&#160;</td><td class="memItemRight" valign="bottom"><b>StartTrigger</b> ()</td></tr>
+<tr class="memitem:ad49600ef64cee5c69355eb09d514d852" id="r_ad49600ef64cee5c69355eb09d514d852"><td class="memItemLeft" align="right" valign="top">IEnumerator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad49600ef64cee5c69355eb09d514d852">StartTrigger</a> ()</td></tr>
+<tr class="memdesc:ad49600ef64cee5c69355eb09d514d852"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start all subsequences simultaneously (synchronous).  <br /></td></tr>
 <tr class="separator:ad49600ef64cee5c69355eb09d514d852"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac11773c516f20029223dd4066034aef2" id="r_ac11773c516f20029223dd4066034aef2"><td class="memItemLeft" align="right" valign="top"><a id="ac11773c516f20029223dd4066034aef2" name="ac11773c516f20029223dd4066034aef2"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsTriggering</b> ()</td></tr>
+<tr class="memitem:ac11773c516f20029223dd4066034aef2" id="r_ac11773c516f20029223dd4066034aef2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac11773c516f20029223dd4066034aef2">IsTriggering</a> ()</td></tr>
+<tr class="memdesc:ac11773c516f20029223dd4066034aef2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if all subsequences are still running or not.  <br /></td></tr>
 <tr class="separator:ac11773c516f20029223dd4066034aef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class as a part of Sequencing system in which this class handles subsequences that contains in a part of sequence data. All subsequences contained in this class will be triggered simultaneously. All subsequence objects are stored as a child object of this component. <a class="el" href="class_sequence_handler_v_s.html" title="Class for handling sequencing system. This class uses SequenceInterface for handling subsequences....">SequenceHandlerVS</a> uses this class as a way to split each subsequence data and handles it in this class. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac11773c516f20029223dd4066034aef2" name="ac11773c516f20029223dd4066034aef2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac11773c516f20029223dd4066034aef2">&#9670;&#160;</a></span>IsTriggering()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SequenceInterface.IsTriggering </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if all subsequences are still running or not. </p>
+<dl class="section return"><dt>Returns</dt><dd>Is the subsequences still running</dd></dl>
+
+</div>
+</div>
+<a id="ad49600ef64cee5c69355eb09d514d852" name="ad49600ef64cee5c69355eb09d514d852"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad49600ef64cee5c69355eb09d514d852">&#9670;&#160;</a></span>StartTrigger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IEnumerator SequenceInterface.StartTrigger </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start all subsequences simultaneously (synchronous). </p>
+<dl class="section return"><dt>Returns</dt><dd>Coroutine helper object</dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Assets/SourceCode/<b>SequenceInterface.cs</b></li>
 </ul>

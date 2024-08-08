@@ -2,7 +2,18 @@ using System.Collections;
 using UnityEngine;
 
 
+/// <summary>
+/// TODO: next feature
+/// 
+/// This is a class for visualizing a bar that represents two different scores within the same bar.
+/// 
+/// This class uses external component(s);
+/// - Two <see cref="BaseProgressUI"/> for the base bar visualization.
+/// </summary>
 public class BattleBarUI: MonoBehaviour{
+  /// <summary>
+  /// The layout in which the score would be shown.
+  /// </summary>
   public enum LayoutPosition{
     Top,
     Bottom
@@ -17,10 +28,15 @@ public class BattleBarUI: MonoBehaviour{
     public float target_value;
   }
 
+  /// <summary>
+  /// The metadata for certain data for a layout.
+  /// </summary>
   public class BarMetadata{
+    /// <summary>
+    /// The name of a bar for related progression object. 
+    /// </summary>
     public string BarName;
   }
-
 
 
 
@@ -67,6 +83,12 @@ public class BattleBarUI: MonoBehaviour{
   }
   
 
+  /// <summary>
+  /// To set progress value of a bar in certain layout.
+  /// </summary>
+  /// <param name="position">The layout to set the value to</param>
+  /// <param name="val">The progress value</param>
+  /// <param name="skip_animation">Skip the "progressing" animation</param>
   public void SetProgress(LayoutPosition position, float val, bool skip_animation = false){
     _UpdateVisualInstance _vis_instance = null;
     switch(position){
@@ -85,11 +107,19 @@ public class BattleBarUI: MonoBehaviour{
   }
 
   
+  /// <summary>
+  /// To set metadata for a bar of certain layout/position.
+  /// </summary>
+  /// <param name="position">The layout to set the value to</param>
+  /// <param name="metadata">The bar metadata</param>
   public void SetBarData(LayoutPosition position, BarMetadata metadata){
     // TODO
   }
 
 
+  /// <summary>
+  /// To catch object enabling event.
+  /// </summary>
   public void OnEnable(){
     StartCoroutine(_update_bar(_top_inst));
     StartCoroutine(_update_bar(_bottom_inst));

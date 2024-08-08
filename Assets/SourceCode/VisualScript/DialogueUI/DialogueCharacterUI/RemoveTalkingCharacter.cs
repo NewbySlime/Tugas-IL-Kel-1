@@ -4,6 +4,9 @@ using Unity.VisualScripting;
 
 [UnitTitle("Remove Character")]
 [UnitCategory("Dialogue/DialogueCharacterUI")]
+/// <summary>
+/// Extended <see cref="DialogueCharacterUI_DataInterface"/> Node for giving instruction to removing already existed character for this part of dialouge data to <see cref="DialogueCharacterUI"/>.
+/// </summary>
 public class RemoveTalkingCharacter: DialogueCharacterUI_DataInterface{
   [DoNotSerialize]
   private ValueInput _character_id_input;

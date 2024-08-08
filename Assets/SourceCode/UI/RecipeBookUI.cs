@@ -8,17 +8,30 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
+/// <summary>
+/// UI Class for use of certain events in the story of the game to show that a Recipe has been added and learned by the player with animation and effects for this event.
+/// 
+/// This class uses Prefab(s);
+/// - Prefab that has effects with <see cref="IEnableTrigger"/> interface class. The effects will be triggered when the object are enabled.
+/// 
+/// This class uses autoload(s);
+/// - <see cref="ItemDatabase"/> for getting data of item.
+/// </summary>
 public class RecipeBookUI: MonoBehaviour{
   [Serializable]
+  // struct for storing the effect data to be used in this class.
   private struct _recipe_discovery_effect_data{
     public float DelayShow;
     public float FinishDelay;
   }
 
+  // struct for storing datas or objects related to the discovered recipe
   private struct _recipe_metadata{
     public RecipeDataButtonUI _recipe_ui;
   }
 
+  // class for allowing coroutine to continue to display and play the effect animation.
+  // for further explanation, see _trigger_recipe_discovery_effect function.
   private class _trigger_recipe_discovery_queue_data{
     public bool AllowTrigger = false;
   }
@@ -37,12 +50,15 @@ public class RecipeBookUI: MonoBehaviour{
   private RecipeDiscoveryComponent _discovery_component = null;
   private ItemDatabase _item_database;
 
+  // data structure for queuing the discovery effect animation.
+  // for further explanation, see _trigger_recipe_discovery_effect function.
   private Queue<_trigger_recipe_discovery_queue_data> _recipe_discovery_queue = new();
   private Dictionary<string, _recipe_metadata> _recipe_metadata_map = new();
 
   public bool IsEffectTriggering{private set; get;} = false;
 
 
+  // sorting used when the UI is hidden.
   private void _sort_recipe_ui(){
     // data from dictionary should have sorted
     foreach(string _recipe_id in _recipe_metadata_map.Keys){
@@ -98,6 +114,13 @@ public class RecipeBookUI: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Handles adding and giving "discovery" effect to the player as a feedback that a recipe has been discovered.
+  /// 
+  /// Since this function might be called in the same time (still synchronously, but using Coroutine), hence the need for queuing the discovery effect for the new recipe and yields the current Coroutine processing until it is allowed to continue by previous discovery effect.
+  /// </summary>
+  /// <param name="recipe_item_id">The new recipe ID</param>
+  /// <returns>Coroutine helper object</returns>
   private IEnumerator _trigger_recipe_discovery_effect(string recipe_item_id){
     if(!IsEffectTriggering){
       IsEffectTriggering = true;
@@ -142,6 +165,7 @@ public class RecipeBookUI: MonoBehaviour{
   }
 
 
+  // when bound RecipeDiscoveryComponent invoke "added recipe" event.
   private void _on_discovery_added(string recipe_item_id){
     StartCoroutine(_add_recipe_metadata(recipe_item_id));
   }
@@ -164,6 +188,10 @@ public class RecipeBookUI: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// To bind the discovery component from a source to be watched when the recipe is added.
+  /// </summary>
+  /// <param name="discovery">The discovery component</param>
   public void BindDiscoveryComponent(RecipeDiscoveryComponent discovery){
     UnbindDiscoveryComponent();
     if(discovery == null)
@@ -177,6 +205,9 @@ public class RecipeBookUI: MonoBehaviour{
       StartCoroutine(_add_recipe_metadata(_recipe_id));
   }
 
+  /// <summary>
+  /// To unbind and clear all data related to the (if available) previous discovery component.
+  /// </summary>
   public void UnbindDiscoveryComponent(){
     if(_discovery_component == null)
       return;
@@ -189,11 +220,18 @@ public class RecipeBookUI: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Function to manually trigger the effect without the event by currently bound discovery component.
+  /// </summary>
+  /// <param name="recipe_item_id">The new recipe ID</param>
   public void TriggerRecipeDiscoveryEffect(string recipe_item_id){
     StartCoroutine(_trigger_recipe_discovery_effect(recipe_item_id));
   }
 
 
+  /// <summary>
+  /// To catch Unity's "enabled object" event.
+  /// </summary>
   public void OnEnable(){
     _sort_recipe_ui();
   }

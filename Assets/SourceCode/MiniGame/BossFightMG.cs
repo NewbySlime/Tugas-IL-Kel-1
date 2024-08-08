@@ -3,6 +3,14 @@ using UnityEngine;
 
 
 
+/// <summary>
+/// Class to handle Minigame system for when Boss Battles in the Game. Win/Lose Condition almost the same as the EnemyFightMG.
+/// 
+/// NOTE: bound objects should have <see cref="HealthComponent"/> and <see cref="ObjectFriendlyHandler"/> for the Minigame to work properly.
+/// 
+/// <seealso cref="EnemyFightMG"/>
+/// <seealso cref="MiniGameHandler"/>
+/// </summary>
 public class BossFightMG: EnemyFightMG{
   private GameUIHandler _ui_handler;
 
@@ -75,7 +83,11 @@ public class BossFightMG: EnemyFightMG{
   }
 
 
-  // always set friendly context to enemy
+  /// <summary>
+  /// Bound enemy (in this case Boss) object for the win condition.
+  /// The target object must have <see cref="HealthComponent"/> and <see cref="ObjectFriendlyHandler"/>.
+  /// </summary>
+  /// <param name="boss_object">The target Boss object</param>
   public void SetWatchBoss(GameObject boss_object){
     _unbind_boss_object();
     _bind_boss_object(boss_object);

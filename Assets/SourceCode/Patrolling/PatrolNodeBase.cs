@@ -6,6 +6,9 @@ using Unity.VisualScripting.InputSystem;
 
 namespace PatrolActions{
   [UnitCategory("Patrol/Interface")]
+  /// <summary>
+  /// An interface class for creating Node Objects that can be used for creating new Patrolling Sequence.
+  /// </summary>
   public class PatrolNodeBase: Unit{
     [DoNotSerialize]
     private ControlInput _input_flow;
@@ -19,7 +22,10 @@ namespace PatrolActions{
 
     private PatrolBehaviour.InitData _init_data;
 
-
+    /// <summary>
+    /// The Unit/Node definition for the Visual Script Object.
+    /// Important to override in case to create new members in the Node.
+    /// </summary>
     protected override void Definition(){
       _input_flow = ControlInput("InputFlow", (flow) => {
         if(_input_data.hasAnyConnection)
@@ -40,6 +46,11 @@ namespace PatrolActions{
       _output_data = ValueOutput<PatrolBehaviour.InitData>("PatrolData", (flow) => _init_data);
     }
 
+    /// <summary>
+    /// Virtual function to get supplied data about the inheriting class.
+    /// </summary>
+    /// <param name="flow">The Visual Scripting flow</param>
+    /// <param name="action">The resulting inherited <see cref="PatrolAction"/> object.</param>
     protected virtual void AddData(Flow flow, out PatrolAction action){
       action = null;
     }

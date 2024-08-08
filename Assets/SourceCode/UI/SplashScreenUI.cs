@@ -5,8 +5,18 @@ using UnityEngine.Video;
 
 
 [RequireComponent(typeof(VideoPlayer))]
+/// <summary>
+/// UI Class for showing splash screen in the start of the game. The usage of this class instead of using Unity's configuration is to show the splash screen (the studio logo) using video.
+/// 
+/// This class uses following component(s);
+/// - <b>VideoPlayer</b> to show the splash screen video. The VideoClip in <b>VideoPlayer</b> should already been assigned with the appropriate video.
+/// 
+/// This class uses autoload(s);
+/// - <see cref="GameHandler"/> for game events and such.
+/// </summary>
 public class SplashScreenUI: MonoBehaviour{
   [SerializeField]
+  // The target object to show/hide the UI element.
   private GameObject _TargetVisualContainer;
 
   private bool _already_triggered = false;
@@ -18,6 +28,7 @@ public class SplashScreenUI: MonoBehaviour{
   private Coroutine _splash_screen_coroutine = null;
 
 
+  // Trigger function to start the splash screen video.
   private IEnumerator _trigger_splash_screen(){
     StartCoroutine(UIUtility.SetHideUI(_TargetVisualContainer, false, true));
 
@@ -29,6 +40,7 @@ public class SplashScreenUI: MonoBehaviour{
     _splash_screen_finished();
   }
 
+  // Function for when the coroutine is finished or resetting/stopping the coroutine.
   private void _splash_screen_finished(){
     _video_player.Stop();
     StartCoroutine(UIUtility.SetHideUI(_TargetVisualContainer, true));
@@ -53,6 +65,7 @@ public class SplashScreenUI: MonoBehaviour{
 
   public void Start(){
     _video_player = GetComponent<VideoPlayer>();
+    _video_player.Prepare();
 
     _game_handler = FindAnyObjectByType<GameHandler>();
     if(_game_handler == null){
@@ -64,6 +77,9 @@ public class SplashScreenUI: MonoBehaviour{
   }
 
   
+  /// <summary>
+  /// Function to stop the splash screen video.
+  /// </summary>
   public void CancelSplashScreen(){
     if(_splash_screen_coroutine == null)
       return;
@@ -73,11 +89,21 @@ public class SplashScreenUI: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Function to catch "UIAccept" input event.
+  /// This function will stop the splash screen.
+  /// </summary>
+  /// <param name="value"></param>
   public void OnUIAccept(InputValue value){
     if(value.isPressed)
       CancelSplashScreen();
   }
 
+  /// <summary>
+  /// Function to catch "UIAccept_Mouse" input event.
+  /// This function will stop the splash screen.
+  /// </summary>
+  /// <param name="value"></param>
   public void OnUIAccept_Mouse(InputValue value){
     if(value.isPressed)
       CancelSplashScreen();

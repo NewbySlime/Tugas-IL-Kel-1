@@ -4,15 +4,39 @@ using UnityEngine;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to hide an object that has the compatibility with using <see cref="UIUtility"/>.
+  /// </summary>
   public class HideUISequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "hide_ui";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target object to be hidden.
+      /// </summary>
       public ObjectReference.ObjRefID TargetObjRef;
-
+      
+      
+      /// <summary>
+      /// If the UI needs to be hidden or shown.
+      /// </summary>
       public bool HideFlag;
+
+      /// <summary>
+      /// Flag to skip the hide/show animation.
+      /// </summary>
       public bool SkipAnimation;
 
+
+      /// <summary>
+      /// Flag to tell if the sequence need to wait until the animation is finished.
+      /// </summary>
       public bool WaitUntilFinished;
     }
 
@@ -69,6 +93,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Hide UI")]
   [UnitCategory("Sequence/UI")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="HideUISequence"/>.
+  /// </summary>
   public class HideUISequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _target_obj_input;

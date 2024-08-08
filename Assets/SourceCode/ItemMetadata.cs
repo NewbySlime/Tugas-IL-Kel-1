@@ -5,17 +5,27 @@ using UnityEngine;
 
 
 /// <summary>
-/// Metadata PENTING untuk memberi tahu bahwa Objek tersebut adalah sebuat Item pada Game. 
+/// Base item data for <see cref="ItemDatabase"/> that stores identifiers about the item. This data is important for creating an item.
 /// </summary>
 public class ItemMetadata: MonoBehaviour{
   /// <summary>
-  /// Data yang digunakan untuk merepresentasikan kelas ItemMetadata.
+  /// Identification data for <see cref="ItemDatabase"/>.
   /// </summary>
   [Serializable]
   public struct ItemData{
+    /// <summary>
+    /// ID for this item.
+    /// </summary>
     public string ItemID;
 
+    /// <summary>
+    /// Name of the item.
+    /// </summary>
     public string Name;
+
+    /// <summary>
+    /// The description of the item.
+    /// </summary>
     public string Description;
   }
 
@@ -24,18 +34,18 @@ public class ItemMetadata: MonoBehaviour{
 
 
   /// <summary>
-  /// Fungsi PENTING untuk membantu proses inisialisasi ItemDatabase.
+  /// Interface class for catching message from <see cref="ItemDatabase"/> and storing this class' data.
   /// </summary>
-  /// <param name="data">Penyimpanan data berdasarkan tipe yang diberikan dari ItemDatabase</param>
+  /// <param name="data">Data storage from the database</param>
   public void ItemDatabase_LoadData(TypeDataStorage data){
     data.AddData(_item_metadata);
   }
   
 
   /// <summary>
-  /// ItemID pada item.
+  /// Get ID for this item.
   /// </summary>
-  /// <returns>ID item</returns>
+  /// <returns>The ID</returns>
   public string GetItemID(){
     return _item_metadata.ItemID;
   }

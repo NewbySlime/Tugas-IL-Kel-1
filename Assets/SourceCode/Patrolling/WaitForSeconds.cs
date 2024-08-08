@@ -4,9 +4,14 @@ using System.Collections;
 
 
 namespace PatrolActions{
+  /// <summary>
+  /// An extension of <see cref="PatrolAction"/> that makes the target patrol object to wait for certain second(s).
+  /// </summary>
   public class WaitForSeconds: PatrolAction{
+    /// <summary>
+    /// Second(s) to wait.
+    /// </summary>
     public float WaitSeconds;
-
 
     public Type GetPatrolType(){
       return typeof(WaitForSeconds);
@@ -20,6 +25,9 @@ namespace PatrolActions{
 
   [UnitTitle("WaitForSeconds")]
   [UnitCategory("Patrol")]
+  /// <summary>
+  /// An extension of <see cref="PatrolNodeBase"/> for <see cref="WaitForSeconds"/>.  
+  /// </summary>
   public class WaitForSecondsUnit: PatrolNodeBase{
     [DoNotSerialize]
     private ValueInput _seconds_input;

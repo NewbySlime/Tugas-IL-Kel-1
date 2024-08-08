@@ -3,6 +3,9 @@ using UnityEngine.UIElements;
 
 
 [RequireComponent(typeof(DamagerComponent))]
+/// <summary>
+/// An extended <see cref="DamagerComponent"/> feature that makes the Damager object exclude some determined layers in certain threshold (for instance, excluding Enemy layer when below threshold speed).
+/// </summary>
 public class DamagerLayerExcludingHelper: MonoBehaviour{
   [SerializeField]
   private Collider2D _TargetColliderManipulation;
@@ -43,12 +46,16 @@ public class DamagerLayerExcludingHelper: MonoBehaviour{
     _last_position = transform.position;
   }
 
-
+  /// <summary>
+  /// An interface function (Unity's Message) used for telling the object that the DamagerContet has been triggered.
+  /// </summary>
   public void DamagerComponent_TriggerDamager(DamagerComponent.DamagerTriggerData data){
     _excluded_started = false;
   }
 
-
+  /// <summary>
+  /// An interface function (Unity's Message) used for telling the object that the DamagerContet has changed.
+  /// </summary>
   public void DamagerComponent_OnContextChanged(){
     DEBUGModeUtils.Log("damager set context");
     DamagerComponent.DamagerContext _context = _damager.GetDamagerContext();

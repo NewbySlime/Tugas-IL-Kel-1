@@ -3,10 +3,22 @@ using UnityEngine;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to start a certain scenario based on the ID.
+  /// </summary>
   public class StartScenarioSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "start_scenario";
     
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target scenario to start.
+      /// </summary>
       public string ScenarioID;
     }
 
@@ -49,6 +61,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Start Scenario")]
   [UnitCategory("Sequence/Scenario")]
+  /// <summary>
+  /// An extended <see cref="AddSubScenario"/> node for sequence <see cref="StartScenarioSequence"/>.
+  /// </summary>
   public class StartScenarioSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _scenario_id_input;

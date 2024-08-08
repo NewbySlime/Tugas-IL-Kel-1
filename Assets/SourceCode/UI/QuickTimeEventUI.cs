@@ -6,9 +6,19 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-
+/// <summary>
+/// TODO: recheck for next feature
+/// 
+/// UI Class for visualizing QTE system.
+/// 
+/// This class uses external component(s);
+/// - <b>Slider</b> for the QTE response "bar".
+/// - <b>Unity's MaskableGraphics</b> object for presenting the symbol used.
+/// - <b>GameObject</b> that has <b>RectTransform</b> and <see cref="IMaterialReference"/> for "Accept" timing bar to resize and manipulate its color.
+/// </summary>
 public class QuickTimeEventUI: MonoBehaviour{
   [Serializable]
+  // data for interpolating color based on the score.
   private struct _ColorLerpData{
     public float _Score;
     public Color _Color;
@@ -24,12 +34,18 @@ public class QuickTimeEventUI: MonoBehaviour{
   private Image _EventSymbolImageUI;
 
   [SerializeField]
+  /// <summary>
+  /// Color interpolation data based on sum of the entire score for "Accept" timing bar.
+  /// </summary>
   private List<_ColorLerpData> _ColorInterpolation;
 
+  // the total of the sum of the entire score from _ColorInterpolation.
   private float _total_color_score = 0;
 
   private IMaterialReference _accept_bar_matref;
   private RectTransform _accept_bar_rect;
+
+  private float _accept_bar_maxsize = 0;
 
 
 
@@ -46,6 +62,12 @@ public class QuickTimeEventUI: MonoBehaviour{
       throw new MissingComponentException();
     }
 
+    _accept_bar_rect.offsetMax = new(0, _accept_bar_rect.offsetMax.y);
+    _accept_bar_rect.offsetMin = new(0, _accept_bar_rect.offsetMin.y);
+    _accept_bar_rect.ForceUpdateRectTransforms();
+
+    _accept_bar_maxsize = _accept_bar_rect.sizeDelta.x;
+
     _total_color_score = 0;
     foreach(_ColorLerpData _data in _ColorInterpolation)
       _total_color_score += _data._Score;
@@ -55,23 +77,39 @@ public class QuickTimeEventUI: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// To resize the right side of the "Accept" timing bar. The value is based on the maximum rect size, hence the use of normalized value.
+  /// </summary>
+  /// <param name="val">The normalized value</param>
   public void SetAcceptBarMaxSize(float val){
     val = 1-val;
 
-    float _right_value = _accept_bar_rect.sizeDelta.x * val;
+    float _right_value = _accept_bar_maxsize * val;
     _accept_bar_rect.offsetMax = new Vector2(_right_value, _accept_bar_rect.offsetMax.y);
   }
 
+  /// <summary>
+  /// To resize the left side of the "Accept" timing bar. The value is based on the maximum rect size, hence the use of normalized value.
+  /// </summary>
+  /// <param name="val">The normalized value</param>
   public void SetAcceptBarMinSize(float val){
-    float _left_value = _accept_bar_rect.sizeDelta.x * val;
+    float _left_value = _accept_bar_maxsize * val;
     _accept_bar_rect.offsetMin = new Vector2(_left_value, _accept_bar_rect.offsetMin.y);
   }
 
 
+  /// <summary>
+  /// Set the current time for the timing bar. NOTE: this uses normalized value of the timer.
+  /// </summary>
+  /// <param name="val">The normalized value</param>
   public void SetQTETimingBar(float val){
     _TimingBar.value = val;
   }
 
+  /// <summary>
+  /// Manipulate the "Accept" bar's color. NOTE: this uses normalized value of the maximum score.
+  /// </summary>
+  /// <param name="val">The normalized value</param>
   public void SetAcceptBarColorLerp(float val){
     float _score_dist = _total_color_score*val;
 
@@ -106,6 +144,10 @@ public class QuickTimeEventUI: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// To set the icon for the symbol used for the type of the event.
+  /// </summary>
+  /// <param name="symbol">The image to be used</param>
   public void SetEventSymbol(Sprite symbol){
     _EventSymbolImageUI.sprite = symbol;
   }

@@ -3,6 +3,16 @@ using TMPro;
 using UnityEngine;
 
 
+/// <summary>
+/// Class to handle health bar for Boss or any Enemy with its name displayed along with the health bar.
+/// 
+/// This class uses external component(s);
+/// - <see cref="HealthBarUI"/> as base progress bar.
+/// - <b>Unity's TMP Text UI</b> used for presenting the enemy name.
+/// 
+/// This class uses following autoload(s);
+/// - <see cref="CharacterDatabase"/> database used for searching the bound character.
+/// </summary>
 public class BossHealthBarUI: MonoBehaviour{
   [SerializeField]
   private HealthBarUI _HealthBarUI;
@@ -24,6 +34,10 @@ public class BossHealthBarUI: MonoBehaviour{
   }
 
   
+  /// <summary>
+  /// Function to bind enemy (preferably boss) object to watch its health.
+  /// </summary>
+  /// <param name="boss">The enemy object</param>
   public void BindBossObject(GameObject boss){
     _HealthBarUI.UnbindHealthComponent();
     _BossName.text = "";

@@ -2,10 +2,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+/// <summary>
+/// Database Class for loading and storing data for Characters.
+/// The database will find any prefab (data) in a determined folder with the prefab has <see cref="CharacterMetadata"/> data component for early identification.
+/// NOTE: for creating custom data component for a character, the database will use interface function <b>CharacterDatabase_LoadData(TypeDataStorage)</b>.
+/// 
+/// This class uses prefab(s);
+/// - Prefab for character object creation. It contains any components that can be used for handling a character object (AI Behaviours, Animation Handler, and such).
+/// </summary>
 public class CharacterDatabase: MonoBehaviour{
-  public delegate void OnInitialized();
+  /// <summary>
+  /// Event for when this class has been initialized.
+  /// </summary>
   public event OnInitialized OnInitializedEvent;
+  public delegate void OnInitialized();
 
+  /// <summary>
+  /// Path to a folder containing prefabs of character data in Resources folder.
+  /// </summary>
   private static string character_data_folder = "Characters";
 
 
@@ -13,8 +27,10 @@ public class CharacterDatabase: MonoBehaviour{
     public string character_id;
     public string character_name;
 
+    // custom data about the character
     public TypeDataStorage data_storage;
 
+    // object prefab
     public GameObject _this;
   }
 
@@ -25,10 +41,14 @@ public class CharacterDatabase: MonoBehaviour{
   private Dictionary<string, _character_metadata> _character_map = new();
 
 
+  /// <summary>
+  /// Flag if this class is ready or not yet.
+  /// </summary>
   public bool IsInitialized{get; private set;} = false;
 
 
   public void Start(){
+    // load all prefabs and store the data
     GameObject[] _prefab_list = Resources.LoadAll<GameObject>(character_data_folder);
     foreach(GameObject _prefab_obj in _prefab_list){
       GameObject _tmp_gameobj = Instantiate(_prefab_obj);
@@ -65,6 +85,11 @@ public class CharacterDatabase: MonoBehaviour{
 
 
   #nullable enable
+  /// <summary>
+  /// Get custom data about the character.
+  /// </summary>
+  /// <param name="character_id">Target character ID</param>
+  /// <returns>Character's custom data</returns>
   public TypeDataStorage? GetDataStorage(string character_id){
     if(!_character_map.ContainsKey(character_id))
       return null;
@@ -73,10 +98,21 @@ public class CharacterDatabase: MonoBehaviour{
   }
   #nullable disable
 
+  /// <summary>
+  /// Get base prefab for creating character object.
+  /// </summary>
+  /// <returns>the prefab</returns>
   private GameObject GetCharacterBasePrefab(){
     return _CharacterBase;
   }
 
+  /// <summary>
+  /// Create a character object based on the ID and the friendly context.
+  /// A character can use a custom object based on its friendly context contained in <see cref="CharacterFriendlyObjectData"/>.
+  /// </summary>
+  /// <param name="character_id">Target character ID</param>
+  /// <param name="friendly_context">Friendly context of the created character</param>
+  /// <returns></returns>
   public GameObject CreateNewCharacter(string character_id, ObjectFriendlyHandler.FriendlyType friendly_context = ObjectFriendlyHandler.FriendlyType.Neutral){
     TypeDataStorage _character_data = GetDataStorage(character_id);
     if(_character_data == null){

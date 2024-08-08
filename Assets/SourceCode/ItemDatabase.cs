@@ -5,22 +5,30 @@ using UnityEngine;
 
 
 /// <summary>
-/// Database pada game untuk menyimpan data-data semua Item.
+/// Database Class for loading and storing data for items.
+/// The database will find any prefab (data) in a determined folder with the prefab that has <see cref="ItemMetadata"/> data component for early identification.
+/// NOTE: for creating custom data component for an item, the database will use interface function <b>ItemDatabase_LoadData(TypeDataStorage)</b>.
 /// </summary>
 public class ItemDatabase: MonoBehaviour{
-  public delegate void OnInitializedCallback();
+  /// <summary>
+  /// Event for when the database has been initialized.
+  /// </summary>
   public event OnInitializedCallback OnInitializedEvent;
+  public delegate void OnInitializedCallback();
   
   /// <summary>
-  /// Folder-folder yang digunakan untuk menyimpan data item (Prefabs)
+  /// Path to a folder containing prefabs of item data in Resources folder.
   /// </summary>
   static private string item_data_folder = "Items";
+
 
   private struct _item_metadata{
     public string item_id;
 
+    // custom data about the item
     public TypeDataStorage _data_storage;
 
+    // object prefab
     public GameObject _this;
   }
 
@@ -28,10 +36,14 @@ public class ItemDatabase: MonoBehaviour{
   private Dictionary<string, _item_metadata> _item_map = new Dictionary<string, _item_metadata>();
 
   
+  /// <summary>
+  /// Flag if this class is ready or not yet.
+  /// </summary>
   public bool IsInitialized{get; private set;} = false;
   
 
   public void Start(){
+    // load all prefab and store the data
     GameObject[] _prefab_list = Resources.LoadAll<GameObject>(item_data_folder);
     foreach(GameObject _prefab_obj in _prefab_list){
       GameObject _tmp_gameobj = Instantiate(_prefab_obj);
@@ -60,9 +72,9 @@ public class ItemDatabase: MonoBehaviour{
 
   
   /// <summary>
-  /// Untuk mendapatkan list semua ItemID yang ada pada game.
+  /// Get a list of all items (by ID) stored in the database.
   /// </summary>
-  /// <returns>List ItemID</returns>
+  /// <returns>The list of item ID</returns>
   public List<string> GetItemList(){
     return _item_map.Keys.ToList();
   }
@@ -70,10 +82,10 @@ public class ItemDatabase: MonoBehaviour{
 
   #nullable enable
   /// <summary>
-  /// Fungsi untuk mendapatkan data-data terkait item berdasarkan ItemID.
+  /// Get a certain item data based on the supplied ID.
   /// </summary>
-  /// <param name="ItemID">ID yang dicari</param>
-  /// <returns>Data-data pada item</returns>
+  /// <param name="ItemID">The target item</param>
+  /// <returns>Item data for the target item</returns>
   public TypeDataStorage? GetItemData(string ItemID){
     if(_item_map.ContainsKey(ItemID))
       return _item_map[ItemID]._data_storage;

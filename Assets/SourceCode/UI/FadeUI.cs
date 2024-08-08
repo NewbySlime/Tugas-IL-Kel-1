@@ -5,6 +5,14 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 
+/// <summary>
+/// Base class used for blocking screen with a UI element attached to this object. The UI also handles showing/hiding animation.
+/// This class uses timer from <see cref="TimingBaseUI"/>.
+///
+/// This class uses external component(s);
+/// - <b>GameObject</b> with <see cref="IAlphaRendererReference"/> to manipulate the alpha with. 
+/// 
+/// </summary>
 public class FadeUI: TimingBaseUI, IObjectInitialized{
   [SerializeField]
   private GameObject _TargetAlphaReference;
@@ -17,8 +25,14 @@ public class FadeUI: TimingBaseUI, IObjectInitialized{
   private float _target_fade_value = 0;
 
   [HideInInspector]
+  /// <summary>
+  /// Should this object be shown or hidden in the next animation trigger.
+  /// </summary>
   public bool FadeToCover = true;
 
+  /// <summary>
+  /// Is the object initialized or not yet?
+  /// </summary>
   public bool IsInitialized{private set; get;} = false;
 
   protected override void _on_timer_started(){

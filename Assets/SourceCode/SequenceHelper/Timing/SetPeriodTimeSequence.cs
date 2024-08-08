@@ -3,10 +3,22 @@ using UnityEngine;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to setting the current Game time (day or night).
+  /// </summary>
   public class SetPeriodTimeSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "set_period_time";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// Which period time to change.
+      /// </summary>
       public GameTimeHandler.GameTimePeriod TimePeriod;
     }
 
@@ -51,6 +63,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Set Period Time")]
   [UnitCategory("Sequence/Timing")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="SetPeriodTimeSequence"/>.
+  /// </summary>
   public class SetPeriodTimeSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _period_time_input;

@@ -4,13 +4,31 @@ using UnityEngine;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system that moves the target AI to follow to a certain position.
+  /// </summary>
   public class MoveObjectToSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "move_object_to";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target position to follow.
+      /// </summary>
       public Vector3 Position;
+      /// <summary>
+      /// Target Object Reference to make it follow.
+      /// </summary>
       public ObjectReference.ObjRefID RefID;
 
+      /// <summary>
+      /// Flag to let the Sequence system blocks the Sequencing until the AI finished following.
+      /// </summary>
       public bool WaitUntilOnPosition;
     }
 
@@ -76,6 +94,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Move Object To Pos")]
   [UnitCategory("Sequence/AI")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="MoveObjectToObjRefSequence"/>.
+  /// </summary>
   public class MoveObjectToSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _pos_input;

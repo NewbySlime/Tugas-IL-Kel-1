@@ -2,12 +2,27 @@ using UnityEngine;
 using Unity.VisualScripting;
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to enable <see cref="AreaTriggerActuator"/> by flag.
+  /// </summary>
   public class EnableTriggerActuatorSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "enable_trigger_actuator";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target object that has <see cref="AreaTriggerActuator"/>.
+      /// </summary>
       public ObjectReference.ObjRefID TargetRef;
 
+      /// <summary>
+      /// Flag for enabling the actuator.
+      /// </summary>
       public bool TriggerEnable;
     }
 
@@ -53,6 +68,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Enable Actuator")]
   [UnitCategory("Sequence/Game/AreaTrigger")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="EnableTriggerActuatorSequence"/>.
+  /// </summary>
   public class EnableTriggerActuatorSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _target_obj_input;

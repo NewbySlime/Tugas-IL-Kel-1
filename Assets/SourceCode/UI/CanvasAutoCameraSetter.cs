@@ -3,6 +3,17 @@ using UnityEngine;
 
 [RequireComponent(typeof(Canvas))]
 [RequireComponent(typeof(CanvasRecursiveScaleCalibrator))]
+/// <summary>
+/// Class for rescaling UI elements' <b>RectTransform</b> when the game changes level/scene.
+/// Explanation: A bug that happen in Unity's Canvas (with RenderMode put to "Screen Space - Camera") when the Game changes scene and then the Canvas has to do some anticipation when the camera is gone and then reapplied with new camera in the new scene, the Canvas would resized to bigger size than it shouldn't be (say, around 100 from 1).
+/// 
+/// This class uses following component(s);
+/// - <b>Canvas</b> base component used in this class.
+/// - <see cref="CanvasRecursiveScaleCalibrator"/> for recalibrating function.
+/// 
+/// This class uses following autoload(s);
+/// - <see cref="GameHandler"/> for using Game events and such.
+/// </summary>
 public class CanvasAutoCameraSetter: MonoBehaviour{
   private GameHandler _game_handler;
 

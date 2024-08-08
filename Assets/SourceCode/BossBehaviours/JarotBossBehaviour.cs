@@ -8,6 +8,20 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(HealthComponent))]
 [RequireComponent(typeof(FollowerBehaviour))]
 [RequireComponent(typeof(VulnerableEffect))]
+/// <summary>
+/// Enamy Behaviour controller for Jarot. For behaviour diagram, look at <b>Reference/Diagrams/JarotBossBehaviour.drawio</b>.
+/// 
+/// This behaviour uses following component(s);
+/// - <see cref="MovementController"/> to let the behaviour have control over the object movement.
+/// - <see cref="HealthComponent"> to give the object ability to have vitality features.
+/// - <see cref="FollowerBehaviour"/> as an extension of the behaviour used as a AI follow helper.
+/// - <see cref="VulnerableEffect"/> used as a vulnerable time window after power striking.
+/// 
+/// This behaviour uses external component(s);
+/// - <see cref="DamagerComponent"/> collider object that seperate from the actual object that acts as a Damager.
+/// - <b>Animator</b> Unity animation handler for certain object state.
+/// - <b>DEBUG_TARGET</b> [DEBUG_MODE] target object to follow once the Game started.
+/// </summary>
 public class JarotBossBehaviour: InterfaceEnemyBehaviour{
   [SerializeField]
   private float _MinStrikeRange = 5f;

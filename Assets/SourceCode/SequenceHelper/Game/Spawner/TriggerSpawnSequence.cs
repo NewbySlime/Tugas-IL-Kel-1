@@ -3,10 +3,22 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to trigger the target <see cref="ObjectSpawner"/> to spawn the objects.
+  /// </summary>
   public class TriggerSpawnSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "trigger_spawn";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target spawner object.
+      /// </summary>
       public ObjectReference.ObjRefID SpawnerRef;
     }
 
@@ -51,6 +63,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Trigger Spawn")]
   [UnitCategory("Sequence/Game/Spawner")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="TriggerSpawnSequence"/>.
+  /// </summary>
   public class TriggerSpawnSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _spawner_ref_input;

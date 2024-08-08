@@ -3,10 +3,22 @@ using UnityEngine;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to stop <see cref="OnDeadGameOverTrigger"/> trigger from invoking GameOver event to <see cref="GameHandler"/>. 
+  /// </summary>
   public class StopGameOverTriggerSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "stop_game_over_trigger";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target object that has <see cref="OnDeadGameOverTrigger"/> trigger component.
+      /// </summary>
       public ObjectReference.ObjRefID TargetRef;
     }
 
@@ -49,6 +61,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Stop Game Over Triggers")]
   [UnitCategory("Sequence/Game")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="StopGameOverTriggerSequence"/>.
+  /// </summary>
   public class StopGameOverTriggerSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _target_obj_ref_input;

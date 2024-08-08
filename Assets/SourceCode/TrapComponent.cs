@@ -1,6 +1,15 @@
 using UnityEngine;
 
 
+/// <summary>
+/// Helper class for <see cref="DamagerComponent"/> to make it as a static damager (not moving). As this component does not use damager data from an item, the class uses a determined data from <see cref="DamagerComponent.DamagerContext"/> and <see cref="DamagerComponent.DamagerData"/> as the configuration used in this class.
+/// 
+/// This class uses external component(s);
+/// - <see cref="DamagerComponent"/> the damager used for this component.
+///
+/// This class uses autoload(s);
+/// - <see cref="GameHandler"/> for game events and such.
+/// </summary>
 public class TrapComponent: MonoBehaviour{
   [SerializeField]
   private DamagerComponent _Damager;
@@ -13,6 +22,9 @@ public class TrapComponent: MonoBehaviour{
 
   private GameHandler _game_handler;
 
+  /// <summary>
+  /// Flag if this class is ready or not yet.
+  /// </summary>
   public bool IsInitialized{private set; get;} = false;
 
 
@@ -31,6 +43,9 @@ public class TrapComponent: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Function to catch Unity's "Object Destroyed" event.
+  /// </summary>
   public void OnDestroy(){
     if(!IsInitialized)
       return;

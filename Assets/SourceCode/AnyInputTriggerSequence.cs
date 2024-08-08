@@ -4,6 +4,18 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
+/// <summary>
+/// Class that handle any inputs coming from user and redirects it to trigger sequence in <see cref="SequenceHandlerVS"/> of this class.
+/// Not only redirects it to trigger sequence, the interaction can also be used to skip the sequence by using a sequence for "finished" state.
+/// NOTE: this class uses input focus context at the start of the scene with "UI" privilege, above "Player" privilege. So it is better to not use this in a scene with an object that has "Player" privilege.
+/// 
+/// This class uses external component(s);
+/// - <see cref="SequenceHandlerVS"/> for "starting" and "finished" state sequence.
+/// 
+/// This class uses autoload(s);
+/// - <see cref="GameHandler"/> for game events and such.
+/// - <see cref="InputFocusContext"/> for asking focus for input.
+/// </summary>
 public class AnyInputTriggerSequence: MonoBehaviour{
   [SerializeField]
   private SequenceHandlerVS _StartSequence;
@@ -27,6 +39,7 @@ public class AnyInputTriggerSequence: MonoBehaviour{
 
 
   
+  // Coroutine function for delaying until giving a valid use of skipping to a flag.
   private IEnumerator _skip_delay(){
     _allow_skip = false;
 
@@ -35,6 +48,8 @@ public class AnyInputTriggerSequence: MonoBehaviour{
     _allow_skip = true;
   }
 
+  // Coroutine function to handle triggering sequences used in this class.
+  // This class also handles a "skipping" function by setting _trigger_skip flag to true.
   private IEnumerator _trigger_start(){
     _triggered = true;
     _trigger_skip = false;
@@ -84,6 +99,10 @@ public class AnyInputTriggerSequence: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Function to catch "AnyKeyPressed" input event.
+  /// </summary>
+  /// <param name="value">Unity's input data</param>
   public void OnAnyKeyPressed(InputValue value){
     if(_triggered || !_input_context.InputAvailable(this))
       return;
@@ -92,6 +111,10 @@ public class AnyInputTriggerSequence: MonoBehaviour{
       StartCoroutine(_trigger_start());
   }
 
+  /// <summary>
+  /// Function to catch "SkipKeyPressed" input event.
+  /// </summary>
+  /// <param name="value">Unity's input data</param>
   public void OnSkipKeyPressed(InputValue value){
     if(_finished || !_allow_skip || !_input_context.InputAvailable(this))
       return;

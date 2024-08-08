@@ -1,6 +1,9 @@
 using UnityEngine;
 
 
+/// <summary>
+/// Class only for storing the UI elements for Player HUD.
+/// </summary>
 public class PlayerHUDUI: MonoBehaviour{
   [SerializeField]
   private HealthBarUI _HealthBar;

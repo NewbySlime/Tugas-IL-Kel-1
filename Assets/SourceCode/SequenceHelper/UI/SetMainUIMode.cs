@@ -3,13 +3,33 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system to set the object position.
+  /// </summary>
   public class SetMainUIMode: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "set_main_ui_mode";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The part of HUD UI type to show/hide.
+      /// </summary>
       public GameUIHandler.MainHUDUIEnum UIMode;
+
+      /// <summary>
+      /// Flag to show it or hide it.
+      /// </summary>
       public bool ShowFlag;
 
+      
+      /// <summary>
+      /// Flag to skip the fade animation.
+      /// </summary>
       public bool SkipAnimation;
     }
 
@@ -54,6 +74,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Main UI Mode")]
   [UnitCategory("Sequence/UI")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="SetMainUIMode"/>.
+  /// </summary>
   public class SetMainUIModeVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _mode_input;

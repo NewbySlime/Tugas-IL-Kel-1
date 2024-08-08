@@ -7,59 +7,149 @@ using UnityEngine.Rendering;
 using UnityEngine.TextCore.Text;
 
 
+/// <summary>
+/// Component that gives an object functionality to become an object that can damage another object that has <see cref="HealthComponent"/>. This class is handled by <see cref="WeaponHandler"/> or can be entirely independent (as an example <see cref="TrapComponent"/>).
+/// 
+/// This class uses external component(s);
+/// - <b>SpriteRenderer</b> for displaying sprite for the damager/projectile (optional if displayed in another object).
+/// - <see cref="SoundAlertTransceiver"/> for alerting any object using "sound" range.
+/// - <b>AudioSource</b> for playing a sound when the object is interacted.
+/// </summary>
 public class DamagerComponent: MonoBehaviour{
   [Serializable]
+  /// <summary>
+  /// Data about the damager.
+  /// </summary>
   public struct DamagerData{
+    /// <summary>
+    /// Value on how many points to deduct when damaging a <see cref="HealthComponent"/> object.
+    /// </summary>
     public uint damage_points;
   }
 
   [Serializable] [Inspectable]
+  /// <summary>
+  /// Damager's context or configuration data.
+  /// </summary>
   public struct DamagerContext{
+    /// <summary>
+    /// What the component should do when on collision with another object.
+    /// </summary>
     public enum OnCollisionAction{
       Nothing,
       EraseOnCollision
     }
 
+    /// <summary>
+    /// What kind of type the damager would inherit that determines the behaviour of the component.
+    /// </summary>
     public enum ProjectileType{
       Raycast,
       NormalProjectile
     }
 
     [Serializable]
+    /// <summary>
+    /// Data for telling the damager to use items when the component are triggered/fired.
+    /// </summary>
     public struct ItemDeplete{
+      /// <summary>
+      /// Target item by ID.
+      /// </summary>
       public string ItemID;
+
+      /// <summary>
+      /// How many items that the component should deplete.
+      /// </summary>
       public uint count;
     }
 
 
     [Inspectable]
+    /// <summary>
+    /// Type of the <see cref="DamagerComponent"/>.
+    /// </summary>
     public ProjectileType _ProjectileType;
 
     public OnCollisionAction OnCollisionEffect; 
+
     [Inspectable]
+    /// <summary>
+    /// Should the damage be dynamically changed based on the speed of the projectile.
+    /// </summary>
     public bool DamageBasedOnSpeed;
 
+    /// <summary>
+    /// The gravity scale the projectile should use. This modifies <b>Rigidbody</b> properties.
+    /// </summary>
     public float ProjectileGravityScale;
+
+    /// <summary>
+    /// The material configuration for physics.
+    /// </summary>
     public PhysicsMaterial2D ProjectileMaterial;
+
+    /// <summary>
+    /// The size the projectile should use. This modifies <b>Transform</b> properties.
+    /// </summary>
     public float ProjectileSize;
+
+    /// <summary>
+    /// The initial speed of the projectile.
+    /// </summary>
     public float ProjectileSpeed;
 
+    /// <summary>
+    /// The lifetime of the projectile.
+    /// </summary>
     public float DamagerLifetime;
 
+    /// <summary>
+    /// NOTE: Unused for now.
+    /// Can the projectile becomes a collectible when the projectile is below the speed threshold stored in <see cref="AllowCollectibleOnSpeedThreshold"/>.
+    /// </summary>
     public bool AsCollectible;
+
+    /// <summary>
+    /// NOTE: Unused for now.
+    /// The speed threshold used for letting the projectile to become a collectible in below this threshold.
+    /// </summary>
     public float AllowCollectibleOnSpeedThreshold;
 
+    /// <summary>
+    /// Mask to exclude certain physics layer when the projectile is below the pssed threshold stored in <see cref="SetExcludeLayerOnSpeedThreshold"/>.
+    /// </summary>
     public LayerMask ExcludeLayerHide;
+
+    /// <summary>
+    /// The speed threshold used for letting the projectile use <see cref="ExcludeLayerHide"/> mask to exclude certain physics layer.
+    /// </summary>
     public float SetExcludeLayerOnSpeedThreshold;
 
+    /// <summary>
+    /// List of items the damager should deplete to become functional.
+    /// </summary>
     public List<ItemDeplete> ListDepleteItem;
 
+    /// <summary>
+    /// Should the damager use <see cref="SoundAlertTransceiver"/> when the projectile is colliding with another object.
+    /// </summary>
     public bool SoundAlertOnCollision;
+
+    /// <summary>
+    /// Configuration for using "alerting" feature used in <see cref="SoundAlertTransceiver"/>.
+    /// </summary>
     public SoundAlertTransceiver.AlertConfig SoundAlertConfig;
 
+    /// <summary>
+    /// The audio data used for when the projectile is colliding with another object.
+    /// </summary>
     public AudioClip OnCollisionSound;
   }
 
+  /// <summary>
+  /// Data used as a parameter in <see cref="TriggerDamager"/> or interface function <b>DamagerComponent_TriggerDamager</b>.
+  /// </summary>
   public struct DamagerTriggerData{
     public Vector2 Direction;
     public Vector3 StartPosition;
@@ -79,10 +169,12 @@ public class DamagerComponent: MonoBehaviour{
   private AudioSource _TargetAudioSource;
   
 
+  // Using default data at start.
   private DamagerData _damager_data = new DamagerData{
     damage_points = 1
   };
 
+  // Using default data at start.
   private DamagerContext _damager_context = new DamagerContext{
     _ProjectileType = DamagerContext.ProjectileType.NormalProjectile,
     ProjectileGravityScale = 0,
@@ -111,6 +203,7 @@ public class DamagerComponent: MonoBehaviour{
 
 
 
+  // Check if object has HealthComponent, then damage it.
   private void _check_object(GameObject target_object){
     HealthComponent _health = target_object.GetComponent<HealthComponent>();
     if(_health == null)
@@ -154,6 +247,7 @@ public class DamagerComponent: MonoBehaviour{
   }
 
   public void FixedUpdate(){
+    // This function handles the threshold and also the lifetime of the projectile.
     if(!_is_triggered)
       return;
 
@@ -176,12 +270,20 @@ public class DamagerComponent: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Set and replace <see cref="DamagerData"/> with new one.
+  /// </summary>
+  /// <param name="damage_data">The new damager data</param>
   public void SetDamagerData(DamagerData damage_data){
     _damager_data = damage_data;
 
     gameObject.SendMessage("DamagerComponent_OnDataChanged", SendMessageOptions.DontRequireReceiver);
   }
 
+  /// <summary>
+  /// Set and apply the configuration of this component and another component related to this. 
+  /// </summary>
+  /// <param name="context">The new configuration data</param>
   public void SetDamagerContext(DamagerContext context){
     _damager_context = context;
 
@@ -200,15 +302,27 @@ public class DamagerComponent: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Get current data of <see cref="DamagerData"/>.
+  /// </summary>
+  /// <returns>Current <see cref="DamagerData"/></returns>
   public DamagerData GetDamagerData(){
     return _damager_data;
   }
 
+  /// <summary>
+  /// Get current configuration of this component.
+  /// </summary>
+  /// <returns>Current <see cref="DamagerComponent"/></returns>
   public DamagerContext GetDamagerContext(){
     return _damager_context;
   }
   
 
+  /// <summary>
+  /// Set which layer to be excluded from the physics processing. This exclusion method will not interfere or instead adapting with any feature that modifies the layer mask.
+  /// </summary>
+  /// <param name="excluded_layer"></param>
   public void SetDamagerExcludeLayer(LayerMask excluded_layer){
     LayerMask _result_layer = excluded_layer | _DamagerExcludeLayer;
     DEBUGModeUtils.Log(string.Format("result exclude layer {0}", _result_layer));
@@ -222,6 +336,10 @@ public class DamagerComponent: MonoBehaviour{
     _current_exclude = _result_layer;
   }
 
+  /// <summary>
+  /// Set the sprite of this damager object.
+  /// </summary>
+  /// <param name="texture">The source sprite</param>
   public void SetDamagerSprite(Sprite texture){
     if(_ProjectileSprite == null)
       return;
@@ -231,6 +349,10 @@ public class DamagerComponent: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// To initialize this component with using current data for use as a damager and giving force to this object based on the trigger data.
+  /// </summary>
+  /// <param name="data">The trigger data</param>
   public void TriggerDamager(DamagerTriggerData data){
     _is_triggered = true;
     _direction = data.Direction;
@@ -265,11 +387,18 @@ public class DamagerComponent: MonoBehaviour{
   }
 
 
-
+  /// <summary>
+  /// Function to catch Unity's <b>Collider2D</b> event when an object entered. 
+  /// </summary>
+  /// <param name="collision">The entered object</param>
   public void OnCollisionEnter2D(Collision2D collision){
     _object_collided(collision.gameObject);
   }
 
+  /// <summary>
+  /// Function to catch Unity's <b>Collider2D</b> event when an object exited.
+  /// </summary>
+  /// <param name="collider">The exited object</param>
   public void OnTriggerEnter2D(Collider2D collider){
     _object_collided(collider.gameObject);
   }

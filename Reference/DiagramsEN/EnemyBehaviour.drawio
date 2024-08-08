@@ -1,0 +1,61 @@
+<mxfile host="65bd71144e">
+    <diagram id="A1zk9c91c2QBh2zsRDUB" name="Page-1">
+        <mxGraphModel dx="1139" dy="747" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="&lt;h1&gt;Enemy Behaviour&lt;/h1&gt;&lt;p&gt;A way for taking over AI's behaviour where this the affected object will walk randomly (by using behaviour from NPCBehaviour) until they found a target enemy detected in their &quot;view&quot;. When targeting an enemy, (using behaviour from FollowerBehaviour) they will follow it until the targeted object is dead.&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="80" width="250" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="&lt;h1&gt;Targeting&lt;/h1&gt;&lt;p&gt;For these feature, the Behaviour inherits the system used by AlertTrigger where the component create a &quot;view&quot; area for detecting a potential target.&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="280" width="230" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="&lt;h1&gt;Attacking&lt;/h1&gt;&lt;p&gt;Damager yang digunakan bersifat static yang mengikuti body dari object. Sehingga object harus mendekati musuh untuk attacking.&lt;/p&gt;&lt;p&gt;Untuk tidak terjadi ketidaksengajaan dalam men-damage suatu objek, Damager akan dinonaktifkan, lalu diaktifkan ketika sudah dekat dengan musuh atau ketika ingin melakukan attack.&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="460" width="190" height="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Object" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+                    <mxGeometry x="425" y="220" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="" style="endArrow=none;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;fillColor=#f0a30a;strokeColor=#BD7000;dashed=1;" parent="1" source="6" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="415" y="290" as="sourcePoint"/>
+                        <mxPoint x="535" y="210" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="8" value="" style="endArrow=none;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;fillColor=#f0a30a;strokeColor=#BD7000;dashed=1;" parent="1" source="6" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="450.0000000000001" y="280" as="sourcePoint"/>
+                        <mxPoint x="535" y="290" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="9" value="Potential&lt;br&gt;Enemy" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+                    <mxGeometry x="585" y="220" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="AlertTrigger" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="465" y="130" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="" style="endArrow=none;html=1;" parent="1" target="10" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="505" y="220" as="sourcePoint"/>
+                        <mxPoint x="405" y="340" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="12" value="Object" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+                    <mxGeometry x="435" y="520" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="" style="rounded=0;whiteSpace=wrap;html=1;fillStyle=cross-hatch;fillColor=#F51119;strokeColor=#F0954F;" parent="1" vertex="1">
+                    <mxGeometry x="455" y="530" width="30" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="Damager" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="515" y="480" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="" style="endArrow=none;html=1;exitX=0.84;exitY=-0.011;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="13" target="14" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="460" y="540" as="sourcePoint"/>
+                        <mxPoint x="510" y="490" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

@@ -6,12 +6,30 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(InventoryData))]
+/// <summary>
+/// Discovery system component for handling recipe discovery that the player can use as a "remembering" system for recipes.
+/// 
+/// This class uses following component(s);
+/// - <see cref="InventoryData"/> to watch this object's inventory system.
+///
+/// This class uses autoload(s);
+/// - <see cref="ItemDatabase"/> to get certain data about an item.
+/// </summary>
 public class RecipeDiscoveryComponent: MonoBehaviour{
-  public delegate void OnRecipeDiscovered(string recipe_item_id);
+  /// <summary>
+  /// Event for when a recipe has been discovered.
+  /// </summary>
   public event OnRecipeDiscovered OnRecipeDiscoveredEvent;
+  public delegate void OnRecipeDiscovered(string recipe_item_id);
 
   [Serializable]
+  /// <summary>
+  /// Data structure for storing to a save file in for <see cref="PersistanceContext"/>.
+  /// </summary>
   public class RuntimeData: PersistanceContext.IPersistance{
+    /// <summary>
+    /// A list of item ID that the object can create (not the item ID for recipe).
+    /// </summary>
     public string[] ListDiscoveredRecipe = new string[0];
 
     public string GetDataID(){
@@ -29,6 +47,7 @@ public class RecipeDiscoveryComponent: MonoBehaviour{
   }
 
   [SerializeField]
+  // Instantly remove item that has ItemRecipeData when added to this inventory system.
   private bool _RemoveDiscoveryItemOnAdded = true;
 
   private HashSet<string> _list_known_recipe = new();
@@ -38,7 +57,7 @@ public class RecipeDiscoveryComponent: MonoBehaviour{
   private InventoryData _inventory;
 
 
-  // in case of bugs happening
+  // In case of bugs happening, this function will wait until all process has ran for this update.
   private IEnumerator _remove_item_co_func(string item_id){
     yield return new WaitForEndOfFrame();
     _inventory.RemoveItem(item_id, uint.MaxValue);
@@ -76,6 +95,10 @@ public class RecipeDiscoveryComponent: MonoBehaviour{
     _inventory.OnItemAddedEvent += _on_item_added;
   }
 
+  /// <summary>
+  /// List for item IDs that the object has the recipe for.
+  /// </summary>
+  /// <returns>List of item IDs</returns>
   public List<string> GetListKnownRecipe(){
     List<string> _result = new();
     foreach(string _recipe_id in _list_known_recipe)
@@ -85,6 +108,10 @@ public class RecipeDiscoveryComponent: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Get the stored state of discovery component. For applying a state to this discovery component, see <see cref="FromRuntimeData"/>.
+  /// </summary>
+  /// <returns>The resulting state</returns>
   public RuntimeData AsRuntimeData(){
     RuntimeData _data = new(){
       ListDiscoveredRecipe = new string[_list_known_recipe.Count]
@@ -100,6 +127,10 @@ public class RecipeDiscoveryComponent: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Apply and modify this discovery component to recreate a state. For getting current state of the discovery component, see <see cref="AsRuntimeData"/>.
+  /// </summary>
+  /// <param name="data">The state to use for recreating</param>
   public void FromRuntimeData(RuntimeData data){
     if(data == null)
       return;

@@ -5,6 +5,13 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(ButtonBaseUI))]
+/// <summary>
+/// Class that will play a soundtrack when a certain set of even is triggered.
+/// 
+/// This class uses following component(s);
+/// - <b>AudioSource</b> used for auditory feedback of the UI interaction.
+/// - <see cref="ButtonBaseUI"/> used for the needed UI events.
+/// </summary>
 public class ButtonSFX: MonoBehaviour{
   [SerializeField]
   private AudioClip Audio_OnHover;

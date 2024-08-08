@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "ProjectILKel1", "index.html", [
+  [ "FlavourOfRoemahNusantara", "index.html", [
     [ "Packages", "namespaces.html", [
       [ "Package List", "namespaces.html", "namespaces_dup" ]
     ] ],
@@ -33,8 +33,11 @@ var NAVTREE =
       [ "Class Index", "classes.html", null ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
-        [ "Functions", "functions_func.html", null ],
+        [ "All", "functions.html", "functions_dup" ],
+        [ "Functions", "functions_func.html", "functions_func" ],
+        [ "Variables", "functions_vars.html", "functions_vars" ],
+        [ "Enumerations", "functions_enum.html", null ],
+        [ "Properties", "functions_prop.html", null ],
         [ "Events", "functions_evnt.html", null ]
       ] ]
     ] ]
@@ -43,7 +46,15 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html"
+"annotated.html",
+"class_game_handler.html#af7d4e7223cec0af7fe80f26cb5bcb24f",
+"class_movement_controller.html#a995a19a74ade8f5c7c2c124662fa868c",
+"class_scenario_diagram_v_s.html#ab769c5df921ae235cfb20fb7a0bbfd39",
+"class_sequence_helper_1_1_logging_sequence.html#a452e6d97e807755ee26c48eed2ece51d",
+"class_sequence_helper_1_1_set_last_checkpoint_sequence.html",
+"class_sequence_helper_1_1_trigger_game_over_sequence_v_s.html",
+"interface_patrol_action.html#a3f6bfdf2ec70c03b48938cd724f2f789",
+"struct_sequence_helper_1_1_set_main_u_i_mode_1_1_sequence_data.html#a87f40874a04c3d2af3f68628b3931f67"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

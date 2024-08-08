@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3810409854901998711}
-  - component: {fileID: 4267507508511945632}
+  - component: {fileID: 8423786420565819064}
   m_Layer: 0
-  m_Name: TimeHandler
+  m_Name: InputFocusContext
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2347545196902674960}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4267507508511945632
+--- !u!114 &8423786420565819064
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4576586142031078091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8469e6d2ddfc414e853a2b07edb7efa, type: 3}
+  m_Script: {fileID: 11500000, guid: 05b3efb7ecc451f42856336b679aadf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4625265137027155813

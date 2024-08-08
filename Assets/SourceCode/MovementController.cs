@@ -6,28 +6,43 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 
+[RequireComponent(typeof(Rigidbody2D))]
 /// <summary>
-/// Komponen untuk mekanik movement. Karena ini hanya mekanik movement yang bisa dipakai Komponen lain, bisa dipakai oleh Player, Musuh, dan lainnya.
-/// Komponen ini memerlukan komponen lain:
-///   - Rigidbody2D
+/// Component for handling movement system used in the Game. For further explanation, see <b>Reference/Diagrams/MovementController.drawio</b>
 /// 
-/// Komponen ini memerlukan Child Object sebagai berikut:
-///   - RigidbodyMessageRelay (GroundCheck)
-///   - RigidbodyMessageRelay (WallHugRight)
-///   - RigidbodyMessageRelay (WallHugLeft)
+/// IMPORTANT This class needs child objects to be functional;
+/// - <b>"GroundCheck"</b> physics body (trigger) that has <see cref="RigidbodyMessageRelay"/> to let this class know that this object has touched a ground.
+/// - (Optional) <b>"WallHugRight"</b> and <b>"WallHugLeft"</b> physics body (trigger) that has <see cref="RigidbodyMessageRelay"/> to let this class know that this object has touched a wall (that can be used for wall-jumping).
+/// 
+/// This class uses following component(s);
+/// - <b>Rigidbody2D</b> physics body for this class.
+/// - <b>Collider2D (any shape)</b> collider component for the physics body.
+/// 
+/// This class uses external component(s);
+/// - <see cref="RigidbodyMessageRelay"/> for getting physics event for another detached part of the body.
+/// - <b>Unity's Animator</b> component for handling movement animation.
+/// - <see cref="AudioCollectionHandler"/> for playing certain audio used in the animation.
 /// </summary>
 public class MovementController: MonoBehaviour{
+  /// <summary>
+  /// Audio ID used for playing "jumping" character sound. 
+  /// </summary>
   public const string AudioID_Jump = "jump";
 
 
   [SerializeField]
+  // Clamped values of input direction for "walking" state of the component.
   private float WalkNormalizeClamp = 0.4f;
 
   [SerializeField]
+  // Should the component have the ability to clamp its input direction value for "walking" state.
   private bool ClampWalkDir = true;
 
   [SerializeField]
   private float movement_speed = 100f;
+  /// <summary>
+  /// The supposed movement speed of the object.
+  /// </summary>
   public float MovementSpeed{get => movement_speed;}
 
   [SerializeField]
@@ -43,11 +58,16 @@ public class MovementController: MonoBehaviour{
   private Vector2 walljump_direction = new Vector2(0.5f, 0.5f);
 
   [SerializeField]
+  // How long (in Y-Axis) the jump to be exaggerated from the target position.
   private float forcejump_y_exaggeration = 1.5f;
   
   [SerializeField]
   private float forcejump_startdelay = 0.5f;
+  /// <summary>
+  /// How long the action delay should be when forcing this component to jump.
+  /// </summary>
   public float ForceJumpStartDelay{get => forcejump_startdelay;}
+
   [SerializeField]
   private float forcejump_finishdelay = 1f;
 
@@ -90,13 +110,22 @@ public class MovementController: MonoBehaviour{
   private bool _set_ignore_one_way_flag = false;
 
 
+  /// <summary>
+  /// Should the movement direction clamped to "walking" state.
+  /// </summary>
   public bool ToggleWalk = false;
 
 
   [HideInInspector]
+  /// <summary>
+  /// This will force this component to force only look at certain direction prompted using function <see cref="LookAt"/>.
+  /// </summary>
   public bool FixedLookAt = false;
 
   [HideInInspector]
+  /// <summary>
+  /// Should this component disable the gliding prevention measures.
+  /// </summary>
   public bool GlideOnGround = false;
 
 
@@ -132,6 +161,7 @@ public class MovementController: MonoBehaviour{
     Vector3 _speed = (transform.position - _last_position) / Time.fixedDeltaTime;
     _last_position = transform.position;
 
+    // portion of code that handles movement
     if(!_forcejump_flag && _is_movement_enabled){
       float _clamped_walk_dir_x = ClampWalkDir? Mathf.Clamp(_walk_dir_x, -1, 1): _walk_dir_x;
       if(ToggleWalk)
@@ -152,6 +182,7 @@ public class MovementController: MonoBehaviour{
     }
 
 
+    // portion of code that handles animation based on the movement
     if(_TargetAnimatorMovement != null){
       float _val_velocity_x = _object_rigidbody.velocity.x/movement_speed;
       if(!FixedLookAt)
@@ -169,6 +200,10 @@ public class MovementController: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Force this object to look at certain direction.
+  /// </summary>
+  /// <param name="direction">The direction to look at</param>
   public void LookAt(Vector2 direction){
     if(_TargetAnimatorMovement == null)
       return;
@@ -179,16 +214,16 @@ public class MovementController: MonoBehaviour{
 
 
   /// <summary>
-  /// Fungsi untuk membuat bergerak secara horizontal Objek Game.
+  /// Give input to this movement object to walk in a direction (X-Axis). 
   /// </summary>
-  /// <param name="walk_dir_x">Arah pergerakan dalam horizontal.</param>
+  /// <param name="walk_dir_x">The normalized direction (in X-Axis)</param>
   public void DoWalk(float walk_dir_x){
     _walk_dir_x = walk_dir_x;
   } 
 
 
   /// <summary>
-  /// Fungsi untuk melakukan lompatan kepada Objek Game. Lompatan bisa berupa lompat saat diatas tanah, atau saat "Wall-Hugging" (Wall Jump).
+  /// Function to jump vertically. If the object is not on ground, but currently "wallhugging", this object will wall-jump instead of normal jump.
   /// </summary>
   public void DoJump(){
     if(!_is_movement_enabled)
@@ -226,24 +261,45 @@ public class MovementController: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Function to enable the movement processing.
+  /// </summary>
+  /// <param name="enabled">Flag to enable movement processing</param>
   public void SetEnableMovement(bool enabled){
     _is_movement_enabled = enabled;
   }
 
 
+  /// <summary>
+  /// Check if this object is currently wallhugging (using wall of the object's left side).
+  /// </summary>
+  /// <returns>Is currently wallhugging</returns>
   public bool IsWallHuggingLeft(){
     return _is_wallhug_left;
   }
 
+  /// <summary>
+  /// Check if this object is currently wallhugging (using wall of the object's right side).
+  /// </summary>
+  /// <returns>Is currently wallhugging</returns>
   public bool IsWallHuggingRight(){
     return _is_wallhug_right;
   }
 
+  /// <summary>
+  /// Get <b>Rigidbody2D</b> physics body of this object. 
+  /// </summary>
+  /// <returns>The physics body</returns>
   public Rigidbody2D GetRigidbody(){
     return _object_rigidbody;
   }
 
 
+  /// <summary>
+  /// NOTE: Feature is unstable for now.
+  /// Ignore "One way collision" objects from able to be interacted by this physics object.
+  /// </summary>
+  /// <param name="flag">Should the interaction ignored or not</param>
   public void SetIgnoreOneWayCollision(bool flag){
     _set_ignore_one_way_flag = flag;
 
@@ -252,6 +308,12 @@ public class MovementController: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Let this object to jump in certain trajectory to reach target position. This function is different from <see cref="DoJump"/>, while the function only jumps in vertical direction, this function will jump in any direction in certain trajectory in order to land on target position.
+  /// NOTE: This function will use delay before and after the jump. The delay variables can be changed in <see cref="forcejump_startdelay"/> and <see cref="forcejump_finishdelay"/>.
+  /// </summary>
+  /// <param name="target_pos">The target position of the </param>
+  /// <returns></returns>
   public IEnumerator ForceJump(Vector3 target_pos){
     /* modified formulas from trajectory calculation:
       t^2 = (dy*2)/g
@@ -294,9 +356,9 @@ public class MovementController: MonoBehaviour{
 
 
   /// <summary>
-  /// Fungsi pengecekan ketika Player menyentuh sesuatu (dengan Collision "GroundCheck")
+  /// Function to catch event for when an object entered in <b>GroundCheck</b> body collision (trigger).
   /// </summary>
-  /// <param name="collider">Object hasil Collision</param>
+  /// <param name="collider">The entered object</param>
   public void OnGroundCheck_Enter(Collider2D collider){
     DEBUGModeUtils.Log(string.Format("ground check enter {0} {1} id {2} count {3}", collider.gameObject.layer, (int)_OneWayColliderMask, collider.gameObject.GetInstanceID(), _ground_collider_set.Count));
     if(collider.gameObject.layer == _OneWayColliderMask)
@@ -316,9 +378,9 @@ public class MovementController: MonoBehaviour{
   }
 
   /// <summary>
-  /// Fungsi pengecekan ketika Collider pada Collision "GroundCheck" keluar
+  /// Function to catch event for when an object exited in <b>GroundCheck</b> body collision (trigger).
   /// </summary>
-  /// <param name="collider">Object hasil Collision</param>
+  /// <param name="collider"></param>
   public void OnGroundCheck_Exit(Collider2D collider){
     DEBUGModeUtils.Log(string.Format("ground check exit id {0}", collider.gameObject.GetInstanceID()));
     if(_ground_collider_set.Contains(collider.gameObject.GetInstanceID()))
@@ -338,9 +400,9 @@ public class MovementController: MonoBehaviour{
 
   
   /// <summary>
-  /// Fungsi pengecekan ketika Player menyentuh sesuatu (dengan Collision "WallHugLeft")
+  /// Function to catch event for when an object entered in <b>WallHugLeft</b> body collision (trigger).
   /// </summary>
-  /// <param name="collider">Object hasil Collision</param>
+  /// <param name="collider">The entered object</param>
   public void OnHugWall_Left_Enter(Collider2D collider){
     _wallhug_left_collider_set.Add(collider.gameObject.GetInstanceID());
     _is_wallhug_left = true;
@@ -351,8 +413,9 @@ public class MovementController: MonoBehaviour{
   }
 
   /// <summary>
-  /// Fungsi pengecekan ketika Collider pada Collision "WallHugLeft" keluar
+  /// Function to catch event for when an object exited in <b>WallHugLeft</b> body collision (trigger).
   /// </summary>
+  /// <param name="collider">The exited object</param>
   public void OnHugWall_Left_Exit(Collider2D collider){
     if(_wallhug_left_collider_set.Contains(collider.gameObject.GetInstanceID()))
       _wallhug_left_collider_set.Remove(collider.gameObject.GetInstanceID());
@@ -368,9 +431,9 @@ public class MovementController: MonoBehaviour{
 
 
   /// <summary>
-  /// Fungsi pengecekan ketika Player menyentuh sesuatu (dengan Collision "WallHugRight")
+  /// Function to catch event for when an object entered in <b>WallHugRight</b> body collision (trigger).
   /// </summary>
-  /// <param name="collider">Object hasil Collision</param>
+  /// <param name="collider">The entered object</param>
   public void OnHugWall_Right_Enter(Collider2D collider){
     _wallhug_right_collider_set.Add(collider.gameObject.GetInstanceID());
     _is_wallhug_right = true;
@@ -381,8 +444,9 @@ public class MovementController: MonoBehaviour{
   }
 
   /// <summary>
-  /// Fungsi pengecekan ketika Collider pada Collision "WallHugRight" keluar
+  /// Function to catch event for when an object exited in <b>WallHugRight</b> body collision (trigger).
   /// </summary>
+  /// <param name="collider">The exited object</param>
   public void OnHugWall_Right_Exit(Collider2D collider){
     if(_wallhug_right_collider_set.Contains(collider.gameObject.GetInstanceID()))
       _wallhug_right_collider_set.Remove(collider.gameObject.GetInstanceID());
@@ -397,12 +461,20 @@ public class MovementController: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Function to catch event for when this object collided with another object.
+  /// </summary>
+  /// <param name="collision">The colliding object</param>
   public void OnCollisionEnter2D(Collision2D collision){
     DEBUGModeUtils.Log(string.Format("enter collider {0}", collision.gameObject.layer));
     if(collision.gameObject.layer == _OneWayColliderMask)
       _one_way_collider_set.Add(collision.gameObject.GetInstanceID());
   }
 
+  /// <summary>
+  /// Function to catch event for when previously colliding object are not colliding with this object.
+  /// </summary>
+  /// <param name="collision">The colliding object</param>
   public void OnCollisionExit2D(Collision2D collision){
     DEBUGModeUtils.Log(string.Format("exit collider {0}", collision.gameObject.layer));
     if(_one_way_collider_set.Contains(collision.gameObject.GetInstanceID())){

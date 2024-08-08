@@ -10,7 +10,17 @@ using UnityEngine.UI;
 
 
 /// <summary>
-/// Komponen untuk mengontrol UI pada Crafting masakan.
+/// NOTE: unused for now.
+/// 
+/// UI Class for handling crafting interaction.
+/// NOTE: this uses wrapper object that contains all the UI elements so this class would stay enabled.
+/// 
+/// This class uses external component(s);
+/// - <see cref="ItemContainerController"/> UI controllers for handle item buttons inside the controllers
+/// - <see cref="InventoryData"/> component from <see cref="PlayerController"/>.
+/// 
+/// This class uses autoload(s);
+/// - <see cref="ItemRecipeDatabase"/> for getting data of items.
 /// </summary>
 public class RecipeCraftingUIController: MonoBehaviour{
   [SerializeField]
@@ -41,16 +51,15 @@ public class RecipeCraftingUIController: MonoBehaviour{
 
 
   /// <summary>
-  /// Fungsi untuk mengubah "keaktifan" fitur terkait pada komponen ini.
+  /// To enable or disable the wrapper object (which hide all the UI elements except this class).
   /// </summary>
-  /// <param name="_enable">Aktif atau tidak</param>
+  /// <param name="_enable">Enable or disable the object</param>
   private void _SetEnable(bool _enable){
     _WrapperContent.SetActive(_enable);
   } 
 
-  /// <summary>
-  /// Fungsi untuk mengupdate ItemController Inventory pada Player.
-  /// </summary>
+
+  // to trigger updating the UI
   private void _UpdateInventory(){
     _item_inv_controller.RemoveAllItem();
 
@@ -66,10 +75,9 @@ public class RecipeCraftingUIController: MonoBehaviour{
     _UpdateInventoryContainerSize();
   }
 
-  /// <summary>
-  /// Fungsi untuk mengupdate size pada ItemContainer Inventory pada Player.
-  /// Ini diperlukan agar fungsi scroll pada ItemContainer bisa dipakai.
-  /// </summary>
+
+  // to update the container size based on how many the objects are in the container.
+  // this function is for trigger updating the scroll class from Unity.
   private void _UpdateInventoryContainerSize(){
     int _total_size = _ItemInventoryListContent.transform.childCount;
 
@@ -94,7 +102,7 @@ public class RecipeCraftingUIController: MonoBehaviour{
   }
 
   /// <summary>
-  /// Fungsi untuk mengecek apakah resep yang dipakai benar. Output kebenarannya diberikan ke UI tampilan hasil resep.
+  /// To update and check the current item combination for resulting item of certain valid recipe.
   /// </summary>
   private void _UpdateRecipeResult(){
     _recipe_craft_res_controller.RemoveAllItem();
@@ -105,6 +113,68 @@ public class RecipeCraftingUIController: MonoBehaviour{
 
     if(_result_id.Length > 0)
       _recipe_craft_res_controller.AddItem(_result_id, 1);
+  }
+
+
+  private void _PlayerInv_OnItemAdded(string item_id, uint count){
+    _item_inv_controller.RemoveItem(item_id);
+    _item_inv_controller.AddItem(item_id, count);
+    _UpdateInventoryContainerSize();
+  }
+
+  private void _PlayerInv_OnItemCountChanged(string item_id, uint new_count){
+    _item_inv_controller.ChangeItemCount(item_id, new_count);
+    _UpdateInventoryContainerSize();
+  }
+
+  private void _PlayerInv_OnItemRemoved(string item_id){
+    _item_inv_controller.RemoveItem(item_id);
+    _UpdateInventoryContainerSize();
+  }
+
+
+  private void _OnInventory_ItemButtonPressed(string item_id){
+    uint _item_count = _player_inv_data.GetItemCount(item_id);
+    if(_item_count <= 0){
+      _item_inv_controller.RemoveItem(item_id);
+      return;
+    }
+    
+    _item_inv_controller.ChangeItemCount(item_id, _item_count-1);
+    _recipe_craft_list_controller.AddItem(item_id, 1);
+
+    _UpdateRecipeResult();
+    _UpdateInventoryContainerSize();
+  }
+
+  private void _OnCraftList_ItemButtonPressed(string item_id){
+    uint _item_count = _player_inv_data.GetItemCount(item_id);
+    if(_item_count <= 0){
+      _item_inv_controller.RemoveItem(item_id);
+      return;
+    }
+
+    _item_inv_controller.ChangeItemCount(item_id, _item_count);
+    _recipe_craft_list_controller.RemoveItem(item_id);
+
+    _UpdateRecipeResult();
+    _UpdateInventoryContainerSize();
+  }
+
+  private void _OnCraftResult_ItemButtonPressed(string item_id){
+    List<string> _recipe_res = _recipe_craft_res_controller.GetListItem();
+    if(_recipe_res.Count <= 0)
+      return;
+
+    List<string> _recipe_list = _recipe_craft_list_controller.GetListItem();
+    bool _successful = _player_inv_data.RemoveItemList(_recipe_list);
+    if(!_successful)
+      return;
+    
+    _player_inv_data.AddItem(_recipe_res[0], 1);
+
+    _recipe_craft_list_controller.RemoveAllItem();
+    _recipe_craft_res_controller.RemoveAllItem();
   }
 
 
@@ -120,9 +190,9 @@ public class RecipeCraftingUIController: MonoBehaviour{
 
     _player_inv_data = _player.gameObject.GetComponent<InventoryData>();
     if(_player_inv_data != null){
-      _player_inv_data.OnItemAddedEvent += PlayerInv_OnItemAdded;
-      _player_inv_data.OnItemCountChangedEvent += PlayerInv_OnItemCountChanged;
-      _player_inv_data.OnItemRemovedEvent += PlayerInv_OnItemRemoved;
+      _player_inv_data.OnItemAddedEvent += _PlayerInv_OnItemAdded;
+      _player_inv_data.OnItemCountChangedEvent += _PlayerInv_OnItemCountChanged;
+      _player_inv_data.OnItemRemovedEvent += _PlayerInv_OnItemRemoved;
 
       _UpdateInventory();
     }
@@ -157,13 +227,13 @@ public class RecipeCraftingUIController: MonoBehaviour{
     }
 
     _item_inv_controller = _ItemInventoryListContent.GetComponent<ItemContainerController>();
-    _item_inv_controller.OnItemButtonPressedEvent += OnInventory_ItemButtonPressed;
+    _item_inv_controller.OnItemButtonPressedEvent += _OnInventory_ItemButtonPressed;
 
     _recipe_craft_list_controller = _RecipeCraftListContent.GetComponent<ItemContainerController>();
-    _recipe_craft_list_controller.OnItemButtonPressedEvent += OnCraftList_ItemButtonPressed;
+    _recipe_craft_list_controller.OnItemButtonPressedEvent += _OnCraftList_ItemButtonPressed;
 
     _recipe_craft_res_controller = _RecipeCraftResultContent.GetComponent<ItemContainerController>();
-    _recipe_craft_res_controller.OnItemButtonPressedEvent += OnCraftResult_ItemButtonPressed;
+    _recipe_craft_res_controller.OnItemButtonPressedEvent += _OnCraftResult_ItemButtonPressed;
 
     _item_inv_grouping = _ItemInventoryListContent.GetComponent<GridLayoutGroup>();
 
@@ -173,103 +243,14 @@ public class RecipeCraftingUIController: MonoBehaviour{
   }
 
   /// <summary>
-  /// Fungsi untuk menerima "InventoryToggle" Input.
+  /// To catch "InventoryToggle" input event. This function to toggle the enable/show flag.
   /// </summary>
-  /// <param name="value">Value Input dari Unity</param>
+  /// <param name="value">Unity's input data</param>
   public void OnInventoryToggle(InputValue value){
     if(value.isPressed){
       _this_enable_toggle = !_this_enable_toggle;
 
       _SetEnable(_this_enable_toggle);
     }
-  }
-
-
-  /// <summary>
-  /// Fungsi untuk menerima event OnItemAdded (penambahan Item) dari InventoryData pada Player.
-  /// </summary>
-  /// <param name="item_id">ID Item yang tertambah</param>
-  /// <param name="count">Jumlah Item yang diterima</param>
-  public void PlayerInv_OnItemAdded(string item_id, uint count){
-    _item_inv_controller.RemoveItem(item_id);
-    _item_inv_controller.AddItem(item_id, count);
-    _UpdateInventoryContainerSize();
-  }
-
-  /// <summary>
-  /// Fungsi untuk menerima event OnItemCountChanged (perubahan jumlah Item) dari InventoryData pada Player.
-  /// </summary>
-  /// <param name="item_id">ID Item yang terubah</param>
-  /// <param name="new_count">Jumlah baru Item</param>
-  public void PlayerInv_OnItemCountChanged(string item_id, uint new_count){
-    _item_inv_controller.ChangeItemCount(item_id, new_count);
-    _UpdateInventoryContainerSize();
-  }
-
-  /// <summary>
-  /// Fungsi untuk menerima event OnItemRemoved (penghapusan Item dari Inventory) dari InventoryData pada Player.
-  /// </summary>
-  /// <param name="item_id">ID Item yang dihapus</param>
-  public void PlayerInv_OnItemRemoved(string item_id){
-    _item_inv_controller.RemoveItem(item_id);
-    _UpdateInventoryContainerSize();
-  }
-
-
-
-  /// <summary>
-  /// Fungsi untuk menerima OnButtonPressed dari ItemContainerController untuk Inventory pada Player.
-  /// </summary>
-  /// <param name="item_id">ID Item yang terkait</param>
-  public void OnInventory_ItemButtonPressed(string item_id){
-    uint _item_count = _player_inv_data.GetItemCount(item_id);
-    if(_item_count <= 0){
-      _item_inv_controller.RemoveItem(item_id);
-      return;
-    }
-    
-    _item_inv_controller.ChangeItemCount(item_id, _item_count-1);
-    _recipe_craft_list_controller.AddItem(item_id, 1);
-
-    _UpdateRecipeResult();
-    _UpdateInventoryContainerSize();
-  }
-
-  /// <summary>
-  /// Fungsi untuk menerima OnButtonPressed dari ItemContainerController untuk  Crafting Table.
-  /// </summary>
-  /// <param name="item_id">ID Item yang terkait</param>
-  public void OnCraftList_ItemButtonPressed(string item_id){
-    uint _item_count = _player_inv_data.GetItemCount(item_id);
-    if(_item_count <= 0){
-      _item_inv_controller.RemoveItem(item_id);
-      return;
-    }
-
-    _item_inv_controller.ChangeItemCount(item_id, _item_count);
-    _recipe_craft_list_controller.RemoveItem(item_id);
-
-    _UpdateRecipeResult();
-    _UpdateInventoryContainerSize();
-  }
-
-  /// <summary>
-  /// Fungsi untuk menerima OnButtonPressed dari ItemContainerController untuk hasil resep.
-  /// </summary>
-  /// <param name="item_id">ID Item yang terkait</param>
-  public void OnCraftResult_ItemButtonPressed(string item_id){
-    List<string> _recipe_res = _recipe_craft_res_controller.GetListItem();
-    if(_recipe_res.Count <= 0)
-      return;
-
-    List<string> _recipe_list = _recipe_craft_list_controller.GetListItem();
-    bool _successful = _player_inv_data.RemoveItemList(_recipe_list);
-    if(!_successful)
-      return;
-    
-    _player_inv_data.AddItem(_recipe_res[0], 1);
-
-    _recipe_craft_list_controller.RemoveAllItem();
-    _recipe_craft_res_controller.RemoveAllItem();
   }
 }

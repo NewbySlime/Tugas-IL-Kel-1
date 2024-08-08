@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: ItemContainerController Class Reference</title>
+<title>FlavourOfRoemahNusantara: ItemContainerController Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -100,7 +102,7 @@ $(function(){initNavTree('class_item_container_controller.html',''); initResizab
 </div><!--header-->
 <div class="contents">
 
-<p>Komponen untuk mengatur Container kumpulan dari <a class="el" href="class_item_button.html" title="Komponen untuk mengontrol tombol dan memproses jika komponen ini di &quot;bind&quot; dengan Item pada Inventory...">ItemButton</a>.  
+<p>UI Component for creating, handling and containing the list of items in the component that can be interacted.  
  <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for ItemContainerController:</div>
@@ -118,34 +120,34 @@ delegate void&#160;</td><td class="memItemRight" valign="bottom"><b>OnItemButton
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr>
 <tr class="separator:aded805119161658c7f991c19d9169e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2067fe4384718264be6b81131d43063e" id="r_a2067fe4384718264be6b81131d43063e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2067fe4384718264be6b81131d43063e">AddItem</a> (string item_id, uint count)</td></tr>
-<tr class="memdesc:a2067fe4384718264be6b81131d43063e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk menambahkan Item ke Container, tombol dan UI lainnya akan dipersiapkan.  <br /></td></tr>
+<tr class="memdesc:a2067fe4384718264be6b81131d43063e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for adding item to the container based on the ID.  <br /></td></tr>
 <tr class="separator:a2067fe4384718264be6b81131d43063e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4443196a82bce06e49b875fea918a0a3" id="r_a4443196a82bce06e49b875fea918a0a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4443196a82bce06e49b875fea918a0a3">ChangeItemCount</a> (string item_id, uint count)</td></tr>
-<tr class="memdesc:a4443196a82bce06e49b875fea918a0a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk mengubah jumlah Item pada Tombol atau UI lainnya.  <br /></td></tr>
+<tr class="memdesc:a4443196a82bce06e49b875fea918a0a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to change the item count for one of the contained item. But if the container does not have the supposed item, the container will add the item using <a class="el" href="#a2067fe4384718264be6b81131d43063e" title="Function for adding item to the container based on the ID.">AddItem</a> function.  <br /></td></tr>
 <tr class="separator:a4443196a82bce06e49b875fea918a0a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3bb442a2178d7250a61bc65b8abd2eaf" id="r_a3bb442a2178d7250a61bc65b8abd2eaf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3bb442a2178d7250a61bc65b8abd2eaf">RemoveItem</a> (string item_id)</td></tr>
-<tr class="memdesc:a3bb442a2178d7250a61bc65b8abd2eaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk menghilangkan Item pada Container ini.  <br /></td></tr>
+<tr class="memdesc:a3bb442a2178d7250a61bc65b8abd2eaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to remove the target item from the container.  <br /></td></tr>
 <tr class="separator:a3bb442a2178d7250a61bc65b8abd2eaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d1329560173e7709a17125461e4e0bf" id="r_a9d1329560173e7709a17125461e4e0bf"><td class="memItemLeft" align="right" valign="top">List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9d1329560173e7709a17125461e4e0bf">GetListItem</a> ()</td></tr>
-<tr class="memdesc:a9d1329560173e7709a17125461e4e0bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk mendapatkan list Item yang ada pada Container ini.  <br /></td></tr>
+<tr class="memdesc:a9d1329560173e7709a17125461e4e0bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to get the list of contained item(s).  <br /></td></tr>
 <tr class="separator:a9d1329560173e7709a17125461e4e0bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19a062eb30d97953206bda943889c635" id="r_a19a062eb30d97953206bda943889c635"><td class="memItemLeft" align="right" valign="top"><a id="a19a062eb30d97953206bda943889c635" name="a19a062eb30d97953206bda943889c635"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>RemoveAllItem</b> ()</td></tr>
-<tr class="memdesc:a19a062eb30d97953206bda943889c635"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk menghapus semua Item dari Container. <br /></td></tr>
+<tr class="memdesc:a19a062eb30d97953206bda943889c635"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to remove all item from the container. <br /></td></tr>
 <tr class="separator:a19a062eb30d97953206bda943889c635"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45e9dde059b7359a61f68c5f47a292f1" id="r_a45e9dde059b7359a61f68c5f47a292f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a45e9dde059b7359a61f68c5f47a292f1">ItemButton_OnButtonPressed</a> (string item_id)</td></tr>
-<tr class="memdesc:a45e9dde059b7359a61f68c5f47a292f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk menerima event dari <a class="el" href="class_item_button.html" title="Komponen untuk mengontrol tombol dan memproses jika komponen ini di &quot;bind&quot; dengan Item pada Inventory...">ItemButton</a>, event OnButtonPressed.  <br /></td></tr>
-<tr class="separator:a45e9dde059b7359a61f68c5f47a292f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="events" name="events"></a>
 Events</h2></td></tr>
 <tr class="memitem:a2140f62e5ad1832e12b43a7eafd93276" id="r_a2140f62e5ad1832e12b43a7eafd93276"><td class="memItemLeft" align="right" valign="top"><a id="a2140f62e5ad1832e12b43a7eafd93276" name="a2140f62e5ad1832e12b43a7eafd93276"></a>
 OnItemButtonPressed&#160;</td><td class="memItemRight" valign="bottom"><b>OnItemButtonPressedEvent</b></td></tr>
-<tr class="memdesc:a2140f62e5ad1832e12b43a7eafd93276"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event jika salah satu <a class="el" href="class_item_button.html" title="Komponen untuk mengontrol tombol dan memproses jika komponen ini di &quot;bind&quot; dengan Item pada Inventory...">ItemButton</a> pada <a class="el" href="class_item_container_controller.html" title="Komponen untuk mengatur Container kumpulan dari ItemButton.">ItemContainerController</a> diklik. <br /></td></tr>
+<tr class="memdesc:a2140f62e5ad1832e12b43a7eafd93276"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event for when one of the item buttons interacted (pressed). This event also gives the ID for the contained item related to the interacted button. <br /></td></tr>
 <tr class="separator:a2140f62e5ad1832e12b43a7eafd93276"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Komponen untuk mengatur Container kumpulan dari <a class="el" href="class_item_button.html" title="Komponen untuk mengontrol tombol dan memproses jika komponen ini di &quot;bind&quot; dengan Item pada Inventory...">ItemButton</a>. </p>
+<div class="textblock"><p>UI Component for creating, handling and containing the list of items in the component that can be interacted. </p>
+<p>This class uses prefab(s);</p><ul>
+<li>Prefab that has <a class="el" href="class_item_button.html" title="OUTDATED This UI class handles button interaction with using certain item to bind and be associated w...">ItemButton</a> component for creating buttons for items. </li>
+</ul>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a2067fe4384718264be6b81131d43063e" name="a2067fe4384718264be6b81131d43063e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2067fe4384718264be6b81131d43063e">&#9670;&#160;</a></span>AddItem()</h2>
@@ -166,11 +168,11 @@ OnItemButtonPressed&#160;</td><td class="memItemRight" valign="bottom"><b>OnItem
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi untuk menambahkan Item ke Container, tombol dan UI lainnya akan dipersiapkan. </p>
+<p>Function for adding item to the container based on the ID. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">item_id</td><td>ID Item yang mau ditambahkan</td></tr>
-    <tr><td class="paramname">count</td><td>Jumlah Item yang mau ditambahkan</td></tr>
+    <tr><td class="paramname">item_id</td><td>The item ID</td></tr>
+    <tr><td class="paramname">count</td><td>The item count</td></tr>
   </table>
   </dd>
 </dl>
@@ -196,11 +198,11 @@ OnItemButtonPressed&#160;</td><td class="memItemRight" valign="bottom"><b>OnItem
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi untuk mengubah jumlah Item pada Tombol atau UI lainnya. </p>
+<p>Function to change the item count for one of the contained item. But if the container does not have the supposed item, the container will add the item using <a class="el" href="#a2067fe4384718264be6b81131d43063e" title="Function for adding item to the container based on the ID.">AddItem</a> function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">item_id</td><td>ID Item yang mau dimodifikasi</td></tr>
-    <tr><td class="paramname">count</td><td>ID Item yang mau diganti jumlahnya</td></tr>
+    <tr><td class="paramname">item_id</td><td>The target item ID</td></tr>
+    <tr><td class="paramname">count</td><td>The item count</td></tr>
   </table>
   </dd>
 </dl>
@@ -222,33 +224,8 @@ OnItemButtonPressed&#160;</td><td class="memItemRight" valign="bottom"><b>OnItem
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi untuk mendapatkan list Item yang ada pada Container ini. </p>
-<dl class="section return"><dt>Returns</dt><dd>List ID Item pada Container</dd></dl>
-
-</div>
-</div>
-<a id="a45e9dde059b7359a61f68c5f47a292f1" name="a45e9dde059b7359a61f68c5f47a292f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a45e9dde059b7359a61f68c5f47a292f1">&#9670;&#160;</a></span>ItemButton_OnButtonPressed()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ItemContainerController.ItemButton_OnButtonPressed </td>
-          <td>(</td>
-          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>item_id</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Fungsi untuk menerima event dari <a class="el" href="class_item_button.html" title="Komponen untuk mengontrol tombol dan memproses jika komponen ini di &quot;bind&quot; dengan Item pada Inventory...">ItemButton</a>, event OnButtonPressed. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">item_id</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Function to get the list of contained item(s). </p>
+<dl class="section return"><dt>Returns</dt><dd>The resulting list of item(s)</dd></dl>
 
 </div>
 </div>
@@ -267,10 +244,10 @@ OnItemButtonPressed&#160;</td><td class="memItemRight" valign="bottom"><b>OnItem
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi untuk menghilangkan Item pada Container ini. </p>
+<p>Function to remove the target item from the container. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">item_id</td><td>ID Item yang mau dihapus</td></tr>
+    <tr><td class="paramname">item_id</td><td>The target item ID</td></tr>
   </table>
   </dd>
 </dl>

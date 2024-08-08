@@ -3,11 +3,27 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system for setting the "enabled" flag to the target object.
+  /// </summary>
   public class SetObjectActiveSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
     public const string SequenceID = "set_object_active";
 
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SequenceData{
+      /// <summary>
+      /// The target object to be "enabled".
+      /// </summary>
       public ObjectReference.ObjRefID RefID;
+
+      /// <summary>
+      /// Enable flag.
+      /// </summary>
       public bool Active;
     }
 
@@ -47,6 +63,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Set Object Active")]
   [UnitCategory("Sequence/Object")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="SetObjectActiveSequence"/>.
+  /// </summary>
   public class SetObjectActiveSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _ref_id_input;

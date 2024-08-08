@@ -31898,6 +31898,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TEMPLATE_LevelNeeds
       objectReference: {fileID: 0}
+    - target: {fileID: 3016261455567577698, guid: f18f7544e29c9294bbae7c195bb4ef9a, type: 3}
+      propertyPath: _PlayerToMouseCameraRatio
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 4173593461363324163, guid: f18f7544e29c9294bbae7c195bb4ef9a, type: 3}
       propertyPath: _LightNighttimeValue
       value: 0.5

@@ -3,14 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+/// <summary>
+/// Class for spawing any objects (stored as inactive object in certain container) whenever it got triggered.
+/// The class also handles auto spawning with some conditions that can be modified with available variables.
+/// 
+/// This class uses external component(s);
+/// - <b>GameObject</b>s as containers that holds objects used in this class.
+/// - Target <b>GameObject</b>(s) for condition checking (minimal distance from the spawner for auto spawn to be triggered).
+/// </summary>
 public class ObjectSpawner: MonoBehaviour{
   [SerializeField]
+  // The source of the spawn objects.
   private GameObject _CopyContainer = null;
 
   [SerializeField]
+  // Container for spawned objects.
   private GameObject _SpawnedContainer;
 
   [SerializeField]
+  // Container used for enabling objects when the spawner is spawning or despawning.
   private GameObject _EnableContainer = null;
 
   [SerializeField]
@@ -38,13 +49,26 @@ public class ObjectSpawner: MonoBehaviour{
   private float _trigger_timer = -1;
 
 
+  /// <summary>
+  /// Auto spawn, use condition of checking distance between spawner and target trigger objects.
+  /// </summary>
   public bool TriggerByDistance = true;
+  /// <summary>
+  /// Auto spawn, use condition of waiting a cooldown from spawning.
+  /// </summary>
   public bool TriggerByTimeout = true;
+  /// <summary>
+  /// Auto spawn, use condition of waiting until all spawned objects are destroyed.
+  /// </summary>
   public bool TriggerWhenEmpty = true;
 
+  /// <summary>
+  /// Should the spawner use random count of how many objects can it spawn in one spawn trigger.
+  /// </summary>
   public bool IgnoreRandomSpawnCount = false;
 
 
+  // Helper function to spawn (copy) a target object.
   private void _spawn_object(GameObject target_copy){
     GameObject _copied_obj = Instantiate(target_copy);
     _copied_obj.transform.SetParent(_SpawnedContainer.transform);
@@ -55,6 +79,7 @@ public class ObjectSpawner: MonoBehaviour{
   }
 
 
+  // Spawn, allow reoccuring same objects to spawn.
   private void _spawn_same_random_objects(int count){
     int _random_count = count;
     while(_random_count > 0){
@@ -65,6 +90,8 @@ public class ObjectSpawner: MonoBehaviour{
     }
   }
 
+  // Spawn, prohibit spawning same objects that already been spawned.
+  // When the spawn count is higher than the source spawn objects, it will be capped with the source count.
   private void _spawn_different_random_objects(int count = int.MaxValue){
     List<GameObject> _spawn_list = new();
     for(int i = 0; i < _CopyContainer.transform.childCount; i++)
@@ -97,9 +124,11 @@ public class ObjectSpawner: MonoBehaviour{
   }
 
   public void FixedUpdate(){
+    // checking conditions for triggering auto spawn
     if(!TriggerByDistance && !TriggerByTimeout && !TriggerWhenEmpty)
       return;
 
+    // spawn cooldown
     bool _trigger_spawn_by_timeout = !TriggerByTimeout;
     if(TriggerByTimeout){
       if(_trigger_timer > 0)
@@ -108,6 +137,7 @@ public class ObjectSpawner: MonoBehaviour{
       _trigger_spawn_by_timeout = _trigger_timer <= 0;
     }
 
+    // spawn when all target trigger objects are outside the minimal range
     bool _trigger_spawn_by_distance = !TriggerByDistance;
     if(TriggerByDistance){
       _trigger_spawn_by_distance = true;
@@ -120,6 +150,7 @@ public class ObjectSpawner: MonoBehaviour{
       }
     }
 
+    // spawn when all spawned objects are destroyed
     bool _trigger_spawn_on_empty = !TriggerWhenEmpty;
     if(TriggerWhenEmpty)
       _trigger_spawn_on_empty = _SpawnedContainer.transform.childCount <= 0;
@@ -129,6 +160,10 @@ public class ObjectSpawner: MonoBehaviour{
   }
 
   
+  /// <summary>
+  /// Immediately trigger spawning objects.
+  /// Also enabling the EnableContainer.
+  /// </summary>
   public void TriggerSpawn(){
     if(_EnableContainer != null)
       _EnableContainer.SetActive(true);
@@ -147,6 +182,10 @@ public class ObjectSpawner: MonoBehaviour{
     _trigger_timer = (int)Mathf.Round(MathExt.Range(_RandomTimerSpawnMin, _RandomTimerSpawnMax, Random.value));
   }
 
+  /// <summary>
+  /// Function to despawn all currently spawned objects that is not destroyed yet.
+  /// Also disabling the EnableContainer.
+  /// </summary>
   public void DespawnAllSpawnedObjects(){
     if(_EnableContainer != null)
       _EnableContainer.SetActive(false);
@@ -158,10 +197,18 @@ public class ObjectSpawner: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Add another target trigger object used for spawning by distance condition.
+  /// </summary>
+  /// <param name="obj">The trigger object</param>
   public void SetTriggerObjectByDistance(GameObject obj){
     _trigger_obj_by_dist[obj.GetInstanceID()] = obj;
   }
 
+  /// <summary>
+  /// Remove certain trigger object used for spawning by distance condition.
+  /// </summary>
+  /// <param name="obj">The trigger object</param>
   public void RemoveTriggerObjectByDistance(GameObject obj){
     if(!_trigger_obj_by_dist.ContainsKey(obj.GetInstanceID()))
       return;
@@ -170,6 +217,10 @@ public class ObjectSpawner: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Get a list of spawned object(s) that are still alive.
+  /// </summary>
+  /// <returns></returns>
   public List<GameObject> GetSpawnedObjectList(){
     List<GameObject> _result = new();
     for(int i = 0; i < _SpawnedContainer.transform.childCount; i++)
@@ -179,6 +230,9 @@ public class ObjectSpawner: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Function to catch Unity's "Object Disabled" event.
+  /// </summary>
   public void OnDisable(){
     DespawnAllSpawnedObjects();
   }

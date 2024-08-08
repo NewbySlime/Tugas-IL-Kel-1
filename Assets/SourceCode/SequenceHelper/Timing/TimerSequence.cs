@@ -6,12 +6,29 @@ using Unity.VisualScripting;
 
 
 namespace SequenceHelper{
+  /// <summary>
+  /// A custom Sequencing system for delaying a part of Sequence.
+  /// </summary>
   public class TimerSequence: MonoBehaviour, ISequenceAsync, ISequenceData{
+    /// <summary>
+    /// Sequence ID to be used for registering to <see cref="SequenceDatabase"/>.
+    /// </summary>
+    /// <returns>The ID</returns>
     public static string GetSequenceIDStatic(){ return "TimerSequence"; }
 
     [Serializable]
+    /// <summary>
+    /// Data for the Sequence system.
+    /// </summary>
     public struct SeqData{
+      /// <summary>
+      /// The timer value for how long the delay will be.
+      /// </summary>
       public float Timer;
+
+      /// <summary>
+      /// Flag for using the timer scaled with Unity Time's scaling or not.
+      /// </summary>
       public bool UseUnscaled;  
     }
 
@@ -53,6 +70,9 @@ namespace SequenceHelper{
 
   [UnitTitle("Timer")]
   [UnitCategory("Sequence")]
+  /// <summary>
+  /// An extended <see cref="AddSubSequence"/> node for sequence <see cref="TimerSequence"/>.
+  /// </summary>
   public class TimerSequenceVS: AddSubSequence{
     [DoNotSerialize]
     private ValueInput _timer_value;

@@ -9,16 +9,15 @@ using UnityEngine.Jobs;
 
 
 
-// Ini adalah handler untuk interaksi antara player dan objek lainnya.
-// Cara kerjanya,
-//    Player mempunyai salah satu InteractionHandler yang akan dipakai ketika player memencet tombol "Interaksi" (tombol F contohnya).
-//    Untuk penerimanya ada InteractableInterface yang menerima arahan dari Handler ini yang dimana akan digunakan sebagai interaksi player.
-//    Secara teknis, ini bekerja dengan handler menggunakan Trigger dari komponen Collision. Setiap ada object yang masuk, Handler akan menyimpan objek yang datang sebagai objek yang akan diberikan arahan ketika player berinteraksi.
-//
-// Untuk developer, fokus kepada ketiga fungsi utama yang dipakai ketika ada interaksi antara player dan objek.
-// Yaitu: Interaction_OnEnter, Interaction_OnExit, TriggerInteraction   
+/// <summary>
+/// Class for handling interaction with other objects that has <see cref="InteractableInterface"/>. This class acts as the actor, all events surrounding interactions are handled here.
+/// For further explanation, see <b>Reference/Diagrams/InteractionHandling.drawio</b>
+/// 
+/// This class uses external component(s);
+/// - <see cref="RigidbodyMessageRelay"/> for getting physics events of the target body used.
+/// - <see cref="InteractableInterface"/> for signalling the interface for interaction events.
+/// </summary>
 public class InteractionHandler: MonoBehaviour{
-  // Objek Relay yang dimana Handler ini akan menerima event\ "Collision" dari Rigidbody2D ataupun Collision2D
   [SerializeField]
   private RigidbodyMessageRelay _InteractionTrigger;
 
@@ -27,7 +26,9 @@ public class InteractionHandler: MonoBehaviour{
 
   private InteractableInterface _current_interactable = null;
 
-
+  
+  // NOTE: this function calculates nearest object by the <b>Transfrom</b> component's position, this does not use collide point for the calculation.
+  // This function returns a list of interface objects not a single interface due to some interactable are pass through, but still accounted. Last object in the list is blocking (meaning pass through flag is not enabled).
   private List<InteractableInterface> _get_nearest_objects(){
     List<InteractableInterface> _interface_list = _interactable_list.ToList();
     _interface_list.Sort((InteractableInterface var1, InteractableInterface var2) => {
@@ -48,6 +49,8 @@ public class InteractionHandler: MonoBehaviour{
     return _result;
   }
 
+  // Trigger events for any entered objects, and trigger exit to interactable behind the first object.
+  // The parameter is a list of interactables due to a possibility that an interactable might be pass through.
   private void _trigger_enter_objects(List<InteractableInterface> list_interface){
     HashSet<InteractableInterface> _exit_set = new(_interactable_list);
     foreach(InteractableInterface _interface_obj in list_interface){
@@ -58,12 +61,13 @@ public class InteractionHandler: MonoBehaviour{
       _interface_obj.TriggerInteractionEnter();
     }
 
-    // trigger exit to not accounted objs
+    // trigger exit to not account any objs
     foreach(InteractableInterface _interface_obj in _exit_set)
       _interface_obj.TriggerInteractionExit();
   }
 
 
+  // Change the current focus of the interactable object.
   private void _change_current(InteractableInterface interactable){
     if(interactable == _current_interactable)
       return;
@@ -89,8 +93,11 @@ public class InteractionHandler: MonoBehaviour{
   }
 
 
-  // Fungsi ini dipakai untuk menyimpan objek yang diberikan saat Collider masuk ke Trigger Collider.
-  // Kemudian fungsi ini dilempar ke objek yang masuk dengan fungsi InteractableInterface.TriggerInteractionEnter() 
+  /// <summary>
+  /// Function to catch <see cref="RigidbodyMessageRelay.OnTriggerEntered2DEvent"/> event from the target body.
+  /// It will trigger an "interactable enter" event to the entered object and readjust the interactable focus to a valid one.
+  /// </summary>
+  /// <param name="collider">The entered object</param>
   public void Interaction_OnEnter(Collider2D collider){
     InteractableInterface _interface = collider.gameObject.GetComponent<InteractableInterface>();
     if(_interface == null)
@@ -104,8 +111,11 @@ public class InteractionHandler: MonoBehaviour{
     _change_current(_nearest_objs.Count > 0? _nearest_objs[_nearest_objs.Count-1]: null);
   }
 
-  // Fungsi ini dipakai untuk melepas objek yang diberikan saat Collider masuk ke Trigger Collider.
-  // Kemudian fungsi ini dilempar ke objek yang masuk dengan fungsi InteractableInterface.TriggerInteractionExit() 
+  /// <summary>
+  /// Function to catch <see cref="RigidbodyMessageRelay.OnTriggerExited2DEvent"/> event from the target body.
+  /// It will trigger an "interactable exit" event to the exited object and readjust the interactable focus to a valid one. 
+  /// </summary>
+  /// <param name="collider">The exited object</param>
   public void Interaction_OnExit(Collider2D collider){
     InteractableInterface _interface = collider.gameObject.GetComponent<InteractableInterface>();
     if(_interface == null)
@@ -120,8 +130,11 @@ public class InteractionHandler: MonoBehaviour{
     _change_current(_nearest_objs.Count > 0? _nearest_objs[_nearest_objs.Count-1]: null);
   }
 
-  // Fungsi ini dipakai oleh Player untuk melakukan fungsi "Interaction" ke objek objek target player.
-  // Kemudian fungsi ini dilempar ke objek yang masuk dengan fungsi InteractableInterface.TriggerInteract()
+  /// <summary>
+  /// Function to trigger an interaction event to a nearest and valid interactable object.
+  /// The trigger event will be skipped when there are no current valid focus to an interactable.
+  /// </summary>
+  /// <returns>Is the trigger event succeeded or not</returns>
   public bool TriggerInteraction(){
     if(_current_interactable == null)
       return false;

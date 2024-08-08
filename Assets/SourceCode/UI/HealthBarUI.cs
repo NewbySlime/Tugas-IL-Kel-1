@@ -2,6 +2,17 @@ using System.Collections;
 using UnityEngine;
 
 
+/// <summary>
+/// Base UI class for handling and showing bar of health.
+/// Also it uses effects for "showing" how many the health has decreased by giving a initial health reference that decreased after some delay.
+/// 
+/// This class uses external component(s);
+/// - <b>GameObject</b> that has <see cref="IMaterialReference"/> object.
+/// - Bound <see cref="HealthComponent"/> for getting health data.
+///
+/// This class uses following autoload(s);
+/// - <see cref="GameHandler"/> for Game events and such.
+/// </summary>
 public class HealthBarUI: MonoBehaviour{
   [SerializeField]
   private GameObject _HealthBarMaterialReference;
@@ -24,6 +35,10 @@ public class HealthBarUI: MonoBehaviour{
 
   private IMaterialReference _material_reference;
 
+
+  // FG is for the actual representation of the health bar.
+  // BG is the reference for how much change is happening in the last few moments.
+
   private float _bg_val;
 
   private float _fg_val;
@@ -35,6 +50,9 @@ public class HealthBarUI: MonoBehaviour{
   private float _bg_smooth_speed_ref;
 
 
+  /// <summary>
+  /// For updating the UI based on the effect variables.
+  /// </summary>
   private void _update_bar_ui(){
     Material _current_material = _material_reference.GetMaterial();
     _current_material.SetFloat("_ProgressFG", _fg_val);
@@ -45,6 +63,10 @@ public class HealthBarUI: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Not for updating the effect, but to update according to the new health data.
+  /// </summary>
+  /// <param name="skip_animation">Should it skip the "init ref" animation</param>
   private void _update_bar(bool skip_animation = false){
     int _current_health = _health_component.GetHealth();
     int _max_health = _health_component.MaxHealth;
@@ -61,19 +83,19 @@ public class HealthBarUI: MonoBehaviour{
     _bg_update_timer = _HealthBarDelayChange;
   }
 
-  private void _on_health_dead(){
-    _health_component.OnDeadEvent -= _on_health_dead;
-    _health_component.OnHealthChangedEvent -= _on_health_changed;
-  }
-
   private void _on_health_changed(int health){
     _update_bar();
   }
 
+  // Don't update when the game is changing level or starting.
   private void _on_health_set_runtime_data(){
     _update_bar(true);
   }
 
+  /// <summary>
+  /// Awaits for next update (until all components are initialized) so it can use its functions at start.
+  /// </summary>
+  /// <returns>Coroutine helper object</returns>
   private IEnumerator _start_co_func(){
     yield return null;
     yield return new WaitForEndOfFrame();
@@ -102,16 +124,20 @@ public class HealthBarUI: MonoBehaviour{
   }
 
   public void Update(){
+    // effect animation handling goes to here. 
+
     bool _update_bar = false; 
     if(Mathf.Abs(_target_fg_val-_fg_val) > 0.01){
       _fg_val = Mathf.SmoothDamp(_fg_val, _target_fg_val, ref _fg_smooth_speed_ref, _HealthBarSmoothTime);
       
+      // BG should follow FG when "increased".
       if(_bg_val < _fg_val)
         _bg_val = _fg_val;
 
       _update_bar = true;      
     }
 
+    // wait until the delay is gone, and then the BG can be "decresed".
     if(_bg_update_timer > 0)
       _bg_update_timer -= Time.deltaTime;
     else if(Mathf.Abs(_fg_val-_bg_val) > 0.01){
@@ -125,6 +151,10 @@ public class HealthBarUI: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Bind health handler object to be watched and shown to this UI.
+  /// </summary>
+  /// <param name="health">The target health object</param>
   public void BindHealthComponent(HealthComponent health){
     UnbindHealthComponent();
     if(health == null)
@@ -137,11 +167,16 @@ public class HealthBarUI: MonoBehaviour{
     _health_component.OnRuntimeDataSetEvent += _on_health_set_runtime_data;
   }
 
+  /// <summary>
+  /// Unbind and clear any related data/function to the previous <see cref="HealthComponent"/>.
+  /// </summary>
   public void UnbindHealthComponent(){
     if(_health_component == null)
       return;
 
     _health_component.OnHealthChangedEvent -= _on_health_changed;
     _health_component.OnRuntimeDataSetEvent -= _on_health_set_runtime_data;
+
+    _health_component = null;
   }
 }

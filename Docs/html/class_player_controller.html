@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: PlayerController Class Reference</title>
+<title>FlavourOfRoemahNusantara: PlayerController Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -93,13 +95,17 @@ $(function(){initNavTree('class_player_controller.html',''); initResizable(); })
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#properties">Properties</a> &#124;
 <a href="class_player_controller-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">PlayerController Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Komponen untuk mengontrol Objek Game berdasarkan input dari Player. Komponen ini memerlukan komponen lain:  
+<p>Class for translating user's input to available interactions in the Game. Some UI interaction handlings are detached from this component (ex. <a class="el" href="class_game_handler.html" title="Class for handling Game&#39;s functions, events, and other objects/components that serves as the internal...">GameHandler</a> handles the pausing system and UI).  
  <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for PlayerController:</div>
@@ -108,24 +114,228 @@ Inheritance diagram for PlayerController:</div>
   <img src="class_player_controller.png" alt=""/>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player_controller_1_1_runtime_data.html">RuntimeData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data structure for storing to a save file in for <a class="el" href="class_persistance_context.html" title="Class for handling data, storing and loading the data with the OS&#39; filesystem. The path for save file...">PersistanceContext</a>.  <a href="class_player_controller_1_1_runtime_data.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae1117d9c4da3193181cddad2c814e467" id="r_ae1117d9c4da3193181cddad2c814e467"><td class="memItemLeft" align="right" valign="top"><a id="ae1117d9c4da3193181cddad2c814e467" name="ae1117d9c4da3193181cddad2c814e467"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr>
 <tr class="separator:ae1117d9c4da3193181cddad2c814e467"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8bc83dffb99867a04be016473ed2c43" id="r_ae8bc83dffb99867a04be016473ed2c43"><td class="memItemLeft" align="right" valign="top"><a id="ae8bc83dffb99867a04be016473ed2c43" name="ae8bc83dffb99867a04be016473ed2c43"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Update</b> ()</td></tr>
+<tr class="separator:ae8bc83dffb99867a04be016473ed2c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5bdb1b48571f67c3f722a58b6f404d4" id="r_ae5bdb1b48571f67c3f722a58b6f404d4"><td class="memItemLeft" align="right" valign="top"><a id="ae5bdb1b48571f67c3f722a58b6f404d4" name="ae5bdb1b48571f67c3f722a58b6f404d4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>FixedUpdate</b> ()</td></tr>
+<tr class="separator:ae5bdb1b48571f67c3f722a58b6f404d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28262cb1dd440c2844d2c841a033140b" id="r_a28262cb1dd440c2844d2c841a033140b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a28262cb1dd440c2844d2c841a033140b">OnStrafe</a> (InputValue value)</td></tr>
-<tr class="memdesc:a28262cb1dd440c2844d2c841a033140b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input Handling ketika Player memberikan input untuk bergerak secara horizontal.  <br /></td></tr>
+<tr class="memdesc:a28262cb1dd440c2844d2c841a033140b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch "Strafe" input event. This will translate the input for <a class="el" href="class_movement_controller.html#ac5fd1519b6884dc51cef40d133646d52" title="Give input to this movement object to walk in a direction (X-Axis).">MovementController.DoWalk(float)</a>.  <br /></td></tr>
 <tr class="separator:a28262cb1dd440c2844d2c841a033140b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a874d575d0d2115f1585c7c210a0674" id="r_a5a874d575d0d2115f1585c7c210a0674"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5a874d575d0d2115f1585c7c210a0674">OnJump</a> (InputValue value)</td></tr>
-<tr class="memdesc:a5a874d575d0d2115f1585c7c210a0674"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input Handling ketika Player memberikan input untuk melompat.  <br /></td></tr>
+<tr class="memdesc:a5a874d575d0d2115f1585c7c210a0674"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch "Jump" input event.  <br /></td></tr>
 <tr class="separator:a5a874d575d0d2115f1585c7c210a0674"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac86e1c23b36a52dbfdeb91481f00adb4" id="r_ac86e1c23b36a52dbfdeb91481f00adb4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac86e1c23b36a52dbfdeb91481f00adb4">OnDuck</a> (InputValue value)</td></tr>
+<tr class="memdesc:ac86e1c23b36a52dbfdeb91481f00adb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch "Duck" input event. This is used for "ignoring" one way platforms.  <br /></td></tr>
+<tr class="separator:ac86e1c23b36a52dbfdeb91481f00adb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad858455991231810487be9d646598b78" id="r_ad858455991231810487be9d646598b78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad858455991231810487be9d646598b78">OnFire</a> (InputValue value)</td></tr>
+<tr class="memdesc:ad858455991231810487be9d646598b78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch "Fire" input event.  <br /></td></tr>
+<tr class="separator:ad858455991231810487be9d646598b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfcaa86db9ae21976b935fa1260d13c2" id="r_abfcaa86db9ae21976b935fa1260d13c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abfcaa86db9ae21976b935fa1260d13c2">OnInteract</a> (InputValue value)</td></tr>
+<tr class="memdesc:abfcaa86db9ae21976b935fa1260d13c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to catch "Interact" input event. The function uses the input to interact using <a class="el" href="class_interaction_handler.html#af40802b91d7035a59719eb0a690baa03" title="Function to trigger an interaction event to a nearest and valid interactable object....">InteractionHandler.TriggerInteraction</a>.  <br /></td></tr>
+<tr class="separator:abfcaa86db9ae21976b935fa1260d13c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2381e8e097876ae8d88f36528f974d6" id="r_aa2381e8e097876ae8d88f36528f974d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa2381e8e097876ae8d88f36528f974d6">SetEnableInteraction</a> (bool flag)</td></tr>
+<tr class="memdesc:aa2381e8e097876ae8d88f36528f974d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets to allow the player for using <a class="el" href="class_interaction_handler.html" title="Class for handling interaction with other objects that has InteractableInterface. This class acts as ...">InteractionHandler</a>.  <br /></td></tr>
+<tr class="separator:aa2381e8e097876ae8d88f36528f974d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8c4e1c7f611034c3ef60a0c167dfe4a" id="r_ad8c4e1c7f611034c3ef60a0c167dfe4a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_player_controller_1_1_runtime_data.html">RuntimeData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad8c4e1c7f611034c3ef60a0c167dfe4a">AsRuntimeData</a> ()</td></tr>
+<tr class="memdesc:ad8c4e1c7f611034c3ef60a0c167dfe4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the stored state of player object. For applying a state to this player object, see <a class="el" href="#a8aea48557f40dbc11400b1727f25bbb1" title="Apply and modify this player object to recreate the object based on the supplied state....">FromRuntimeData</a>.  <br /></td></tr>
+<tr class="separator:ad8c4e1c7f611034c3ef60a0c167dfe4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8aea48557f40dbc11400b1727f25bbb1" id="r_a8aea48557f40dbc11400b1727f25bbb1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8aea48557f40dbc11400b1727f25bbb1">FromRuntimeData</a> (<a class="el" href="class_player_controller_1_1_runtime_data.html">RuntimeData</a> data)</td></tr>
+<tr class="memdesc:a8aea48557f40dbc11400b1727f25bbb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply and modify this player object to recreate the object based on the supplied state. For getting current state of the object, see <a class="el" href="#ad8c4e1c7f611034c3ef60a0c167dfe4a" title="Get the stored state of player object. For applying a state to this player object,...">AsRuntimeData</a>.  <br /></td></tr>
+<tr class="separator:a8aea48557f40dbc11400b1727f25bbb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:abbc6c01f0906759f008bd5387b3518b9" id="r_abbc6c01f0906759f008bd5387b3518b9"><td class="memItemLeft" align="right" valign="top"><a id="abbc6c01f0906759f008bd5387b3518b9" name="abbc6c01f0906759f008bd5387b3518b9"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>AllowUseWeapon</b> = true</td></tr>
+<tr class="memdesc:abbc6c01f0906759f008bd5387b3518b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows the player to use their <a class="el" href="class_weapon_handler.html" title="Component for handling weapon and gives its wielder (such as PlayerController) Game interactions for ...">WeaponHandler</a>. <br /></td></tr>
+<tr class="separator:abbc6c01f0906759f008bd5387b3518b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56cba5ac216e0488b8161b997e3be048" id="r_a56cba5ac216e0488b8161b997e3be048"><td class="memItemLeft" align="right" valign="top"><a id="a56cba5ac216e0488b8161b997e3be048" name="a56cba5ac216e0488b8161b997e3be048"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>AllowJump</b> = true</td></tr>
+<tr class="memdesc:a56cba5ac216e0488b8161b997e3be048"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows the player to jump. <br /></td></tr>
+<tr class="separator:a56cba5ac216e0488b8161b997e3be048"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1f32365ca4343443b25a895475315a9" id="r_ab1f32365ca4343443b25a895475315a9"><td class="memItemLeft" align="right" valign="top"><a id="ab1f32365ca4343443b25a895475315a9" name="ab1f32365ca4343443b25a895475315a9"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>TriggerGameOverOnDead</b> = true</td></tr>
+<tr class="memdesc:ab1f32365ca4343443b25a895475315a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should the Game Over triggered when the player is dead. <br /></td></tr>
+<tr class="separator:ab1f32365ca4343443b25a895475315a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef298091c56d32b5a99b4cc64b2ccfc2" id="r_aef298091c56d32b5a99b4cc64b2ccfc2"><td class="memItemLeft" align="right" valign="top"><a id="aef298091c56d32b5a99b4cc64b2ccfc2" name="aef298091c56d32b5a99b4cc64b2ccfc2"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>DisableMovementOnDead</b> = true</td></tr>
+<tr class="memdesc:aef298091c56d32b5a99b4cc64b2ccfc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should the <a class="el" href="class_movement_controller.html" title="Component for handling movement system used in the Game. For further explanation, see Reference/Diagr...">MovementController</a> disabled when the player is dead. <br /></td></tr>
+<tr class="separator:aef298091c56d32b5a99b4cc64b2ccfc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a65697e8e0a32a2c4cd2dbd95cb69e7c7" id="r_a65697e8e0a32a2c4cd2dbd95cb69e7c7"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_object_reference_1_1_obj_ref_i_d.html">ObjectReference.ObjRefID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a65697e8e0a32a2c4cd2dbd95cb69e7c7">DefaultRefID</a></td></tr>
+<tr class="memdesc:a65697e8e0a32a2c4cd2dbd95cb69e7c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Reference used for representation of the single scene instance of the object.  <br /></td></tr>
+<tr class="separator:a65697e8e0a32a2c4cd2dbd95cb69e7c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9101f4ccc73f6cbf003620c9c84b8e07" id="r_a9101f4ccc73f6cbf003620c9c84b8e07"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_sequence_helper_1_1_register_input_focus_sequence_1_1_input_focus_data.html">RegisterInputFocusSequence.InputFocusData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9101f4ccc73f6cbf003620c9c84b8e07">PlayerInputContext</a></td></tr>
+<tr class="memdesc:a9101f4ccc73f6cbf003620c9c84b8e07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default input focus data for <a class="el" href="class_player_controller.html" title="Class for translating user&#39;s input to available interactions in the Game. Some UI interaction handlin...">PlayerController</a>.  <br /></td></tr>
+<tr class="separator:a9101f4ccc73f6cbf003620c9c84b8e07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:a478e88635f57b2a2c9c31bd877b1e53c" id="r_a478e88635f57b2a2c9c31bd877b1e53c"><td class="memItemLeft" align="right" valign="top"><a id="a478e88635f57b2a2c9c31bd877b1e53c" name="a478e88635f57b2a2c9c31bd877b1e53c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>TriggerAvailable</b> = true<code> [get]</code></td></tr>
+<tr class="memdesc:a478e88635f57b2a2c9c31bd877b1e53c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can another components/objects use this object as a trigger. <br /></td></tr>
+<tr class="separator:a478e88635f57b2a2c9c31bd877b1e53c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Komponen untuk mengontrol Objek Game berdasarkan input dari Player. Komponen ini memerlukan komponen lain: </p>
-<ul>
-<li><a class="el" href="class_movement_controller.html" title="Komponen untuk mekanik movement. Karena ini hanya mekanik movement yang bisa dipakai Komponen lain,...">MovementController</a> </li>
+<div class="textblock"><p>Class for translating user's input to available interactions in the Game. Some UI interaction handlings are detached from this component (ex. <a class="el" href="class_game_handler.html" title="Class for handling Game&#39;s functions, events, and other objects/components that serves as the internal...">GameHandler</a> handles the pausing system and UI). </p>
+<p>This class uses following component(s);</p><ul>
+<li><a class="el" href="class_movement_controller.html" title="Component for handling movement system used in the Game. For further explanation, see Reference/Diagr...">MovementController</a> for controlling movement system used in this Game.</li>
+<li>Unity's <b>PlayerInput</b> for handling input from player.</li>
+<li><a class="el" href="class_health_component.html" title="Base component for Game&#39;s entities to handle health system for the entity. When the entity is &quot;dead&quot; ...">HealthComponent</a> for handling health system.</li>
+<li><a class="el" href="class_inventory_data.html" title="Component to store items. Items can be added manually or automatically by class like CollectibleCompo...">InventoryData</a> for storing items.</li>
+<li><a class="el" href="class_recipe_discovery_component.html" title="Discovery system component for handling recipe discovery that the player can use as a &quot;remembering&quot; s...">RecipeDiscoveryComponent</a> as to handle discoveries of undiscovered recipes at the start of the Game.</li>
+<li><a class="el" href="class_on_dead_game_over_trigger.html" title="Trigger class for triggering a Game Over event to GameHandler.">OnDeadGameOverTrigger</a> as a separate trigger for triggering Game Over event when the object is dead.</li>
+</ul>
+<p>This class uses external component(s);</p><ul>
+<li><a class="el" href="class_weapon_handler.html" title="Component for handling weapon and gives its wielder (such as PlayerController) Game interactions for ...">WeaponHandler</a> for controlling weapon system that can be used by player.</li>
+<li><a class="el" href="class_interaction_handler.html" title="Class for handling interaction with other objects that has InteractableInterface. This class acts as ...">InteractionHandler</a> for giving interaction interface between player and the Game's world objects.</li>
+<li><a class="el" href="class_pickable_object_picker_handler.html" title="TODO: next feature Class to handle picking object that has PickableObject. This only picks the object...">PickableObjectPickerHandler</a> for handling item picking system.</li>
+<li>Unity's <b>Animator</b> Component for handling animation used for this object.</li>
+<li><a class="el" href="class_animation_trigger_flag_component.html" title="Component for distributing Unity&#39;s Animation Trigger Event into C# event for evenly distribution to s...">AnimationTriggerFlagComponent</a> for listening to trigger flag that comes from Unity's animation system.</li>
+<li><a class="el" href="class_mouse_follower.html" title="As the name suggest, this component will moves this object to world position of the mouse (pointer po...">MouseFollower</a> (gets by finding an instance) to get the mouse position.</li>
+<li><a class="el" href="class_multiple_progress_bar.html" title="Class for handling multiple progress bar with using one value. Brief explanation: the progress uses n...">MultipleProgressBar</a> (gets by stored UI in <a class="el" href="class_game_u_i_handler.html" title="Helper class for storing all the UI objects used in the Game. All UI objects are added by hardcoding ...">GameUIHandler</a>) as the weapon cooldown progress. r This class uses autoload(s);</li>
+<li><a class="el" href="class_game_handler.html" title="Class for handling Game&#39;s functions, events, and other objects/components that serves as the internal...">GameHandler</a> for Game events and such.</li>
+<li><a class="el" href="class_persistance_context.html" title="Class for handling data, storing and loading the data with the OS&#39; filesystem. The path for save file...">PersistanceContext</a> for handling save files.</li>
+<li><a class="el" href="class_game_u_i_handler.html" title="Helper class for storing all the UI objects used in the Game. All UI objects are added by hardcoding ...">GameUIHandler</a> for getting UI used in the Game.</li>
+<li><a class="el" href="class_item_database.html" title="Database Class for loading and storing data for items. The database will find any prefab (data) in a ...">ItemDatabase</a> for getting data about certain item.</li>
+<li><a class="el" href="class_input_focus_context.html" title="Helper class that can be used by any object to know if certain object has the privilege to use the in...">InputFocusContext</a> for asking focus of input used. </li>
 </ul>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad8c4e1c7f611034c3ef60a0c167dfe4a" name="ad8c4e1c7f611034c3ef60a0c167dfe4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8c4e1c7f611034c3ef60a0c167dfe4a">&#9670;&#160;</a></span>AsRuntimeData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_player_controller_1_1_runtime_data.html">RuntimeData</a> PlayerController.AsRuntimeData </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the stored state of player object. For applying a state to this player object, see <a class="el" href="#a8aea48557f40dbc11400b1727f25bbb1" title="Apply and modify this player object to recreate the object based on the supplied state....">FromRuntimeData</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>The resulting state</dd></dl>
+
+</div>
+</div>
+<a id="a8aea48557f40dbc11400b1727f25bbb1" name="a8aea48557f40dbc11400b1727f25bbb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8aea48557f40dbc11400b1727f25bbb1">&#9670;&#160;</a></span>FromRuntimeData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PlayerController.FromRuntimeData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_player_controller_1_1_runtime_data.html">RuntimeData</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apply and modify this player object to recreate the object based on the supplied state. For getting current state of the object, see <a class="el" href="#ad8c4e1c7f611034c3ef60a0c167dfe4a" title="Get the stored state of player object. For applying a state to this player object,...">AsRuntimeData</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>The state to use for recreating</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac86e1c23b36a52dbfdeb91481f00adb4" name="ac86e1c23b36a52dbfdeb91481f00adb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac86e1c23b36a52dbfdeb91481f00adb4">&#9670;&#160;</a></span>OnDuck()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PlayerController.OnDuck </td>
+          <td>(</td>
+          <td class="paramtype">InputValue</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to catch "Duck" input event. This is used for "ignoring" one way platforms. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Unity's input data</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad858455991231810487be9d646598b78" name="ad858455991231810487be9d646598b78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad858455991231810487be9d646598b78">&#9670;&#160;</a></span>OnFire()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PlayerController.OnFire </td>
+          <td>(</td>
+          <td class="paramtype">InputValue</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to catch "Fire" input event. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Unity's input data</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abfcaa86db9ae21976b935fa1260d13c2" name="abfcaa86db9ae21976b935fa1260d13c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfcaa86db9ae21976b935fa1260d13c2">&#9670;&#160;</a></span>OnInteract()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PlayerController.OnInteract </td>
+          <td>(</td>
+          <td class="paramtype">InputValue</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to catch "Interact" input event. The function uses the input to interact using <a class="el" href="class_interaction_handler.html#af40802b91d7035a59719eb0a690baa03" title="Function to trigger an interaction event to a nearest and valid interactable object....">InteractionHandler.TriggerInteraction</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Unity's input data</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a5a874d575d0d2115f1585c7c210a0674" name="a5a874d575d0d2115f1585c7c210a0674"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5a874d575d0d2115f1585c7c210a0674">&#9670;&#160;</a></span>OnJump()</h2>
 
@@ -141,10 +351,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr
       </table>
 </div><div class="memdoc">
 
-<p>Input Handling ketika Player memberikan input untuk melompat. </p>
+<p>Function to catch "Jump" input event. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">value</td><td>Value yang diberikan Unity.</td></tr>
+    <tr><td class="paramname">value</td><td>Unity's input data</td></tr>
   </table>
   </dd>
 </dl>
@@ -166,13 +376,95 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr
       </table>
 </div><div class="memdoc">
 
-<p>Input Handling ketika Player memberikan input untuk bergerak secara horizontal. </p>
+<p>Function to catch "Strafe" input event. This will translate the input for <a class="el" href="class_movement_controller.html#ac5fd1519b6884dc51cef40d133646d52" title="Give input to this movement object to walk in a direction (X-Axis).">MovementController.DoWalk(float)</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">value</td><td>Value yang diberikan Unity.</td></tr>
+    <tr><td class="paramname">value</td><td>Unity's input data</td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="aa2381e8e097876ae8d88f36528f974d6" name="aa2381e8e097876ae8d88f36528f974d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2381e8e097876ae8d88f36528f974d6">&#9670;&#160;</a></span>SetEnableInteraction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PlayerController.SetEnableInteraction </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>flag</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets to allow the player for using <a class="el" href="class_interaction_handler.html" title="Class for handling interaction with other objects that has InteractableInterface. This class acts as ...">InteractionHandler</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">flag</td><td>Is player allowed to interact</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a65697e8e0a32a2c4cd2dbd95cb69e7c7" name="a65697e8e0a32a2c4cd2dbd95cb69e7c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65697e8e0a32a2c4cd2dbd95cb69e7c7">&#9670;&#160;</a></span>DefaultRefID</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_object_reference_1_1_obj_ref_i_d.html">ObjectReference.ObjRefID</a> PlayerController.DefaultRefID</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">new</span>(){</div>
+<div class="line">    ID = <span class="stringliteral">&quot;player_object&quot;</span></div>
+<div class="line">  }</div>
+</div><!-- fragment -->
+<p>Default Reference used for representation of the single scene instance of the object. </p>
+
+</div>
+</div>
+<a id="a9101f4ccc73f6cbf003620c9c84b8e07" name="a9101f4ccc73f6cbf003620c9c84b8e07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9101f4ccc73f6cbf003620c9c84b8e07">&#9670;&#160;</a></span>PlayerInputContext</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_sequence_helper_1_1_register_input_focus_sequence_1_1_input_focus_data.html">RegisterInputFocusSequence.InputFocusData</a> PlayerController.PlayerInputContext</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">new</span>(){</div>
+<div class="line">    RefID = <a class="code hl_variable" href="#a65697e8e0a32a2c4cd2dbd95cb69e7c7">DefaultRefID</a>,</div>
+<div class="line">    InputContext = InputFocusContext.ContextEnum.Player</div>
+<div class="line">  }</div>
+<div class="ttc" id="aclass_player_controller_html_a65697e8e0a32a2c4cd2dbd95cb69e7c7"><div class="ttname"><a href="#a65697e8e0a32a2c4cd2dbd95cb69e7c7">PlayerController.DefaultRefID</a></div><div class="ttdeci">static ObjectReference.ObjRefID DefaultRefID</div><div class="ttdoc">Default Reference used for representation of the single scene instance of the object.</div><div class="ttdef"><b>Definition</b> PlayerController.cs:55</div></div>
+</div><!-- fragment -->
+<p>Default input focus data for <a class="el" href="class_player_controller.html" title="Class for translating user&#39;s input to available interactions in the Game. Some UI interaction handlin...">PlayerController</a>. </p>
 
 </div>
 </div>

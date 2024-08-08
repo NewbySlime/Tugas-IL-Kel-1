@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectILKel1: FollowerCamera2D Class Reference</title>
+<title>FlavourOfRoemahNusantara: FollowerCamera2D Class Reference</title>
+<link rel="icon" href="Idle_Yadi1.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,10 +27,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="Idle_Yadi1.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ProjectILKel1<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">FlavourOfRoemahNusantara<span id="projectnumber">&#160;1</span>
    </div>
-   <div id="projectbrief">Dokumentasi Projek Studi Independen IL (Kelompok 1)</div>
+   <div id="projectbrief">Documentation For Studi Independen IL Project (Team 1)</div>
   </td>
  </tr>
  </tbody>
@@ -94,10 +96,15 @@ $(function(){initNavTree('class_follower_camera2_d.html',''); initResizable(); }
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="class_follower_camera2_d-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">FollowerCamera2D Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Component to extend <b>Camera2D</b> functionality to automatically or determinantly follow a target object or more smoothly. Target follow objects can be multiple so the expected position will be in-between those objects. The expected position can be offset by using weighting for each follow object to create a ratio. For further explanation, check diagram in <b>Reference/Diagrams/FollowerCamera2D.drawio</b>  
+ <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for FollowerCamera2D:</div>
 <div class="dyncontent">
@@ -113,22 +120,213 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr
 <tr class="memitem:a06419b7c87a4c6b660535f0337c7d25c" id="r_a06419b7c87a4c6b660535f0337c7d25c"><td class="memItemLeft" align="right" valign="top"><a id="a06419b7c87a4c6b660535f0337c7d25c" name="a06419b7c87a4c6b660535f0337c7d25c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Update</b> ()</td></tr>
 <tr class="separator:a06419b7c87a4c6b660535f0337c7d25c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac85a30057d4df1fb86880d46665346db" id="r_ac85a30057d4df1fb86880d46665346db"><td class="memItemLeft" align="right" valign="top"><a id="ac85a30057d4df1fb86880d46665346db" name="ac85a30057d4df1fb86880d46665346db"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>AddFollowObject</b> (GameObject target, float weight)</td></tr>
-<tr class="separator:ac85a30057d4df1fb86880d46665346db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64dcaae42b5ff595f493e6702d35e242" id="r_a64dcaae42b5ff595f493e6702d35e242"><td class="memItemLeft" align="right" valign="top"><a id="a64dcaae42b5ff595f493e6702d35e242" name="a64dcaae42b5ff595f493e6702d35e242"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>SetFollowWeight</b> (GameObject target, float weight)</td></tr>
-<tr class="separator:a64dcaae42b5ff595f493e6702d35e242"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6d138bd3a48819ac6829f49ad2deb36" id="r_ac6d138bd3a48819ac6829f49ad2deb36"><td class="memItemLeft" align="right" valign="top"><a id="ac6d138bd3a48819ac6829f49ad2deb36" name="ac6d138bd3a48819ac6829f49ad2deb36"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>RemoveFollowObject</b> (GameObject target)</td></tr>
+<tr class="memitem:a82d826c30a90946be51a52e9fd95e601" id="r_a82d826c30a90946be51a52e9fd95e601"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a82d826c30a90946be51a52e9fd95e601">SetFollowObject</a> (GameObject target, float weight)</td></tr>
+<tr class="memdesc:a82d826c30a90946be51a52e9fd95e601"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add another object to follow. This function will replace existing object configuration with a new one.  <br /></td></tr>
+<tr class="separator:a82d826c30a90946be51a52e9fd95e601"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6d138bd3a48819ac6829f49ad2deb36" id="r_ac6d138bd3a48819ac6829f49ad2deb36"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac6d138bd3a48819ac6829f49ad2deb36">RemoveFollowObject</a> (GameObject target)</td></tr>
+<tr class="memdesc:ac6d138bd3a48819ac6829f49ad2deb36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove an object that this object follows based on the target object. Will be ignored if the target object does not exist or not followed yet.  <br /></td></tr>
 <tr class="separator:ac6d138bd3a48819ac6829f49ad2deb36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d5c611c13126e1a10cd616b653a065e" id="r_a1d5c611c13126e1a10cd616b653a065e"><td class="memItemLeft" align="right" valign="top"><a id="a1d5c611c13126e1a10cd616b653a065e" name="a1d5c611c13126e1a10cd616b653a065e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetPivotObject</b> (GameObject? target=null)</td></tr>
+<tr class="memitem:afa29af4b89d2ed720a127f75cb593e68" id="r_afa29af4b89d2ed720a127f75cb593e68"><td class="memItemLeft" align="right" valign="top"><a id="afa29af4b89d2ed720a127f75cb593e68" name="afa29af4b89d2ed720a127f75cb593e68"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ClearFollowObject</b> ()</td></tr>
+<tr class="memdesc:afa29af4b89d2ed720a127f75cb593e68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all objects that followed by this object. <br /></td></tr>
+<tr class="separator:afa29af4b89d2ed720a127f75cb593e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d5c611c13126e1a10cd616b653a065e" id="r_a1d5c611c13126e1a10cd616b653a065e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d5c611c13126e1a10cd616b653a065e">SetPivotObject</a> (GameObject? target=null)</td></tr>
+<tr class="memdesc:a1d5c611c13126e1a10cd616b653a065e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the pivot object of this follower component. The parameter for the target object can be set to null stops its following system. When calling this function, preferrably to call <a class="el" href="#afa29af4b89d2ed720a127f75cb593e68" title="Clear all objects that followed by this object.">ClearFollowObject</a> to complete it to full stop.  <br /></td></tr>
 <tr class="separator:a1d5c611c13126e1a10cd616b653a065e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7046cb538aa028842ac3c5144ad0a8cc" id="r_a7046cb538aa028842ac3c5144ad0a8cc"><td class="memItemLeft" align="right" valign="top"><a id="a7046cb538aa028842ac3c5144ad0a8cc" name="a7046cb538aa028842ac3c5144ad0a8cc"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsFollowingObject</b> (GameObject target)</td></tr>
+<tr class="memitem:ace3125dad5f9f3d79d55350acd32edaa" id="r_ace3125dad5f9f3d79d55350acd32edaa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ace3125dad5f9f3d79d55350acd32edaa">SetSmoothTime</a> (float time)</td></tr>
+<tr class="memdesc:ace3125dad5f9f3d79d55350acd32edaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the smoothing time for the effect.  <br /></td></tr>
+<tr class="separator:ace3125dad5f9f3d79d55350acd32edaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7046cb538aa028842ac3c5144ad0a8cc" id="r_a7046cb538aa028842ac3c5144ad0a8cc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7046cb538aa028842ac3c5144ad0a8cc">IsFollowingObject</a> (GameObject target)</td></tr>
+<tr class="memdesc:a7046cb538aa028842ac3c5144ad0a8cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">To check if this component is following the object (pivot not included to be checked).  <br /></td></tr>
 <tr class="separator:a7046cb538aa028842ac3c5144ad0a8cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85ffab4d4bf1c58b9629ab34c7282355" id="r_a85ffab4d4bf1c58b9629ab34c7282355"><td class="memItemLeft" align="right" valign="top"><a id="a85ffab4d4bf1c58b9629ab34c7282355" name="a85ffab4d4bf1c58b9629ab34c7282355"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>RevertDefaultPivot</b> ()</td></tr>
+<tr class="memdesc:a85ffab4d4bf1c58b9629ab34c7282355"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to revert all configurations about this component to the default. Automatically follows the player and another object(s) needed to be followed. <br /></td></tr>
+<tr class="separator:a85ffab4d4bf1c58b9629ab34c7282355"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a2e917486863c9d454edf1b6d88178856" id="r_a2e917486863c9d454edf1b6d88178856"><td class="memItemLeft" align="right" valign="top"><a id="a2e917486863c9d454edf1b6d88178856" name="a2e917486863c9d454edf1b6d88178856"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>DefaultSmoothTime</b> = 0.1f</td></tr>
+<tr class="memdesc:a2e917486863c9d454edf1b6d88178856"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default smooth time value. <br /></td></tr>
+<tr class="separator:a2e917486863c9d454edf1b6d88178856"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:ad30a8795b52cb57e753d947bafdee26e" id="r_ad30a8795b52cb57e753d947bafdee26e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_object_reference_1_1_obj_ref_i_d.html">ObjectReference.ObjRefID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad30a8795b52cb57e753d947bafdee26e">DefaultRefID</a></td></tr>
+<tr class="memdesc:ad30a8795b52cb57e753d947bafdee26e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The reference representation of the single scene instance of the object.  <br /></td></tr>
+<tr class="separator:ad30a8795b52cb57e753d947bafdee26e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Component to extend <b>Camera2D</b> functionality to automatically or determinantly follow a target object or more smoothly. Target follow objects can be multiple so the expected position will be in-between those objects. The expected position can be offset by using weighting for each follow object to create a ratio. For further explanation, check diagram in <b>Reference/Diagrams/FollowerCamera2D.drawio</b> </p>
+<p>This class uses external component(s);</p><ul>
+<li>A <b>GameObject</b> as the pivot object. This is set manually.</li>
+<li>Target <b>GameObject</b>(s) as follower objects. This is set manually.</li>
+</ul>
+<p>This class uses autoload(s);</p><ul>
+<li><a class="el" href="class_game_handler.html" title="Class for handling Game&#39;s functions, events, and other objects/components that serves as the internal...">GameHandler</a> for game events and such.</li>
+<li><a class="el" href="class_game_time_handler.html" title="Class for handling the Game&#39;s time also handling scenario for period of time. Period of time defined ...">GameTimeHandler</a> to know if the Game is pausing. </li>
+</ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7046cb538aa028842ac3c5144ad0a8cc" name="a7046cb538aa028842ac3c5144ad0a8cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7046cb538aa028842ac3c5144ad0a8cc">&#9670;&#160;</a></span>IsFollowingObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FollowerCamera2D.IsFollowingObject </td>
+          <td>(</td>
+          <td class="paramtype">GameObject</td>          <td class="paramname"><span class="paramname"><em>target</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>To check if this component is following the object (pivot not included to be checked). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>The target object to check</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Is the object being followed</dd></dl>
+
+</div>
+</div>
+<a id="ac6d138bd3a48819ac6829f49ad2deb36" name="ac6d138bd3a48819ac6829f49ad2deb36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6d138bd3a48819ac6829f49ad2deb36">&#9670;&#160;</a></span>RemoveFollowObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FollowerCamera2D.RemoveFollowObject </td>
+          <td>(</td>
+          <td class="paramtype">GameObject</td>          <td class="paramname"><span class="paramname"><em>target</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove an object that this object follows based on the target object. Will be ignored if the target object does not exist or not followed yet. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>The target object to remove</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a82d826c30a90946be51a52e9fd95e601" name="a82d826c30a90946be51a52e9fd95e601"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82d826c30a90946be51a52e9fd95e601">&#9670;&#160;</a></span>SetFollowObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FollowerCamera2D.SetFollowObject </td>
+          <td>(</td>
+          <td class="paramtype">GameObject</td>          <td class="paramname"><span class="paramname"><em>target</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>weight</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add another object to follow. This function will replace existing object configuration with a new one. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>The target object to follow</td></tr>
+    <tr><td class="paramname">weight</td><td>Following weight</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1d5c611c13126e1a10cd616b653a065e" name="a1d5c611c13126e1a10cd616b653a065e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d5c611c13126e1a10cd616b653a065e">&#9670;&#160;</a></span>SetPivotObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FollowerCamera2D.SetPivotObject </td>
+          <td>(</td>
+          <td class="paramtype">GameObject?</td>          <td class="paramname"><span class="paramname"><em>target</em><span class="paramdefsep"> = </span><span class="paramdefval">null</span></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the pivot object of this follower component. The parameter for the target object can be set to null stops its following system. When calling this function, preferrably to call <a class="el" href="#afa29af4b89d2ed720a127f75cb593e68" title="Clear all objects that followed by this object.">ClearFollowObject</a> to complete it to full stop. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>The target object</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ace3125dad5f9f3d79d55350acd32edaa" name="ace3125dad5f9f3d79d55350acd32edaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace3125dad5f9f3d79d55350acd32edaa">&#9670;&#160;</a></span>SetSmoothTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FollowerCamera2D.SetSmoothTime </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>time</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the smoothing time for the effect. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>The new smoothing time</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ad30a8795b52cb57e753d947bafdee26e" name="ad30a8795b52cb57e753d947bafdee26e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad30a8795b52cb57e753d947bafdee26e">&#9670;&#160;</a></span>DefaultRefID</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_object_reference_1_1_obj_ref_i_d.html">ObjectReference.ObjRefID</a> FollowerCamera2D.DefaultRefID</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">new</span>(){</div>
+<div class="line">    ID = <span class="stringliteral">&quot;scene_camera_obj&quot;</span></div>
+<div class="line">  }</div>
+</div><!-- fragment -->
+<p>The reference representation of the single scene instance of the object. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Assets/SourceCode/<b>FollowerCamera2D.cs</b></li>
 </ul>

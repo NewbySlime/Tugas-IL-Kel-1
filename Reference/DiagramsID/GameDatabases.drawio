@@ -1,0 +1,92 @@
+<mxfile host="65bd71144e">
+    <diagram id="ATtf1RYG8toDPdy8yNsT" name="Page-1">
+        <mxGraphModel dx="1035" dy="679" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="24" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="470" y="620" width="380" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="&lt;h1&gt;Database&lt;/h1&gt;&lt;p&gt;Objek yang digunakan oleh Game untuk menyimpan data-data yang sudah dibuat dari awal oleh developer. Dari data yang dibuat dan disimpan, database digunakan untuk menyiapkan data tersebut agar siap digunakan oleh Game.&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="90" y="70" width="210" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="&lt;h1&gt;Prefab - Data Objek&lt;/h1&gt;&lt;p&gt;Database sistem ini menggunakan prefab yang berisi data-data tentang suatu objek. Setelah prefab tidak digunakan (semua data sudah diambil) objek (prefab) yang di-instantiate langsung di-destroy.&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="90" y="310" width="250" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="&lt;h1&gt;Sebagai Objek Level&lt;/h1&gt;&lt;p&gt;Database sistem ini menggunakan objek-objek dengan tipe tertentu pada level sebagai data.&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="560" y="310" width="220" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Database" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="225" y="490" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Prefab" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="75" y="700" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="6" target="5">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="475" y="630" as="sourcePoint"/>
+                        <mxPoint x="525" y="580" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="8" value="" style="endArrow=classic;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="5" target="9">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="475" y="630" as="sourcePoint"/>
+                        <mxPoint x="525" y="580" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="9" value="Objek Game" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="230" y="700" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="" style="endArrow=classic;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;curved=1;" edge="1" parent="1" source="6" target="9">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="400" y="630" as="sourcePoint"/>
+                        <mxPoint x="450" y="580" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="165" y="680"/>
+                            <mxPoint x="260" y="680"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="13" value="Ambil File Prefab" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="120" y="590" width="80" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="Instantiate Berdasarkan Prefab" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="195" y="640" width="75" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="Instantiate Objek" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="290" y="660" width="90" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="Ambil Data dari Objek" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="560" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="Database" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="490" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="Objek Game 1" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="520" y="680" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="Objek Game 2" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="690" y="680" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="" style="endArrow=classic;html=1;curved=1;startArrow=classic;startFill=1;" edge="1" parent="1" source="17" target="18">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="690" y="530" as="sourcePoint"/>
+                        <mxPoint x="430" y="510" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="21" value="" style="endArrow=classic;html=1;curved=1;startArrow=classic;startFill=1;" edge="1" parent="1" source="17" target="19">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="661.578947368421" y="560" as="sourcePoint"/>
+                        <mxPoint x="603.421052631579" y="690" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="22" value="Mengambil Data Dari Objek" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="530" y="560" width="100" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="Menggunakan Fungsi dari Database" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="480" y="640" width="130" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

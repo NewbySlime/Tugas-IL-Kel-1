@@ -3,6 +3,15 @@ using UnityEngine;
 
 
 
+/// <summary>
+/// Class for modifying components related to Character object presentation (like Unity's <b>Animator</b> component) based on the ID of a target character.
+/// 
+/// This class uses external component(s);
+/// Unity's <b>Animator</b> component to modify its animation data to fit the target character.
+/// 
+/// This class uses autoload(s);
+/// - <see cref="CharacterDatabase"/> for getting target Character data.
+/// </summary>
 public class CharacterComponent: MonoBehaviour{
   [SerializeField]
   private Animator _TargetAnimator;
@@ -13,9 +22,16 @@ public class CharacterComponent: MonoBehaviour{
   
   private CharacterDatabase _character_database;
   
+  /// <summary>
+  /// Flag to tell if the object has been initialized or not.
+  /// </summary>
   public bool IsInitialized{private set; get;} = false;
 
 
+  /// <summary>
+  /// Extended Start function for waiting until every object is initialized for use.
+  /// </summary>
+  /// <returns>Coroutine helper object</returns>
   private IEnumerator _start_co_func(){
     yield return null;
     yield return new WaitForEndOfFrame();
@@ -36,6 +52,10 @@ public class CharacterComponent: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Sets and modify the related component to this component to match the target character's object configuration.
+  /// </summary>
+  /// <param name="character_id">The target character's ID</param>
   public void SetCharacterID(string character_id){
     _CharacterID = character_id;
     if(!IsInitialized)

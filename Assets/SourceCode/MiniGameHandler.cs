@@ -3,16 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// Komponen penting ketika akan melakukan "MiniGame" yang dimana pemakaiannya cukup luas. Seperti contoh, pada scene "base_level" ada dua "ekstensi" dari MiniGameHandler yang dipakai. Contohnya, Komponen EnemyFightMG dan BossFightMG.
-// Komponen ini juga memberikan fungsi yang bisa dipakai sebagai ekstensi dari objek ini, seperti contoh memberikan fungsi menjalankan Sequence ketika ResultCase tercapai.
+/// <summary>
+/// Class that handles Minigame system and as a base for inherting class.
+/// The Minigame also handles sequencing supplied based on the outcomes of the conditions.
+/// Since this is a base class, the rule for the outcome of the conditions controlled by the inheriting class.
+/// 
+/// Needed Autoload(s);
+/// - <see cref="SequenceDatabase"/> needed for getting a prefab for sequencing handler.
+/// </summary>
 public class MiniGameHandler: MonoBehaviour{
-  // Enum yang dipakai untuk menentukan apa ResultCase dari akhir MiniGame tersebut.
+  /// <summary>
+  /// Enums used to determine which outcome it produced in certain time.
+  /// </summary>
   public enum ResultCase{
     Win,
     Lose
   }
 
-  // Ini Sequence data yang digunakan ketika ResultCase tercapai.
+  /// <summary>
+  /// Data for sequencing an outcome that it triggers.
+  /// </summary>
   public struct ResultSequenceData{
     public ResultCase Case;
     public SequenceHandlerVS SequenceHandler;
@@ -22,6 +32,10 @@ public class MiniGameHandler: MonoBehaviour{
 
   private Dictionary<ResultCase, SequenceHandlerVS> _result_sequence_map = new();
 
+  /// <summary>
+  /// A check if the Minigame is currently running.
+  /// </summary>
+  /// <value></value>
   public bool IsMiniGameRunning{private set; get;} = false;
 
 
@@ -44,11 +58,18 @@ public class MiniGameHandler: MonoBehaviour{
     _result_sequence_map[result] = _sequence_handler;
   }
 
-  // PENTING: ini adalah fungsi yang dipakai sebagai Callback untuk ekstensi kelas.
+
+  /// <summary>
+  /// Virtual function as an event when the Minigame is finished.
+  /// </summary>
+  /// <param name="result">The outcome of the Minigame</param>
   protected virtual void _OnGameFinished(ResultCase result){}
 
 
-  // PENTING: ini fungsi yang dipakai ketika komponen ekstensi memberi tahu bahwa "Game ini sudah selesai, dan hasilnya: X".
+  /// <summary>
+  /// Function used by inheriting class to trigger the outcome or finished state.
+  /// </summary>
+  /// <param name="result">The outcome of the Minigame</param>
   protected void _GameFinished(ResultCase result){
     DEBUGModeUtils.Log("mini game finished");
     if(!IsMiniGameRunning)
@@ -78,13 +99,20 @@ public class MiniGameHandler: MonoBehaviour{
   }
 
 
-  // Fungsi yang dipakai di Visual Scripting untuk menambahakan Sequence saat terjadi setelah MiniGame selesai dengan ResultCase tertentu.
+  /// <summary>
+  /// Function used by Sequencing system to set the sequence data based on the outcome.
+  /// </summary>
+  /// <param name="result">The target outcome</param>
+  /// <param name="data">The sequence data</param>
   public void SetResultCaseSequence(ResultCase result, SequenceHandlerVS.SequenceInitializeData data){
     StartCoroutine(_set_result_case_sequence(result, data));
   }
 
   
-  // PENTING: Funsgi yang dipakai oleh MiniGame ataupun komponen ekstensi ketika ada objek atau actor yang menjalankan/mentrigger MiniGame ini.
+  /// <summary>
+  /// Function to start the Minigame.
+  /// Also used as a virtual function that the inheriting class can override to change how the Minigame should started.
+  /// </summary>
   public virtual void TriggerGameStart(){
     DEBUGModeUtils.Log("mini game started");
     IsMiniGameRunning = true;

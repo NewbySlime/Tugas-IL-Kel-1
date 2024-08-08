@@ -2,6 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+/// <summary>
+/// Component as a functionality part of "Item" mechanic where this object becomes a collectible of an item associated with it. An object with <see cref="InventoryData"/> can collect this item object.
+/// 
+/// This class uses external component(s);
+/// - <see cref="RigidbodyMessageRelay"/> for body interaction events.
+/// - <b>SpriteRenderer</b> for displaying item's image.
+/// 
+/// This class uses autoload(s);
+/// - <see cref="ItemDatabase"/> for getting data about certain item.
+/// </summary>
 public class CollectibleComponent: MonoBehaviour{
   [SerializeField]
   private RigidbodyMessageRelay _TargetRigidbody;
@@ -26,6 +36,7 @@ public class CollectibleComponent: MonoBehaviour{
   private HashSet<GameObject> _list_entered_collider = new();
 
 
+  // Check a collection of entered colliders.
   private void _check_collection(){
     if(!_enable_collection)
       return;
@@ -79,6 +90,10 @@ public class CollectibleComponent: MonoBehaviour{
 
 
   #nullable enable
+  /// <summary>
+  /// Bind item to this component by ID.
+  /// </summary>
+  /// <param name="item_id">The target item ID</param>
   public void SetItemID(string item_id){
     if(_item_database == null)
       return;
@@ -100,6 +115,10 @@ public class CollectibleComponent: MonoBehaviour{
   }
   #nullable disable
 
+  /// <summary>
+  /// Set how many items contained in this component.
+  /// </summary>
+  /// <param name="item_count">How many items</param>
   public void SetItemCount(uint item_count){
     if(_item_count <= 0){
       Debug.LogWarning("Cannot set item count to 0.");
@@ -110,12 +129,20 @@ public class CollectibleComponent: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Should this class' "collection" feature enabled or not. This function will not disable this object.
+  /// </summary>
+  /// <param name="enable">Enabled or not</param>
   public void SetEnableCollection(bool enable){
     _enable_collection = enable;
     if(_enable_collection)
       _check_collection();
   }
 
+  /// <summary>
+  /// Get the flag for enabling "collection" feature.
+  /// </summary>
+  /// <returns></returns>
   public bool GetEnableCollection(){
     return _enable_collection;
   }

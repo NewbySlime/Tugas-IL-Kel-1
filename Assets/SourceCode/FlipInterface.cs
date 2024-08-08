@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+/// <summary>
+/// Class used for handling flipping an object (in 2D space) or changing the direction of the object(s) horizontally or vertically.
+/// List compatible object(s) to flip;
+/// - <b>SpriteRenderer</b>
+/// - <see cref="FlipInterface"/> (Flipping itself is not possible)
+/// 
+/// For objects that is not compatible, any object can catch the message interface used by this class by using <b>FlipInterface_SetFlippedX(bool)</b> and/or <b>FlipInterface_SetFlippedY(bool)</b>.
+/// </summary>
 public class FlipInterface: MonoBehaviour{
   private delegate void _SetFlipDelegateHelper(object obj, bool flip);
 
@@ -39,6 +47,7 @@ public class FlipInterface: MonoBehaviour{
   private Dictionary<GameObject, _ObjectMetadata> _initialized_metadata_map = new Dictionary<GameObject, _ObjectMetadata>();
 
 
+  // initialiing metadata (and seperate flipping interface functions) on a target object and the configuration for it.
   private void _initialize_metadata(_ObjectMetadataSerializeable _metadata){
     if(!_initialized_metadata_map.ContainsKey(_metadata.Object)){
       _initialized_metadata_map[_metadata.Object] = new _ObjectMetadata();
@@ -48,7 +57,7 @@ public class FlipInterface: MonoBehaviour{
     _init_metadata._metadata = _metadata;
     _init_metadata._setter_function_list.Clear();
 
-    {// cek SpriteRenderer
+    {// check SpriteRenderer
       SpriteRenderer _sr = _metadata.Object.GetComponent<SpriteRenderer>();
       if(_sr != null){
         _init_metadata._setter_function_list.Add(new _ObjectMetadata._SetterFunction{
@@ -59,7 +68,7 @@ public class FlipInterface: MonoBehaviour{
       }
     }
 
-    if(_metadata.Object != gameObject){// cek FlipInterface 
+    if(_metadata.Object != gameObject){// check FlipInterface 
       FlipInterface _fi = _metadata.Object.GetComponent<FlipInterface>();
       if(_fi != null){
         _init_metadata._setter_function_list.Add(new _ObjectMetadata._SetterFunction{
@@ -73,6 +82,7 @@ public class FlipInterface: MonoBehaviour{
 
 
   public void Start(){
+    // this function initialize metadata for each object attached with this
     _initialize_metadata(new _ObjectMetadataSerializeable{
       Object = gameObject,
 
@@ -86,16 +96,30 @@ public class FlipInterface: MonoBehaviour{
   }
 
 
+  /// <summary>
+  /// Flip the object in X-axis. (Boolean in string format)
+  /// This function can be used using Unity's animation system.
+  /// </summary>
+  /// <param name="val">Flag in string format</param>
   public void SetFlippedX(string val){
     DEBUGModeUtils.Log(string.Format("flipped {0}", val));
     SetFlippedX(val == "true");
   }
 
+  /// <summary>
+  /// Flip the object in Y-axis. (Boolean in string format)
+  /// This function can be used using Unity's animation system.
+  /// </summary>
+  /// <param name="val">Flag in string format</param>
   public void SetFlippedY(string val){
     SetFlippedY(val == "true");
   }
 
 
+  /// <summary>
+  /// Flip the object in X-axis.
+  /// </summary>
+  /// <param name="flipped">Flag to flip</param>
   public void SetFlippedX(bool flipped){
     _flipped_x = flipped;
     DEBUGModeUtils.Log("flipped");
@@ -131,6 +155,10 @@ public class FlipInterface: MonoBehaviour{
     }
   }
 
+  /// <summary>
+  /// Flip the object in Y-axis.
+  /// </summary>
+  /// <param name="flipped">Flag to flip</param>
   public void SetFlippedY(bool flipped){
     _flipped_y = flipped;
     

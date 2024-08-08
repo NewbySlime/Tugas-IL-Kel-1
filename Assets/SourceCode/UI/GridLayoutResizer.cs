@@ -5,6 +5,13 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(RectTransform))]
 [RequireComponent(typeof(GridLayoutGroup))]
+/// <summary>
+/// Class to appropriately resizing each cells in <b>GridLayoutGroup</b> based on the current <b>RectTransform</b> rect size.
+/// 
+/// This class uses following component(s);
+/// - <b>RectTransform</b> base UI class also for basis of the resizing factor.
+/// - <b>GridLayoutGroup</b> grid based cells of UI elements as for the target for resizing.
+/// </summary>
 public class GridLayoutResizer: UIBehaviour{
   [SerializeField]
   private bool _ScaleCellSize;
@@ -23,9 +30,15 @@ public class GridLayoutResizer: UIBehaviour{
   private float _ratio_x;
   private float _ratio_y;
 
+  /// <summary>
+  /// Is the object initialized or not yet?
+  /// </summary>
   public bool IsInitialized{private set; get;} = false;
 
 
+  /// <summary>
+  /// Overriding Start function from <b>UIBehaviour</b>.
+  /// </summary>
   protected override void Start(){
     base.Start();
 
@@ -43,6 +56,9 @@ public class GridLayoutResizer: UIBehaviour{
   }
 
 
+  /// <summary>
+  /// Overriding function for catching <b>RectTransform</b> resizing event.
+  /// </summary>
   protected override void OnRectTransformDimensionsChange(){
     base.OnRectTransformDimensionsChange();
     if(!IsInitialized)

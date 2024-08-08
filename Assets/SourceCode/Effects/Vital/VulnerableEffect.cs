@@ -6,6 +6,13 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(HealthComponent))]
+/// <summary>
+/// An extended <see cref="HealthComponent"/> feature that will give visual feedback to the object when the used character are "vulnerable" in certain case.
+/// 
+/// This class uses Component(s);
+/// - <b>Animator</b> The target animation handler to set the animation state.
+/// - <b>SpriteRenderer</b> The target renderer to manipulate the visual.
+/// </summary>
 public class VulnerableEffect: MonoBehaviour{
   [SerializeField]
   private float _EffectTime = 3;
@@ -40,6 +47,10 @@ public class VulnerableEffect: MonoBehaviour{
   private Coroutine _viseffect_coroutine = null;
 
 
+  /// <summary>
+  /// Coroutine function that handles "damaged" effect lifetime.
+  /// </summary>
+  /// <returns>Coroutine helper object</returns>
   private IEnumerator _trigger_viseffect(){
     if(_TargetVisualEffect == null)
       yield break;
@@ -67,6 +78,10 @@ public class VulnerableEffect: MonoBehaviour{
     _trigger_viseffect_finished();
   }
 
+  /// <summary>
+  /// Resets everything to a finished state to completely to make sure that everything is in finished state.
+  /// This is used when the effect is finished or an actor wants to cancel the effect.
+  /// </summary>
   private void _trigger_viseffect_finished(){
     _TargetVisualEffect.material = _default_mat;
     _viseffect_coroutine = null;
@@ -113,6 +128,9 @@ public class VulnerableEffect: MonoBehaviour{
   }
 
   
+  /// <summary>
+  /// Function to trigger and starting the effect.
+  /// </summary>
   public void StartEffect(){
     _set_invincible(false);
     _effect_timer = _EffectTime;
@@ -121,11 +139,18 @@ public class VulnerableEffect: MonoBehaviour{
       _viseffect_coroutine = StartCoroutine(_trigger_viseffect());
   }
 
+  /// <summary>
+  /// Function to check if the effect still running or not.
+  /// </summary>
+  /// <returns>Effect stopped</returns>
   public bool IsEffectStopped(){
     return _effect_timer <= 0;
   }
 
 
+  /// <summary>
+  /// Function used to stop the ongoing effect.
+  /// </summary>
   public void CancelEffect(){
     StopCoroutine(_viseffect_coroutine);
 
