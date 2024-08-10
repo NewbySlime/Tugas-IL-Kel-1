@@ -65,6 +65,8 @@ public class FollowerCamera2D: MonoBehaviour{
 
   private void _on_scene_changed(string scnee_id, GameHandler.GameContext context){
     ObjectReference.SetReferenceObject(DefaultRefID, gameObject);
+    if(_pivot_object != null)
+      transform.position = new(_pivot_object.transform.position.x, _pivot_object.transform.position.y, _z_position);
   }
 
   private void _on_scene_removed(){

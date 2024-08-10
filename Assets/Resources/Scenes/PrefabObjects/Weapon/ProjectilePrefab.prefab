@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bf6ad44042bf51c4d90b181eaeddff44, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &-3165354857664368661
@@ -109,6 +109,7 @@ MonoBehaviour:
   _ProjectileSprite: {fileID: 6046488937970872598}
   _SoundAlertTranceiver: {fileID: 1072409544624969593}
   _TargetAudioSource: {fileID: -8927883021753526264}
+  AllowMultipleHitsSameObject: 0
 --- !u!50 &6434875006214125794
 Rigidbody2D:
   serializedVersion: 4

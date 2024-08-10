@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e66c6366d904e98bc83428217d4fd7, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"graph":{"variables":{"Kind":"Flow","collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[],"controlOutputDefinitions":[],"valueInputDefinitions":[],"valueOutputDefinitions":[],"title":null,"summary":null,"pan":{"x":-167.2001,"y":102.4},"zoom":1.0,"elements":[{"coroutine":false,"defaultValues":{},"position":{"x":-681.0,"y":-94.0},"guid":"626ede6f-caf1-43e9-8f50-a5b982645252","$version":"A","$type":"Unity.VisualScripting.Start","$id":"9"},{"defaultValues":{"Dialogue":{"$content":"","$type":"System.String"}},"position":{"x":-362.0,"y":-98.0},"guid":"d26ff43b-aea7-4f28-b4c0-197ce27e1f5a","$version":"A","$type":"AddDialogue","$id":"11"},{"defaultValues":{},"position":{"x":296.0,"y":-98.0},"guid":"f72c2ec8-3b7a-40ae-953a-b9a51fad5cfb","$version":"A","$type":"SetDialogueToGameObject","$id":"13"},{"type":"System.String","value":{"$content":"Jump
+      using <b>W</b> button","$type":"System.String"},"defaultValues":{},"position":{"x":-620.0,"y":113.0},"guid":"e8b95311-3e9f-44e8-8bfc-b84c7f2648d8","$version":"A","$type":"Unity.VisualScripting.Literal","$id":"15"},{"defaultValues":{},"position":{"x":153.0,"y":123.0},"guid":"66a31cc7-cdef-46a0-a371-08d4c9bfcd1c","$version":"A","$type":"Unity.VisualScripting.This","$id":"17"},{"sourceUnit":{"$ref":"11"},"sourceKey":"Output
+      Flow","destinationUnit":{"$ref":"13"},"destinationKey":"Input Flow","guid":"e4452a24-15ee-4906-865b-35eb904c521b","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"9"},"sourceKey":"trigger","destinationUnit":{"$ref":"11"},"destinationKey":"Input
+      Flow","guid":"b43e11dc-937c-4ff0-93cf-1e9837764166","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"15"},"sourceKey":"output","destinationUnit":{"$ref":"11"},"destinationKey":"Dialogue","guid":"44da61d9-60b1-47a2-bfdf-b5bc5c851d92","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"17"},"sourceKey":"self","destinationUnit":{"$ref":"13"},"destinationKey":"GameObject","guid":"47c13be3-5ea6-4f78-aad1-3c3d1e1b1994","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"11"},"sourceKey":"DialogueData","destinationUnit":{"$ref":"13"},"destinationKey":"DialogueData","guid":"5cbc65ce-1d15-49de-91be-a080dcb85d80","$type":"Unity.VisualScripting.ValueConnection"}],"$version":"A"}}'
+    _objectReferences: []

@@ -23,7 +23,9 @@ public class MainMenuUI: MonoBehaviour{
   }
 
   public enum PromptContext{
-    StartNewGame
+    StartNewGame,
+  
+    StartNewGameDEMO
   }
 
   [SerializeField]
@@ -42,6 +44,8 @@ public class MainMenuUI: MonoBehaviour{
 
   [SerializeField]
   private ButtonBaseUI _StartNewGameButton;
+  [SerializeField]
+  private ButtonBaseUI _StartNewGameDEMOButton;
   [SerializeField]
   private ButtonBaseUI _OpenSettingsButton;
   [SerializeField]
@@ -65,6 +69,12 @@ public class MainMenuUI: MonoBehaviour{
       case PromptContext.StartNewGame:{
         _game_handler.StartNewGame();
       }break;
+
+#if DEMO_MODE
+      case PromptContext.StartNewGameDEMO:{
+        _game_handler.StartNewGame_Demo();
+      }break;
+#endif
 
       default:{
         Debug.LogError(string.Format("PromptContext ({0}) is not yet supported.", _current_prompt_context));
@@ -113,6 +123,17 @@ public class MainMenuUI: MonoBehaviour{
     _game_handler.StartNewGame();
   }
 
+#if DEMO_MODE
+  private void _on_start_game_DEMO_button(){
+    if(_game_handler.PersistanceHandler.IsSaveValid()){
+      _trigger_prompt(PromptContext.StartNewGameDEMO);
+      return;
+    }
+
+    _game_handler.StartNewGame_Demo();
+  }
+#endif
+
   private void _on_open_settings_button(){
     _game_handler.OpenSettingsUI();
   }
@@ -150,6 +171,13 @@ public class MainMenuUI: MonoBehaviour{
     _LoadGameButton.OnButtonReleasedEvent += _on_load_game_button;
     _OpenSettingsButton.OnButtonReleasedEvent += _on_open_settings_button;
     _ExitGameButton.OnButtonReleasedEvent += _on_quit_button;
+
+#if DEMO_MODE
+    _StartNewGameDEMOButton.OnButtonReleasedEvent += _on_start_game_DEMO_button;
+#else
+    // disable the UI for DEMO mode
+    StartCoroutine(UIUtility.SetHideUI(_StartNewGameDEMOButton.gameObject, true, true));
+#endif
 
     StartCoroutine(UIUtility.SetHideUI(_PromptUI.gameObject, true, true));
     StartCoroutine(UIUtility.SetHideUI(_LoadGameButtonActiveTarget, true, true));

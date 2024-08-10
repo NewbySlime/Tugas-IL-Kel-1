@@ -61,6 +61,11 @@ public class GameHandler: MonoBehaviour{
   public const string DefaultScenarioID = "intro_scenario";
 
 
+#if DEMO_MODE
+  public const string DefaultScenarioID_DEMO = "town_level";
+#endif
+
+
   /// <summary>
   /// Event for when a scene is initializing.
   /// </summary>
@@ -656,6 +661,16 @@ public class GameHandler: MonoBehaviour{
   }
 
 
+#if DEMO_MODE
+  private IEnumerator _wait_until_game_started_DEMO(){
+    yield return new WaitUntil(() => SceneInitialized);
+    yield return null;
+
+    _time_handler.SetTimePeriod(GameTimeHandler.GameTimePeriod.Nighttime);
+    _scenario_diagram.SetEnableScenario("demo_scenario", true);
+  }
+#endif
+
   public void Awake(){
 #if UNITY_EDITOR
     foreach(var _metadata in _SceneMetadataList){
@@ -804,6 +819,24 @@ public class GameHandler: MonoBehaviour{
     StartCoroutine(_load_game(true));
 #endif
   }
+
+#if DEMO_MODE
+  public void StartNewGame_Demo(){
+    PersistanceHandler.ClearData();
+    _runtime_data.ClearData();
+    ResetGameScenario();
+
+    _scene_context_map.Clear();
+    foreach(SceneData _metadata in _SceneMetadataList)
+      _scene_context_map[_metadata.Metadata.SceneID] = new SceneContext{
+        SceneID = _metadata.Metadata.SceneID,
+        LastCheckpointID = ""
+      };
+
+    ChangeScene(DefaultScenarioID_DEMO);
+    StartCoroutine(_wait_until_game_started_DEMO());
+  }
+#endif
 
   /// <summary>
   /// To reset Game's data and variables and start a new Game.
